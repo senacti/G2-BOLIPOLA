@@ -22,6 +22,6 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 ## Integrantes ⛷️
 - Jhon Stiven Sarmiento Diaz
 - Julian Stevan Castro Quintero
-- Juan Jose Ochoa Romera
+- Juan Jose Ochoa Romero
 - Luis Miguel Restrepo Espitia
 - Miguel Angel Pulido Quinche
