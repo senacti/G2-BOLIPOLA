@@ -8,36 +8,178 @@ html {
     font-size: 16px;
 }
 
+body {
+    background-color: #FBFCFC;
+}
+
 .mainBox {
-    margin: 10vh 0;
+    margin: 12vh auto;
+    height: 672px;
+    width: 68rem;
 }
 
 .left {
-    display: flex;
-    margin: 2rem;
-    margin-left: 4rem;
+    display: grid;
+    align-items: center;
+    float: left;
+    height: 100%;
 }
 
 .left__logo-img {
     height: 15rem;
 }
 
+.left__centrador {
+    display: grid;
+    place-items: center;
+}
+
+.left__flechaAndImgs {
+    display: flex;
+}
+
 .left__flecha {
-    display: inline;
+    display: inline-block;
+    margin: auto 1rem;
+}
+
+.left__flecha-button {
+    font-size: 1.5rem;
+    padding: 0.6rem 0.725rem;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background-color: #CB4335;
+    color: #FBFCFC;
+    box-shadow: 0.2rem 0.2rem #696969;
+    transition: 120ms;
+    transition-timing-function: ease-in;
+}
+
+.left__flecha-button:hover {
+    color: #CB4335;
+    background-color: #FBFCFC;
+    border-color: #CB4335;
+    box-shadow: none;
+    cursor: pointer;
 }
 
 .left__imgs {
-    display: inline-block;
-}
-
-.left__circles-circle {
-    display: inline;
-    padding: 0.5rem 1.032rem;
-    border-radius: 50%;
-    border: 1px solid black;
-    margin: 0.5rem;
+    display: inline-flex;
+    margin: auto;
+    padding: 1rem;
 }
 
 .left__imgs-img {
     height: 20rem;
+    width: 20rem;
+    border: 2px solid #CB4335;
+    border-radius: 5%;
+    box-shadow: 0 0 0.2rem #CB4335;
+}
+
+.left__circles {
+    margin: 1.5rem 0;
+}
+
+.left__circles-circle {
+    display: inline;
+    padding: 0.35rem 0.8256rem;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin: 0.5rem;
+    transition: 150ms;
+    transition-timing-function: ease-in;
+}
+
+.right {
+    display: grid;
+    place-items: center;
+    float: right;
+    height: 100%;
+}
+
+.right__box {
+    display: grid;
+    place-items: center;
+    padding: 2.8rem 0;
+    width: 26rem;
+    border: 3px solid black;
+    border-radius: 3%;
+    background-color: #F8F9F9;
+    box-shadow: 0.2rem 0.2rem 0.8rem grey;
+}
+
+.right__box-title {
+    margin-bottom: 1rem;
+}
+
+.right__box-title-h1 {
+    font-weight: 300;
+    font-size: 2.5rem;
+}
+
+.right__box-buttons-button {
+    display: grid;
+    place-items: center;
+    width: 16.5rem;
+    padding: 0.8rem 0;
+    margin: 1.5rem 0;
+    border-radius: 5px;
+    border: 0;
+    font-size: 1.3rem;
+    border: 2px solid transparent;
+    box-shadow: 0.2rem 0.2rem #696969;
+    transition: 120ms;
+    transition-timing-function: ease-in;
+}
+
+.right__box-buttons-button:hover {
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.right__box-buttons-button-span {
+    margin-left: 0.8rem;
+    font-weight: normal;
+}
+
+.right__box-buttons-button#buttonGoogle {
+    color: #F8F9F9;
+    background-color: #EA4335;
+}
+
+.right__box-buttons-button#buttonGoogle:hover {
+    color: #EA4335;
+    background-color: #F8F9F9;
+    border-color: #EA4335;
+}
+
+.right__box-buttons-button#buttonPhone {
+    color: #F8F9F9;
+    background-color: black;
+}
+
+.right__box-buttons-button#buttonPhone:hover {
+    color: black;
+    background-color: #F8F9F9;
+    border-color: black;
+}
+
+.right__box-buttons-button#buttonEmail {
+    color: #F8F9F9;
+    background-color: #4285F4;
+}
+
+.right__box-buttons-button#buttonEmail:hover {
+    color: #4285F4;
+    background-color: #F8F9F9;
+    border-color: #4285F4;
+}
+
+.right__box-signup-a {
+    text-decoration: none;
+}
+
+.right__box-signup-a:hover {
+    text-decoration: underline;
 }

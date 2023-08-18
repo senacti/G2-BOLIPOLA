@@ -3,35 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./signin.css">
+    <script src="https://kit.fontawesome.com/6117eaa017.js" crossorigin="anonymous"></script>
     <title>Iniciar sesión</title>
 </head>
 <body>
     <div class="mainBox">
         <div class="left">
-
-            <div class="left__logo">
-                <img src="./images/logo.png" alt="Logo de la empresa" class="left__logo-img">
-            </div>
-    
-            <div class="left__flecha">
-                <span class="left__flecha-left"><</span>
-            </div>
-    
-            <div class="left__imgs">
-                <img src="./images/example.jpg" alt="x" class="left__imgs-img">
-                <img src="" alt="" hidden>
-            </div>
-    
-            <div class="left__flecha">
-                <span class="left__flecha-right">></span>
-            </div>
-    
-            <div class="left__circles">
-                <div class="left__circles-circle"></div>
-                <div class="left__circles-circle"></div>
-                <div class="left__circles-circle"></div>
-                <div class="left__circles-circle"></div>
-                <div class="left__circles-circle"></div>
+            <div class="left__centrador">
+                <div class="left__logo">
+                    <img src="./images/logo.png" alt="Logo de la empresa" class="left__logo-img">
+                </div>
+                
+                <div class="left__flechaAndImgs">
+                    <div class="left__flecha">
+                        <button class="left__flecha-button" id="flechaLeft"><i class="fa-solid fa-angles-left"></i></button>
+                    </div>
+            
+                    <div class="left__imgs">
+                    </div>
+            
+                    <div class="left__flecha">
+                        <button class="left__flecha-button" id="flechaRight"><i class="fa-solid fa-angles-right"></i></button>
+                    </div>
+                </div>
+        
+                <div class="left__circles">
+                    <div class="left__circles-circle" id="circle1" number=0></div>
+                    <div class="left__circles-circle" id="circle2" number=1></div>
+                    <div class="left__circles-circle" id="circle3" number=2></div>
+                    <div class="left__circles-circle" id="circle4" number=3></div>
+                    <div class="left__circles-circle" id="circle5" number=4></div>
+                </div>
             </div>
         </div>
     
@@ -43,17 +45,21 @@
                 </div>
     
                 <div class="right__box-buttons">
-                    <button class="right__box-buttons-button" id="buttonGoogle">Continuar con google</button>
-                    <button class="right__box-buttons-button" id="buttonPhone">Continuar con número</button>
-                    <button class="right__box-buttons-button" id="buttonEmail">Continuar con correo</button>
+                    <button class="right__box-buttons-button" id="buttonGoogle"><i class="fa-brands fa-google"><span class="right__box-buttons-button-span">Continuar con Google</span></i></button>
+
+                    <button class="right__box-buttons-button" id="buttonPhone"><i class="fa-solid fa-phone"><span class="right__box-buttons-button-span">Continuar con número</span></i></button>
+
+                    <button class="right__box-buttons-button" id="buttonEmail"><i class="fa-solid fa-envelope"><span class="right__box-buttons-button-span">Continuar con correo</span></i></button>
                 </div>
     
                 <div class="right__box-signup">
-                    <a class="right__box-signup-a" href="https://www.google.com">Crear cuenta</a>
+                    <a class="right__box-signup-a" href="https://www.google.com" target="_blank">¿Crear cuenta?</a>
                 </div>
     
             </div>
         </div>
     </div>
+
+    <script src="./rotacionImgs.js"></script>
 </body>
 </html>
