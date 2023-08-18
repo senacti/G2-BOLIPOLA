@@ -4,6 +4,7 @@ const buttonRight = document.querySelector("#flechaRight")
 const circles = document.querySelectorAll(".left__circles-circle")
 let numImg = 0
 let intervalImgsVar;
+let recargandoStartInterval = false;
 let rutas = ["./images/example.jpg", "./images/evento.jpg", "./images/papas.jpg", "./images/balon.jpg", "./images/bolirana.jpg"]
 
 function colocadorImgs() {
@@ -35,8 +36,14 @@ function cambioImg() {
 
 //---Funciones para los intervalos de rotar imágenes y detener cuando se da click en un botón durante 8 segundos
 const stopInterval = () => {
+    if (recargandoStartInterval) {
+        return
+    }
+
     clearInterval(intervalImgsVar)
+    recargandoStartInterval = true
     setTimeout(() => {
+        recargandoStartInterval = false
         startInterval()
     }, 8000)
 }
