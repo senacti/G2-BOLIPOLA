@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+}
+
+html {
+    font-size: 16px;
+}
+
+.mainBox {
+    margin: 10vh 0;
+}
+
+.left {
+    display: flex;
+    margin: 2rem;
+    margin-left: 4rem;
+}
+
+.left__logo-img {
+    height: 15rem;
+}
+
+.left__flecha {
+    display: inline;
+}
+
+.left__imgs {
+    display: inline-block;
+}
+
+.left__circles-circle {
+    display: inline;
+    padding: 0.5rem 1.032rem;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: 0.5rem;
+}
+
+.left__imgs-img {
+    height: 20rem;
+}
