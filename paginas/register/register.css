@@ -1,5 +1,6 @@
 html {
     font-size: 16px;
+    overflow: hidden;
 }
 
 * {
@@ -65,7 +66,7 @@ html {
     font-size: 1.1rem;
 }
 
-.formBox__inf-box input {
+.formBox__inf-box input, select {
     width: 10.8rem;
     height: 1.95rem;
     text-align: left;
@@ -75,16 +76,14 @@ html {
     color: gray;
 }
 
-.formBox__inf-box input:focus {
+.formBox__inf-box input:focus, select:focus {
     border-color: #CB4335;
     box-shadow: 0 0 2px #d8766b;
     color: black;
 }
 
 .formBox__inf-box select {
-    width: 11rem;
-    height: 1.8rem;
-    text-align: left;
+    width: 11.05rem;
 }
 
 .formBox__inf-box div {

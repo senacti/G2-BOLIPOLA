@@ -19,22 +19,22 @@
 
                     <div class="formBox__inf-box-name" centrado="on">
                         <label for="name" class="formBox__inf-box-name-label">Nombre:</label>
-                        <input type="text" name="name" class="formBox__inf-box-name-input">
+                        <input type="text" name="name" class="formBox__inf-box-name-input" minlength="2" required>
                     </div>
 
                     <div class="formBox__inf-box-phone" centrado="off">
                         <label for="phone" class="formBox__inf-box-phone-label">Teléfono:</label>
-                        <input type="text" name="phone" class="formBox__inf-box-phone-input">
+                        <input type="text" name="phone" pattern="[0-9]{10}" class="formBox__inf-box-phone-input" required>
                     </div>
 
                     <div class="formBox__inf-box-date" centrado="off">
                         <label for="date" class="formBox__inf-box-date-label">F. Nacimiento:</label>
-                        <input type="date" name="date" class="formBox__inf-box-date-input">
+                        <input type="date" name="date" class="formBox__inf-box-date-input" min="1950-01-01" max="2015-01-01" required>
                     </div>
 
                     <div class="formBox__inf-box-pass" centrado="on">
                         <label for="pass1" class="formBox__inf-box-pass-label">Establecer contraseña:</label>
-                        <input type="text" name="pass1" class="formBox__inf-box-pass-input">
+                        <input type="password" name="pass1" id="pass1" class="formBox__inf-box-pass-input" minlength="6" required>
                     </div>
 
                 </div>
@@ -54,27 +54,27 @@
                     
                     <div class="formBox__inf-box-lastName" centrado="on">
                         <label for="lastName" class="formBox__inf-box-lastName-label">Apellido:</label>
-                        <input type="text" name="lastName" class="formBox__inf-box-lastName-input">
+                        <input type="text" name="lastName" class="formBox__inf-box-lastName-input" minlength="2" required>
                     </div>
 
                     <div class="formBox__inf-box-email" centrado="off">
                         <label for="email" class="formBox__inf-box-email-label">Correo:</label>
-                        <input type="text" name="email" class="formBox__inf-box-email-input">
+                        <input type="email" name="email" class="formBox__inf-box-email-input" required>
                     </div>
 
                     <div class="formBox__inf-box-gender" centrado="off">
                         <label for="gender" class="formBox__inf-box-gender-label">Género:</label>
-                        <input list="gender" class="formBox__inf-box-gender-input">
-                        <datalist id="gender">
-                            <option class="formBox__inf-box-gender-input-option" value="femenino"></option>
-                            <option class="formBox__inf-box-gender-input-option" value="masculino"></option>
-                            <option class="formBox__inf-box-gender-input-option" value="indefinido"></option>
-                        </datalist>
+                        <select list="gender" class="formBox__inf-box-gender-input" required>
+                            <option value="">...</option>
+                            <option>Femenino</option>
+                            <option>Masculino</option>
+                            <option>Otro</option>
+                        </select>
                     </div>
 
                     <div class="formBox__inf-box-pass" centrado="on">
-                        <label for="pass2" class="formBox__inf-box-pass-label">Repetir la contraseña:</label>
-                        <input type="text" name="pass2" class="formBox__inf-box-pass-input">
+                        <label for="pass2" class="formBox__inf-box-pass-label">Confirmar contraseña:</label>
+                        <input type="password" name="pass2" id="pass2" class="formBox__inf-box-pass-input" required>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
             <div class="formBox__termsAndRegister">
 
                 <div class="formBox__terms">
-                    <input type="checkbox" class="formBox__terms-input">
+                    <input type="checkbox" class="formBox__terms-input" required>
                     <span class="formBox__terms-span">Acepto los <a href="https://www.google.com" target="_blank" class="formBox__terms-span-a">términos y condiciones</a></span>
                 </div>
     
