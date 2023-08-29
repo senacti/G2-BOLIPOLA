@@ -2,22 +2,35 @@
 <p align="center"><img width="245" src="https://github.com/senacti/G2-BOLIPOLA/blob/main/bolipolaImage/thumbnail_IMG-20230719-WA0000.jpg"></p>
 
 ## Objetivo general 🎯
-Desarrollar un software el cual permita automatizar y agilizar procesos, reemplazando las metodologías obsoletas, mejorando la productividad y eficiencia de la empresa.
+Crear un software el cual permita a la empresa automatizar y agilizar sus procesos, reemplazando las metodologías obsoletas, mejorando la eficiencia y productividad de esta organización.
+Los objetivos específicos de nuestro proyecto son los siguientes:
 
 ## Objetivos específicos 🎯
-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+
+-Automatizar y agilizar la gestión del inventario permitiendo tener un control sobre las existencias y evitar problemas de falta o exceso de productos
+
+-Agilizar Gestionar los procesos de cotizaciones, generación de informes y facilitar la integración con otros sistemas de pago, contribuyendo con la eficiencia y productividad. este se relaciona con el precio
+
+-Gestionar la disponibilidad de los espacios, confirmaciones, gestiones de pagos, así como los precios y horarios mediante una interfaz la cual permita la realización de estas tareas de una manera ágil e intuitiva.
+
+-Establecer fechas, horarios, así como los espacios de realización de los eventos y administrar los precios, productos adicionales y los asistentes.
+
+-Gestionar los torneos a realizar, los equipos participantes, el espacio a emplear, el premio y el coste de inscripción.
 
 ## Planteamiento del problema 😵‍💫
-BoliPola es una empresa de reservas de canchas sintéticas, boli ranas, ventas de bebidas alcohólicas y otros productos. Actualmente BoliPola usa métodos poco eficaces para hacer sus reservas, llevar un registro o hacer sus ventas como usar tablas de cálculo, escribir en hojas las ventas o usar WhatsApp para hacer reservas.
+La empresa Bolipola carece actualmente de un sistema ordenado para la realización de los diferentes procesos que se realizan allí, por el contrario, todos los procesos son llevados en Excel o libretas en las cuales llevan nota de todo, esto puede conllevar a un problema puesto que puede haber pérdida de datos, así como poco orden y control de estos.
 
 ## Justificación 📃
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Proyecto realizado a pedido de los instructores del Sena el cual cumple los cinco módulos requeridos 
+
+Además de que el proyecto ayudará a una empresa colombiana a la facilitación y optimización de sus diferentes procesos por lo que mejorará la eficiencia de dicha empresa la cual actualmente tiene problemas con la toma, registro y realización de estos procesos, también es un proyecto el cual puede llegar a ser vendido y ejecutado en la empresa generando de esta manera una ganancia monetaria para el equipo desarrollador tanto como para la empresa, gracias a la optimización y organización de los procesos anteriormente la empresa tendrá una oportunidad de crecimiento mayor comparado a empresas similares carentes de un software similar.
+
+Finalmente cumplir las expectativas tanto de los dueños del local como de los instructores.
+
 
 ## Alcance 🚀
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+Desarrollar un software el cual ayudará a la gestión y realización de diferentes tipos de tareas en Bolipola el cual permita a los administradores y a los clientes su debida interacción con estos procesos: eventos, reservas, ventas, torneos e inventariado. El sistema debe de ser compatible con los diferentes tipos de navegadores, ser de uso sencillo e intuitivo, garantizar la seguridad de los diferentes tipos de datos a tratar, tener un excelente rendimiento y ser de fácil acceso, todo este proyecto debe realizarse en un plazo de 6 meses con un equipo desarrollador de 5 integrantes.
+
 
 ## Integrantes ⛷️
 - Jhon Stiven Sarmiento Diaz
