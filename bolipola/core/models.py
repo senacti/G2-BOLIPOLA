@@ -36,7 +36,7 @@ class Inventory(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.product_quantity
+        return str(self.product_quantity)
     
     class Meta:
         verbose_name = 'Inventario'
@@ -50,7 +50,7 @@ class Output(models.Model):
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.product_quantity_out
+        return str(self.product_quantity_out)
     
     class Meta:
         verbose_name = 'Salida'
@@ -64,7 +64,7 @@ class Calendar(models.Model):
     Availability = models.BooleanField(verbose_name='Disponibilidad', default=True)
 
     def __str__(self):
-        return self.Availability
+        return str(self.Availability)
     
     class Meta:
         verbose_name = 'Calendario'
@@ -83,7 +83,7 @@ class Reservation(models.Model):
     Calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.availability
+        return str(self.availability)
     
     class Meta:
         verbose_name = 'Reserva'
@@ -107,15 +107,55 @@ class Event(models.Model):
         db_table = 'evento'
         ordering = ['id']
 
+class Team(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Nombre')
+    color = models.CharField(max_length=60, verbose_name='Color')
+    players_num = models.PositiveBigIntegerField(verbose_name='Número de jugadores')
+    avatar = models.ImageField(verbose_name='Avatar')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Equipo'
+        verbose_name_plural = 'Equipos'
+        db_table = 'equipo'
+        ordering = ['id']
+
+class Player(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Nombre')
+    last_name = models.CharField(max_length=100, verbose_name='Apellido')
+    birthdate = models.DateField(verbose_name='Fecha de nacimiento')
+    phone = models.CharField(max_length=10, verbose_name='Teléfono')
+    email = models.EmailField(max_length=200, verbose_name='Correo')
+    dorsal = models.PositiveBigIntegerField(verbose_name='Número de dorsal')
+    age = models.PositiveIntegerField(verbose_name='Edad')
+    gender = models.CharField(max_length=50, verbose_name='Género')
+    position = models.CharField(max_length=60, verbose_name='Posición')
+    yellow_card = models.IntegerField(verbose_name='Tarjeta amarilla')
+    blue_card = models.IntegerField(verbose_name='Tarjeta azul')
+    red_card = models.IntegerField(verbose_name='Tarjeta roja')
+    equipo = models.ForeignKey(Team, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Jugador'
+        verbose_name_plural = 'Jugadores'
+        db_table = 'jugador'
+        ordering = ['id']
+
 class Tournament(models.Model):
     number_teams = models.PositiveIntegerField(verbose_name='Cantidad de equipos')
     registered_teams = models.PositiveIntegerField(verbose_name='Equipos registrados')
     date = models.DateTimeField(verbose_name='Fecha del torneo')
     prize_payment = models.FloatField(verbose_name='Pago de premio')
     registration_cost = models.FloatField(verbose_name='Costo de inscripción')
+    team = models.ManyToManyField(Team, through='TournamentTeam')
 
     def __str__(self):
-        return self.number_teams
+        return str(self.number_teams)
     
     class Meta:
         verbose_name = 'Torneo'
@@ -123,6 +163,26 @@ class Tournament(models.Model):
         db_table = 'torneo'
         ordering = ['id']
 
+class TournamentTeam(models.Model):
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    goals_for = models.IntegerField(verbose_name='Goles a favor')
+    goals_against = models.IntegerField(verbose_name='Goles en contra')
+    goals_diff = models.IntegerField(verbose_name='Diferencia de goles')
+    games_tied = models.IntegerField(verbose_name='Partidos empatados')
+    games_won = models.IntegerField(verbose_name='Partidos ganados')
+    games_lost = models.IntegerField(verbose_name='Partidos perdidos')
+    games_played = models.IntegerField(verbose_name='Partidos jugados')
+    score = models.IntegerField(verbose_name='Puntaje')
+
+    def __str__(self):
+        return str(self.score)
+    
+    class Meta:
+        verbose_name = 'Torneo y equipo'
+        verbose_name_plural = 'Torneos y equipos'
+        db_table = 'torneo_equipo'
+        ordering = ['id']
 
 class Sale(models.Model):
     total_cost = models.FloatField(verbose_name='Costo total')
