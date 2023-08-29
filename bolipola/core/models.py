@@ -36,7 +36,7 @@ class Inventory(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.product_quantity)
+        return str(f'{self.product_quantity} - {self.product.name}')
     
     class Meta:
         verbose_name = 'Inventario'
@@ -50,7 +50,7 @@ class Output(models.Model):
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.product_quantity_out)
+        return str(f'{self.product_quantity_out}, {self.inventory.product.name}')
     
     class Meta:
         verbose_name = 'Salida'
@@ -61,10 +61,10 @@ class Output(models.Model):
       
 class Calendar(models.Model):
     date = models.DateTimeField(verbose_name='Fecha')
-    Availability = models.BooleanField(verbose_name='Disponibilidad', default=True)
+    availability = models.BooleanField(verbose_name='Disponibilidad', default=True)
 
     def __str__(self):
-        return str(self.Availability)
+        return str(f'{self.availability} - {self.date}')
     
     class Meta:
         verbose_name = 'Calendario'
@@ -80,10 +80,10 @@ class Reservation(models.Model):
     start_time = models.DateTimeField(verbose_name='Hora de inicio')
     end_time = models.DateTimeField(verbose_name='Hora de finalización')
     cost = models.FloatField(verbose_name='Costo de la reserva')
-    Calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE)
+    calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.availability)
+        return str(f'{self.availability} - {self.calendar.date}')
     
     class Meta:
         verbose_name = 'Reserva'
@@ -147,6 +147,7 @@ class Player(models.Model):
         ordering = ['id']
 
 class Tournament(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Nombre', null=True)
     number_teams = models.PositiveIntegerField(verbose_name='Cantidad de equipos')
     registered_teams = models.PositiveIntegerField(verbose_name='Equipos registrados')
     date = models.DateTimeField(verbose_name='Fecha del torneo')
@@ -155,7 +156,7 @@ class Tournament(models.Model):
     team = models.ManyToManyField(Team, through='TournamentTeam')
 
     def __str__(self):
-        return str(self.number_teams)
+        return self.name
     
     class Meta:
         verbose_name = 'Torneo'
@@ -176,7 +177,7 @@ class TournamentTeam(models.Model):
     score = models.IntegerField(verbose_name='Puntaje')
 
     def __str__(self):
-        return str(self.score)
+        return str(f'{self.tournament.name} - {self.team.name}')
     
     class Meta:
         verbose_name = 'Torneo y equipo'
@@ -199,7 +200,7 @@ class Sale(models.Model):
     Tournament = models.ManyToManyField(Tournament, verbose_name='Venta_torneo')
 
     def __str__(self):
-        return self.payment_type
+        return str(self.date)
     
     class Meta:
         verbose_name = 'Venta'
