@@ -33,8 +33,8 @@ Desarrollar un software el cual ayudará a la gestión y realización de diferen
 
 
 ## Integrantes ⛷️😈
-- Jhon Stiven Sarmiento Diaz🦊
-- Julian Stevan Castro Quintero🦝
-- Juan Jose Ochoa Romero🪱
-- Luis Miguel Restrepo Espitia🐒
-- Miguel Angel Pulido Quinche🐻
+- Jhon Stiven Sarmiento Diaz🦝🦥
+- Julian Stevan Castro Quintero🦊🐬
+- Juan Jose Ochoa Romero🪱🐦
+- Luis Miguel Restrepo Espitia🐒🦖
+- Miguel Angel Pulido Quinche🐻🐼
