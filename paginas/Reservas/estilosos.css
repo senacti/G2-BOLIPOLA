@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #e74c3c;
+    color: #fff;
+    width: 100%;
+}
+
+a.button {
+    text-align: center;
+    display: block;
+    color: #e74c3c;
+    margin-top: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #e74c3c;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+a.button:hover {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.reserva {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #e74c3c;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 40px);
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reserva h2 {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+
+#letra {
+    margin-bottom: 10px;
+}
+
+#letra label {
+    font-weight: bold;
+}
+
+#letra input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    background-color: #c0392b;
+}
+
+button[type="submit"] span {
+    font-weight: bold;
+}
+
+.reserva img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+
+
+
