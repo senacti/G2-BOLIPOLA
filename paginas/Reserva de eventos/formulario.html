@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="formulario.css">
+    <title>Formulario de Eventos</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Reserva de Eventos</h1>
+        <form action="#" method="POST">
+
+            <label for="nombre">Nombre</label>
+            <input type="Nombre">
+            <label for="apellido">Apellido</label>
+            <input type="Apellido">
+            <label for="edad">Edad</label>
+            <input type="Edad">
+            <label for="correo electronico">Correo Electronico</label>
+            <input type="Correo Electronico"><br>
+            <select name="tipo" id="tipo" required>
+                <option value="gmail">Gmail</option>
+                <option value="hotmail">Hotmail</option>
+                <option value="outlook">Outlook</option>
+                <option value="otra">Otra</option>
+                <input value="" placeholder="coloque aqui otro correo electronico">
+            </select><br>
+            <label for="nombre">Nombre del Evento:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <label for="fecha">Fecha:</label> 
+            <input type= "datetime-local"> <br>
+            
+            <label for="tipo">Tipo de Evento:</label><br> 
+            <select id="tipo" name="tipo" required>
+                <option value="">Seleccionar</option>
+                <option value="cumpleaños">Cumpleaños</option>
+                <option value="bautizos">Bautizos</option>
+                <option value="primera comunion">Primera Comunion </option>
+                <option value="Otra">Otra</option>
+                <input value="" placeholder="coloque aqui que tipo de evennto es si Selecciono otra">
+            </select><br>
+            
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+</html>
