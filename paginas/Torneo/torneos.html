@@ -1,20 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="bolipola.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/IMAGENES/bolipola.jpeg" />
-    <title>Torneos</title>
-    <link rel="stylesheet" href="bolipola.css" type="text/css">
+    <title>Document</title>
 </head>
 <body>
-    <ul id="menu1">
-        <a href="inicio.html"><li>INICIO</li></a>
-        <a href="productos.html"><li>PRODUCTOS</li></a>
-        <a href="reservas.html"><li>RESERVAS</li></a>
-        <a href="eventos.html"><li>EVENTOS</li></a>
-        <a href="torneos.html"><li>TORNEOS</li></a>
-    </ul>
+    <header>
+        <div class="container-hero">
+            <div class="container hero">
+                <div class="customer-support">
+                    <i class="fa-solid fa-headset"></i>
+                    <div class="content-customer-support">
+                        <span class="text">Numero de Contacto</span>
+                        <span class="number">123-456-78960</span>
+                    </div>
+                </div>
+
+                <div class="container-logo">
+                    <a class="logo" href="/"></a>
+                </div>
+
+                <div class="container-user">
+                    <i class="fa-solid fa-user"></i>
+                    <div>
+                        <span class="text">Hola, <a href="#">Inicia sesión</a></span>
+                        <span class="number">o <a href="#">Regístrate</a></span>
+                    </div>
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    <div class="content-shopping-cart">
+                        <span class="text">Carrito</span>
+                        <span class="number">(0)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-navbar">
+            <nav class="navbar container">
+                <i class="fa-solid fa-bars"></i>
+                <ul class="menu">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Licores</a></li>
+                    <li><a href="#">Reservas</a></li>
+                    <li><a href="#">Eventos</a></li>
+                    <li><a href="#">Torneos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main">
         <div class="info-torneo">
             <div class="cuadros">
                 <strong>
@@ -30,23 +66,71 @@
                 </strong>
             </div>
         </div>
-
-        <div class="container">
-            <div class="cuadros">
-                <img src="/IMAGENES/bolipola.jpeg">
+        <div class="tarjeta">
+            <div class="box">
+                <img src="img/logo.png">
                 <h4>TORNEO 16 equipos</h4>
                 <p>En este torneo habran 16 equipos los cuales competiran por un premio de 2.000.000 de pesos colombianos</p>
                 <p>el valor de inscripcion es de 200.000 pesos cada equipo</p>
                 <a href="#">Leer mas</a><br><br>
                 <a href="inscripcion.html"><input type="submit" value="inscribirse" id="boton2"></a>
             </div>
-            <div class="cuadros">
-                <img src="/IMAGENES/bolipola.jpeg">
+            <div class="box">
+                <img src="img/logo.png">
                 <h4>TORNEO 24 EQUIPOS</h4>
                 <p>En este torneo habran 24 equipos los cuales competiran por un premio de 5.000.000 de pesos colombianos</p>
                 <p>el valor de inscripcion es de 300.000 pesos cada equipo</p>
                 <a href="#">Leer mas</a><br><br>
                 <a href="inscripcion.html"><input type="submit" value="inscribirse" id="boton2"></a>
-        </div>  
+            </div> 
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container-footer">
+            <div class="menu-footer">
+                <div class="contact-info">
+                    <p class="title-footer">Información de Contacto</p>
+                    <ul>
+                        <li>
+                            Dirección: Calle de la fantasia Miguelin
+                        </li>
+                        <li>Teléfono: 123-456-7890</li>
+                        <li>EmaiL: bolipola@support.com</li>
+                    </ul>
+                    <div class="social-icons">
+                        <span class="facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </span>
+                        <span class="instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="information">
+                    <p class="title-footer">Información</p>
+                    <ul>
+                        <li><a href="#">Politicas de Privacidad</a></li>
+                        <li><a href="#">Términos y condiciones</a></li>
+                        <li><a href="#">Contactános</a></li>
+                    </ul>
+                </div>
+                <div class="my-account">
+                    <p class="title-footer">Mi cuenta</p>
+                    <ul>
+                        <li><a href="#">Mi cuenta</a></li>
+                        <li><a href="#">Historial de ordenes</a></li>
+                        <li><a href="#">Reembolsos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>
+                    copyright jiji &copy; 2023
+                </p>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
