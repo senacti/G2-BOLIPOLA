@@ -3,7 +3,10 @@ const avatarInput = document.querySelector("#colocadorImg")
 const form = document.querySelector(".form")
 const pass1 = document.querySelector("#pass1")
 const pass2 = document.querySelector("#pass2")
+const email = document.querySelector(".formBox__inf-box-email-input")
 const gender = document.querySelector(".formBox__inf-box-gender-input")
+const setPassword = document.querySelector("#passwordConfirm")
+const setUsername = document.querySelector("#usernameConfirm")
 
 //Validar formulario
 form.addEventListener("submit", (e) => {
@@ -19,8 +22,6 @@ form.addEventListener("submit", (e) => {
         e.preventDefault() //Evita que se recargue la página y se borren los datos ya puestos
         return alert(`DATOS INVÁLIDOS:\n${errorMsj}`)
     }
-
-    return alert("¡Cuenta creada con éxito!")
 })
 
 //Colocador de imágen en el avatar:
@@ -37,4 +38,13 @@ avatarInput.addEventListener("change", (e) => {
     reader.onload = () => {
         avatarDiv.style.backgroundImage = `url(${reader.result})`
     }
+})
+
+//Ir colocando password y username con eventos
+email.addEventListener("input", () => {
+    setUsername.value = email.value
+})
+
+pass1.addEventListener("input", () => {
+    setPassword.value = pass1.value
 })

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'register/register.css' %}">
 </head>
 <body>
-    <form class="form" autocomplete="off">
+    <form class="form" autocomplete="off" method="POST" action="{% url 'register' %}">
         {% csrf_token %}
         <fieldset class="formBox">
             <legend class="formBox__legend"><img src="{% static 'register/images/logo.png' %}" alt="Logo empresa" class="formBox__legend-img"></legend>
@@ -20,23 +20,23 @@
                 <div class="formBox__inf-box" id="boxLeft">
 
                     <div class="formBox__inf-box-name" centrado="on">
-                        <label for="name" class="formBox__inf-box-name-label">Nombre:</label>
-                        <input type="text" name="name" class="formBox__inf-box-name-input" minlength="2" required>
+                        <label for="{{ form.first_name.id_for_label }}" class="formBox__inf-box-name-label">Nombre:</label>
+                        {{ form.first_name }}
                     </div>
 
                     <div class="formBox__inf-box-phone" centrado="off">
-                        <label for="phone" class="formBox__inf-box-phone-label">Teléfono:</label>
-                        <input type="text" name="phone" pattern="[0-9]{10}" class="formBox__inf-box-phone-input" required>
+                        <label for="{{ form.phone.id_for_label }}" class="formBox__inf-box-phone-label">Teléfono:</label>
+                        {{ form.phone }}
                     </div>
 
                     <div class="formBox__inf-box-date" centrado="off">
-                        <label for="date" class="formBox__inf-box-date-label">F. Nacimiento:</label>
-                        <input type="date" name="date" class="formBox__inf-box-date-input" min="1950-01-01" max="2015-01-01" required>
+                        <label for="{{ form.birthdate.id_for_label }}" class="formBox__inf-box-date-label">F. Nacimiento:</label>
+                        {{ form.birthdate }}
                     </div>
 
                     <div class="formBox__inf-box-pass" centrado="on">
-                        <label for="pass1" class="formBox__inf-box-pass-label">Establecer contraseña:</label>
-                        <input type="password" name="pass1" id="pass1" class="formBox__inf-box-pass-input" minlength="6" required>
+                        <label for="{{ form.password1.id_for_label }}" class="formBox__inf-box-pass-label">Contraseña:</label>
+                        {{ form.password1 }}
                     </div>
 
                 </div>
@@ -44,9 +44,9 @@
                 <div class="formBox__inf-box" id="boxCenter">
 
                     <div class="formBox__inf-box-avatar">
-                        <label for="avatar" class="formBox__inf-box-avatar-label">Avatar</label>
+                        <label for="{{ form.avatar.id_for_label }}" class="formBox__inf-box-avatar-label">Avatar</label>
                         <div id="modificadorInputFile">
-                            <input type="file" name="avatar" accept="image/*" class="formBox__inf-box-avatar-input" id="colocadorImg">
+                            {{ form.avatar }}
                         </div>
                     </div>
 
@@ -55,28 +55,23 @@
                 <div class="formBox__inf-box" id="boxRight">
                     
                     <div class="formBox__inf-box-lastName" centrado="on">
-                        <label for="lastName" class="formBox__inf-box-lastName-label">Apellido:</label>
-                        <input type="text" name="lastName" class="formBox__inf-box-lastName-input" minlength="2" required>
+                        <label for="{{ form.last_name.id_for_label }}" class="formBox__inf-box-lastName-label">Apellido:</label>
+                        {{ form.last_name }}
                     </div>
 
                     <div class="formBox__inf-box-email" centrado="off">
-                        <label for="email" class="formBox__inf-box-email-label">Correo:</label>
-                        <input type="email" name="email" class="formBox__inf-box-email-input" required>
+                        <label for="{{ form.email.id_for_label }}" class="formBox__inf-box-email-label">Correo:</label>
+                        {{ form.email }}
                     </div>
 
                     <div class="formBox__inf-box-gender" centrado="off">
-                        <label for="gender" class="formBox__inf-box-gender-label">Género:</label>
-                        <select list="gender" class="formBox__inf-box-gender-input" required>
-                            <option value="">...</option>
-                            <option>Femenino</option>
-                            <option>Masculino</option>
-                            <option>Otro</option>
-                        </select>
+                        <label for="{{ form.gender.id_for_label }}" class="formBox__inf-box-gender-label">Género:</label>
+                        {{ form.gender }}
                     </div>
 
                     <div class="formBox__inf-box-pass" centrado="on">
-                        <label for="pass2" class="formBox__inf-box-pass-label">Confirmar contraseña:</label>
-                        <input type="password" name="pass2" id="pass2" class="formBox__inf-box-pass-input" required>
+                        <label for="{{ form.password2.id_for_label }}" class="formBox__inf-box-pass-label">Confirmar contraseña:</label>
+                        {{ form.password2 }}
                     </div>
                 </div>
             </div>
@@ -94,8 +89,10 @@
                 
             </div>
         </fieldset>
-    </form>
 
+        {{ form.password }}
+        {{ form.username }}
+    </form>
     <script src="{% static 'register/register.js' %}"></script>
 </body>
 </html>
