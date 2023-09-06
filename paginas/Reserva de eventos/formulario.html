@@ -6,45 +6,97 @@
     <title>Formulario de Eventos</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Reserva de Eventos</h1>
-        <form action="#" method="POST">
+    <header>
+        <div class="container-hero">
+            <div class="container hero">
+                <div class="customer-support">
+                    <i class="fa-solid fa-headset"></i>
+                    <div class="content-customer-support">
+                        <span class="text">Numero de Contacto</span>
+                        <span class="number">123-456-78960</span>
+                    </div>
+                </div>
 
-            <label for="nombre">Nombre</label>
-            <input type="Nombre">
-            <label for="apellido">Apellido</label>
-            <input type="Apellido">
-            <label for="edad">Edad</label>
-            <input type="Edad">
-            <label for="correo electronico">Correo Electronico</label>
-            <input type="Correo Electronico"><br>
-            <select name="tipo" id="tipo" required>
-                <option value="gmail">Gmail</option>
-                <option value="hotmail">Hotmail</option>
-                <option value="outlook">Outlook</option>
-                <option value="otra">Otra</option>
-                <input value="" placeholder="coloque aqui otro correo electronico">
-            </select><br>
-            <label for="nombre">Nombre del Evento:</label>
-            <input type="text" id="nombre" name="nombre" required>
-            <label for="fecha">Fecha:</label> 
-            <input type= "datetime-local"> <br>
+                <div class="container-logo">
+                    <a class="logo" href="logo.png"></a>
+                </div>
+
+                <div class="container-user">
+                    <i class="fa-solid fa-user"></i>
+                    <div>
+                        <span class="text">Hola, <a href="#">Inicia sesión</a></span>
+                        <span class="number">o <a href="#">Regístrate</a></span>
+                    </div>
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    <div class="content-shopping-cart">
+                        <span class="text">Carrito</span>
+                        <span class="number">(0)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-navbar">
+            <nav class="navbar container">
+                <i class="fa-solid fa-bars"></i>
+
+                <ul class="menu">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Licores</a></li>
+                    <li><a href="#">Reservas</a></li>
+                    <li><a href="#">Eventos</a></li>
+                    <li><a href="#">Torneos</a></li>
+                </ul>
             
-            <label for="tipo">Tipo de Evento:</label><br> 
-            <select id="tipo" name="tipo" required>
-                <option value="">Seleccionar</option>
-                <option value="cumpleaños">Cumpleaños</option>
-                <option value="bautizos">Bautizos</option>
-                <option value="primera comunion">Primera Comunion </option>
-                <option value="Otra">Otra</option>
-                <input value="" placeholder="coloque aqui que tipo de evennto es si Selecciono otra">
-            </select><br>
-            
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
-            
-            <button type="submit">Enviar</button>
-        </form>
+            </nav>
+        </div>
+    </header>
+
+    <div class="containerMain">
+        <div class="containerxd">
+            <h1>Reserva de Eventos</h1>
+            <form action="#" method="POST">
+
+                <label for="nombre">Nombre</label>
+                <input type="Nombre">
+                <label for="apellido">Apellido</label>
+                <input type="Apellido">
+                <label for="edad">Edad</label>
+                <input type="Edad">
+                <label for="correo electronico">Correo Electronico</label>
+                <input type="Correo Electronico"><br>
+                <select name="tipo" id="tipo" required>
+                    <option value="gmail">Gmail</option>
+                    <option value="hotmail">Hotmail</option>
+                    <option value="outlook">Outlook</option>
+                    <option value="otra">Otra</option>
+                    <input value="" placeholder="coloque aqui otro correo electronico">
+                </select><br>
+                <label for="nombre">Nombre del Evento:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                <label for="fecha">Fecha:</label> 
+                <input type= "datetime-local"> <br>
+                
+                <label for="tipo">Tipo de Evento:</label><br> 
+                <select id="tipo" name="tipo" required>
+                    <option value="">Seleccionar</option>
+                    <option value="cumpleaños">Cumpleaños</option>
+                    <option value="bautizos">Bautizos</option>
+                    <option value="primera comunion">Primera Comunion </option>
+                    <option value="Otra">Otra</option>
+                    <input value="" placeholder="coloque aqui que tipo de evennto es si Selecciono otra">
+                </select><br>
+                
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+                
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
     </div>
+    <script
+    src="https://kit.fontawesome.com/81581fb069.js"
+    crossorigin="anonymous"
+    ></script>
 </body>
 </html>
