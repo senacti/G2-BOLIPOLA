@@ -35,7 +35,9 @@ html {
 /*               HEADER               */
 /* ********************************** */
 .container-hero {
+
 	background-color: var(--background-color);
+
 }
 
 .hero {
@@ -68,9 +70,10 @@ background-position: center;
 }
 
 .container-logo {
-
-	display: flex;
-	align-items: center;
+	position: relative;
+	left: 6.25rem;
+	display: grid;
+	place-items: center;
 	gap: 0.5rem;
 }
 
@@ -112,12 +115,13 @@ background-position: center;
 
 /* ************* NAVBAR ************* */
 .container-navbar {
+	padding: 0.8rem 0;
 	background-color: var(--primary-color);
 }
 
 .navbar {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 	padding: 1rem 0;
 }
@@ -138,7 +142,7 @@ background-position: center;
 .menu a {
 	text-decoration: none;
 	font-size: 1.3rem;
-	color: var(--dark-color);
+	color: var(--background-color);
 	font-weight: 600;
 	text-transform: uppercase;
 	position: relative;
