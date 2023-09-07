@@ -5,8 +5,8 @@ from django.contrib.auth import authenticate
 from django.contrib import messages
 from user.forms import CustomUserForm
 
-def register(request):
-    return render(request, 'register.html', {})
+def index(request):
+    return render(request, 'index.html', {})
 
 def signin(request):
     if request.method == 'POST':

@@ -57,9 +57,9 @@ class CustomUserForm(forms.ModelForm):
 
     GENDER_CHOICES = (
         ('', '...'),
-        ('M', 'Masculino'),
-        ('F', 'Femenino'),
-        ('O', 'Otro'),
+        ('Masculino', 'Masculino'),
+        ('Femenino', 'Femenino'),
+        ('Otro', 'Otro'),
     )
     gender = forms.ChoiceField(
         label='Género',
