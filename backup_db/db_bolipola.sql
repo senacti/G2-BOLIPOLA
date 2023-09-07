@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 07-09-2023 a las 00:24:47
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Sep 07, 2023 at 05:19 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_bolipola`
+-- Database: `db_bolipola`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `admin_interface_theme`
+-- Table structure for table `admin_interface_theme`
 --
 
 CREATE TABLE `admin_interface_theme` (
@@ -88,10 +88,18 @@ CREATE TABLE `admin_interface_theme` (
   `collapsible_tabular_inlines_collapsed` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admin_interface_theme`
+--
+
+INSERT INTO `admin_interface_theme` (`id`, `name`, `active`, `title`, `title_visible`, `logo`, `logo_visible`, `css_header_background_color`, `title_color`, `css_header_text_color`, `css_header_link_color`, `css_header_link_hover_color`, `css_module_background_color`, `css_module_text_color`, `css_module_link_color`, `css_module_link_hover_color`, `css_module_rounded_corners`, `css_generic_link_color`, `css_generic_link_hover_color`, `css_save_button_background_color`, `css_save_button_background_hover_color`, `css_save_button_text_color`, `css_delete_button_background_color`, `css_delete_button_background_hover_color`, `css_delete_button_text_color`, `list_filter_dropdown`, `related_modal_active`, `related_modal_background_color`, `related_modal_rounded_corners`, `logo_color`, `recent_actions_visible`, `favicon`, `related_modal_background_opacity`, `env_name`, `env_visible_in_header`, `env_color`, `env_visible_in_favicon`, `related_modal_close_button_visible`, `language_chooser_active`, `language_chooser_display`, `list_filter_sticky`, `form_pagination_sticky`, `form_submit_sticky`, `css_module_background_selected_color`, `css_module_link_selected_color`, `logo_max_height`, `logo_max_width`, `foldable_apps`, `language_chooser_control`, `list_filter_highlight`, `list_filter_removal_links`, `show_fieldsets_as_tabs`, `show_inlines_as_tabs`, `css_generic_link_active_color`, `collapsible_stacked_inlines`, `collapsible_stacked_inlines_collapsed`, `collapsible_tabular_inlines`, `collapsible_tabular_inlines_collapsed`) VALUES
+(1, 'Django', 0, 'Administración de Django', 1, '', 1, '#0C4B33', '#F5DD5D', '#44B78B', '#FFFFFF', '#C9F0DD', '#44B78B', '#FFFFFF', '#FFFFFF', '#C9F0DD', 1, '#0C3C26', '#156641', '#0C4B33', '#0C3C26', '#FFFFFF', '#BA2121', '#A41515', '#FFFFFF', 1, 1, '#000000', 1, '#FFFFFF', 1, '', '0.3', '', 1, '#E74C3C', 1, 1, 1, 'code', 1, 0, 0, '#FFFFCC', '#FFFFFF', 100, 400, 1, 'default-select', 1, 0, 0, 0, '#29B864', 0, 1, 0, 1),
+(2, 'Bolipola', 1, 'Bolipola admin', 1, 'admin-interface/logo/logo_pdsEZYf.png', 1, '#CB4335', '#FBFCFC', '#FBFCFC', '#FFFFFF', '#F1F1F1', '#B23B2E', '#FFFFFF', '#FFFFFF', '#C9F0DD', 1, '#0C3C26', '#156641', '#CB4335', '#BABBBB', '#FFFFFF', '#BA2121', '#A41515', '#FFFFFF', 1, 1, '#000000', 1, '#FFFFFF', 1, '', '0.3', '', 1, '#2BFF32', 1, 1, 1, 'code', 1, 0, 0, '#DADBDB', '#FFFFFF', 70, 400, 1, 'default-select', 1, 0, 0, 0, '#29B864', 0, 1, 0, 1);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auth_group`
+-- Table structure for table `auth_group`
 --
 
 CREATE TABLE `auth_group` (
@@ -102,7 +110,7 @@ CREATE TABLE `auth_group` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auth_group_permissions`
+-- Table structure for table `auth_group_permissions`
 --
 
 CREATE TABLE `auth_group_permissions` (
@@ -114,7 +122,7 @@ CREATE TABLE `auth_group_permissions` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `auth_permission`
+-- Table structure for table `auth_permission`
 --
 
 CREATE TABLE `auth_permission` (
@@ -125,7 +133,7 @@ CREATE TABLE `auth_permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `auth_permission`
+-- Dumping data for table `auth_permission`
 --
 
 INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
@@ -209,7 +217,7 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `calendario`
+-- Table structure for table `calendario`
 --
 
 CREATE TABLE `calendario` (
@@ -221,7 +229,7 @@ CREATE TABLE `calendario` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categoria`
+-- Table structure for table `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -233,7 +241,7 @@ CREATE TABLE `categoria` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `django_admin_log`
+-- Table structure for table `django_admin_log`
 --
 
 CREATE TABLE `django_admin_log` (
@@ -247,10 +255,20 @@ CREATE TABLE `django_admin_log` (
   `user_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `django_admin_log`
+--
+
+INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
+(1, '2023-09-07 03:12:30.815204', '2', 'Bolipola', 1, '[{\"added\": {}}]', 1, 1),
+(2, '2023-09-07 03:14:38.214502', '2', 'Bolipola', 2, '[{\"changed\": {\"fields\": [\"Logo\", \"Max height\", \"Color\"]}}]', 1, 1),
+(3, '2023-09-07 03:15:14.581972', '2', 'Bolipola', 2, '[{\"changed\": {\"fields\": [\"Title\", \"Background color\"]}}]', 1, 1),
+(4, '2023-09-07 03:17:50.650529', '2', 'Bolipola', 2, '[{\"changed\": {\"fields\": [\"Text color\", \"Link hover color\", \"Background color\", \"Background selected color\", \"Background color\", \"Background hover color\"]}}]', 1, 1);
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `django_content_type`
+-- Table structure for table `django_content_type`
 --
 
 CREATE TABLE `django_content_type` (
@@ -260,7 +278,7 @@ CREATE TABLE `django_content_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `django_content_type`
+-- Dumping data for table `django_content_type`
 --
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
@@ -287,7 +305,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `django_migrations`
+-- Table structure for table `django_migrations`
 --
 
 CREATE TABLE `django_migrations` (
@@ -298,7 +316,7 @@ CREATE TABLE `django_migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `django_migrations`
+-- Dumping data for table `django_migrations`
 --
 
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
@@ -357,7 +375,7 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `django_session`
+-- Table structure for table `django_session`
 --
 
 CREATE TABLE `django_session` (
@@ -366,10 +384,17 @@ CREATE TABLE `django_session` (
   `expire_date` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('2d28c8y2uj09tokd3471uqieg086ss6u', '.eJxVjMsOwiAQRf-FtSEw5dG6dO83kIEZpGogKe3K-O_apAvd3nPOfYmA21rC1nkJM4mz0OL0u0VMD647oDvWW5Op1XWZo9wVedAur434eTncv4OCvXxrUDlbJGKdMik1GE6GPHhjmBmUhcG6FMkhWaAJ3GCsH82YCDQpHSfx_gD7CDfy:1qe5Q9:niNsRV5lM_pI9r66X7M1KUde1nIPa9PfYRZ9_YjpexE', '2023-09-21 03:11:05.006111');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `equipo`
+-- Table structure for table `equipo`
 --
 
 CREATE TABLE `equipo` (
@@ -383,7 +408,7 @@ CREATE TABLE `equipo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `evento`
+-- Table structure for table `evento`
 --
 
 CREATE TABLE `evento` (
@@ -398,7 +423,7 @@ CREATE TABLE `evento` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `inventario`
+-- Table structure for table `inventario`
 --
 
 CREATE TABLE `inventario` (
@@ -411,7 +436,7 @@ CREATE TABLE `inventario` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `jugador`
+-- Table structure for table `jugador`
 --
 
 CREATE TABLE `jugador` (
@@ -434,7 +459,7 @@ CREATE TABLE `jugador` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `producto`
+-- Table structure for table `producto`
 --
 
 CREATE TABLE `producto` (
@@ -450,7 +475,7 @@ CREATE TABLE `producto` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `reserva`
+-- Table structure for table `reserva`
 --
 
 CREATE TABLE `reserva` (
@@ -467,7 +492,7 @@ CREATE TABLE `reserva` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `salida`
+-- Table structure for table `salida`
 --
 
 CREATE TABLE `salida` (
@@ -480,7 +505,7 @@ CREATE TABLE `salida` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `torneo`
+-- Table structure for table `torneo`
 --
 
 CREATE TABLE `torneo` (
@@ -496,7 +521,7 @@ CREATE TABLE `torneo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `torneo_equipo`
+-- Table structure for table `torneo_equipo`
 --
 
 CREATE TABLE `torneo_equipo` (
@@ -516,7 +541,7 @@ CREATE TABLE `torneo_equipo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user_userboli`
+-- Table structure for table `user_userboli`
 --
 
 CREATE TABLE `user_userboli` (
@@ -539,18 +564,18 @@ CREATE TABLE `user_userboli` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `user_userboli`
+-- Dumping data for table `user_userboli`
 --
 
 INSERT INTO `user_userboli` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `email`, `avatar`, `birthdate`, `phone`, `gender`, `rango`) VALUES
-(1, 'pbkdf2_sha256$600000$2bZnruJCZryYweQlCNND6r$KZRiLRbLts+pmelrpxEfSJXYWohkKiAZWjszISXijDg=', NULL, 1, 'admin', '', '', 1, 1, '2023-09-06 21:53:01.686383', 'admin@admin.com', '', NULL, NULL, 'Otro', 0),
+(1, 'pbkdf2_sha256$600000$2bZnruJCZryYweQlCNND6r$KZRiLRbLts+pmelrpxEfSJXYWohkKiAZWjszISXijDg=', '2023-09-07 03:11:04.972080', 1, 'admin', '', '', 1, 1, '2023-09-06 21:53:01.686383', 'admin@admin.com', '', NULL, NULL, 'Otro', 0),
 (2, 'pbkdf2_sha256$600000$rDrUEcbL3bnkRBpOAzexpV$+XaHDtA3qNuFGSk0fwLHOJqxmZRQeXQLjsDknC6V3/4=', NULL, 0, 'jua@soy.com', 'Tatiana', 'Alfreda', 0, 1, '2023-09-06 21:59:46.659757', 'jua@soy.com', '', '2003-12-12', '3224587458', 'F', 0),
 (3, 'pbkdf2_sha256$600000$Kqbow709NNAoOMolXEJqL8$PCSTi/84Bqz7tTC1HRx7Udatr+2YzQeglO+EAel69YQ=', NULL, 0, 'juan@com.com', 'elkakas', 'juanito123', 0, 1, '2023-09-06 22:03:42.358296', 'juan@com.com', '', '2004-12-12', '8574857892', 'F', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user_userboli_groups`
+-- Table structure for table `user_userboli_groups`
 --
 
 CREATE TABLE `user_userboli_groups` (
@@ -562,7 +587,7 @@ CREATE TABLE `user_userboli_groups` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user_userboli_user_permissions`
+-- Table structure for table `user_userboli_user_permissions`
 --
 
 CREATE TABLE `user_userboli_user_permissions` (
@@ -574,7 +599,7 @@ CREATE TABLE `user_userboli_user_permissions` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta`
+-- Table structure for table `venta`
 --
 
 CREATE TABLE `venta` (
@@ -592,7 +617,7 @@ CREATE TABLE `venta` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta_event`
+-- Table structure for table `venta_event`
 --
 
 CREATE TABLE `venta_event` (
@@ -604,7 +629,7 @@ CREATE TABLE `venta_event` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta_inventory`
+-- Table structure for table `venta_inventory`
 --
 
 CREATE TABLE `venta_inventory` (
@@ -616,7 +641,7 @@ CREATE TABLE `venta_inventory` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta_reservation`
+-- Table structure for table `venta_reservation`
 --
 
 CREATE TABLE `venta_reservation` (
@@ -628,7 +653,7 @@ CREATE TABLE `venta_reservation` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `venta_tournament`
+-- Table structure for table `venta_tournament`
 --
 
 CREATE TABLE `venta_tournament` (
@@ -638,25 +663,25 @@ CREATE TABLE `venta_tournament` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `admin_interface_theme`
+-- Indexes for table `admin_interface_theme`
 --
 ALTER TABLE `admin_interface_theme`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `admin_interface_theme_name_30bda70f_uniq` (`name`);
 
 --
--- Indices de la tabla `auth_group`
+-- Indexes for table `auth_group`
 --
 ALTER TABLE `auth_group`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Indices de la tabla `auth_group_permissions`
+-- Indexes for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   ADD PRIMARY KEY (`id`),
@@ -664,26 +689,26 @@ ALTER TABLE `auth_group_permissions`
   ADD KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`);
 
 --
--- Indices de la tabla `auth_permission`
+-- Indexes for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`);
 
 --
--- Indices de la tabla `calendario`
+-- Indexes for table `calendario`
 --
 ALTER TABLE `calendario`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `categoria`
+-- Indexes for table `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `django_admin_log`
+-- Indexes for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
   ADD PRIMARY KEY (`id`),
@@ -691,80 +716,80 @@ ALTER TABLE `django_admin_log`
   ADD KEY `django_admin_log_user_id_c564eba6_fk_user_userboli_id` (`user_id`);
 
 --
--- Indices de la tabla `django_content_type`
+-- Indexes for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`);
 
 --
--- Indices de la tabla `django_migrations`
+-- Indexes for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `django_session`
+-- Indexes for table `django_session`
 --
 ALTER TABLE `django_session`
   ADD PRIMARY KEY (`session_key`),
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
--- Indices de la tabla `equipo`
+-- Indexes for table `equipo`
 --
 ALTER TABLE `equipo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `evento`
+-- Indexes for table `evento`
 --
 ALTER TABLE `evento`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `inventario`
+-- Indexes for table `inventario`
 --
 ALTER TABLE `inventario`
   ADD PRIMARY KEY (`id`),
   ADD KEY `inventario_product_id_a1edc06a_fk_producto_id` (`product_id`);
 
 --
--- Indices de la tabla `jugador`
+-- Indexes for table `jugador`
 --
 ALTER TABLE `jugador`
   ADD PRIMARY KEY (`id`),
   ADD KEY `jugador_equipo_id_f972fb22_fk_equipo_id` (`equipo_id`);
 
 --
--- Indices de la tabla `producto`
+-- Indexes for table `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `producto_category_id_d39dad7c_fk_categoria_id` (`category_id`);
 
 --
--- Indices de la tabla `reserva`
+-- Indexes for table `reserva`
 --
 ALTER TABLE `reserva`
   ADD PRIMARY KEY (`id`),
   ADD KEY `reserva_calendar_id_0e77bd6e_fk_calendario_id` (`calendar_id`);
 
 --
--- Indices de la tabla `salida`
+-- Indexes for table `salida`
 --
 ALTER TABLE `salida`
   ADD PRIMARY KEY (`id`),
   ADD KEY `salida_inventory_id_3d569ade_fk_inventario_id` (`inventory_id`);
 
 --
--- Indices de la tabla `torneo`
+-- Indexes for table `torneo`
 --
 ALTER TABLE `torneo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `torneo_equipo`
+-- Indexes for table `torneo_equipo`
 --
 ALTER TABLE `torneo_equipo`
   ADD PRIMARY KEY (`id`),
@@ -772,7 +797,7 @@ ALTER TABLE `torneo_equipo`
   ADD KEY `torneo_equipo_tournament_id_2a153cdb_fk_torneo_id` (`tournament_id`);
 
 --
--- Indices de la tabla `user_userboli`
+-- Indexes for table `user_userboli`
 --
 ALTER TABLE `user_userboli`
   ADD PRIMARY KEY (`id`),
@@ -780,7 +805,7 @@ ALTER TABLE `user_userboli`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indices de la tabla `user_userboli_groups`
+-- Indexes for table `user_userboli_groups`
 --
 ALTER TABLE `user_userboli_groups`
   ADD PRIMARY KEY (`id`),
@@ -788,7 +813,7 @@ ALTER TABLE `user_userboli_groups`
   ADD KEY `user_userboli_groups_group_id_c57ab420_fk_auth_group_id` (`group_id`);
 
 --
--- Indices de la tabla `user_userboli_user_permissions`
+-- Indexes for table `user_userboli_user_permissions`
 --
 ALTER TABLE `user_userboli_user_permissions`
   ADD PRIMARY KEY (`id`),
@@ -796,13 +821,13 @@ ALTER TABLE `user_userboli_user_permissions`
   ADD KEY `user_userboli_user_p_permission_id_b052ddf3_fk_auth_perm` (`permission_id`);
 
 --
--- Indices de la tabla `venta`
+-- Indexes for table `venta`
 --
 ALTER TABLE `venta`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `venta_event`
+-- Indexes for table `venta_event`
 --
 ALTER TABLE `venta_event`
   ADD PRIMARY KEY (`id`),
@@ -810,7 +835,7 @@ ALTER TABLE `venta_event`
   ADD KEY `venta_Event_event_id_6228417f_fk_evento_id` (`event_id`);
 
 --
--- Indices de la tabla `venta_inventory`
+-- Indexes for table `venta_inventory`
 --
 ALTER TABLE `venta_inventory`
   ADD PRIMARY KEY (`id`),
@@ -818,7 +843,7 @@ ALTER TABLE `venta_inventory`
   ADD KEY `venta_inventory_inventory_id_d006d13b_fk_inventario_id` (`inventory_id`);
 
 --
--- Indices de la tabla `venta_reservation`
+-- Indexes for table `venta_reservation`
 --
 ALTER TABLE `venta_reservation`
   ADD PRIMARY KEY (`id`),
@@ -826,7 +851,7 @@ ALTER TABLE `venta_reservation`
   ADD KEY `venta_Reservation_reservation_id_e760ca9a_fk_reserva_id` (`reservation_id`);
 
 --
--- Indices de la tabla `venta_tournament`
+-- Indexes for table `venta_tournament`
 --
 ALTER TABLE `venta_tournament`
   ADD PRIMARY KEY (`id`),
@@ -834,267 +859,158 @@ ALTER TABLE `venta_tournament`
   ADD KEY `venta_Tournament_tournament_id_fa034e3f_fk_torneo_id` (`tournament_id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `admin_interface_theme`
+-- AUTO_INCREMENT for table `admin_interface_theme`
 --
 ALTER TABLE `admin_interface_theme`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `auth_group`
+-- AUTO_INCREMENT for table `auth_group`
 --
 ALTER TABLE `auth_group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `auth_group_permissions`
+-- AUTO_INCREMENT for table `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `auth_permission`
+-- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
--- AUTO_INCREMENT de la tabla `calendario`
+-- AUTO_INCREMENT for table `calendario`
 --
 ALTER TABLE `calendario`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `categoria`
+-- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `django_admin_log`
+-- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `django_content_type`
+-- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT de la tabla `django_migrations`
+-- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT de la tabla `equipo`
+-- AUTO_INCREMENT for table `equipo`
 --
 ALTER TABLE `equipo`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `evento`
+-- AUTO_INCREMENT for table `evento`
 --
 ALTER TABLE `evento`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `inventario`
+-- AUTO_INCREMENT for table `inventario`
 --
 ALTER TABLE `inventario`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `jugador`
+-- AUTO_INCREMENT for table `jugador`
 --
 ALTER TABLE `jugador`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `producto`
+-- AUTO_INCREMENT for table `producto`
 --
 ALTER TABLE `producto`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `reserva`
+-- AUTO_INCREMENT for table `reserva`
 --
 ALTER TABLE `reserva`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `salida`
+-- AUTO_INCREMENT for table `salida`
 --
 ALTER TABLE `salida`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `torneo`
+-- AUTO_INCREMENT for table `torneo`
 --
 ALTER TABLE `torneo`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `torneo_equipo`
+-- AUTO_INCREMENT for table `torneo_equipo`
 --
 ALTER TABLE `torneo_equipo`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `user_userboli`
+-- AUTO_INCREMENT for table `user_userboli`
 --
 ALTER TABLE `user_userboli`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `user_userboli_groups`
+-- AUTO_INCREMENT for table `user_userboli_groups`
 --
 ALTER TABLE `user_userboli_groups`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `user_userboli_user_permissions`
+-- AUTO_INCREMENT for table `user_userboli_user_permissions`
 --
 ALTER TABLE `user_userboli_user_permissions`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `venta`
+-- AUTO_INCREMENT for table `venta`
 --
 ALTER TABLE `venta`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `venta_event`
+-- AUTO_INCREMENT for table `venta_event`
 --
 ALTER TABLE `venta_event`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `venta_inventory`
+-- AUTO_INCREMENT for table `venta_inventory`
 --
 ALTER TABLE `venta_inventory`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `venta_reservation`
+-- AUTO_INCREMENT for table `venta_reservation`
 --
 ALTER TABLE `venta_reservation`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `venta_tournament`
---
-ALTER TABLE `venta_tournament`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `auth_group_permissions`
---
-ALTER TABLE `auth_group_permissions`
-  ADD CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
-
---
--- Filtros para la tabla `auth_permission`
---
-ALTER TABLE `auth_permission`
-  ADD CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
-
---
--- Filtros para la tabla `django_admin_log`
---
-ALTER TABLE `django_admin_log`
-  ADD CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
-  ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`);
-
---
--- Filtros para la tabla `inventario`
---
-ALTER TABLE `inventario`
-  ADD CONSTRAINT `inventario_product_id_a1edc06a_fk_producto_id` FOREIGN KEY (`product_id`) REFERENCES `producto` (`id`);
-
---
--- Filtros para la tabla `jugador`
---
-ALTER TABLE `jugador`
-  ADD CONSTRAINT `jugador_equipo_id_f972fb22_fk_equipo_id` FOREIGN KEY (`equipo_id`) REFERENCES `equipo` (`id`);
-
---
--- Filtros para la tabla `producto`
---
-ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_category_id_d39dad7c_fk_categoria_id` FOREIGN KEY (`category_id`) REFERENCES `categoria` (`id`);
-
---
--- Filtros para la tabla `reserva`
---
-ALTER TABLE `reserva`
-  ADD CONSTRAINT `reserva_calendar_id_0e77bd6e_fk_calendario_id` FOREIGN KEY (`calendar_id`) REFERENCES `calendario` (`id`);
-
---
--- Filtros para la tabla `salida`
---
-ALTER TABLE `salida`
-  ADD CONSTRAINT `salida_inventory_id_3d569ade_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`);
-
---
--- Filtros para la tabla `torneo_equipo`
---
-ALTER TABLE `torneo_equipo`
-  ADD CONSTRAINT `torneo_equipo_team_id_aff5ce69_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`),
-  ADD CONSTRAINT `torneo_equipo_tournament_id_2a153cdb_fk_torneo_id` FOREIGN KEY (`tournament_id`) REFERENCES `torneo` (`id`);
-
---
--- Filtros para la tabla `user_userboli_groups`
---
-ALTER TABLE `user_userboli_groups`
-  ADD CONSTRAINT `user_userboli_groups_group_id_c57ab420_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
-  ADD CONSTRAINT `user_userboli_groups_userboli_id_3cbe31ac_fk_user_userboli_id` FOREIGN KEY (`userboli_id`) REFERENCES `user_userboli` (`id`);
-
---
--- Filtros para la tabla `user_userboli_user_permissions`
---
-ALTER TABLE `user_userboli_user_permissions`
-  ADD CONSTRAINT `user_userboli_user_p_permission_id_b052ddf3_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  ADD CONSTRAINT `user_userboli_user_p_userboli_id_0c75c885_fk_user_user` FOREIGN KEY (`userboli_id`) REFERENCES `user_userboli` (`id`);
-
---
--- Filtros para la tabla `venta_event`
---
-ALTER TABLE `venta_event`
-  ADD CONSTRAINT `venta_Event_event_id_6228417f_fk_evento_id` FOREIGN KEY (`event_id`) REFERENCES `evento` (`id`),
-  ADD CONSTRAINT `venta_Event_sale_id_be4786ff_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`);
-
---
--- Filtros para la tabla `venta_inventory`
---
-ALTER TABLE `venta_inventory`
-  ADD CONSTRAINT `venta_inventory_inventory_id_d006d13b_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`),
-  ADD CONSTRAINT `venta_inventory_sale_id_3ec0a1ef_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`);
-
---
--- Filtros para la tabla `venta_reservation`
---
-ALTER TABLE `venta_reservation`
-  ADD CONSTRAINT `venta_Reservation_reservation_id_e760ca9a_fk_reserva_id` FOREIGN KEY (`reservation_id`) REFERENCES `reserva` (`id`),
-  ADD CONSTRAINT `venta_Reservation_sale_id_3eab4339_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`);
-
---
--- Filtros para la tabla `venta_tournament`
---
-ALTER TABLE `venta_tournament`
-  ADD CONSTRAINT `venta_Tournament_sale_id_4fd2d748_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`),
-  ADD CONSTRAINT `venta_Tournament_tournament_id_fa034e3f_fk_torneo_id` FOREIGN KEY (`tournament_id`) REFERENCES `torneo` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
