@@ -1,0 +1,42 @@
+* {
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+.main {
+    display: grid;
+    place-items: center;
+}
+
+.main-form {
+    position: relative;
+    top: 5rem;
+}
+
+.box {
+    width: 52rem;
+    padding: 2rem;
+}
+
+.box__legend-img {
+    height: 12rem;
+}
+
+.box__name {
+    border: 1px solid red;
+    float: right;
+}
+
+.box__name-input {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.box__name-input:disabled {
+}
