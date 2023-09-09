@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" href="{% static 'index/index.css' %}">
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Inicio</title>
 </head>
 <body>
     <header>
@@ -40,13 +40,20 @@
 
         <div class="container-navbar">
             <nav class="navbar container">
-                <i class="fa-solid fa-bars"></i>
+                <i class="fa-solid fa-bars" id="dropdown"></i>
                 <ul class="menu">
                     <li><a href="#">Inicio</a></li>
                     <li><a href="#">Productos</a></li>
                     <li><a href="#">Reservas</a></li>
                     <li><a href="#">Eventos</a></li>
                     <li><a href="#">Torneos</a></li>
+                </ul>
+                <ul class="menuDropDown" hidden>
+                    <li hidden><a href="#">Inicio</a></li>
+                    <li hidden><a href="#">Productos</a></li>
+                    <li hidden><a href="#">Reservas</a></li>
+                    <li hidden><a href="#">Eventos</a></li>
+                    <li hidden><a href="#">Torneos</a></li>
                 </ul>
             </nav>
         </div>
@@ -393,5 +400,6 @@
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
+    <script src="{% static 'index/index.js' %}"></script>
 </body>
 </html>

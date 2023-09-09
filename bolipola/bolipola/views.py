@@ -3,23 +3,29 @@ from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.contrib.auth import authenticate
 from django.contrib import messages
-from user.forms import CustomUserForm
+from user.forms import CustomUserForm, CustomSigninForm
 
 def index(request):
     return render(request, 'index.html', {})
 
 def signin(request):
     if request.method == 'POST':
+        form = CustomSigninForm(request, data=request.POST)
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
-        if user:
+        if user is not None:
             login(request, user)
-            messages.success(request, 'Bienvenido {}'.format(user.username))
-            return redirect('signin')
-        else: 
-            messages.error(request, 'Usuario o contraseña incorrectos')
-    return render(request, 'signin.html',{})
+            messages.success(request, f'Bienvenido {username}')
+            if user.is_staff:
+                return redirect('admin:index')
+            else:
+                return redirect('index')
+        else:
+            messages.error('Credenciales inválidas')
+            
+    form = CustomSigninForm()
+    return render(request, 'signin.html', {'form': form})
 
 def register(request):
     if request.method == 'POST':

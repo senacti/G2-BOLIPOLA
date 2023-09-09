@@ -1,5 +1,6 @@
 from django import forms
 from .models import UserBoli
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
 class CustomUserForm(forms.ModelForm):
     '''
@@ -11,7 +12,7 @@ class CustomUserForm(forms.ModelForm):
         max_length=100, 
         min_length=2, 
         required=True,
-        widget=forms.TextInput(attrs={'class':'formBox__inf-box-name-input'}),
+        widget=forms.TextInput(attrs={'class':'formBox__inf-box-name-input', 'pattern': '[A-Za-z]+'}),
     )
 
     phone = forms.CharField(
@@ -43,7 +44,7 @@ class CustomUserForm(forms.ModelForm):
 
     last_name = forms.CharField(
         label='Apellido',
-        widget=forms.TextInput(attrs={'class': 'formBox__inf-box-lastName-input'}), 
+        widget=forms.TextInput(attrs={'class': 'formBox__inf-box-lastName-input', 'pattern': '[A-Za-z]+'}), 
         max_length=100, 
         min_length=2, 
         required=True,
@@ -99,3 +100,10 @@ class CustomUserForm(forms.ModelForm):
             'password',
             'username',
         ]
+
+class CustomSigninForm(AuthenticationForm):
+    username = UsernameField(widget=forms.TextInput(attrs={'class': 'right__box-inputs-div-input', 'placeholder': 'Correo'}))
+    password = forms.CharField(
+        strip=False,
+        widget=forms.PasswordInput(attrs={'class': 'right__box-inputs-div-input', 'placeholder': 'Contraseña'}),
+    )
