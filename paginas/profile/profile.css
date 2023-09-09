@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+:root {
+    --primary-color: #CB4335;
+}
+
 html {
     font-size: 16px;
 }
@@ -14,15 +18,14 @@ html {
 }
 
 .main-form {
-    position: relative;
-    top: 2rem;
+    margin-top: 2rem;
 }
 
 .box {
     width: 52rem;
     padding: 2rem;
     padding-bottom: 0;
-    border: 0.2rem groove #CB4335;
+    border: 0.2rem solid var(--primary-color);
     border-radius: 0.75rem;
     background-color: #FBFCFC;
 }
@@ -83,7 +86,7 @@ html {
 }
 
 .box__name-input:focus {
-    border-color: #CB4335;
+    border-color: var(--primary-color);
     color: black;
 }
 
@@ -172,7 +175,7 @@ html {
 }
 
 .box__left-box-inf-span-input:focus {
-    border-color: #CB4335;
+    border-color: var(--primary-color);
     color: black;
 }
 
@@ -185,7 +188,7 @@ html {
     position: relative;
     left: 0.1rem;
     font-size: 1.4rem;
-    color: #CB4335;
+    color: var(--primary-color);
 }
 
 .box__left-box-changePass {
@@ -196,7 +199,7 @@ html {
 .box__left-box-changePass-a {
     text-decoration: none;
     font-size: 1.1rem;
-    color: #CB4335;
+    color: var(--primary-color);
 }
 
 .box__left-box-changePass-a:hover {
@@ -242,7 +245,7 @@ html {
 
 .box__right-list-element-desc {
     font-size: 0.8rem;
-    color: #CB4335;
+    color: var(--primary-color);
 }
 
 .box__right-moreList {
@@ -284,12 +287,12 @@ html {
 }
 
 .box__bottom-saveOrCancel-button#cancel {
-    background-color: #CB4335;
+    background-color: var(--primary-color);
 }
 
 .box__bottom-saveOrCancel-button#cancel:hover {
-    color: #CB4335;
-    border-color: #CB4335;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
     background-color: #FBFCFC;
 }
 
@@ -314,5 +317,29 @@ button[name="editAndMore"] {
 
 button[name="editAndMore"]:hover {
     cursor: pointer;
-    color: #CB4335;
+    color: var(--primary-color);
+}
+
+.containerSignout {
+    margin-top: 2.8rem;
+}
+
+.containerSignout__a {
+    position: relative;
+    bottom: 0rem;
+	padding: 0.5rem 1rem;
+	font-size: 0.8rem;
+	font-weight: 500;
+	text-decoration: none;
+	color: var(--primary-color);
+	border: 0.1rem solid var(--primary-color);
+	border-left: 0.3rem solid var(--primary-color);
+	border-bottom: 0.3rem solid var(--primary-color);
+	border-radius: 0.5rem;
+	transition: 70ms ease-in;
+}
+
+.containerSignout__a:hover {
+    bottom: 0.1rem;
+	box-shadow: 0 0 0.2rem 0.1rem #CCD1D1;
 }

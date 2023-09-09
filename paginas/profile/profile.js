@@ -1,7 +1,6 @@
 const inputFirstName = document.querySelector("#input_first_name")
 const inputLastName = document.querySelector("#input_last_name")
-const textFirstName = document.querySelector("#text_first_name")
-const textLastName = document.querySelector("#text_last_name")
+const textName = document.querySelector("#text_name")
 const inputs = document.querySelectorAll("input")
 const buttons = document.querySelectorAll("button")
 const cancelButton = document.querySelector("#cancel")
@@ -13,16 +12,14 @@ const inputImgHelp = document.querySelector(".box__legend-imgIndication")
 
 function setNames() {
     //Lo que este en el value de input se pondrá en el span del nombre
-    textFirstName.innerHTML = inputFirstName.value
-    textLastName.innerHTML = inputLastName.value
+    textName.innerHTML = `${inputFirstName.value} ${inputLastName.value}`
 
     return true
 }
 
 edit.addEventListener("click", () => {
     //Ocultando span de nombre    
-    textFirstName.setAttribute("hidden", "true")
-    textLastName.setAttribute("hidden", "true")
+    textName.setAttribute("hidden", "true")
 
     //Quitando ocultos de los inputs
     inputs.forEach((element) => {
