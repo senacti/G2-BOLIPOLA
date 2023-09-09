@@ -15,7 +15,7 @@ html {
 
 .main-form {
     position: relative;
-    top: 5rem;
+    top: 2rem;
 }
 
 .box {
@@ -29,14 +29,66 @@ html {
 
 .box__legend-img {
     height: 12rem;
+    border-radius: 50%;
+}
+
+#modificadorInputFile {
+    display: grid;
+    place-items: center;
+    position: relative;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+    background-image: url("../register/images/exampleUser.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 0;
+    width: 0;
+}
+
+.box__legend-imgIndication {
+    height: 4.5rem;
+    opacity: 50%;
+}
+
+.box__legend-input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.box__legend-input:hover {
+    cursor: pointer;
 }
 
 .box__name {
     position: relative;
+    float: left;
     bottom: 6.2rem;
-    right: 12rem;
-    float: right;
+    left: 12rem;
     width: auto;
+}
+
+.box__name-input {
+    border: 0;
+    font-size: 2rem;
+    border-bottom: 0.15rem solid #CCD1D1;
+    width: 20rem;
+    background-color: transparent;
+    color: gray;
+    outline: none;
+}
+
+.box__name-input:focus {
+    border-color: #CB4335;
+    color: black;
+}
+
+.box__name-input#input_last_name {
+    margin-left: 1rem;
 }
 
 .box__name-text {
