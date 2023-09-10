@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2023 at 05:19 AM
+-- Generation Time: Sep 10, 2023 at 10:34 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -94,7 +94,7 @@ CREATE TABLE `admin_interface_theme` (
 
 INSERT INTO `admin_interface_theme` (`id`, `name`, `active`, `title`, `title_visible`, `logo`, `logo_visible`, `css_header_background_color`, `title_color`, `css_header_text_color`, `css_header_link_color`, `css_header_link_hover_color`, `css_module_background_color`, `css_module_text_color`, `css_module_link_color`, `css_module_link_hover_color`, `css_module_rounded_corners`, `css_generic_link_color`, `css_generic_link_hover_color`, `css_save_button_background_color`, `css_save_button_background_hover_color`, `css_save_button_text_color`, `css_delete_button_background_color`, `css_delete_button_background_hover_color`, `css_delete_button_text_color`, `list_filter_dropdown`, `related_modal_active`, `related_modal_background_color`, `related_modal_rounded_corners`, `logo_color`, `recent_actions_visible`, `favicon`, `related_modal_background_opacity`, `env_name`, `env_visible_in_header`, `env_color`, `env_visible_in_favicon`, `related_modal_close_button_visible`, `language_chooser_active`, `language_chooser_display`, `list_filter_sticky`, `form_pagination_sticky`, `form_submit_sticky`, `css_module_background_selected_color`, `css_module_link_selected_color`, `logo_max_height`, `logo_max_width`, `foldable_apps`, `language_chooser_control`, `list_filter_highlight`, `list_filter_removal_links`, `show_fieldsets_as_tabs`, `show_inlines_as_tabs`, `css_generic_link_active_color`, `collapsible_stacked_inlines`, `collapsible_stacked_inlines_collapsed`, `collapsible_tabular_inlines`, `collapsible_tabular_inlines_collapsed`) VALUES
 (1, 'Django', 0, 'Administración de Django', 1, '', 1, '#0C4B33', '#F5DD5D', '#44B78B', '#FFFFFF', '#C9F0DD', '#44B78B', '#FFFFFF', '#FFFFFF', '#C9F0DD', 1, '#0C3C26', '#156641', '#0C4B33', '#0C3C26', '#FFFFFF', '#BA2121', '#A41515', '#FFFFFF', 1, 1, '#000000', 1, '#FFFFFF', 1, '', '0.3', '', 1, '#E74C3C', 1, 1, 1, 'code', 1, 0, 0, '#FFFFCC', '#FFFFFF', 100, 400, 1, 'default-select', 1, 0, 0, 0, '#29B864', 0, 1, 0, 1),
-(2, 'Bolipola', 1, 'Bolipola admin', 1, 'admin-interface/logo/logo_pdsEZYf.png', 1, '#CB4335', '#FBFCFC', '#FBFCFC', '#FFFFFF', '#F1F1F1', '#B23B2E', '#FFFFFF', '#FFFFFF', '#C9F0DD', 1, '#0C3C26', '#156641', '#CB4335', '#BABBBB', '#FFFFFF', '#BA2121', '#A41515', '#FFFFFF', 1, 1, '#000000', 1, '#FFFFFF', 1, '', '0.3', '', 1, '#2BFF32', 1, 1, 1, 'code', 1, 0, 0, '#DADBDB', '#FFFFFF', 70, 400, 1, 'default-select', 1, 0, 0, 0, '#29B864', 0, 1, 0, 1);
+(2, 'Bolipola', 1, 'Bolipola admin', 1, 'admin-interface/logo/logo.png', 1, '#CB4335', '#FBFCFC', '#FBFCFC', '#FFFFFF', '#F1F1F1', '#B23B2E', '#FFFFFF', '#FFFFFF', '#C9F0DD', 1, '#0C3C26', '#156641', '#CB4335', '#BABBBB', '#FFFFFF', '#BA2121', '#A41515', '#FFFFFF', 1, 1, '#000000', 1, '#FFFFFF', 1, '', '0.3', '', 1, '#2BFF32', 1, 1, 1, 'code', 1, 0, 0, '#DADBDB', '#FFFFFF', 70, 400, 1, 'default-select', 1, 0, 0, 0, '#29B864', 0, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -263,7 +263,14 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (1, '2023-09-07 03:12:30.815204', '2', 'Bolipola', 1, '[{\"added\": {}}]', 1, 1),
 (2, '2023-09-07 03:14:38.214502', '2', 'Bolipola', 2, '[{\"changed\": {\"fields\": [\"Logo\", \"Max height\", \"Color\"]}}]', 1, 1),
 (3, '2023-09-07 03:15:14.581972', '2', 'Bolipola', 2, '[{\"changed\": {\"fields\": [\"Title\", \"Background color\"]}}]', 1, 1),
-(4, '2023-09-07 03:17:50.650529', '2', 'Bolipola', 2, '[{\"changed\": {\"fields\": [\"Text color\", \"Link hover color\", \"Background color\", \"Background selected color\", \"Background color\", \"Background hover color\"]}}]', 1, 1);
+(4, '2023-09-07 03:17:50.650529', '2', 'Bolipola', 2, '[{\"changed\": {\"fields\": [\"Text color\", \"Link hover color\", \"Background color\", \"Background selected color\", \"Background color\", \"Background hover color\"]}}]', 1, 1),
+(5, '2023-09-10 06:29:16.777938', '4', 'calisto@hotmail.com', 2, '[{\"changed\": {\"fields\": [\"Avatar\"]}}]', 19, 1),
+(6, '2023-09-10 07:43:15.484355', '6', 'mala@gmail.com', 3, '', 19, 1),
+(7, '2023-09-10 07:43:21.012315', '5', 'lauris@gmail.com', 3, '', 19, 1),
+(8, '2023-09-10 08:08:43.535917', '2', 'Bolipola', 2, '[{\"changed\": {\"fields\": [\"Logo\"]}}]', 1, 1),
+(9, '2023-09-10 08:09:06.511734', '2', 'jua@soy.com', 3, '', 19, 1),
+(10, '2023-09-10 08:09:11.282061', '3', 'juan@com.com', 3, '', 19, 1),
+(11, '2023-09-10 08:09:16.118917', '7', 'laura@hotmail.com', 3, '', 19, 1);
 
 -- --------------------------------------------------------
 
@@ -370,7 +377,9 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (48, 'admin_interface', '0030_theme_collapsible_stacked_inlines_and_more', '2023-09-06 21:46:51.845564'),
 (49, 'core', '0001_initial', '2023-09-06 21:46:52.575812'),
 (50, 'sessions', '0001_initial', '2023-09-06 21:46:52.599005'),
-(51, 'user', '0002_alter_userboli_avatar_alter_userboli_birthdate_and_more', '2023-09-06 21:52:04.865264');
+(51, 'user', '0002_alter_userboli_avatar_alter_userboli_birthdate_and_more', '2023-09-06 21:52:04.865264'),
+(52, 'user', '0002_alter_userboli_avatar', '2023-09-10 06:51:48.864920'),
+(53, 'user', '0003_alter_userboli_avatar', '2023-09-10 07:36:07.573407');
 
 -- --------------------------------------------------------
 
@@ -383,13 +392,6 @@ CREATE TABLE `django_session` (
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `django_session`
---
-
-INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('2d28c8y2uj09tokd3471uqieg086ss6u', '.eJxVjMsOwiAQRf-FtSEw5dG6dO83kIEZpGogKe3K-O_apAvd3nPOfYmA21rC1nkJM4mz0OL0u0VMD647oDvWW5Op1XWZo9wVedAur434eTncv4OCvXxrUDlbJGKdMik1GE6GPHhjmBmUhcG6FMkhWaAJ3GCsH82YCDQpHSfx_gD7CDfy:1qe5Q9:niNsRV5lM_pI9r66X7M1KUde1nIPa9PfYRZ9_YjpexE', '2023-09-21 03:11:05.006111');
 
 -- --------------------------------------------------------
 
@@ -560,17 +562,19 @@ CREATE TABLE `user_userboli` (
   `birthdate` date DEFAULT NULL,
   `phone` varchar(10) DEFAULT NULL,
   `gender` varchar(50) DEFAULT NULL,
-  `rango` int(10) UNSIGNED NOT NULL CHECK (`rango` >= 0)
+  `range` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_userboli`
 --
 
-INSERT INTO `user_userboli` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `email`, `avatar`, `birthdate`, `phone`, `gender`, `rango`) VALUES
-(1, 'pbkdf2_sha256$600000$2bZnruJCZryYweQlCNND6r$KZRiLRbLts+pmelrpxEfSJXYWohkKiAZWjszISXijDg=', '2023-09-07 03:11:04.972080', 1, 'admin', '', '', 1, 1, '2023-09-06 21:53:01.686383', 'admin@admin.com', '', NULL, NULL, 'Otro', 0),
-(2, 'pbkdf2_sha256$600000$rDrUEcbL3bnkRBpOAzexpV$+XaHDtA3qNuFGSk0fwLHOJqxmZRQeXQLjsDknC6V3/4=', NULL, 0, 'jua@soy.com', 'Tatiana', 'Alfreda', 0, 1, '2023-09-06 21:59:46.659757', 'jua@soy.com', '', '2003-12-12', '3224587458', 'F', 0),
-(3, 'pbkdf2_sha256$600000$Kqbow709NNAoOMolXEJqL8$PCSTi/84Bqz7tTC1HRx7Udatr+2YzQeglO+EAel69YQ=', NULL, 0, 'juan@com.com', 'elkakas', 'juanito123', 0, 1, '2023-09-06 22:03:42.358296', 'juan@com.com', '', '2004-12-12', '8574857892', 'F', 0);
+INSERT INTO `user_userboli` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `email`, `avatar`, `birthdate`, `phone`, `gender`, `range`) VALUES
+(1, 'pbkdf2_sha256$600000$2bZnruJCZryYweQlCNND6r$KZRiLRbLts+pmelrpxEfSJXYWohkKiAZWjszISXijDg=', '2023-09-10 08:26:00.938915', 1, 'admin@admin.com', 'Juan', 'Ochoa', 1, 1, '2023-09-06 21:53:01.686383', 'admin@admin.com', 'avatar/miFotoDeGit_R2gE4bP.jpg', '2005-12-14', '5689874587', 'Masculino', 0),
+(4, 'pbkdf2_sha256$600000$woyUpfgD7DXFyvzNjArwNf$i9E8vIQj1qp6K2Oh8qIFyCwzyghlqyy/m+o/+I4oxdc=', '2023-09-10 08:26:55.283440', 0, 'calisto@hotmail.com', 'Juanito', 'Gómez', 0, 1, '2023-09-10 00:33:36.000000', 'calisto@hotmail.com', 'avatar/flecha-correcta.png', '2007-01-01', '2568974187', 'Otro', 0),
+(8, 'pbkdf2_sha256$600000$cQ4yCOeVjsLJY9klWkCynf$bBnohclOwKNubHUWxS6TJCxrieI+iUp5JNB+maO2vLE=', NULL, 0, 'mari@mari.com', 'mariano', 'asfadsf', 0, 1, '2023-09-10 08:04:47.706206', 'mari@mari.com', 'exampleUser.png', '2005-12-13', '4758987415', 'Masculino', 0),
+(9, 'pbkdf2_sha256$600000$euMv9RmgbLlxlXvzb1yk82$1f++PmTkfT8QPlgl3uIWVYlZa8LkahiCBsLw1api+0c=', NULL, 0, 'tiju@jmail.com', 'tijuana', 'asfasdf', 0, 1, '2023-09-10 08:06:08.842121', 'tiju@jmail.com', 'exampleUser.png', '2004-05-12', '4587415896', 'Masculino', 0),
+(10, 'pbkdf2_sha256$600000$chtvTZQrUsMdRgRlQBjbsg$mpdqJh+iM9QmF+UwupZydGSA4VqGc72O2BMQWSu6W3A=', NULL, 0, 'puto@punt.com', 'asfasdf', 'culo', 0, 1, '2023-09-10 08:07:11.207428', 'puto@punt.com', 'avatar/internet.png', '2008-12-12', '4785478961', 'Masculino', 0);
 
 -- --------------------------------------------------------
 
@@ -902,7 +906,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
@@ -914,7 +918,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `equipo`
@@ -974,7 +978,7 @@ ALTER TABLE `torneo_equipo`
 -- AUTO_INCREMENT for table `user_userboli`
 --
 ALTER TABLE `user_userboli`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user_userboli_groups`
