@@ -9,13 +9,17 @@ html {
 }
 
 body {
+    display: grid;
+    place-items: center;
     background-color: #FBFCFC;
+    height: 90vh;
 }
 
 .mainBox {
-    margin: 2rem auto;
+    display: flex;
+    justify-content: space-between;
     height: 42rem;
-    width: 68rem;
+    width: 62rem;
 }
 
 .left {
@@ -94,7 +98,6 @@ body {
 .right {
     display: grid;
     place-items: center;
-    float: right;
     height: 100%;
 }
 
@@ -174,4 +177,59 @@ body {
 
 .right__box-signup-a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 1020px) {
+    .mainBox {
+        display: grid;
+        place-items: center;
+        width: auto;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .left {
+        margin-bottom: 2rem;
+        float: none;
+    }
+
+    .right {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 540px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 460px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 390px) {
+    html {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 295px) {
+    html {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 235px) {
+    html {
+        font-size: 5px;
+    } 
+}
+
+@media (max-width: 165px) {
+    html {
+        font-size: 4px;
+    } 
 }
