@@ -10,7 +10,11 @@
     <form class="form" autocomplete="off" method="POST" action="{% url 'register' %}">
         {% csrf_token %}
         <fieldset class="formBox">
-            <legend class="formBox__legend"><img src="{% static 'register/images/logo.png' %}" alt="Logo empresa" class="formBox__legend-img"></legend>
+            <legend class="formBox__legend">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'register/images/logo.png' %}" alt="Logo empresa"class="formBox__legend-img">
+                </a>
+            </legend>
 
             <div class="formBox__title">
                 <h1 class="formBox__title-h1">Crear cuenta</h1>

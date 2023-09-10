@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth import authenticate
 from django.contrib import messages
 from user.forms import CustomUserForm, CustomSigninForm
 
 def index(request):
     return render(request, 'index.html', {})
+
+def profile(request):
+    return render(request, 'profile.html', {})
 
 def signin(request):
     if request.method == 'POST':
@@ -22,10 +25,14 @@ def signin(request):
             else:
                 return redirect('index')
         else:
-            messages.error('Credenciales inválidas')
+            pass
             
     form = CustomSigninForm()
     return render(request, 'signin.html', {'form': form})
+
+def signout(request):
+    logout(request)
+    return redirect('index')
 
 def register(request):
     if request.method == 'POST':

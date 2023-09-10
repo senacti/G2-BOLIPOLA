@@ -12,7 +12,9 @@
         <div class="left">
             <div class="left__centrador">
                 <div class="left__logo">
-                    <img src="{% static 'signin/images/logo.png' %}" alt="Logo de la empresa" class="left__logo-img">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'signin/images/logo.png' %}" alt="Logo de la empresa" class="left__logo-img">
+                    </a>
                 </div>
                 
                 <div class="left__flechaAndImgs">

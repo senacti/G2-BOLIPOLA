@@ -48,9 +48,52 @@ html {
 }
 
 .customer-support {
+	margin-left: 2rem;
+	width: 18rem;
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	gap: 2rem;
+}
+
+#whatsappIcon {
+	color: var(--primary-color);
+	margin-right: 1rem;
+}
+
+.numberTop {
+	font-size: 1.6rem;
+	font-weight: 600;
+}
+
+.container-button-db a {
+	text-decoration: none;
+}
+
+.button-db {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.6rem 1.2rem;
+	color: var(--background-color);
+    background-color: var(--primary-color);
+    border: 0.3rem solid transparent;
+    border-radius: 0.75rem;
+    box-shadow: 0.2rem 0.2rem #696969;
+    transition: 120ms;
+    transition-timing-function: ease-in;
+}
+
+.button-db:hover {
+	cursor: pointer;
+    color: #CB4335;
+    border-color: #CB4335;
+    background-color: #FBFCFC;
+    box-shadow: none;
+}
+
+.button-db span {
+	margin-left: 1rem;
+	font-size: 1.45rem;
 }
 
 .customer-support i {
@@ -61,6 +104,7 @@ html {
 	display: flex;
 	flex-direction: column;
 }
+
 .logo{
 	background-image: url('./images/logo.png');
 	height: 10rem;
@@ -71,7 +115,7 @@ html {
 
 .container-logo {
 	position: relative;
-	left: 6.25rem;
+	left: 3.5rem;
 	display: grid;
 	place-items: center;
 	gap: 0.5rem;
@@ -91,26 +135,58 @@ html {
 
 .container-user {
 	display: flex;
-	gap: 1rem;
-	cursor: pointer;
+	justify-content: center;
+	margin-right: 2rem;
+	width: 26rem;
 }
 
-.container-user .fa-user {
-	font-size: 3rem;
+.container-user a img {
+	position: relative;
+	top: 0.2rem;
+	height: 6rem;
+	border-radius: 50%;
 	color: var(--primary-color);
 }
 
 .container-user .fa-basket-shopping {
-	font-size: 3rem;
+	font-size: 4rem;
 	color: var(--primary-color);
-	padding-left: 1rem;
 }
 
-.content-shopping-cart {
-	display: flex;
-	flex-direction: column;
-	padding-right: 2.5rem;
-	border-right: 1px solid #e2e2e2;
+.carAndPerfil {
+	display: grid;
+	place-content: center;
+	margin: 0 2rem;
+	height: 5rem;
+	width: 5rem;
+}
+
+.carAndPerfil:hover {
+	cursor: pointer;
+}
+
+.linePerfil {
+	border: 1px solid #CCD1D1;
+}
+
+.linkUser {
+	position: relative;
+	bottom: 0rem;
+	padding: 0.5rem 1rem;
+	font-size: 1.8rem;
+	font-weight: 500;
+	text-decoration: none;
+	color: var(--primary-color);
+	border: 0.1rem solid var(--primary-color);
+	border-left: 0.3rem solid var(--primary-color);
+	border-bottom: 0.3rem solid var(--primary-color);
+	border-radius: 0.5rem;
+	transition: 70ms ease-in;
+}
+
+.linkUser:hover {
+	bottom: 0.1rem;
+	box-shadow: 0 0 0.2rem 0.2rem #CCD1D1;
 }
 
 /* ************* NAVBAR ************* */
@@ -925,7 +1001,7 @@ html {
 
 	.menuDropDown {
 		position: absolute;
-		margin-top: 24rem;
+		margin-top: 26rem;
 		display: grid;
 		place-items: center;
 		background-color: #CB4335;

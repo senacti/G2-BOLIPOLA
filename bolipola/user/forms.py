@@ -9,7 +9,7 @@ class CustomUserForm(forms.ModelForm):
 
     first_name = forms.CharField(
         label='Nombre',
-        max_length=100, 
+        max_length=20, 
         min_length=2, 
         required=True,
         widget=forms.TextInput(attrs={'class':'formBox__inf-box-name-input', 'pattern': '[A-Za-z]+'}),
@@ -45,7 +45,7 @@ class CustomUserForm(forms.ModelForm):
     last_name = forms.CharField(
         label='Apellido',
         widget=forms.TextInput(attrs={'class': 'formBox__inf-box-lastName-input', 'pattern': '[A-Za-z]+'}), 
-        max_length=100, 
+        max_length=20, 
         min_length=2, 
         required=True,
     )
