@@ -32,7 +32,9 @@ html {
 
 .box__legend-img {
     height: 12rem;
+    width: 12rem;
     border-radius: 50%;
+    border: 0.3rem solid var(--primary-color);
 }
 
 #modificadorInputFile {
@@ -42,15 +44,19 @@ html {
     width: 12rem;
     height: 12rem;
     border-radius: 50%;
-    background-image: url("../register/images/exampleUser.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
     height: 0;
     width: 0;
 }
 
+.box__legend-imgDef {
+    height: 12rem;
+    width: 12rem;
+    border-radius: 50%;
+    border: 0.3rem solid var(--primary-color);
+}
+
 .box__legend-imgIndication {
+    position: absolute;
     height: 4.5rem;
     opacity: 50%;
 }
@@ -72,7 +78,7 @@ html {
     float: left;
     bottom: 6.2rem;
     left: 12rem;
-    width: auto;
+    width: 41.5rem;
 }
 
 .box__name-input {
@@ -108,6 +114,10 @@ html {
     justify-content: space-between;
 }
 
+.box__left {
+    width: 32.5rem;
+}
+
 .box__left-title {
     margin-bottom: 3rem;
 }
@@ -118,6 +128,20 @@ html {
 
 .box__left-title-rango i {
     margin-left: 0.15rem;
+}
+
+.container_inf_rango {
+    position: absolute;
+    transform: translate(7rem, -6.5rem);
+    padding: 0.8rem;
+    width: 17rem;
+    background-color: gray;
+    color: #FBFCFC;
+    border-radius: 1rem;
+}
+
+.inf_rango {
+    font-size: 1.2rem;
 }
 
 .box__left-title-value {
@@ -164,6 +188,10 @@ html {
     outline: none;
 }
 
+.box__left-box-inf-span-input#selectInput:disabled {
+    appearance: none;
+}
+
 .box__left-box-inf-span-input#birthdate {
     display: inline-flex;
     width: 10rem;
@@ -182,6 +210,7 @@ html {
 .box__left-box-inf-span-input:disabled {
     color: black;
     border-bottom: 0.15rem solid transparent;
+    opacity: 100%;
 }
 
 .box__left-box-inf-span-age {
@@ -217,6 +246,22 @@ html {
 
 .box__right-list {
     padding: 0 0.5rem;
+}
+
+.box__right-list-none {
+    margin-top: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.box__right-list-none-img {
+    height: 5rem;
+    opacity: 30%;
+}
+
+.box__right-list-none-span {
+    font-size: 0.9rem;
+    opacity: 70%;
 }
 
 .box__right-list-element {
@@ -328,18 +373,12 @@ button[name="editAndMore"]:hover {
     position: relative;
     bottom: 0rem;
 	padding: 0.5rem 1rem;
-	font-size: 0.8rem;
+	font-size: 1.2rem;
 	font-weight: 500;
-	text-decoration: none;
-	color: var(--primary-color);
-	border: 0.1rem solid var(--primary-color);
-	border-left: 0.3rem solid var(--primary-color);
-	border-bottom: 0.3rem solid var(--primary-color);
-	border-radius: 0.5rem;
-	transition: 70ms ease-in;
+    color: var(--primary-color);
+    text-decoration: none;
 }
 
 .containerSignout__a:hover {
-    bottom: 0.1rem;
-	box-shadow: 0 0 0.2rem 0.1rem #CCD1D1;
+    text-decoration: underline;
 }

@@ -46,7 +46,7 @@
                     <div class="linePerfil">
                     </div>
                     <div class="carAndPerfil" id="perfil">
-                        <a href="{% url 'profile' %}"><img src="{% static 'register/images/exampleUser.png' %}"></a>
+                        <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
                     </div>
 
                     {% else %}

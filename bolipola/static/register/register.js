@@ -48,3 +48,5 @@ email.addEventListener("input", () => {
 pass1.addEventListener("input", () => {
     setPassword.value = pass1.value
 })
+
+console.log(avatarInput)

@@ -143,9 +143,11 @@ html {
 .container-user a img {
 	position: relative;
 	top: 0.2rem;
-	height: 6rem;
+	margin-left: 1.5rem;
 	border-radius: 50%;
-	color: var(--primary-color);
+	border: 0.2rem solid var(--primary-color);
+	height: 7rem;
+	width: 7rem;
 }
 
 .container-user .fa-basket-shopping {

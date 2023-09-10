@@ -9,20 +9,22 @@
 </head>
 <body>
     <div class="main">
-        <form class="main-form">
+        <form class="main-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <fieldset class="box">
                 <legend class="box__legend">
-                    <img class="box__legend-img" src="{% static 'register/images/exampleUser.png' %}" alt="Foto de perfil">
+                    <img class="box__legend-img" src="{{ user.avatar.url }}" alt="Foto de perfil">
 
                     <div id="modificadorInputFile">
+                        <img class="box__legend-imgDef" src="{{ user.avatar.url }}" hidden>
                         <img class="box__legend-imgIndication" src="{% static 'profile/images/imagen.png' %}" hidden>
-                        <input type="file" name="avatar" accept="image/*" class="box__legend-input" hidden>
+                        {{ form.avatar }}
                     </div>
                 </legend>
 
                 <div class="box__name">
-                    <input class="box__name-input" id="input_first_name" type="text" value="Juanito" hidden>
-                    <input class="box__name-input" id="input_last_name" type="text" value="Alimaña" hidden>
+                    {{ form.first_name }}
+                    {{ form.last_name }}
 
                     <span class="box__name-text" id="text_name"></span>
                 </div>
@@ -31,7 +33,12 @@
                     <div class="box__left">
                         <div class="box__left-title">
                             <h3 class="box__left-title-rango">Rango<i class="fa-solid fa-circle-question fa-2xs"></i></h3>
-                            <h2 class="box__left-title-value">Comprador ardiente 🔥</h2>
+                            <div class="container_inf_rango" hidden>
+                                <span class="inf_rango">
+                                    Ganas puntos cada vez que haces una compra, entre más puntos más subiras tu rango
+                                </span>
+                            </div>
+                            <h2 class="box__left-title-value">{{ user.rangeAlias }}</h2>
                         </div>
                         <div class="box__left-box">
                             <div class="box__left-box-edit">
@@ -39,16 +46,16 @@
                             </div>
                             <div class="box__left-box-inf">
                                 <span class="box__left-box-inf-span">
-                                    <i class="fa-solid fa-venus-mars"></i><input class="box__left-box-inf-span-input" type="text" value="Masculino" disabled>
+                                    <i class="fa-solid fa-venus-mars"></i>{{ form.gender }}
                                 </span>
                                 <span class="box__left-box-inf-span">
-                                    <i class="fa-solid fa-phone"></i><input class="box__left-box-inf-span-input" type="text" value="3111234567" disabled>
+                                    <i class="fa-solid fa-phone"></i>{{ form.phone }}
                                 </span>
                                 <span class="box__left-box-inf-span">
-                                    <i class="fa-solid fa-envelope"></i><input class="box__left-box-inf-span-input" type="text" value="example@email.com" disabled>
+                                    <i class="fa-solid fa-envelope"></i>{{ form.email }}
                                 </span>
                                 <span class="box__left-box-inf-span">
-                                    <i class="fa-solid fa-cake-candles"></i><input id="birthdate" class="box__left-box-inf-span-input" type="date" value="1999-01-01" disabled><span class="box__left-box-inf-span-age">21 años</span>
+                                    <i class="fa-solid fa-cake-candles"></i>{{ form.birthdate }}<span class="box__left-box-inf-span-age">{{ user.age }} años</span>
                                 </span>
                             </div>
                             <div class="box__left-box-changePass">
@@ -59,26 +66,9 @@
                     
                     <div class="box__right">
                         <div class="box__right-list">
-                            <div class="box__right-list-element">
-                                <img class="box__right-list-element-img" src="{% static 'signin/images/example.jpg' %}">
-                                <div class="titleAndDesc">
-                                    <h3 class="box__right-list-element-title">Aguardiente</h3>
-                                    <p class="box__right-list-element-desc">03-01-2001</p>
-                                </div>  
-                            </div>
-                            <div class="box__right-list-element">
-                                <img class="box__right-list-element-img" src="{% static 'signin/images/balon.jpg' %}">
-                                <div class="titleAndDesc">
-                                    <h3 class="box__right-list-element-title">Cancha</h3>
-                                    <p class="box__right-list-element-desc">02-01-2001</p>
-                                </div>
-                            </div>
-                            <div class="box__right-list-element">
-                                <img class="box__right-list-element-img" src="{% static 'signin/images/papas.jpg' %}">
-                                <div class="titleAndDesc">
-                                    <h3 class="box__right-list-element-title">Papas margarita</h3>
-                                    <p class="box__right-list-element-desc">01-01-2001</p>
-                                </div>
+                            <div class="box__right-list-none" name="none">
+                                <img class="box__right-list-none-img" src="{% static 'profile/images/nada.png' %}">
+                                <span class="box__right-list-none-span">No hay nada que mostrar</span>
                             </div>
                         </div>
     
@@ -108,6 +98,23 @@
             <a class="containerSignout__a" href="{% url 'signout' %}">Cerrar sesión</a>
         </div>
     </div>
+
+
+    <!--Detectando fechas para el js-->
+    <span class="birthdateDay" hidden>{{ user.birthdate.day }}</span>
+    <span class="birthdateMonth" hidden>{{ user.birthdate.month }}</span>
+    <span class="birthdateYear" hidden>{{ user.birthdate.year }}</span>
+    
     <script src="{% static 'profile/profile.js' %}"></script>
+
+    <!--Cuando tenga compras aparecerá en la lista
+        <div class="box__right-list-element">
+            <img class="box__right-list-element-img" src="{% static 'signin/images/papas.jpg' %}">
+            <div class="titleAndDesc">
+                <h3 class="box__right-list-element-title">Papas margarita</h3>
+                <p class="box__right-list-element-desc">01-01-2001</p>
+            </div>
+        </div>
+    -->
 </body>
 </html>
