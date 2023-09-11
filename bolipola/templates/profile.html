@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'profile/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'profile/styles/profile.css' %}">
     <script src="https://kit.fontawesome.com/6117eaa017.js" crossorigin="anonymous"></script>
     <title>Perfil</title>
 </head>
@@ -59,7 +59,7 @@
                                 </span>
                             </div>
                             <div class="box__left-box-changePass">
-                                <a class="box__left-box-changePass-a" href="#" hidden>¿Cambiar contraseña?</a>
+                                <a class="box__left-box-changePass-a" href="{% url 'change_password' %}" hidden>¿Cambiar contraseña?</a>
                             </div>
                         </div>
                     </div>

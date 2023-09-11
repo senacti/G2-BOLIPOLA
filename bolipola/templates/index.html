@@ -64,43 +64,21 @@
         <div class="container-navbar">
             <nav class="navbar container">
                 <i class="fa-solid fa-bars" id="dropdown"></i>
-                {% if user.is_authenticated %}
                 <ul class="menu">
                     <li><a href="{% url 'index' %}">Inicio</a></li>
-                    <li><a href="#">Productos</a></li>
-                    <li><a href="#">Reservas</a></li>
-                    <li><a href="#">Eventos</a></li>
-                    <li><a href="#">Torneos</a></li>
+                    <li><a href="{% url 'store' %}">Productos</a></li>
+                    <li><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li><a href="{% url 'tournament' %}">Torneos</a></li>
                 </ul>
                 <ul class="menuDropDown" hidden>
                     <li hidden><a href="{% url 'index' %}">Inicio</a></li>
-                    <li hidden><a href="#">Productos</a></li>
-                    <li hidden><a href="#">Reservas</a></li>
-                    <li hidden><a href="#">Eventos</a></li>
-                    <li hidden><a href="#">Torneos</a></li>
+                    <li hidden><a href="{% url 'store' %}">Productos</a></li>
+                    <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
                     {% if user.is_staff %}
                     <li hidden><a href="{% url 'admin:index' %}">Base de datos</a></li>
                     {% endif %}
                 </ul>
-                
-                {% else %}
-
-                <ul class="menu">
-                    <li><a href="{% url 'index' %}">Inicio</a></li>
-                    <li><a href="{% url 'signin' %}">Productos</a></li>
-                    <li><a href="{% url 'signin' %}">Reservas</a></li>
-                    <li><a href="{% url 'signin' %}">Eventos</a></li>
-                    <li><a href="{% url 'signin' %}">Torneos</a></li>
-                </ul>
-                <ul class="menuDropDown" hidden>
-                    <li hidden><a href="{% url 'index' %}">Inicio</a></li>
-                    <li hidden><a href="{% url 'signin' %}">Productos</a></li>
-                    <li hidden><a href="{% url 'signin' %}">Reservas</a></li>
-                    <li hidden><a href="{% url 'signin' %}">Eventos</a></li>
-                    <li hidden><a href="{% url 'signin' %}">Torneos</a></li>
-                </ul>
-
-                {% endif %}
             </nav>
         </div>
     </header>

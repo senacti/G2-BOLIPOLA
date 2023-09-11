@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'tournament/tournament.css' %}">
+    <link rel="stylesheet" href="{% static 'index/index.css' %}">
+    <title>Torneos</title>
+</head>
+<body>
+    {% if not user.is_authenticated %}
+
+    <script>
+        window.location.href = "{% url 'signin' %}";
+    </script>
+
+    {% endif %}
+    <header>
+        <div class="container-hero">
+            <div class="container hero">
+                <div class="customer-support">
+                    {% if user.is_staff and user.is_authenticated %}
+                    <div class="container-button-db">
+                        <a href="{% url 'admin:index' %}">
+                            <button class="button-db">
+                                <i class="fa-solid fa-database"></i><span>Base de datos</span>
+                            </button>  
+                        </a>          
+                    </div>
+
+                    {% else %}
+
+                    <i class="fa-brands fa-whatsapp" id="whatsappIcon"></i>
+                    <div class="content-customer-support">
+                        <span class="numberTop">+57 1234567890</span>             
+                    </div>
+
+                    {% endif %}
+                </div>
+
+                <div class="container-logo">
+                    <a class="logo" href="/"></a>
+                </div>
+
+                <div class="container-user">
+                    {% if user.is_authenticated %}
+
+                    <div class="carAndPerfil" id="car">
+                        <a href="#">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </a>
+                    </div>
+                    <div class="linePerfil">
+                    </div>
+                    <div class="carAndPerfil" id="perfil">
+                        <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
+                    </div>
+
+                    {% else %}
+
+                    <div>
+                        <a class="linkUser" id="register" href="{% url 'register' %}">Regístrate</a></span>
+                        <a class="linkUser" id="signin" href="{% url 'signin' %}">Inicia sesión</a>
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container-navbar">
+            <nav class="navbar container">
+                <i class="fa-solid fa-bars" id="dropdown"></i>
+                <ul class="menu">
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    <li><a href="{% url 'store' %}">Productos</a></li>
+                    <li><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li><a href="{% url 'tournament' %}">Torneos</a></li>
+                </ul>
+                <ul class="menuDropDown" hidden>
+                    <li hidden><a href="{% url 'index' %}">Inicio</a></li>
+                    <li hidden><a href="{% url 'store' %}">Productos</a></li>
+                    <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
+                    {% if user.is_staff %}
+                    <li hidden><a href="{% url 'admin:index' %}">Base de datos</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="main">
+        <div class="info-torneo">
+            <div class="cuadros">
+                <strong>
+                    <h2>Reglas</h2>
+                        <p>Las reglas de torneo estan hechas para mantener un juego limpio y disfrutar la experiencia del torneo, las reglas son:</p>
+                    <ol>
+                        <li>Mantener un juego limpio</li><br>
+                        <li>El jugador a exepcion del guardameta no podra tocar el balon con la mano de lo contrario se realizara un saque de banda</li><br>
+                        <li>Si el guardameta toca el balon con las manos estando fuera del area delimitada sera tomada como falta</li><br>
+                        <li>Si el guardameta saca con la mano el balon no podra hacer el primer toque pasando la mitad de la cancha ya que se tomara como falta</li><br>
+                        <li>Todos los jugadores deberan inscribirse con un numero que los identifique</li><br><br>
+                    </ol>
+                </strong>
+            </div>
+        </div>
+        <div class="tarjeta">
+            <div class="box">
+                <img src="{% static 'register/images/logo.png' %}">
+                <h4>TORNEO 16 equipos</h4>
+                <p>En este torneo habran 16 equipos los cuales competiran por un premio de 2.000.000 de pesos colombianos</p>
+                <p>el valor de inscripcion es de 200.000 pesos cada equipo</p>
+                <a href="#">Leer mas</a><br><br>
+                <a href="#"><input type="submit" value="inscribirse" id="boton2"></a>
+            </div>
+            <div class="box">
+                <img src="{% static 'register/images/logo.png' %}">
+                <h4>TORNEO 24 EQUIPOS</h4>
+                <p>En este torneo habran 24 equipos los cuales competiran por un premio de 5.000.000 de pesos colombianos</p>
+                <p>el valor de inscripcion es de 300.000 pesos cada equipo</p>
+                <a href="#">Leer mas</a><br><br>
+                <a href="#"><input type="submit" value="inscribirse" id="boton2"></a>
+            </div> 
+        </div>
+    </div>
+    <script
+        src="https://kit.fontawesome.com/81581fb069.js"
+        crossorigin="anonymous"
+    ></script>
+</body>
+</html>

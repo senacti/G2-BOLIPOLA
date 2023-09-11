@@ -10,7 +10,11 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('signin/', views.signin, name='signin'),
     path('signout/', views.signout, name='signout'),
-    path('profile/', views.profile, name='profile')
+    path('profile/', views.profile, name='profile'),
+    path('reserve/', views.reserve, name='reserve'),
+    path('tournament/', views.tournament, name='tournament'),
+    path('store/', views.store, name='store'),
+    path('profile/change_password', views.change_password, name='change_password')
 ]
 
 if settings.DEBUG:

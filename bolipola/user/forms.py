@@ -18,6 +18,7 @@ class CustomUserForm(forms.ModelForm):
     phone = forms.CharField(
         label='Teléfono',
         max_length=10,
+        min_length=10,
         widget=forms.TextInput(attrs={'pattern': '[0-9]{1,10}', 'class': 'formBox__inf-box-phone-input'}),
         required=True,
     )
@@ -155,6 +156,7 @@ class EditProfileForm(forms.ModelForm):
 
     phone = forms.CharField(
         max_length=10,
+        min_length=10,
         widget=forms.TextInput(attrs={
             'pattern': '[0-9]{1,10}', 
             'class': 'box__left-box-inf-span-input',
@@ -201,4 +203,40 @@ class EditProfileForm(forms.ModelForm):
             'last_name',
             'email',
             'gender',
+        ]
+
+class ChangePasswordForm(forms.ModelForm):
+
+    old_password = forms.CharField(
+        max_length=254,
+        widget=forms.PasswordInput(attrs={
+            'class': 'box__pass-container-input',
+            'id': 'oldpass',
+        }),
+        required=True,
+    )
+
+    password = forms.CharField(
+        min_length=6,
+        max_length=254,
+        widget=forms.PasswordInput(attrs={
+            'class': 'box__pass-container-input',
+            'id': 'pass1',
+        }),
+        required=True,
+    )
+
+    password2 = forms.CharField(
+        max_length=254,
+        widget=forms.PasswordInput(attrs={
+            'class': 'box__pass-container-input',
+            'id': 'pass2',
+        }),
+        required=True,
+    )
+
+    class Meta:
+        model = UserBoli
+        fields = [
+            'password',
         ]
