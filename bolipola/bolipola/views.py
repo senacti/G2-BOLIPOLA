@@ -1,6 +1,7 @@
 import os
 from . import settings
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -10,7 +11,7 @@ from user.models import UserBoli
 
 #Productos
 def store(request):
-    return render(request, 'store.html', {})
+    return HttpResponse('Página en construcción')
 
 #Torneos
 def tournament(request):
@@ -19,6 +20,8 @@ def tournament(request):
 #Reservas
 def reserve(request):
     return render(request, 'reserve.html', {})
+
+
 
 #Inicio
 def index(request):
@@ -91,12 +94,16 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
+
             userInf = request.user
             messages.success(request, f'<i class="fa-solid fa-user"></i> Bienvenido {userInf.first_name}')
-            return redirect('index')
+            
+            if user.is_staff:
+                return redirect('admin:index')
+            else:
+                return redirect('index')
         else:
-            messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Datos inválidos')
-            return redirect('signin')
+            pass
             
     form = CustomSigninForm()
     return render(request, 'signin.html', {'form': form})
