@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'signin/signin.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/signin/messages.css' %}">
     <script src="https://kit.fontawesome.com/6117eaa017.js" crossorigin="anonymous"></script>
     <title>Iniciar sesión</title>
 </head>
@@ -62,11 +63,26 @@
                         </div>
                     </form>
                 </div>
-    
+                
                 <div class="right__box-signup">
                     <a class="right__box-signup-a" href="{% url 'register' %}" >¿Crear cuenta?</a>
                 </div>
-    
+                
+                {% if messages %}
+                    {% for msg in messages %}
+                    <div class="message-container">
+                        <span group="messages"
+                        class="
+                            {% if msg.tags == 'success' %}message-success{% endif %}
+                            {% if msg.tags == 'error' %}message-error{% endif %}
+                            {% if msg.tags == 'info' %}message-info{% endif %}
+                        "
+                        >
+                            {{ msg.message|safe }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

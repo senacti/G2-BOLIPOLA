@@ -3,9 +3,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservas</title>
-    <link rel="stylesheet" href="{% static 'reserve/styles/reserve.css' %}">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'store/store.css' %}">
     <link rel="stylesheet" href="{% static 'header/header.css' %}">
 </head>
 <body>
@@ -16,25 +17,8 @@
     </script>
 
     {% endif %}
-
     <header>
-        {% if messages %}
-            {% for msg in messages %}
-            <div class="message-container">
-                <span group="messages"
-                class="
-                    {% if msg.tags == 'success' %}message-success{% endif %}
-                    {% if msg.tags == 'error' %}message-error{% endif %}
-                    {% if msg.tags == 'info' %}message-info{% endif %}
-                "
-                >
-                    {{ msg.message|safe }}
-                </span>
-            </div>
-            {% endfor %}
-        {% endif %}
         <div class="container-hero">
-
             <div class="container hero">
                 <div class="customer-support">
                     {% if user.is_staff and user.is_authenticated %}
@@ -58,12 +42,18 @@
                 </div>
 
                 <div class="container-logo">
-                    <a class="logo" href="/"></a>
+                    <a class="logo" href="#"></a>
                 </div>
 
                 <div class="container-user">
                     {% if user.is_authenticated %}
-                    <div class="linePerfil">
+
+                    <div class="carAndPerfil" id="car">
+                        <a href="#" class="shopping">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </a>
+                    </div>
+                    <div class="linePerfil" style="border: 1px solid #CCD1D1;">
                     </div>
                     <div class="carAndPerfil" id="perfil">
                         <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
@@ -103,36 +93,27 @@
         </div>
     </header>
 
-<div class="container">
+    <div class="container">
+        <div class="list">
 
-    <div class="reserva">
-         <h2 class="reservas">Boliranas</h2>
-         <img src="{% static 'reserve/images/bolirana.jpg' %}" width="400" />
-         <p>!Reserva ya tu(s) mesa(s) de Bolirana!</p>
-         <a href="#">
-            <button>Reservar Boliranas</button>
-         </a>
+        </div>
     </div>
-    
-    <div class="reserva">
-        <h2 class="reservas">Canchas de Futbol</h2>
-        <img src="{% static 'reserve/images/court.jpg' %}" width="400" />
-        <p>!Reserva ya la cancha de futbol!</p>
-        <a href="#">
-            <button>Reservar Cancha</button>
-        </a>
+    <div class="card">
+        <h1>Card</h1>
+        <ul class="listCard">
+        </ul>
+            <div class="checkOut">
+                <h1>Total</h1>
+                <h1 class="total">0</h1>
+                <div class="closeShopping">Close</div>
+                <div class="total">Pagar</div>
+        </div>
     </div>
 
-    <div class="reserva">
-        <h2 class="reservas">Mesas</h2>
-        <img src="{% static 'reserve/images/tables.jpg' %}" width="400" />
-        <p>!Reserva ya tu mesa!</p>
-        <a href="#">
-            <button>Reservar Mesa</button>
-        </a>
-      
-    </div>
-</div>
+    <script>
+        let staticUrl = "{% static '' %}";
+    </script>
+    <script src="{% static 'store/store.js' %}"></script>
     <script
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"

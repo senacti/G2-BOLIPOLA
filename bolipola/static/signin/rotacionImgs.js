@@ -15,7 +15,6 @@ function colocadorImgs() {
     let iterador = -1
     rutas.forEach((ruta) => {
         iterador ++
-
         let img = document.createElement("img")
         img.src = staticUrl + ruta
         img.className = "left__imgs-img"
