@@ -8,6 +8,11 @@
 </head>
 <body>
     <header>
+        {% if messages %}
+            {% for msg in messages %}
+                <li>{{ msg }}</li>
+            {% endfor %}
+        {% endif %}
         <div class="container-hero">
             <div class="container hero">
                 <div class="customer-support">
