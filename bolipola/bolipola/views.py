@@ -92,7 +92,9 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, f'Bienvenido {username}')
+
+            userInf = request.user
+            messages.success(request, f'<i class="fa-solid fa-user"></i> Bienvenido {userInf.first_name}')
             
             if user.is_staff:
                 return redirect('admin:index')

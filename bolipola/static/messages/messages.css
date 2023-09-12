@@ -1,0 +1,30 @@
+.message-container {
+    height: 3.2rem;
+}
+
+.message-success {
+    background-color: #c9e8de;
+    color: #014f2a;
+}
+
+.message-info {
+    background-color: #fff3cc;
+    color: #704c01;
+}
+
+.message-error {
+    background-color: #ffd8db;
+    color: #991723;
+}
+
+span[group="messages"] {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: 100%;
+    font-size: 2rem;
+}
+
+span[group="messages"] i {
+    margin: 0 1rem;
+}

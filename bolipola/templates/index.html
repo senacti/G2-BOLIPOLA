@@ -3,6 +3,7 @@
 <html lang="es">
 <head>
     <link rel="stylesheet" href="{% static 'index/index.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
     <meta charset="UTF-8">
     <title>Inicio</title>
 </head>
@@ -10,10 +11,21 @@
     <header>
         {% if messages %}
             {% for msg in messages %}
-                <li>{{ msg }}</li>
+            <div class="message-container">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
             {% endfor %}
         {% endif %}
         <div class="container-hero">
+
             <div class="container hero">
                 <div class="customer-support">
                     {% if user.is_staff and user.is_authenticated %}
