@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservas</title>
     <link rel="stylesheet" href="{% static 'reserve/styles/reserve.css' %}">
-    <link rel="stylesheet" href="{% static 'header/header.css' %}">
+    <link rel="stylesheet" href="{% static 'index/index.css' %}">
 </head>
 <body>
     {% if not user.is_authenticated %}
@@ -18,27 +18,10 @@
     {% endif %}
 
     <header>
-        {% if messages %}
-            {% for msg in messages %}
-            <div class="message-container">
-                <span group="messages"
-                class="
-                    {% if msg.tags == 'success' %}message-success{% endif %}
-                    {% if msg.tags == 'error' %}message-error{% endif %}
-                    {% if msg.tags == 'info' %}message-info{% endif %}
-                "
-                >
-                    {{ msg.message|safe }}
-                </span>
-            </div>
-            {% endfor %}
-        {% endif %}
         <div class="container-hero">
-
             <div class="container hero">
                 <div class="customer-support">
                     {% if user.is_staff and user.is_authenticated %}
-                    
                     <div class="container-button-db">
                         <a href="{% url 'admin:index' %}">
                             <button class="button-db">
@@ -63,6 +46,12 @@
 
                 <div class="container-user">
                     {% if user.is_authenticated %}
+
+                    <div class="carAndPerfil" id="car">
+                        <a href="#">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </a>
+                    </div>
                     <div class="linePerfil">
                     </div>
                     <div class="carAndPerfil" id="perfil">
@@ -107,27 +96,27 @@
 
     <div class="reserva">
          <h2 class="reservas">Boliranas</h2>
-         <img src="{% static 'reserve/images/bolirana.jpg' %}" width="400" />
+         <img src="{% static 'reserve/images/bolirana.jpg' %}" class="reference-img"/>
          <p>!Reserva ya tu(s) mesa(s) de Bolirana!</p>
-         <a href="#">
+         <a href="{% url 'bolirana_form' %}">
             <button>Reservar Boliranas</button>
          </a>
     </div>
     
     <div class="reserva">
         <h2 class="reservas">Canchas de Futbol</h2>
-        <img src="{% static 'reserve/images/court.jpg' %}" width="400" />
+        <img src="{% static 'reserve/images/court.jpg' %}" class="reference-img"/>
         <p>!Reserva ya la cancha de futbol!</p>
-        <a href="#">
+        <a href="{% url 'court_form' %}">
             <button>Reservar Cancha</button>
         </a>
     </div>
 
     <div class="reserva">
         <h2 class="reservas">Mesas</h2>
-        <img src="{% static 'reserve/images/tables.jpg' %}" width="400" />
+        <img src="{% static 'reserve/images/tables.jpg' %}" class="reference-img"/>
         <p>!Reserva ya tu mesa!</p>
-        <a href="#">
+        <a href="{% url 'tables_form' %}">
             <button>Reservar Mesa</button>
         </a>
       
@@ -137,6 +126,5 @@
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
-    <script src="{% static 'header/header.js' %}"></script>
 </body>
 </html>
