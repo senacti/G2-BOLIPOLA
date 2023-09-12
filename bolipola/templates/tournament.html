@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'tournament/tournament.css' %}">
-    <link rel="stylesheet" href="{% static 'header/header.css' %}">
+    <link rel="stylesheet" href="{% static 'index/index.css' %}">
     <title>Torneos</title>
 </head>
 <body>
@@ -16,27 +16,10 @@
 
     {% endif %}
     <header>
-        {% if messages %}
-            {% for msg in messages %}
-            <div class="message-container">
-                <span group="messages"
-                class="
-                    {% if msg.tags == 'success' %}message-success{% endif %}
-                    {% if msg.tags == 'error' %}message-error{% endif %}
-                    {% if msg.tags == 'info' %}message-info{% endif %}
-                "
-                >
-                    {{ msg.message|safe }}
-                </span>
-            </div>
-            {% endfor %}
-        {% endif %}
         <div class="container-hero">
-
             <div class="container hero">
                 <div class="customer-support">
                     {% if user.is_staff and user.is_authenticated %}
-                    
                     <div class="container-button-db">
                         <a href="{% url 'admin:index' %}">
                             <button class="button-db">
@@ -61,6 +44,12 @@
 
                 <div class="container-user">
                     {% if user.is_authenticated %}
+
+                    <div class="carAndPerfil" id="car">
+                        <a href="#">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </a>
+                    </div>
                     <div class="linePerfil">
                     </div>
                     <div class="carAndPerfil" id="perfil">
@@ -101,22 +90,9 @@
         </div>
     </header>
     <div class="main">
-        <div class="info-torneo">
-            <div class="cuadros">
-                <strong>
-                    <h2>Reglas</h2>
-                        <p>Las reglas de torneo estan hechas para mantener un juego limpio y disfrutar la experiencia del torneo, las reglas son:</p>
-                    <ol>
-                        <li>Mantener un juego limpio</li><br>
-                        <li>El jugador a exepcion del guardameta no podra tocar el balon con la mano de lo contrario se realizara un saque de banda</li><br>
-                        <li>Si el guardameta toca el balon con las manos estando fuera del area delimitada sera tomada como falta</li><br>
-                        <li>Si el guardameta saca con la mano el balon no podra hacer el primer toque pasando la mitad de la cancha ya que se tomara como falta</li><br>
-                        <li>Todos los jugadores deberan inscribirse con un numero que los identifique</li><br><br>
-                    </ol>
-                </strong>
-            </div>
-        </div>
+        <a href="#"><button id="boton3">Crear equipo</button></a>
         <div class="tarjeta">
+            
             <div class="box">
                 <img src="{% static 'register/images/logo.png' %}">
                 <h4>TORNEO 16 equipos</h4>
@@ -133,12 +109,34 @@
                 <a href="#">Leer mas</a><br><br>
                 <a href="#"><input type="submit" value="inscribirse" id="boton2"></a>
             </div> 
+            <div class="box">
+                <img src="{% static 'register/images/logo.png' %}">
+                <h4>TORNEO 16 equipos</h4>
+                <p>En este torneo habran 16 equipos los cuales competiran por un premio de 2.000.000 de pesos colombianos</p>
+                <p>el valor de inscripcion es de 200.000 pesos cada equipo</p>
+                <a href="#">Leer mas</a><br><br>
+                <a href="#"><input type="submit" value="inscribirse" id="boton2"></a>
+            </div>
+            <div class="box">
+                <img src="{% static 'register/images/logo.png' %}">
+                <h4>TORNEO 24 EQUIPOS</h4>
+                <p>En este torneo habran 24 equipos los cuales competiran por un premio de 5.000.000 de pesos colombianos</p>
+                <p>el valor de inscripcion es de 300.000 pesos cada equipo</p>
+                <a href="#">Leer mas</a><br><br>
+                <a href="#"><input type="submit" value="inscribirse" id="boton2"></a>
+            </div> <div class="box">
+                <img src="{% static 'register/images/logo.png' %}">
+                <h4>TORNEO 16 equipos</h4>
+                <p>En este torneo habran 16 equipos los cuales competiran por un premio de 2.000.000 de pesos colombianos</p>
+                <p>el valor de inscripcion es de 200.000 pesos cada equipo</p>
+                <a href="#">Leer mas</a><br><br>
+                <a href="#"><input type="submit" value="inscribirse" id="boton2"></a>
+            </div>
         </div>
     </div>
     <script
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
-    <script src="{% static 'header/header.js' %}"></script>
 </body>
 </html>
