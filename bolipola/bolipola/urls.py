@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from reserve_views import views as reserve_views
 from . import views
+from .reserve_views import views as reserve_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
