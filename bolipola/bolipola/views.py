@@ -72,14 +72,17 @@ def change_password(request):
             authetication = authenticate(username = userForm.username, password = old_pass)
 
             if not authetication or pass1 != pass2:
+                messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Alguna contraseña<br>no coincide...')
+
                 return redirect('change_password')
                 
             userForm.set_password(form.cleaned_data["password"])
             form.save()
+            messages.success(request, '<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i>Cambio con éxito<br>Vuelva a iniciar sesión')
+
             return redirect('signin')
     else:
         form = ChangePasswordForm()
-
     return render(request, 'profile_change_pass/change-password.html', {'form': form})
 
 #Iniciar sesión
@@ -97,7 +100,7 @@ def signin(request):
         else:
             messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Datos inválidos')
             return redirect('signin')
-            
+    
     form = CustomSigninForm()
     return render(request, 'signin.html', {'form': form})
 
