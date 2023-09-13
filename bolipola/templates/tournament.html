@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'tournament/tournament.css' %}">
-    <link rel="stylesheet" href="{% static 'index/index.css' %}">
+    <link rel="stylesheet" href="{% static 'header/header.css' %}">
     <title>Torneos</title>
 </head>
 <body>
@@ -16,10 +16,27 @@
 
     {% endif %}
     <header>
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message-container">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
+            {% endfor %}
+        {% endif %}
         <div class="container-hero">
+
             <div class="container hero">
                 <div class="customer-support">
                     {% if user.is_staff and user.is_authenticated %}
+                    
                     <div class="container-button-db">
                         <a href="{% url 'admin:index' %}">
                             <button class="button-db">
@@ -44,12 +61,6 @@
 
                 <div class="container-user">
                     {% if user.is_authenticated %}
-
-                    <div class="carAndPerfil" id="car">
-                        <a href="#">
-                            <i class="fa-solid fa-basket-shopping"></i>
-                        </a>
-                    </div>
                     <div class="linePerfil">
                     </div>
                     <div class="carAndPerfil" id="perfil">
@@ -92,7 +103,7 @@
     <div class="main">
         <a href="#"><button id="boton3">Crear equipo</button></a>
         <div class="tarjeta">
-            
+
             <div class="box">
                 <img src="{% static 'register/images/logo.png' %}">
                 <h4>TORNEO 16 equipos</h4>
@@ -138,5 +149,6 @@
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
+    <script src="{% static 'header/header.js' %}"></script>
 </body>
 </html>
