@@ -7,14 +7,17 @@
     color: var(--background-color);
 }
 .list .item{
-    text-align: center;
-    background-color: var(--background-color);
-    padding: 20px;
-    box-shadow: 0 10px 10px rgb(243, 148, 148);
-    letter-spacing: 1px;
+	text-align: center;
+	padding: 20px;
+	letter-spacing:1;
+	transition: all 0.25s;
+	border: solid black 1px;
+}
+.list .item:hover{
+	transform: translateY(-15px);
+	box-shadow: 0 12px 16px rgb(240, 52, 52);
 }
 .list .item img{
-    box-shadow: 0 5px 5px rgba(168, 25, 25, 0.13);
     width: 90%;
     height: 430px;
     object-fit: cover;
@@ -28,16 +31,19 @@
     color: #000;
 }
 .list .item button{
-    background-color: #CB4335;
-    color: #fff;
-    width: 100%;
-    padding: 10px;
-    border-color: #CB4335;
-    text-decoration: none;
+	border-radius: 10px;
+	background-color: #c63424;
+	color: #fff;
+	width: 100%;
+	padding: 1rem;
+	text-decoration: none;
 	font-size: 1.3rem;
 	font-weight: 600;
 	position: relative;
 }	
+.list .item button:hover{
+	background-color: #da4332;
+}
 .card{
     position: fixed;
     top:0;
