@@ -17,6 +17,8 @@ urlpatterns = [
     path('reserve/court/', reserve_views.court, name='court_form'),
     path('reserve/tables/', reserve_views.tables, name='tables_form'),
     path('tournament/', views.tournament, name='tournament'),
+    path('tournament/inscription/', views.inscription, name='inscription'),
+    path('tournament/team/', views.team, name='team'),
     path('store/', views.store, name='store'),
     path('profile/change_password/', views.change_password, name='change_password')
 ]
