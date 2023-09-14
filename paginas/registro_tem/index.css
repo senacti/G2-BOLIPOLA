@@ -1,0 +1,39 @@
+.box-izq{
+margin: 5px;
+width: max-content;
+}
+.registro{
+margin: 5px;
+width: 30rem;
+height: 28rem;
+border: solid black;
+}
+.box-der{
+position: relative;
+bottom: 32.5rem;
+left: 34rem;
+margin: 5px;
+width: max-content;
+}
+.listado{
+margin: 3px;
+width: 18rem;
+border: solid black;
+}
+input{
+height: 30px;
+}
+#boton-guardar{
+position: absolute;
+height: 37px;
+width: 90px;
+bottom: 14.5rem;
+left: 25rem;
+margin: 4px;
+border: rgb(15, 117, 15) solid 1px;
+background-color: transparent;
+color: rgb(15, 117, 15);
+}
+#boton-guardar:hover{
+background-color: rgba(43, 228, 43, 0.595);
+}
