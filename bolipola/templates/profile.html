@@ -38,7 +38,7 @@
                                     Ganas puntos cada vez que haces una compra, entre más puntos más subiras tu rango
                                 </span>
                             </div>
-                            <h2 class="box__left-title-value">{{ user.rangeAlias }}</h2>
+                            <h2 class="box__left-title-value">{{ user.rangeAlias.1 }}</h2>
                         </div>
                         <div class="box__left-box">
                             <div class="box__left-box-edit">
@@ -100,10 +100,11 @@
     </div>
 
 
-    <!--Detectando fechas para el js-->
+    <!--Detectando fechas y color de rango para el js-->
     <span class="birthdateDay" hidden>{{ user.birthdate.day }}</span>
     <span class="birthdateMonth" hidden>{{ user.birthdate.month }}</span>
     <span class="birthdateYear" hidden>{{ user.birthdate.year }}</span>
+    <span class="rangeAliasColor" hidden>{{ user.rangeAlias.0 }}</span>
     
     <script src="{% static 'profile/profile.js' %}"></script>
 

@@ -21,6 +21,8 @@ const shopList = document.querySelector(".box__right-list")
 const imgOfNone = document.querySelector(".box__right-list-none")
 const iconRange = document.querySelector(".box__left-title-rango i")
 const advRange = document.querySelector(".container_inf_rango")
+const aliasColor = document.querySelector(".rangeAliasColor")
+const aliasColorContainer = document.querySelector(".box__left-title-value")
 
 function setNames() {
     //Lo que este en el value de input se pondrá en el span del nombre
@@ -51,6 +53,10 @@ function setAdversiment() {
     if (firstElementValue != "none") {
       imgOfNone.style.display = "none"
     }
+}
+
+function setAliasColor() {
+    aliasColorContainer.style.cssText = `color: ${aliasColor.innerHTML};`
 }
 
 //Evento al editar
@@ -119,3 +125,4 @@ inputImg.addEventListener("change", (e) => {
 setNames()
 setBirthdate()
 setAdversiment()
+setAliasColor()
