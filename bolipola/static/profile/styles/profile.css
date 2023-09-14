@@ -9,7 +9,13 @@
 }
 
 html {
-    font-size: 14px;
+    font-size: 95%;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 95vh;
 }
 
 .main {

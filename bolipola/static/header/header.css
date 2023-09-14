@@ -217,10 +217,9 @@ html {
 
 .menu a {
 	text-decoration: none;
-	font-size: 1.3rem;
+	font-size: 1.55rem;
 	color: var(--background-color);
 	font-weight: 600;
-	text-transform: uppercase;
 	position: relative;
 }
 
