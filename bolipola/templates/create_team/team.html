@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./team.css">
-    <title>Cambio de contraseña</title>
+    <link rel="stylesheet" href="{% static 'tournament/team.css' %}">
+    <title>Crear equipo</title>
 </head>
 <body>
     <div class="mainBox">
@@ -11,7 +12,7 @@
             <fieldset class="box">
 
                 <legend class="box__legend">
-                    <img src="./images/group.png" class="box__legend-img">
+                    <img src="{% static 'tournament/images/group.png' %}" class="box__legend-img">
                     <input type="file" class="box__legend-input">
                 </legend>
 
@@ -39,7 +40,7 @@
                 </div>
 
                 <div class="box__containerLogo">
-                    <a href="#"><img class="box__containerLogo-img" src="../register/images/logo.png" alt="Logo"></a>
+                    <a href="#"><img class="box__containerLogo-img" src="{% static 'register/images/logo.png' %} " alt="Logo"></a>
                 </div>
             </fieldset>
         </form>
@@ -47,5 +48,9 @@
             <a class="cancel__link" href="#">Cancelar</a>
         </div>
     </div>
+    <script
+        src="https://kit.fontawesome.com/81581fb069.js"
+        crossorigin="anonymous"
+    ></script>
 </body>
 </html>
