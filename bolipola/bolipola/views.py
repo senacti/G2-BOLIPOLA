@@ -16,6 +16,12 @@ def store(request):
 def tournament(request):
     return render(request, 'tournament.html', {})
 
+def inscription(request):
+    return render(request, 'tournament_inscript/inscription.html', {})
+
+def team(request):
+    return render(request, 'create_team/team.html')
+
 #Reservas
 def reserve(request):
     return render(request, 'reserve.html', {})
