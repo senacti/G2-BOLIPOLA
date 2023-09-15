@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class UserBoli(AbstractUser):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True ,verbose_name='Email')
     avatar = models.ImageField(default='exampleUser.png', null=False, verbose_name='Avatar', upload_to='avatar/')
     birthdate = models.DateField(null=True, verbose_name='Fecha de nacimiento')
     phone = models.CharField(null=True, max_length=10, verbose_name='Teléfono')

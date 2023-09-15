@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Registrarme</title>
     <link rel="stylesheet" href="{% static 'register/register.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
 </head>
 <body>
     <form class="form" autocomplete="off" method="POST" action="{% url 'register' %}" enctype="multipart/form-data">
@@ -91,12 +92,31 @@
                     <input type="submit" value="Registrarse" class="formBox__register-submit">
                 </div>
                 
+                {% if messages %}
+                    {% for msg in messages %}
+                    <div class="message-container">
+                        <span group="messages"
+                        class="
+                            {% if msg.tags == 'success' %}message-success{% endif %}
+                            {% if msg.tags == 'error' %}message-error{% endif %}
+                            {% if msg.tags == 'info' %}message-info{% endif %}
+                        "
+                        >
+                            {{ msg.message|safe }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </fieldset>
 
         {{ form.password }}
         {{ form.username }}
     </form>
+    <script
+        src="https://kit.fontawesome.com/81581fb069.js"
+        crossorigin="anonymous"
+    ></script>
     <script src="{% static 'register/register.js' %}"></script>
 </body>
 </html>

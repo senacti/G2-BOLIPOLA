@@ -9,7 +9,7 @@ class CustomUserForm(forms.ModelForm):
 
     first_name = forms.CharField(
         label='Nombre',
-        max_length=20, 
+        max_length=15, 
         min_length=2, 
         required=True,
         widget=forms.TextInput(attrs={'class':'formBox__inf-box-name-input', 'pattern': '[A-Za-záéíóúüñÁÉÍÓÚÜÑ ]+'}),
@@ -46,7 +46,7 @@ class CustomUserForm(forms.ModelForm):
     last_name = forms.CharField(
         label='Apellido',
         widget=forms.TextInput(attrs={'class': 'formBox__inf-box-lastName-input', 'pattern': '[A-Za-záéíóúüñÁÉÍÓÚÜÑ ]+'}), 
-        max_length=20, 
+        max_length=15, 
         min_length=2, 
         required=True,
     )
@@ -111,7 +111,7 @@ class CustomSigninForm(AuthenticationForm):
 
 class EditProfileForm(forms.ModelForm):
     first_name = forms.CharField(
-        max_length=20,
+        max_length=15,
         min_length=2, 
         required=True,
         widget=forms.TextInput(attrs={
@@ -131,7 +131,7 @@ class EditProfileForm(forms.ModelForm):
             'value': '{{ user.last_name }}',
             'hidden': 'hidden',
             }), 
-        max_length=20, 
+        max_length=15, 
         min_length=2, 
         required=True,
     )

@@ -40,12 +40,12 @@
                 </div>
 
                 <div class="box__containerLogo">
-                    <a href="#"><img class="box__containerLogo-img" src="{% static 'register/images/logo.png' %} " alt="Logo"></a>
+                    <a href="{% url 'index' %}"><img class="box__containerLogo-img" src="{% static 'register/images/logo.png' %} " alt="Logo"></a>
                 </div>
             </fieldset>
         </form>
         <div class="cancel">
-            <a class="cancel__link" href="#">Cancelar</a>
+            <a class="cancel__link" href="{% url 'tournament' %}">Cancelar</a>
         </div>
     </div>
     <script
