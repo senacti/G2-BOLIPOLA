@@ -3,40 +3,30 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'tournament/team.css' %}">
+    <link rel="stylesheet" href="{% static 'tournament/team/team.css' %}">
     <title>Crear equipo</title>
 </head>
 <body>
     <div class="mainBox">
-        <form class="form">
+        <form class="form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <fieldset class="box">
-
                 <legend class="box__legend">
-                    <img src="{% static 'tournament/images/group.png' %}" class="box__legend-img">
-                    <input type="file" class="box__legend-input">
+                    <img src="{% static 'tournament/team/images/group.png' %}" class="box__legend-img">
+                    {{ form.avatar }}
                 </legend>
 
                 <div class="box__pass">
                     <div class="box__pass-container" id="newpass1">
-                        <input class="box__pass-container-input" name="newpass1" type="text" placeholder="Nombre del equipo">
+                        {{ form.name }}
                     </div>
                     <div class="box__pass-container" id="newpass2">
-                        <select>
-                            <option value="">Color del equipo...</option>
-                            <option value="Azul">Azul</option>
-                            <option value="Rojo">Rojo</option>
-                            <option value="Amarillo">Amarillo</option>
-                            <option value="Verde">Verde</option>
-                            <option value="Morado">Morado</option>
-                            <option value="Rosa">Rosa</option>
-                            <option value="Negro">Negro</option>
-                            <option value="Blanco">Blanco</option>
-                        </select>
+                        {{ form.color }}
                     </div>
                 </div>
     
                 <div class="box__containerSubmit">
-                    <button class="box__containerSubmit-button" type="submit">Guardar</button>
+                    <button class="box__containerSubmit-button" type="submit">Crear</button>
                 </div>
 
                 <div class="box__containerLogo">
@@ -52,5 +42,6 @@
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
+    <script src="{% static 'tournament/team/team.js' %}"></script>
 </body>
 </html>

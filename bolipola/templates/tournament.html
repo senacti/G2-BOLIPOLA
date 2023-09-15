@@ -16,21 +16,6 @@
 
     {% endif %}
     <header>
-        {% if messages %}
-            {% for msg in messages %}
-            <div class="message-container">
-                <span group="messages"
-                class="
-                    {% if msg.tags == 'success' %}message-success{% endif %}
-                    {% if msg.tags == 'error' %}message-error{% endif %}
-                    {% if msg.tags == 'info' %}message-info{% endif %}
-                "
-                >
-                    {{ msg.message|safe }}
-                </span>
-            </div>
-            {% endfor %}
-        {% endif %}
         <div class="container-hero">
 
             <div class="container hero">
@@ -101,6 +86,24 @@
         </div>
     </header>
     <div class="main">
+        {% if not user.is_staff and not has_team %}
+
+        <div class="main-top">
+            <a href="{% url 'team' %}"><button class="main-top-button">¡Crear equipo!</button></a>
+        </div>
+
+        {% elif not user.is_staff and has_team %}
+
+        <div class="teamCreatedButtons">
+            <div class="main-top">
+                <a href="#"><button class="main-top-button">Editar equipo</button></a>
+            </div>
+            <div class="main-top">
+                <a href="#"><button class="main-top-button">Consultar jugadores</button></a>
+            </div>
+        </div>
+
+        {% endif %}
         <div class="tarjeta">       
             <div class="box">
                 <img src="{% static 'register/images/logo.png' %}">
@@ -135,9 +138,6 @@
                 <a href="{% url 'inscription' %}"><input type="submit" value="Inscribirse" id="boton2"></a>
             </div>
         </div>
-        </div>
-        <div class="main-down">
-            <a href="{% url 'team' %}"><button id="boton3">Crear equipo</button></a>
         </div>
     </div>
     <script
