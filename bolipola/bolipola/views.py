@@ -16,11 +16,15 @@ def store(request):
 def tournament(request):
     return render(request, 'tournament.html', {})
 
+#Inscripción a torneo
+@login_required
 def inscription(request):
     return render(request, 'tournament_inscript/inscription.html', {})
 
+#Equipo
+@login_required
 def team(request):
-    return render(request, 'create_team/team.html')
+    return render(request, 'create_team/team.html', {})
 
 #Reservas
 def reserve(request):
@@ -36,6 +40,7 @@ def index(request):
     return render(request, 'index.html', {'user': user})
 
 #Perfil
+@login_required
 def profile(request):
     userForm = request.user
     if request.method == 'POST':
@@ -104,7 +109,7 @@ def signin(request):
             messages.success(request, f'<i class="fa-solid fa-user"></i> Bienvenido {userInf.first_name}')
             return redirect('index')
         else:
-            messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Datos inválidos')
+            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Datos inválidos')
             return redirect('signin')
     
     form = CustomSigninForm()
@@ -120,11 +125,23 @@ def register(request):
     if request.method == 'POST':
         form = CustomUserForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save()
-            user.set_password(form.cleaned_data["password"]) #Se encarga de encriptar la contraseña puesta
-            user.save()
+            pass1 = form.cleaned_data['password1']
+            pass2 = form.cleaned_data['password2']
 
-            return redirect('signin')
+            if pass1 != pass2:
+                #En caso de que no coincidan las contraseñas
+                messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Las contraseñas no coinciden<br>')
+            else:
+                user = form.save()
+                user.set_password(form.cleaned_data["password"])
+                user.save()
+
+                login(request, user)
+                messages.success(request, f'<i class="fa-solid fa-circle-check"></i> Cuenta creada con éxito, bienvenido {request.user.first_name}')
+                return redirect('index')
+        else:
+            #Si el formulario no es válido es porque el email ya existe
+            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> El correo puesto ya existe<br>')
     else:
         form = CustomUserForm()
 
