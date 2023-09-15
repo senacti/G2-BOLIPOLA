@@ -1,4 +1,20 @@
 from django.db import models
+from user.models import UserBoli
+
+class Comment(models.Model):
+    score = models.PositiveIntegerField(verbose_name='Puntuación')
+    text = models.TextField(verbose_name='Texto')
+    date = models.DateField(auto_now_add=True)
+    user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user.first_name} {self.text[:15]}...'
+    
+    class Meta:
+        verbose_name = 'Comentario'
+        verbose_name_plural = 'Comentarios'
+        db_table = 'comentario'
+        ordering = ['id']
 
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre')
@@ -108,10 +124,11 @@ class Event(models.Model):
         ordering = ['id']
 
 class Team(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Nombre')
-    color = models.CharField(max_length=60, verbose_name='Color')
-    players_num = models.PositiveBigIntegerField(verbose_name='Número de jugadores')
-    avatar = models.ImageField(verbose_name='Avatar')
+    name = models.CharField(max_length=30, verbose_name='Nombre', null=False)
+    color = models.CharField(max_length=20, verbose_name='Color', null=False)
+    players_num = models.PositiveIntegerField(default=0, verbose_name='Número de jugadores')
+    avatar = models.ImageField(default='group.png',verbose_name='Avatar')
+    user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -125,7 +142,6 @@ class Team(models.Model):
 class Player(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre')
     last_name = models.CharField(max_length=100, verbose_name='Apellido')
-    birthdate = models.DateField(verbose_name='Fecha de nacimiento')
     phone = models.CharField(max_length=10, verbose_name='Teléfono')
     email = models.EmailField(max_length=200, verbose_name='Correo')
     dorsal = models.PositiveBigIntegerField(verbose_name='Número de dorsal')
@@ -195,12 +211,13 @@ class Sale(models.Model):
     type = models.CharField(max_length=50, verbose_name='Tipo de venta')
     product_quantity = models.PositiveIntegerField(verbose_name='Cantidad de productos comprados')
     inventory = models.ManyToManyField(Inventory)
-    Event = models.ManyToManyField(Event, verbose_name='Venta_evento')
-    Reservation = models.ManyToManyField(Reservation, verbose_name='Venta_reserva')
-    Tournament = models.ManyToManyField(Tournament, verbose_name='Venta_torneo')
+    event = models.ManyToManyField(Event, verbose_name='Venta_evento')
+    reservation = models.ManyToManyField(Reservation, verbose_name='Venta_reserva')
+    tournament = models.ManyToManyField(Tournament, verbose_name='Venta_torneo')
+    user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.date)
+        return f'{self.user.first_name} - {self.date} - {self.type}'
     
     class Meta:
         verbose_name = 'Venta'
