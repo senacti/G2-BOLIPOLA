@@ -19,8 +19,9 @@ urlpatterns = [
     path('tournament/', views.tournament, name='tournament'),
     path('tournament/inscription/', views.inscription, name='inscription'),
     path('tournament/team/', views.team, name='team'),
+    path('tournament/player/', views.player, name='player'),
     path('store/', views.store, name='store'),
-    path('profile/change_password/', views.change_password, name='change_password')
+    path('profile/change_password/', views.change_password, name='change_password'),
 ]
 
 if settings.DEBUG:

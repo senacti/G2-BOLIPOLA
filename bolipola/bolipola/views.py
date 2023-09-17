@@ -30,7 +30,7 @@ def tournament(request):
 #Inscripción a torneo
 @login_required
 def inscription(request):
-    return render(request, 'tournament_inscript/inscription.html', {})
+    return render(request, 'tournament/inscription.html', {})
 
 #Equipo
 @login_required
@@ -46,7 +46,11 @@ def team(request):
     else:
         form = TeamForm()
 
-    return render(request, 'create_team/team.html', {'form':form})
+    return render(request, 'tournament/team.html', {'form':form})
+
+@login_required
+def player(request):
+    return render(request, 'tournament/player.html', {})
 
 
 #------------------Reservas---------------------------
