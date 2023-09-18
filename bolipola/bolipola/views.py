@@ -1,14 +1,16 @@
 import os
 from . import settings
+from django.http import Http404
+from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from core.forms import TeamForm
+from core.forms import TeamForm, PlayerForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team
+from core.models import Team, Player
 
 #------------------Productos-----------------------
 #Productos
@@ -22,10 +24,11 @@ def tournament(request):
     #Si el usuario está registrado, entonces buscará coincidencias
     if request.user.is_authenticated:
         has_team = Team.objects.filter(user=request.user).exists()
+        team = get_object_or_404(Team, user_id=request.user.id)
     else:
         has_team = False
 
-    return render(request, 'tournament.html', {'has_team':has_team})
+    return render(request, 'tournament.html', {'has_team':has_team, 'team':team})
 
 #Inscripción a torneo
 @login_required
@@ -35,6 +38,10 @@ def inscription(request):
 #Equipo
 @login_required
 def team(request):
+    team = Team.objects.all().filter(user_id=request.user.id)
+    if team.exists():
+        raise Http404('No puedes tener más de dos equipos')
+
     if request.method == 'POST':
         form = TeamForm(request.POST, request.FILES)
         if form.is_valid():
@@ -49,9 +56,80 @@ def team(request):
     return render(request, 'tournament/team.html', {'form':form})
 
 @login_required
-def player(request):
-    return render(request, 'tournament/player.html', {})
+def team_edit(request, team_id):
+    team_inf = get_object_or_404(Team, id=team_id)
 
+    if request.method == 'POST':
+        form = TeamForm(request.POST, request.FILES, instance=team_inf)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se ha hecho el cambio del equipo')
+            return redirect('tournament')
+    else:
+        form = TeamForm()
+
+    return render(request, 'tournament/team.html', {'form':form, 'team_inf':team_inf})
+
+@login_required
+def player(request):
+    #Consiguiendo información del equipo a la que va a pertencer el player
+    user = request.user
+    team = get_object_or_404(Team, user_id=user.id)
+
+    #Si hay jugadores entonces muestra la información de ese jugador
+    if Player.objects.all().filter(team_id=team.id).exists():
+        players = Player.objects.all().filter(team_id=team.id)
+    else:
+        players = ""
+
+    if request.method == 'POST':
+        form = PlayerForm(request.POST)
+        if team.players_num >= 15:
+            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Máximo de jugadores')
+            return redirect('player')
+
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.team_id = team.id
+            team.players_num += 1
+            team.save()
+            player.save()
+
+            return redirect('player')
+    else:
+        form = PlayerForm()
+
+    return render(request, 'tournament/player.html', {'form':form, 'team':team, 'players':players})
+
+@login_required
+def player_edit(request, player_id):
+    #Consiguiendo información del equipo a la que va a pertencer el player
+    user = request.user
+    player_inf = get_object_or_404(Player, id=player_id)
+    team = get_object_or_404(Team, user_id=user.id)
+
+    #Comprobando que el jugador que se va a editar pertenezca al equipo consultado
+    if team.id != player_inf.team_id:
+        raise Http404('Ha ocurrido un error')
+
+    #Si hay jugadores entonces muestra la información de ese jugador
+    if Player.objects.all().filter(team_id=team.id).exists():
+        players = Player.objects.all().filter(team_id=team.id)
+    else:
+        players = ""
+
+    if request.method == 'POST':
+        form = PlayerForm(request.POST, instance=player_inf)
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se ha hecho el cambio')
+            url = reverse('player_edit', args=[player_id])
+            return redirect(url)
+    else:
+        form = PlayerForm()
+
+    return render(request, 'tournament/player.html', {'form':form, 'team':team, 'players':players, 'player_inf':player_inf})
 
 #------------------Reservas---------------------------
 #Reservas
@@ -63,7 +141,7 @@ def reserve(request):
 #Inicio
 def index(request):
     if request.user.is_authenticated:
-        user = get_object_or_404(UserBoli, pk=request.user.pk)
+        user = get_object_or_404(UserBoli, id=request.user.id)
     else:
         user = False
         
@@ -104,7 +182,7 @@ def profile(request):
     else:
         form = EditProfileForm(instance=userForm)
 
-    user = get_object_or_404(UserBoli, pk=request.user.pk)
+    user = get_object_or_404(UserBoli, id=request.user.id)
     return render(request, 'profile.html', {'user': user, 'form': form})
 
 #Cambio de contraseña
@@ -145,7 +223,7 @@ def signin(request):
         if user is not None:
             login(request, user)
             userInf = request.user
-            messages.success(request, f'<i class="fa-solid fa-user"></i> Bienvenido {userInf.first_name}')
+            messages.success(request, f'<i class="fa-solid fa-user"></i> Bienvenid{userInf.pronoun()} {userInf.first_name}')
             return redirect('index')
         else:
             messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Datos inválidos')
@@ -176,7 +254,7 @@ def register(request):
                 user.save()
 
                 login(request, user)
-                messages.success(request, f'<i class="fa-solid fa-circle-check"></i> Cuenta creada con éxito, bienvenido {request.user.first_name}')
+                messages.success(request, f'<i class="fa-solid fa-circle-check"></i> Cuenta creada con éxito, bienvenid{request.user.pronoun()} {request.user.first_name}')
                 return redirect('index')
         else:
             #Si el formulario no es válido es porque el email ya existe

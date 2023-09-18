@@ -133,6 +133,24 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
+    def hexcolor(self):
+        if (self.color == 'Azul'):
+            return '#2980B9'
+        if (self.color == 'Rojo'):
+            return '#E74C3C'
+        if (self.color == 'Amarillo'):
+            return '#F1C40F'
+        if (self.color == 'Verde'):
+            return '#28B463'
+        if (self.color == 'Morado'):
+            return '#884EA0'
+        if (self.color == 'Rosa'):
+            return '#F03687'
+        if (self.color == 'Negro'):
+            return '#000000'
+        if (self.color == 'Blanco'):
+            return '#FFFFFF'
+
     class Meta:
         verbose_name = 'Equipo'
         verbose_name_plural = 'Equipos'
@@ -140,18 +158,16 @@ class Team(models.Model):
         ordering = ['id']
 
 class Player(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Nombre')
-    last_name = models.CharField(max_length=100, verbose_name='Apellido')
-    phone = models.CharField(max_length=10, verbose_name='Teléfono')
-    email = models.EmailField(max_length=200, verbose_name='Correo')
-    dorsal = models.PositiveBigIntegerField(verbose_name='Número de dorsal')
-    age = models.PositiveIntegerField(verbose_name='Edad')
-    gender = models.CharField(max_length=50, verbose_name='Género')
-    position = models.CharField(max_length=60, verbose_name='Posición')
-    yellow_card = models.IntegerField(verbose_name='Tarjeta amarilla')
-    blue_card = models.IntegerField(verbose_name='Tarjeta azul')
-    red_card = models.IntegerField(verbose_name='Tarjeta roja')
-    equipo = models.ForeignKey(Team, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name='Nombre', null=False)
+    last_name = models.CharField(max_length=100, verbose_name='Apellido', null=False)
+    dorsal = models.PositiveBigIntegerField(verbose_name='Número de dorsal', null=False)
+    age = models.PositiveIntegerField(verbose_name='Edad', null=False)
+    gender = models.CharField(max_length=50, verbose_name='Género', null=False)
+    position = models.CharField(max_length=60, verbose_name='Posición', null=False)
+    yellow_card = models.IntegerField(verbose_name='Tarjeta amarilla', default=0)
+    blue_card = models.IntegerField(verbose_name='Tarjeta azul', default=0)
+    red_card = models.IntegerField(verbose_name='Tarjeta roja', default=0)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
