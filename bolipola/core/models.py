@@ -127,7 +127,7 @@ class Team(models.Model):
     name = models.CharField(max_length=30, verbose_name='Nombre', null=False)
     color = models.CharField(max_length=20, verbose_name='Color', null=False)
     players_num = models.PositiveIntegerField(default=0, verbose_name='Número de jugadores')
-    avatar = models.ImageField(default='group.png',verbose_name='Avatar')
+    avatar = models.ImageField(default='group.png',verbose_name='Avatar', upload_to='team_avatar/')
     user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -180,11 +180,12 @@ class Player(models.Model):
 
 class Tournament(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre', null=True)
-    number_teams = models.PositiveIntegerField(verbose_name='Cantidad de equipos')
-    registered_teams = models.PositiveIntegerField(verbose_name='Equipos registrados')
+    number_teams = models.PositiveIntegerField(verbose_name='Cantidad de equipos', default=16)
+    registered_teams = models.PositiveIntegerField(verbose_name='Equipos registrados', default=0)
     date = models.DateTimeField(verbose_name='Fecha del torneo')
     prize_payment = models.FloatField(verbose_name='Pago de premio')
     registration_cost = models.FloatField(verbose_name='Costo de inscripción')
+    active = models.BooleanField(verbose_name='Activo', default=True)
     team = models.ManyToManyField(Team, through='TournamentTeam')
 
     def __str__(self):
@@ -220,8 +221,6 @@ class TournamentTeam(models.Model):
 class Sale(models.Model):
     total_cost = models.FloatField(verbose_name='Costo total')
     payment_type = models.CharField(max_length=50, verbose_name='Tipo de pago')
-    discount = models.BooleanField(verbose_name='Aplica descuento')
-    total_discount = models.FloatField(verbose_name='Total descuento')
     status = models.CharField(max_length=50, verbose_name='Estado de venta')
     date = models.DateTimeField(auto_now=True, verbose_name='Fecha')
     type = models.CharField(max_length=50, verbose_name='Tipo de venta')

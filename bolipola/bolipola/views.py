@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from core.forms import TeamForm, PlayerForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team, Player
+from core.models import Team, Player, Tournament
 
 #------------------Productos-----------------------
 #Productos
@@ -24,11 +24,17 @@ def tournament(request):
     #Si el usuario está registrado, entonces buscará coincidencias
     if request.user.is_authenticated:
         has_team = Team.objects.filter(user=request.user).exists()
-        team = get_object_or_404(Team, user_id=request.user.id)
     else:
         has_team = False
 
-    return render(request, 'tournament.html', {'has_team':has_team, 'team':team})
+    if has_team:
+        team = get_object_or_404(Team, user_id=request.user.id)
+    else:
+        team = False
+
+    tournaments = Tournament.objects.all().filter(active=1)
+
+    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'tournaments':tournaments})
 
 #Inscripción a torneo
 @login_required

@@ -4,7 +4,7 @@ from .models import Team, Player
 #Formulario de equipo
 class TeamForm(forms.ModelForm):
     name = forms.CharField(
-        max_length=30, 
+        max_length=20, 
         min_length=3,
         required=True,
         widget=forms.TextInput(
