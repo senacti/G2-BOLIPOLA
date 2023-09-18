@@ -6,82 +6,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="{% static 'tournament/player/player.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
 </head>
 <body>
     <div class="main">
         <div class="main__left">
             <div class="main__left-titleContainer">
-                <h2 class="main__left-titleContainer-title">Registrar jugador</h2>
+                <h2 class="main__left-titleContainer-title">
+                    {% if player_inf %}
+                        Editar
+                    {% else %}
+                        Registrar
+                    {% endif %}
+                        jugador</h2>
             </div>
-            <form class="main__left-form">
-
+            <form class="main__left-form" autocomplete="off" method="post">
+                {% csrf_token %}
                 <div class="groupInf">
                     <div class="main__left-form-inf">
                         <label for="nombre">Nombre</label>
-                        <input type="text">
+                        {{ form.name }}
                     </div>
                     <div class="main__left-form-inf">
                         <label for="apellido">Apellido</label>
-                        <input type="text">
-                    </div>
-                </div>
-
-                <div class="groupInf">
-                    <div class="main__left-form-inf">
-                        <label for="email">Email</label>
-                        <input type="email">
-                    </div>
-                    <div class="main__left-form-inf">
-                        <label for="celular">Celular</label>
-                        <input type="text">
+                        {{ form.last_name }}
                     </div>
                 </div>
 
                 <div class="groupInf">
                     <div class="main__left-form-inf">
                         <label for="edad">Edad</label>
-                        <input type="text">
+                        {{ form.age }}
                     </div>
                     <div class="main__left-form-inf">
-                        <label for="genero">Género</label>
-                        <input type="text">
-                    </div>
+                        <label for="dorsal">Dorsal</label>
+                        {{ form.dorsal }}
+                    </div>   
                 </div>
 
                 <div class="groupInf">
                     <div class="main__left-form-inf">
-                        <label for="dorsal">Dorsal</label>
-                        <input type="number">
+                        <label for="genero">Género</label>
+                        {{ form.gender }}
                     </div>
                     <div class="main__left-form-inf">
                         <label for="posicion">Posición</label>
-                        <select>
-                            <option value="">...</option>
-                            <option value="portero">Portero</option>
-                            <option value="defensa">Defensa</option>
-                            <option value="medio_campo">Centrocampista</option>
-                            <option value="delantero">Delantero</option>
-                        </select>
+                        {{ form.position }}
                     </div>
                 </div>
 
                 <div class="main__left-form-submitContainer">
-                    <input type="submit" class="main__left-form-submitContainer-submit" value="Guardar">
+                    {% if player_inf %}
+                    <a href="{% url 'player' %}" class="main__left-form-submitContainer-submit" id="cancelChanges">
+                        Cancelar cambios
+                    </a>
+                    {% endif %}
+
+                    <button type="submit" class="main__left-form-submitContainer-submit">
+                        {% if player_inf %}
+                            Guardar cambios
+                        {% else %}
+                            Guardar
+                        {% endif %}
+                    </button>
                 </div>
             </form>
+
+            <div class="main__left-cancel">
+                <a href="{% url 'tournament' %}">Cancelar</a>
+            </div>
+            {% if messages %}
+                {% for msg in messages %}
+                <div class="message-container">
+                    <span group="messages"
+                    class="
+                        {% if msg.tags == 'success' %}message-success{% endif %}
+                        {% if msg.tags == 'error' %}message-error{% endif %}
+                        {% if msg.tags == 'info' %}message-info{% endif %}
+                    "
+                    >
+                        {{ msg.message|safe }}
+                    </span>
+                </div>
+                {% endfor %}
+            {% endif %}
         </div>
         <div class="main__right">
             <div class="main__right-titleContainer">
-                <h2 class="main__right-titleContainer-title">Jugadores del equipo</h2>
+                <h2 class="main__right-titleContainer-title">Jugadores del equipo<span>(Máx 15)</span>
+                </h2>
             </div>
             <div class="main__right-list">
+                {% for player in players %}
+                    <a href="{% url 'player_edit' player.id %}">
+                        {% if player_inf and player_inf.id == player.id %}
+                        <div class="main__right-list-item" style="background-color: #CCD1D1;">
+                            <i class="fa-solid fa-user"></i><span>{{ player.dorsal }} - {{ player.name }} - {{ player.position }}</span>
+                        </div>
+                        {% else %}
+                        <div class="main__right-list-item">
+                            <i class="fa-solid fa-user"></i><span>{{ player.dorsal }} - {{ player.name }} - {{ player.position }}</span>
+                        </div>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+                
+                {% if not players %}
                 <div class="main__right-list-adversiment">
                     <img class="main__right-list-adversiment-img" src="{% static 'tournament/images/none.png' %}">
-                    <span class="main__right-list-adversiment-span">Sin jugadores registrados</span>
+                    <span class="main__right-list-adversiment-span">Sin jugadores registrados</span>                 
                 </div>
+                {% endif %}
+            </div>
+            <div class="main__right-team">
+                <img class="main__right-team-img" src="{{team.avatar.url}}" alt="Imágen del equipo">
+                <h2 class="main__right-team-title">{{team.name}}</h2><span hidden id="teamColor">{{team.hexcolor}}</span>
             </div>
         </div>
     </div>
+
+    <ul hidden id="playerInf">
+        {% if player_inf %}
+        <li>{{player_inf.name}}</li>
+        <li>{{player_inf.last_name}}</li>
+        <li>{{player_inf.age}}</li>
+        <li>{{player_inf.dorsal}}</li>
+        <li>{{player_inf.gender}}</li>
+        <li>{{player_inf.position}}</li>
+        {% endif %}
+    </ul>
 
     <script src="{% static 'tournament/player/player.js' %}"></script>
     <script src="https://kit.fontawesome.com/81581fb069.js"></script>

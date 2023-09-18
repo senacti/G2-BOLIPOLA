@@ -1,11 +1,21 @@
-const rightList = document.querySelector(".main__right-list")
-const rightListAdversiment =  document.querySelector(".main__right-list-adversiment")
+const teamName = document.querySelector(".main__right-team-title")
+const teamColor = document.querySelector("#teamColor")
+const playerInf = document.querySelector("#playerInf")
+const inputsInf = document.querySelectorAll(".main__left-form-inf input, .main__left-form-inf select")
 
-function setAdversiment() {
-    firstElementIsAdversiment = rightList.firstElementChild.attributes.class.value == "main__right-list-adversiment"
-    if (!firstElementIsAdversiment) {
-        rightListAdversiment.style.display = "none"
+//Colocando color al nombre del equipo
+function setTeamColor() {
+    teamName.style.color = teamColor.innerHTML
+}
+
+//Colocando información del jugador en inputs de registro en caso de que se selecciones
+function setPlayerInf() {
+    if (playerInf.firstElementChild != null) {
+        inputsInf.forEach((element, i) => {
+            element.value = playerInf.children[i].innerHTML
+        })
     }
 }
 
-setAdversiment()
+setTeamColor()
+setPlayerInf()

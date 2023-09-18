@@ -19,6 +19,14 @@ class UserBoli(AbstractUser):
             return age
         return None
     
+    def pronoun(self):
+        if self.gender == 'Femenino':
+            return 'a'
+        if self.gender == 'Masculino':
+            return 'o'
+        if self.gender == 'Otro':
+            return '@'
+
     def rangeAlias(self):
         if self.is_superuser == 1:
             return ['#CB4335', 'Admin']

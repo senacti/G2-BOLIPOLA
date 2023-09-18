@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'tournament/tournament.css' %}">
     <link rel="stylesheet" href="{% static 'header/header.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
     <title>Torneos</title>
 </head>
 <body>
@@ -16,8 +17,22 @@
 
     {% endif %}
     <header>
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message-container" style="margin: 0;">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
+            {% endfor %}
+        {% endif %}
         <div class="container-hero">
-
             <div class="container hero">
                 <div class="customer-support">
                     {% if user.is_staff and user.is_authenticated %}
@@ -96,7 +111,7 @@
 
         <div class="teamCreatedButtons">
             <div class="main-top">
-                <a href="#"><button class="main-top-button">Editar equipo</button></a>
+                <a href="{% url 'team_edit' team.id %}"><button class="main-top-button">Editar equipo</button></a>
             </div>
             <div class="main-top">
                 <a href="{% url 'player' %}"><button class="main-top-button">Consultar jugadores</button></a>

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'tournament/team/team.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
     <title>Crear equipo</title>
 </head>
 <body>
@@ -12,7 +13,11 @@
             {% csrf_token %}
             <fieldset class="box">
                 <legend class="box__legend">
+                    {% if team_inf %}
+                    <img src="{{ team_inf.avatar.url }}" class="box__legend-img">
+                    {% else %}
                     <img src="{% static 'tournament/team/images/group.png' %}" class="box__legend-img">
+                    {% endif %}
                     {{ form.avatar }}
                 </legend>
 
@@ -26,7 +31,13 @@
                 </div>
     
                 <div class="box__containerSubmit">
-                    <button class="box__containerSubmit-button" type="submit">Crear</button>
+                    <button class="box__containerSubmit-button" type="submit">
+                        {% if team_inf %}
+                            Guardar cambios
+                        {% else %}
+                            Crear
+                        {% endif %}
+                    </button>
                 </div>
 
                 <div class="box__containerLogo">
@@ -38,6 +49,14 @@
             <a class="cancel__link" href="{% url 'tournament' %}">Cancelar</a>
         </div>
     </div>
+
+    <ul hidden id="teamInf">
+        {% if team_inf %}
+            <li>{{ team_inf.name }}</li>
+            <li>{{ team_inf.color }}</li>
+        {% endif %}
+    </ul>
+
     <script
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
