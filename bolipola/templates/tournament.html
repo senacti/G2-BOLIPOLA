@@ -119,39 +119,17 @@
         </div>
 
         {% endif %}
-        <div class="tarjeta">       
+        <div class="tarjeta">
+            {% for tournament in tournaments %}   
             <div class="box">
                 <img src="{% static 'register/images/logo.png' %}">
-                <h4>TORNEO 16 equipos</h4>
-                <p>En este torneo habran 16 equipos los cuales competiran por un premio de 2.000.000 de pesos colombianos</p>
-                <p>el valor de inscripcion es de 200.000 pesos cada equipo</p>
-                <a href="#">Leer mas</a><br><br>
+                <h1>{{tournament.name}}</h1>
+                <h4>TORNEO {{tournament.number_teams}} equipos</h4>
+                <p>En este torneo habran 16 equipos los cuales competiran por un premio de {{ tournament.prize_payment }} de pesos colombianos</p>
+                <p>el valor de inscripcion es de {{tournament.registration_cost}} de pesos cada equipo</p>
                 <a href="{% url 'inscription' %}"><input type="submit" value="Inscribirse" id="boton2"></a>
             </div>
-            <div class="box">
-                <img src="{% static 'register/images/logo.png' %}">
-                <h4>TORNEO 24 EQUIPOS</h4>
-                <p>En este torneo habran 24 equipos los cuales competiran por un premio de 5.000.000 de pesos colombianos</p>
-                <p>el valor de inscripcion es de 300.000 pesos cada equipo</p>
-                <a href="#">Leer mas</a><br><br>
-                <a href="{% url 'inscription' %}"><input type="submit" value="Inscribirse" id="boton2"></a>
-            </div> 
-            <div class="box">
-                <img src="{% static 'register/images/logo.png' %}">
-                <h4>TORNEO 16 equipos</h4>
-                <p>En este torneo habran 16 equipos los cuales competiran por un premio de 2.000.000 de pesos colombianos</p>
-                <p>el valor de inscripcion es de 200.000 pesos cada equipo</p>
-                <a href="#">Leer mas</a><br><br>
-                <a href="{% url 'inscription' %}"><input type="submit" value="Inscribirse" id="boton2"></a>
-            </div>
-            <div class="box">
-                <img src="{% static 'register/images/logo.png' %}">
-                <h4>TORNEO 24 EQUIPOS</h4>
-                <p>En este torneo habran 24 equipos los cuales competiran por un premio de 5.000.000 de pesos colombianos</p>
-                <p>el valor de inscripcion es de 300.000 pesos cada equipo</p>
-                <a href="#">Leer mas</a><br><br>
-                <a href="{% url 'inscription' %}"><input type="submit" value="Inscribirse" id="boton2"></a>
-            </div>
+            {% endfor %}
         </div>
         </div>
     </div>
