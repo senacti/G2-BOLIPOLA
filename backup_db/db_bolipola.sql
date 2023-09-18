@@ -273,7 +273,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,7 +282,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2023-09-15 07:08:51.733566','2','Bolipola',1,'[{\"added\": {}}]',1,1),(2,'2023-09-15 07:11:16.881143','2','Bolipola',2,'[{\"changed\": {\"fields\": [\"Logo\", \"Max height\", \"Favicon\", \"Title\", \"Color\", \"Background color\", \"Text color\", \"Link hover color\"]}}]',1,1),(3,'2023-09-15 07:13:37.293139','2','Bolipola',2,'[{\"changed\": {\"fields\": [\"Background color\", \"Background selected color\", \"Link color\", \"Link hover color\", \"Link active color\"]}}]',1,1),(4,'2023-09-15 07:14:40.720337','2','Bolipola',2,'[]',1,1),(5,'2023-09-15 07:17:25.113769','2','Bolipola',2,'[{\"changed\": {\"fields\": [\"Link color\", \"Link hover color\", \"Link active color\", \"Background color\", \"Background hover color\"]}}]',1,1);
+INSERT INTO `django_admin_log` VALUES (1,'2023-09-18 04:10:49.421570','2','Bolipola',1,'[{\"added\": {}}]',1,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +334,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-09-15 07:01:18.238080'),(2,'contenttypes','0002_remove_content_type_name','2023-09-15 07:01:19.029131'),(3,'auth','0001_initial','2023-09-15 07:01:23.004094'),(4,'auth','0002_alter_permission_name_max_length','2023-09-15 07:01:24.478203'),(5,'auth','0003_alter_user_email_max_length','2023-09-15 07:01:24.522586'),(6,'auth','0004_alter_user_username_opts','2023-09-15 07:01:24.571835'),(7,'auth','0005_alter_user_last_login_null','2023-09-15 07:01:24.613039'),(8,'auth','0006_require_contenttypes_0002','2023-09-15 07:01:24.653241'),(9,'auth','0007_alter_validators_add_error_messages','2023-09-15 07:01:24.696489'),(10,'auth','0008_alter_user_username_max_length','2023-09-15 07:01:24.738695'),(11,'auth','0009_alter_user_last_name_max_length','2023-09-15 07:01:24.779900'),(12,'auth','0010_alter_group_name_max_length','2023-09-15 07:01:24.879147'),(13,'auth','0011_update_proxy_permissions','2023-09-15 07:01:24.922144'),(14,'auth','0012_alter_user_first_name_max_length','2023-09-15 07:01:24.973440'),(15,'user','0001_initial','2023-09-15 07:01:29.453554'),(16,'admin','0001_initial','2023-09-15 07:01:32.211297'),(17,'admin','0002_logentry_remove_auto_add','2023-09-15 07:01:32.255522'),(18,'admin','0003_logentry_add_action_flag_choices','2023-09-15 07:01:32.296710'),(19,'admin_interface','0001_initial','2023-09-15 07:01:32.594123'),(20,'admin_interface','0002_add_related_modal','2023-09-15 07:01:32.974641'),(21,'admin_interface','0003_add_logo_color','2023-09-15 07:01:33.141499'),(22,'admin_interface','0004_rename_title_color','2023-09-15 07:01:33.243997'),(23,'admin_interface','0005_add_recent_actions_visible','2023-09-15 07:01:33.380418'),(24,'admin_interface','0006_bytes_to_str','2023-09-15 07:01:33.444798'),(25,'admin_interface','0007_add_favicon','2023-09-15 07:01:34.149337'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-09-15 07:01:34.484519'),(27,'admin_interface','0009_add_enviroment','2023-09-15 07:01:34.877600'),(28,'admin_interface','0010_add_localization','2023-09-15 07:01:34.925009'),(29,'admin_interface','0011_add_environment_options','2023-09-15 07:01:35.397345'),(30,'admin_interface','0012_update_verbose_names','2023-09-15 07:01:35.437527'),(31,'admin_interface','0013_add_related_modal_close_button','2023-09-15 07:01:35.562256'),(32,'admin_interface','0014_name_unique','2023-09-15 07:01:35.794409'),(33,'admin_interface','0015_add_language_chooser_active','2023-09-15 07:01:35.949391'),(34,'admin_interface','0016_add_language_chooser_display','2023-09-15 07:01:36.082349'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-09-15 07:01:36.120545'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-09-15 07:01:36.406992'),(37,'admin_interface','0019_add_form_sticky','2023-09-15 07:01:36.651361'),(38,'admin_interface','0020_module_selected_colors','2023-09-15 07:01:36.994174'),(39,'admin_interface','0021_file_extension_validator','2023-09-15 07:01:37.037733'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-09-15 07:01:37.457617'),(41,'admin_interface','0023_theme_foldable_apps','2023-09-15 07:01:37.681876'),(42,'admin_interface','0024_remove_theme_css','2023-09-15 07:01:37.836149'),(43,'admin_interface','0025_theme_language_chooser_control','2023-09-15 07:01:37.984473'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-09-15 07:01:38.135213'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-09-15 07:01:38.273016'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-09-15 07:01:38.731268'),(47,'admin_interface','0029_theme_css_generic_link_active_color','2023-09-15 07:01:38.977178'),(48,'admin_interface','0030_theme_collapsible_stacked_inlines_and_more','2023-09-15 07:01:39.689503'),(49,'core','0001_initial','2023-09-15 07:01:45.776152'),(50,'core','0002_initial','2023-09-15 07:02:08.507987'),(51,'sessions','0001_initial','2023-09-15 07:02:09.508222');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-09-18 04:02:29.552109'),(2,'contenttypes','0002_remove_content_type_name','2023-09-18 04:02:30.343525'),(3,'auth','0001_initial','2023-09-18 04:02:34.285548'),(4,'auth','0002_alter_permission_name_max_length','2023-09-18 04:02:35.894732'),(5,'auth','0003_alter_user_email_max_length','2023-09-18 04:02:35.991884'),(6,'auth','0004_alter_user_username_opts','2023-09-18 04:02:36.064170'),(7,'auth','0005_alter_user_last_login_null','2023-09-18 04:02:36.095286'),(8,'auth','0006_require_contenttypes_0002','2023-09-18 04:02:36.160555'),(9,'auth','0007_alter_validators_add_error_messages','2023-09-18 04:02:36.270024'),(10,'auth','0008_alter_user_username_max_length','2023-09-18 04:02:36.370627'),(11,'auth','0009_alter_user_last_name_max_length','2023-09-18 04:02:36.554484'),(12,'auth','0010_alter_group_name_max_length','2023-09-18 04:02:36.962009'),(13,'auth','0011_update_proxy_permissions','2023-09-18 04:02:37.020227'),(14,'auth','0012_alter_user_first_name_max_length','2023-09-18 04:02:37.087559'),(15,'user','0001_initial','2023-09-18 04:02:41.193013'),(16,'admin','0001_initial','2023-09-18 04:02:44.184523'),(17,'admin','0002_logentry_remove_auto_add','2023-09-18 04:02:44.255874'),(18,'admin','0003_logentry_add_action_flag_choices','2023-09-18 04:02:44.286345'),(19,'admin_interface','0001_initial','2023-09-18 04:02:44.533745'),(20,'admin_interface','0002_add_related_modal','2023-09-18 04:02:45.038409'),(21,'admin_interface','0003_add_logo_color','2023-09-18 04:02:45.169046'),(22,'admin_interface','0004_rename_title_color','2023-09-18 04:02:45.275572'),(23,'admin_interface','0005_add_recent_actions_visible','2023-09-18 04:02:45.407276'),(24,'admin_interface','0006_bytes_to_str','2023-09-18 04:02:45.468608'),(25,'admin_interface','0007_add_favicon','2023-09-18 04:02:45.594795'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-09-18 04:02:45.840900'),(27,'admin_interface','0009_add_enviroment','2023-09-18 04:02:46.205082'),(28,'admin_interface','0010_add_localization','2023-09-18 04:02:46.249271'),(29,'admin_interface','0011_add_environment_options','2023-09-18 04:02:46.830469'),(30,'admin_interface','0012_update_verbose_names','2023-09-18 04:02:46.869902'),(31,'admin_interface','0013_add_related_modal_close_button','2023-09-18 04:02:47.092789'),(32,'admin_interface','0014_name_unique','2023-09-18 04:02:47.350980'),(33,'admin_interface','0015_add_language_chooser_active','2023-09-18 04:02:47.505662'),(34,'admin_interface','0016_add_language_chooser_display','2023-09-18 04:02:47.911285'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-09-18 04:02:47.977515'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-09-18 04:02:48.351512'),(37,'admin_interface','0019_add_form_sticky','2023-09-18 04:02:48.643359'),(38,'admin_interface','0020_module_selected_colors','2023-09-18 04:02:49.201206'),(39,'admin_interface','0021_file_extension_validator','2023-09-18 04:02:49.352794'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-09-18 04:02:49.611098'),(41,'admin_interface','0023_theme_foldable_apps','2023-09-18 04:02:49.741915'),(42,'admin_interface','0024_remove_theme_css','2023-09-18 04:02:49.842382'),(43,'admin_interface','0025_theme_language_chooser_control','2023-09-18 04:02:50.213036'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-09-18 04:02:50.495861'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-09-18 04:02:50.616717'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-09-18 04:02:50.842905'),(47,'admin_interface','0029_theme_css_generic_link_active_color','2023-09-18 04:02:51.002849'),(48,'admin_interface','0030_theme_collapsible_stacked_inlines_and_more','2023-09-18 04:02:51.793800'),(49,'core','0001_initial','2023-09-18 04:02:58.832757'),(50,'core','0002_initial','2023-09-18 04:03:20.480896'),(51,'sessions','0001_initial','2023-09-18 04:03:21.156150');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,7 +360,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('ac5zxdgov4ssirneyud3x451uckbhm22','.eJxVjEsOwjAMBe-SNYrysdOWJfueoXJtQwookfpZIe4OlbqA7ZuZ9zIDbWsetkXnYRJzNt6cfreR-KFlB3KncquWa1nnabS7Yg-62L6KPi-H-3eQacnfOl4ZO5YQXQyoCRnGSOwASbxKEsfCEFpswavziQMQCjbgIHQNqZr3B-PpN7k:1qh2uy:3lDKF79Hat043DHzivEFkcKqbv0lj5IQU2SiFjuKYUQ','2023-09-29 07:07:08.578750');
+INSERT INTO `django_session` VALUES ('lp378uyikfxhfqcfqpbdm3yjxd4qynse','.eJxVjDsOwjAQBe_iGlns2ma9lPQ5g7X-gAPIkeKkQtwdIqWA9s3Me6kg61LD2sscxqzOCtXhd4uSHqVtIN-l3SadprbMY9Sbonfa9TDl8rzs7t9BlV6_NdhoCBMnB-wNHwt4dsycAawFErZkKYskMgXwilIEEClFjxZP6NT7A62mNog:1qi5cI:C18O5Mv5y5QioRhGLUnpCRDCF7zxVduEyKUkjgBCgIk','2023-10-02 04:12:10.229296');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -375,13 +375,13 @@ CREATE TABLE `equipo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `color` varchar(20) NOT NULL,
-  `players_num` bigint(20) unsigned NOT NULL CHECK (`players_num` >= 0),
+  `players_num` int(10) unsigned NOT NULL CHECK (`players_num` >= 0),
   `avatar` varchar(100) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `equipo_user_id_6697ca39_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `equipo_user_id_6697ca39_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -390,6 +390,7 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
+INSERT INTO `equipo` VALUES (1,'Los Ochux','Azul',0,'group.png',2);
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -458,8 +459,6 @@ CREATE TABLE `jugador` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `phone` varchar(10) NOT NULL,
-  `email` varchar(200) NOT NULL,
   `dorsal` bigint(20) unsigned NOT NULL CHECK (`dorsal` >= 0),
   `age` int(10) unsigned NOT NULL CHECK (`age` >= 0),
   `gender` varchar(50) NOT NULL,
@@ -467,10 +466,10 @@ CREATE TABLE `jugador` (
   `yellow_card` int(11) NOT NULL,
   `blue_card` int(11) NOT NULL,
   `red_card` int(11) NOT NULL,
-  `equipo_id` bigint(20) NOT NULL,
+  `team_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `jugador_equipo_id_f972fb22_fk_equipo_id` (`equipo_id`),
-  CONSTRAINT `jugador_equipo_id_f972fb22_fk_equipo_id` FOREIGN KEY (`equipo_id`) REFERENCES `equipo` (`id`)
+  KEY `jugador_team_id_ade94278_fk_equipo_id` (`team_id`),
+  CONSTRAINT `jugador_team_id_ade94278_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -671,7 +670,7 @@ CREATE TABLE `user_userboli` (
 
 LOCK TABLES `user_userboli` WRITE;
 /*!40000 ALTER TABLE `user_userboli` DISABLE KEYS */;
-INSERT INTO `user_userboli` VALUES (1,'pbkdf2_sha256$600000$TnzvOsz9HQcrp5YKqDU4i1$pnIMSObpkVZHPbqbgdQGo3fN9Rg7nbiZMU4NJbV7GHI=','2023-09-15 07:07:08.536603',1,'admin@admin.com','Juanjo','Ochoa',1,1,'2023-09-15 07:03:38.085793','admin@admin.com','avatar/miFotoDeGit.jpg','2005-12-14','3111234567','Masculino',0),(2,'pbkdf2_sha256$600000$fYWqNrROlXWZ9TfM2KSd6x$D0VEkgcUTrlyjDE7MXjIJpKYunQ6ctsT8TCXRTZvYcY=','2023-09-15 07:06:25.399606',0,'calisto@hotmail.com','Eduardo','Calisto',0,1,'2023-09-15 07:06:25.047073','calisto@hotmail.com','avatar/anImage.jpg','2003-12-12','4532138987','Masculino',0);
+INSERT INTO `user_userboli` VALUES (1,'pbkdf2_sha256$600000$i762hqy2ckcb9g4EKvS5u2$l/JivSr81q3uLw2RKRNzvi9BSsR4YkscmN20XVJlK8s=','2023-09-18 04:04:30.690521',1,'admin@admin.com','Juanjo','Ochoa',1,1,'2023-09-18 04:04:00.696989','admin@admin.com','avatar/miFotoDeGit.jpg','2005-12-14','3111234567','Masculino',0),(2,'pbkdf2_sha256$600000$dm1naVl76cJ2xesJ8OzfwI$8XZwefJG4o9FlYFHCMU5Q53gZ4h98yTcThi9Zm6RL1g=','2023-09-18 04:12:10.146180',0,'calisto@hotmail.com','Eduardo','Calisto',0,1,'2023-09-18 04:12:09.778209','calisto@hotmail.com','avatar/anImage.jpg','2000-08-09','8723411316','Otro',0);
 /*!40000 ALTER TABLE `user_userboli` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -885,4 +884,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-15  2:20:31
+-- Dump completed on 2023-09-17 23:15:59
