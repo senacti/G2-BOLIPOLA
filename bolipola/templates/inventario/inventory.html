@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Productos</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <ul>
+        {% for product in products %}
+
+            <li>{{ product.name }} - {{ product.cost }} -  </li>
+            <tr>
+                <td>{{ product.name }}</td>
+                <!-- ... -->
+                <td>
+                    <a href="{% url 'create_product' %}">Crear</a> |
+                    <a href="{% url 'edit_product' product.pk %}">Editar</a> |
+                    <a href="{% url 'delete_product' product.pk %}">Eliminar</a> |
+                    <a href="{% url 'quantity_product' product.pk %}">Agregar Cantidad</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </ul>
+    {% for lol in inventorys %}
+    <h1>{{ lol.product_quantity }}</h1>
+    {% endfor %}
+    {% for xd in products %}
+    <h1>{{ product.name }}xd</h1>
+    {% endfor %}
+</body>
+</html>
