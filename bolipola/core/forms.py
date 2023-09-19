@@ -1,5 +1,5 @@
 from django import forms
-from .models import Team, Player, Sale
+from .models import Team, Player, Sale, Product, Inventory, Category
 
 
 #Formulario de venta
@@ -173,4 +173,94 @@ class PlayerForm(forms.ModelForm):
             'age',
             'gender',
             'position',
+        ]
+
+class ProductForm(forms.ModelForm):
+    name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Nombre del producto'
+            }
+        )
+        )
+    cost = forms.FloatField(
+        widget=forms.NumberInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Costo del producto'
+            }
+        )
+    )
+    description = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Descripción del producto'
+            }
+        )
+    )
+    image = forms.ImageField(
+        widget=forms.FileInput(
+            attrs={
+                'class':'form-control',
+            }
+        )
+    )
+    due_date = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Fecha de vencimiento'
+            }
+        )
+    )
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        widget=forms.Select(
+            attrs={
+                'class':'form-control',
+            }
+        )
+    )
+    class Meta:
+        model = Product
+        fields = [
+            'name',
+            'cost',
+            'description',
+            'image',
+            'due_date',
+            'category'
+        ]
+        
+class InventoryForm(forms.ModelForm):
+    class Meta:
+        model = Inventory
+        fields = [
+            'entry_date',
+            'product_quantity',
+            'product'  
+        ]
+
+class CategoryForm(forms.ModelForm):
+    name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Nombre de la categoría'
+            }
+        )
+    )
+    forOlder = forms.BooleanField(
+        widget=forms.CheckboxInput(
+        )
+    )
+    class Meta:
+        model = Category
+        fields = [
+            'name',
+            'forOlder'
         ]
