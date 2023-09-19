@@ -262,6 +262,24 @@ class Sale(models.Model):
         money = locale.currency(self.total_cost, symbol=True, grouping=True)
         return money
 
+    def search_intermediate(self):
+        listTables = [SaleTournament, SaleReservation, SaleInventory, SaleEvent]
+
+        for table in listTables:
+            intermediate = table.objects.filter(sale_id=self.id)
+            if intermediate:
+                the_table = intermediate.first()
+
+        return the_table
+
+    def status_number(self):
+        if self.status == 'En proceso...':
+            return 's1'
+        if self.status == 'Vendido':
+            return 's2'
+        if self.status == 'Cancelado':
+            return 's3'
+
     class Meta:
         verbose_name = 'Venta'
         verbose_name_plural = 'Ventas'

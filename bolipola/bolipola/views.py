@@ -20,10 +20,17 @@ def sale(request, type_id, type_name):
     #Detectando que tipo de venta es
     if type_name == 'Torneo':
         inf = get_object_or_404(Tournament, id=type_id)
+        team = get_object_or_404(Team, user_id=request.user.id)
+        if team.players_num < 11:
+            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Sin jugadores suficientes, mínimo 11 para un torneo')
+            return redirect('tournament')
+    
     if type_name == 'Evento':
         inf = get_object_or_404(Event, id=type_id)
+
     if type_name == 'Productos':
         inf = get_object_or_404(Product, id=type_id)
+
     if type_name == 'Reserva':
         inf = get_object_or_404(Reservation, id=type_id)
 
@@ -76,8 +83,14 @@ def tournament(request):
         team = False
      
     tournaments = Tournament.objects.all().filter(active=1)
+    sale_id_user = Sale.objects.all().filter(user_id=request.user.id, type='Torneo').first()
 
-    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'tournaments':tournaments})
+    if sale_id_user: 
+        has_tournament = SaleTournament.objects.all().filter(sale_id=sale_id_user.id).first()
+    else:
+        has_tournament = False
+        
+    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'tournaments':tournaments, 'has_tournament':has_tournament})
 
 #Inscripción a torneo
 @login_required
