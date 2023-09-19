@@ -98,67 +98,16 @@
         <div class="content-banner">
             <p>¡Las mejores ofertas!</p>
             <h2>4 Pack Coctel<br />Strawberry Mykes Lata</h2>
-            <a href="#">Comprar ahora</a>
+            <a href="{% url 'store' %}">Comprar ahora</a>
         </div>
     </section>
 
     <main class="main-content">
-        <section class="container container-features">
-            <div class="card-feature">
-                <i class="fa-solid fa-shopping-cart"></i>
-                <div class="feature-content">
-                    <span>Envío gratuito en Bogotá</span>
-                    <p>En pedido superiores a $150.000</p>
-                </div>
-            </div>
-            <div class="card-feature">
-                <i class="fa-solid fa-wallet"></i>
-                <div class="feature-content">
-                    <span>Reembolso</span>
-                    <p>100% garantía de devolución de dinero</p>
-                </div>
-            </div>
-            <div class="card-feature">
-                <i class="fa-solid fa-gift"></i>
-                <div class="feature-content">
-                    <span>Tarjeta regalo especial</span>
-                    <p>Ofrece bonos especiales con regalo</p>
-                </div>
-            </div>
-            <div class="card-feature">
-                <i class="fa-solid fa-headset"></i>
-                <div class="feature-content">
-                    <span>Servicio al cliente 24/7</span>
-                    <p>LLámenos 24/7 al 123-456-7890</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="container top-categories">
-            <h1 class="heading-1">Mejores Categorías</h1>
-            <div class="container-categories">
-                <div class="card-category category-aguardiente">
-                    <p>Aguardiente</p>
-                    <span>Ver más</span>
-                </div>
-                <div class="card-category category-ron">
-                    <p>Ron</p>
-                    <span>Ver más</span>
-                </div>
-                <div class="card-category category-vodka">
-                    <p>Vodka</p>
-                    <span>Ver más</span>
-                </div>
-            </div>
-        </section>
-
         <section class="container top-products">
             <h1 class="heading-1">Mejores Productos</h1>
 
             <div class="container-options">
                 <span class="active">Destacados</span>
-                <span>Más recientes</span>
-                <span>Mejores Vendidos</span>
             </div>
 
             <div class="container-products">
@@ -166,32 +115,15 @@
                 <div class="card-product">
                     <div class="container-img">
                         <img src="{% static 'index/images/aguardiente.jpg' %}" alt="aguardiente" />
-                        <span class="discount">-13%</span>
                         <div class="button-group">
-                            <span>
-                                <i class="fa-regular fa-eye"></i>
-                            </span>
-                            <span>
-                                <i class="fa-regular fa-heart"></i>
-                            </span>
-                            <span>
-                                <i class="fa-solid fa-code-compare"></i>
-                            </span>
                         </div>
                     </div>
                     <div class="content-card-product">
-                        <div class="stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        </div>
                         <h3>Aguardiente Antioqueño litro</h3>
                         <span class="add-cart">
-                            <i class="fa-solid fa-basket-shopping"></i>
+                            <a class="fa-solid fa-basket-shopping" href="{% url 'store' %}"></a>
                         </span>
-                        <p class="price">$56.300 <span>$58.700</span></p>
+                        <p class="price">$56.300</p>
                     </div>
                 </div>
                 <!-- Producto 2 -->
@@ -201,32 +133,15 @@
                             src="{% static 'index/images/ron.png' %}"
                             alt="ron.png"
                         />
-                        <span class="discount">-22%</span>
                         <div class="button-group">
-                            <span>
-                                <i class="fa-regular fa-eye"></i>
-                            </span>
-                            <span>
-                                <i class="fa-regular fa-heart"></i>
-                            </span>
-                            <span>
-                                <i class="fa-solid fa-code-compare"></i>
-                            </span>
                         </div>
                     </div>
                     <div class="content-card-product">
-                        <div class="stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                            <i class="fa-regular fa-star"></i>
-                        </div>
                         <h3>Ron de Caldas</h3>
                         <span class="add-cart">
-                            <i class="fa-solid fa-basket-shopping"></i>
+                            <a class="fa-solid fa-basket-shopping" href="{% url 'store' %}"></a>
                         </span>
-                        <p class="price">$50.000 <span>$35.000</span></p>
+                        <p class="price">$50.000</p>
                     </div>
                 </div>
                 <!--  -->
@@ -237,28 +152,12 @@
                             alt="Smirnoff lulo"
                         />
                         <div class="button-group">
-                            <span>
-                                <i class="fa-regular fa-eye"></i>
-                            </span>
-                            <span>
-                                <i class="fa-regular fa-heart"></i>
-                            </span>
-                            <span>
-                                <i class="fa-solid fa-code-compare"></i>
-                            </span>
                         </div>
                     </div>
                     <div class="content-card-product">
-                        <div class="stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
                         <h3>Smirnoff lulo</h3>
                         <span class="add-cart">
-                            <i class="fa-solid fa-basket-shopping"></i>
+                            <a class="fa-solid fa-basket-shopping" href="{% url 'store' %}"></a>
                         </span>
                         <p class="price">$55.500</p>
                     </div>
