@@ -48,14 +48,6 @@ function setBirthdate() {
     return inputBirthDate.value = `${year}-${month}-${day}`
 }
 
-//Colocando imágen vacía en caso de que no haya historial
-function setAdversiment() {
-    firstElementValue = shopList.firstElementChild.attributes.name.value
-    if (firstElementValue != "none") {
-      imgOfNone.style.display = "none"
-    }
-}
-
 function setAliasColor() {
     aliasColorContainer.style.cssText = `color: ${aliasColor.innerHTML};`
 }

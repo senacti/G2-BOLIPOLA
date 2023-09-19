@@ -125,9 +125,9 @@
                 <img src="{% static 'register/images/logo.png' %}">
                 <h1>{{tournament.name}}</h1>
                 <h4>TORNEO {{tournament.number_teams}} equipos</h4>
-                <p>En este torneo habran 16 equipos los cuales competiran por un premio de {{ tournament.prize_payment }} de pesos colombianos</p>
-                <p>el valor de inscripcion es de {{tournament.registration_cost}} de pesos cada equipo</p>
-                <a href="{% url 'inscription' %}"><input type="submit" value="Inscribirse" id="boton2"></a>
+                <p>En este torneo habran 16 equipos los cuales competiran por un premio de {{ tournament.payment_to_money }} de pesos colombianos</p>
+                <p>el valor de inscripcion es de {{tournament.cost_to_money}} de pesos cada equipo</p>
+                <a href="{% url 'sale' tournament.id tournament.sale_type %}"><input type="submit" value="Inscribirse" id="boton2"></a>
             </div>
             {% endfor %}
         </div>

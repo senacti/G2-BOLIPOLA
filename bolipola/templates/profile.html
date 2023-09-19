@@ -66,10 +66,30 @@
                     
                     <div class="box__right">
                         <div class="box__right-list">
+                            {% if shoppings %}
+                                {% for shop in shoppings %}
+                                <div class="box__right-list-element">
+                                    {% if shop.type == 'Torneo' %}
+                                    <i class="fa-solid fa-users fa-xl"></i>
+                                    <div class="titleAndDesc">
+                                        <h3 class="box__right-list-element-title">{{ shop.type }}</h3>
+                                    {% elif shop.type == 'Productos' %}
+                                    <i class="fa-solid fa-cart-shopping fa-xl"></i>
+                                    {% elif shop.type == 'Reserva' %}
+                                    <i class="fa-solid fa-face-laugh-wink fa-xl"></i>
+                                    {% else %}
+                                    <i class="fa-solid fa-cake-candles fa-xl"></i>
+                                    {% endif %}
+                                        <p class="box__right-list-element-desc">{{ shop.date.date }}</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
                             <div class="box__right-list-none" name="none">
                                 <img class="box__right-list-none-img" src="{% static 'profile/images/nada.png' %}">
                                 <span class="box__right-list-none-span">No hay nada que mostrar</span>
                             </div>
+                            {% endif %}
                         </div>
     
                         <div class="box__right-moreList">
@@ -107,15 +127,5 @@
     <span class="rangeAliasColor" hidden>{{ user.rangeAlias.0 }}</span>
     
     <script src="{% static 'profile/profile.js' %}"></script>
-
-    <!--Cuando tenga compras aparecerá en la lista
-        <div class="box__right-list-element">
-            <img class="box__right-list-element-img" src="{% static 'signin/images/papas.jpg' %}">
-            <div class="titleAndDesc">
-                <h3 class="box__right-list-element-title">Papas margarita</h3>
-                <p class="box__right-list-element-desc">01-01-2001</p>
-            </div>
-        </div>
-    -->
 </body>
 </html>

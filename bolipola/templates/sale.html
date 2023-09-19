@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'sale/sale.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="centrador">
+        <form action="" method="post" class="form">
+            {% csrf_token %}
+            <fieldset class="main">
+                <legend class="main__legend">
+                    <img src="{% static 'register/images/logo.png' %}" alt="logo" class="main__legend-img">
+                </legend>
+                <div class="main__titleContainer">
+                    {{ form.type }}
+                    <div class="main__titleContainer-check">
+                        <span class="main__titleContainer-check-asterisc">
+                            *********************************
+                        </span>
+                        <span class="main__titleContainer-check-title">
+                            RECIBO  
+                        </span>
+                        <span class="main__titleContainer-check-asterisc">
+                            *********************************
+                        </span>
+                    </div>
+                </div>
+                <div class="main__inf">
+                    <div class="main__inf-item">
+                        <span>Tipo de pago:</span>
+                        {{ form.payment_type }}
+                    </div>
+
+                    <!--Caso de venta torneo-->
+                    {% if type_name == 'Torneo'%}
+
+                    <div class="main__inf-item">
+                        <span>Nombre del torneo:</span>
+                        <input type="text" value="{{ inf.name }}" readonly>
+                    </div>
+
+                    <div class="main__inf-item">
+                        <span>Fecha de inicio:</span>
+                        <input type="text" value="{{ inf.date.date }}" readonly>
+                    </div>
+                    
+                    <div class="main__inf-item">
+                        <span>Costo de inscripción:</span>
+                        <input type="text" value="{{ inf.cost_to_money }}" readonly>
+                    </div>
+
+                    <div class="main__inf-item">
+                        <span>Premio:</span>
+                        <input type="text" value="{{ inf.payment_to_money }}" readonly>
+                    </div>
+
+                    {{ form.total_cost }}
+
+                    {% endif %}
+                    
+                    <div class="moreInf">
+                        <div class="main__inf-item">
+                            <span>Cantidad comprado:</span>
+                            {% if  type_name != 'Productos' %}
+
+                            {{ form.product_quantity }}
+
+                            {% else %}
+
+                            {{ form.product_quantity }}
+
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="bottomInf">
+                        <div class="main__inf-item">
+                            <span>Costo total:</span>
+                            <input type="text" value="{{ inf.cost_to_money }}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="buttons">
+                <div class="buttons_container">
+                    {% if  type_name == 'Torneo' %}
+                    <a href="{% url 'tournament' %}">
+                    {% elif type_name == 'Productos' %}
+                    <a href="{% url 'store' %}">
+                    {% elif type_name == 'Reserva' %}
+                    <a href="{% url 'reserve' %}">
+                    {% else %}
+                    <a href="{% url 'index' %}">
+                    {% endif %}
+                        <button type="button" class="buttons__container-button" id="cancel">Cancelar</button>
+                    </a>
+                </div>
+                <div class="buttons__container">
+                    <button type="submit" class="buttons__container-button" id="buy">Comprar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <ul hidden id="infList">
+        <li>{{ type_name }}</li>
+        <li>{{ inf.cost }}</li>
+    </ul>
+    <script src="{% static 'sale/sale.js' %}"></script>
+</body>
+</html>

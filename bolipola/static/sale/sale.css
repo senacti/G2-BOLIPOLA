@@ -1,0 +1,135 @@
+* {
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --font_size-: 1.2rem;
+    --primary-color: #CB4335;
+    --secondary-color: #FBFCFC;
+    --save: #228B22;
+}
+
+html {
+    font-size: 100%;
+}
+
+.centrador {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.main {
+    font-size: var(--font_size-);
+    border: 0.15rem solid black;
+    border-radius: 3rem;
+    padding: 0.5rem 1rem;
+}
+
+.main__legend {
+    margin: auto;
+}
+
+.main__legend-img {
+    width: 5rem;
+}
+
+.main__titleContainer {
+    width: 100%;
+    margin-top: 0.6rem;
+}
+
+.main__titleContainer-check {
+    display: none;
+    place-items: center;
+    margin: 1rem auto;
+}
+
+.main__inf-item {
+    display: flex;
+    margin: 1.2rem 0;
+}
+
+.main__inf-item input:read-only, .main__titleContainer input:read-only {
+    display: block;
+    background-color: transparent;
+    width: 15rem;
+    margin-left: 0.35rem;
+    border: none;
+    font-size: var(--font_size-);
+    color: black;
+    outline: none;
+}
+
+.main__titleContainer input:read-only {
+    width: 22rem;
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: calc(var(--font_size-) + 1.2rem);
+}
+
+.main__inf-item select {
+    font-size: var(--font_size-);
+    margin-left: 0.35rem;
+    outline: none;
+}
+
+.main__inf-item select:focus {
+    border-color: #CB4335;
+    box-shadow: 0 0 0.15rem #d8766b;
+    color: black;
+}
+
+.bottomInf {
+    margin-top: 10rem;
+}
+
+.bottomInf span {
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0.5rem;
+}
+
+.buttons__container-button {
+    padding: 0.5rem 1rem;
+    margin: 0 1.8rem;
+    font-size: calc(var(--font_size-) + 0.2rem);
+    border: 0.15rem solid transparent;
+    border-radius: 0.35rem;
+    color: var(--secondary-color);
+    box-shadow: 0.2rem 0.2rem #696969;
+    transition: 120ms;
+    transition-timing-function: ease-in;
+}
+
+.buttons__container-button:hover {
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.buttons__container-button#cancel {
+    background-color: var(--primary-color);
+}
+
+.buttons__container-button#cancel:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+.buttons__container-button#buy {
+    background-color: var(--save);
+}
+
+.buttons__container-button#buy:hover {
+    color: var(--save);
+    border-color: var(--save);
+    background-color: var(--secondary-color);
+}
