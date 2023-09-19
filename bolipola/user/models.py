@@ -27,7 +27,7 @@ class UserBoli(AbstractUser):
         if self.gender == 'Otro':
             return '@'
 
-    def rangeAlias(self):
+    def range_alias(self):
         if self.is_superuser == 1:
             return ['#CB4335', 'Admin']
 

@@ -249,6 +249,12 @@ body {
     border-bottom-right-radius: 1rem;
 }
 
+#adminTitleList {
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+    text-decoration: underline;
+}
+
 .box__right-list {
     padding: 0 0.5rem;
 }

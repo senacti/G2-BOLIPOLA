@@ -24,7 +24,7 @@ body {
     padding: 3rem 4.5rem;
     place-items: center;
     background-color: #FBFCFC;
-    border: 0.2rem solid #CB4335;
+    border: 0.15rem solid #CB4335;
     border-style: solid;
     border-radius: 1rem;
 }
@@ -40,7 +40,7 @@ body {
     width: 10rem;
     height: 10rem;
     border-radius: 50%;
-    border: 0.2rem solid #CB4335;
+    border: 0.2rem solid black;
 }
 
 .box__legend-input {

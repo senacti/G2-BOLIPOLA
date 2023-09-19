@@ -58,7 +58,7 @@
                 <div class="main__left-form-submitContainer">
                     {% if player_inf %}
                     <a href="{% url 'player' %}" class="main__left-form-submitContainer-submit" id="cancelChanges">
-                        Cancelar cambios
+                        Cancelar
                     </a>
                     {% endif %}
 
@@ -73,7 +73,7 @@
             </form>
 
             <div class="main__left-cancel">
-                <a href="{% url 'tournament' %}">Cancelar</a>
+                <a href="{% url 'tournament' %}">Salir</a>
             </div>
             {% if messages %}
                 {% for msg in messages %}
@@ -93,7 +93,7 @@
         </div>
         <div class="main__right">
             <div class="main__right-titleContainer">
-                <h2 class="main__right-titleContainer-title">Jugadores del equipo<span>(Máx 15)</span>
+                <h2 class="main__right-titleContainer-title">Jugadores<span>Total:<span style="color: {{team.hexcolor}}; margin-right: 1.35rem;">{{team.players_num}}</span>(Máx 15)</span>
                 </h2>
             </div>
             <div class="main__right-list">

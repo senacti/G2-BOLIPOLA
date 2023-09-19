@@ -3,6 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'sale/status/status.css' %}">
     <link rel="stylesheet" href="{% static 'profile/styles/profile.css' %}">
     <script src="https://kit.fontawesome.com/6117eaa017.js" crossorigin="anonymous"></script>
     <title>Perfil</title>
@@ -35,10 +36,10 @@
                             <h3 class="box__left-title-rango">Rango<i class="fa-solid fa-circle-question fa-2xs"></i></h3>
                             <div class="container_inf_rango" hidden>
                                 <span class="inf_rango">
-                                    Ganas puntos cada vez que haces una compra, entre más puntos más subiras tu rango
+                                    Ganas puntos cada vez que completas una compra, entre más puntos más subiras tu rango
                                 </span>
                             </div>
-                            <h2 class="box__left-title-value">{{ user.rangeAlias.1 }}</h2>
+                            <h2 class="box__left-title-value" id="rangeName" style="color: {{user.range_alias.0}};">{{ user.range_alias.1 }}</h2>
                         </div>
                         <div class="box__left-box">
                             <div class="box__left-box-edit">
@@ -63,16 +64,20 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="box__right">
+                        {% if user.is_staff %}
+                            <h4 id="adminTitleList">Compras de clientes:</h4>
+                        {% endif %}
                         <div class="box__right-list">
                             {% if shoppings %}
                                 {% for shop in shoppings %}
-                                <div class="box__right-list-element">
+                                <div class="box__right-list-element" id="{{ shop.status_number }}">
                                     {% if shop.type == 'Torneo' %}
                                     <i class="fa-solid fa-users fa-xl"></i>
                                     <div class="titleAndDesc">
-                                        <h3 class="box__right-list-element-title">{{ shop.type }}</h3>
+                                        <h3 class="box__right-list-element-title">
+                                            {{ shop.search_intermediate.tournament.name }}
+                                        </h3>
                                     {% elif shop.type == 'Productos' %}
                                     <i class="fa-solid fa-cart-shopping fa-xl"></i>
                                     {% elif shop.type == 'Reserva' %}
@@ -124,8 +129,7 @@
     <span class="birthdateDay" hidden>{{ user.birthdate.day }}</span>
     <span class="birthdateMonth" hidden>{{ user.birthdate.month }}</span>
     <span class="birthdateYear" hidden>{{ user.birthdate.year }}</span>
-    <span class="rangeAliasColor" hidden>{{ user.rangeAlias.0 }}</span>
-    
+
     <script src="{% static 'profile/profile.js' %}"></script>
 </body>
 </html>
