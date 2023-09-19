@@ -9,10 +9,10 @@ from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from core.forms import TeamForm, PlayerForm, SaleForm
+from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, CategoryForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team, Player, Tournament, Event, Product,Reservation, Sale, SaleTournament, SaleReservation, SaleEvent, SaleInventory
+from core.models import Team, Player, Tournament, Event, Product,Reservation, Sale, SaleTournament, SaleReservation, SaleEvent, SaleInventory, Inventory, Category
 
 #------------------Ventas---------------------------
 def sale(request, type_id, type_name):
@@ -66,6 +66,55 @@ def sale(request, type_id, type_name):
 #Productos
 def store(request):
     return render(request, 'store.html', {})
+
+def inventory(request):
+    products = Product.objects.all()
+    form = ProductForm()
+
+    
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('inventory')
+    
+    return render(request, 'inventario/inventory.html', {'products': products, 'form': form})
+ 
+def quantity_product(request, pk):
+    inventorys = Inventory.objects.get(pk=pk)
+    form = InventoryForm(instance=inventorys)
+    
+    if request.method == 'POST':
+        form = InventoryForm(request.POST, instance=inventorys)
+        if form.is_valid():
+            form.save()
+            return redirect('inventory')
+    
+    return render(request, 'inventario/quantity_product.html', {'form': form})
+    
+def edit_product(request, pk):
+    product = Product.objects.get(pk=pk)
+    form = ProductForm(instance=product)
+    
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('inventory')
+    
+    return render(request, 'inventario/edit_product.html', {'form': form})
+
+def delete_product(request, pk):
+    product = Product.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        product.delete()
+        return redirect('inventory')
+    
+    return render(request, 'inventario/delete_product.html', {'product': product})
+
+def create_product(request):
+    pass
 
 
 #-------------------Torneos-----------------------

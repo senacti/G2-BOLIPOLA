@@ -25,6 +25,11 @@ urlpatterns = [
     path('store/', views.store, name='store'),
     path('profile/change_password/', views.change_password, name='change_password'),
     path('sale/<int:type_id>/<str:type_name>/', views.sale, name='sale'),
+    path('inventory/', views.inventory, name='inventory'),
+    path('edit-product/<int:pk>/', views.edit_product, name='edit_product'),
+    path('delete-product/<int:pk>/', views.delete_product, name='delete_product'),
+    path('quantity-product/<int:pk>/', views.quantity_product, name='quantity_product'),
+    path('create-product/', views.create_product, name='create_product'),
 ]
 
 if settings.DEBUG:
