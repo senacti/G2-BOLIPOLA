@@ -1,5 +1,8 @@
 from django.db import models
 from user.models import UserBoli
+from django.utils import timezone
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 class Comment(models.Model):
     score = models.PositiveIntegerField(verbose_name='Puntuación')
@@ -40,6 +43,9 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
+    def sale_type(self):
+        return 'Productos'
+
     class Meta:
         verbose_name = 'Producto'
         verbose_name_plural = 'Productos'
@@ -47,7 +53,7 @@ class Product(models.Model):
         ordering = ['id']
 
 class Inventory(models.Model):
-    entry_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de entrada')
+    entry_date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de entrada')
     product_quantity = models.PositiveIntegerField(verbose_name='Cantidad de producto')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
@@ -61,7 +67,7 @@ class Inventory(models.Model):
         ordering = ['id']
 
 class Output(models.Model):
-    output_date = models.DateTimeField(auto_now=True, verbose_name='Fecha de salida')
+    output_date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de salida')
     product_quantity_out = models.PositiveIntegerField(verbose_name='Cantidad de productos fuera')
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
 
@@ -101,6 +107,9 @@ class Reservation(models.Model):
     def __str__(self):
         return str(f'{self.availability} - {self.calendar.date}')
     
+    def sale_type(self):
+        return 'Reserva'
+
     class Meta:
         verbose_name = 'Reserva'
         verbose_name_plural = 'Reservas'
@@ -113,6 +122,10 @@ class Event(models.Model):
     date = models.DateTimeField(verbose_name='Fecha del evento')
     cost = models.FloatField(verbose_name='Costo del evento')
     guests = models.PositiveIntegerField(verbose_name='Cantidad de invitados')
+    description = models.TextField(verbose_name='Descripción', default='Fiesta')
+
+    def sale_type(self):
+        return 'Evento'
 
     def __str__(self):
         return self.type
@@ -184,13 +197,24 @@ class Tournament(models.Model):
     registered_teams = models.PositiveIntegerField(verbose_name='Equipos registrados', default=0)
     date = models.DateTimeField(verbose_name='Fecha del torneo')
     prize_payment = models.FloatField(verbose_name='Pago de premio')
-    registration_cost = models.FloatField(verbose_name='Costo de inscripción')
+    cost = models.FloatField(verbose_name='Costo de inscripción')
     active = models.BooleanField(verbose_name='Activo', default=True)
     team = models.ManyToManyField(Team, through='TournamentTeam')
 
     def __str__(self):
         return self.name
     
+    def sale_type(self):
+        return 'Torneo'
+
+    def payment_to_money(self):
+        money = locale.currency(self.prize_payment, symbol=True, grouping=True)
+        return money
+
+    def cost_to_money(self):
+        money = locale.currency(self.cost, symbol=True, grouping=True)
+        return money
+
     class Meta:
         verbose_name = 'Torneo'
         verbose_name_plural = 'Torneos'
@@ -211,7 +235,7 @@ class TournamentTeam(models.Model):
 
     def __str__(self):
         return str(f'{self.tournament.name} - {self.team.name}')
-    
+
     class Meta:
         verbose_name = 'Torneo y equipo'
         verbose_name_plural = 'Torneos y equipos'
@@ -221,21 +245,77 @@ class TournamentTeam(models.Model):
 class Sale(models.Model):
     total_cost = models.FloatField(verbose_name='Costo total')
     payment_type = models.CharField(max_length=50, verbose_name='Tipo de pago')
-    status = models.CharField(max_length=50, verbose_name='Estado de venta')
-    date = models.DateTimeField(auto_now=True, verbose_name='Fecha')
+    status = models.CharField(max_length=50, verbose_name='Estado de venta', default='En proceso...')
+    date = models.DateTimeField(default=timezone.now, verbose_name='Fecha')
     type = models.CharField(max_length=50, verbose_name='Tipo de venta')
     product_quantity = models.PositiveIntegerField(verbose_name='Cantidad de productos comprados')
-    inventory = models.ManyToManyField(Inventory)
-    event = models.ManyToManyField(Event, verbose_name='Venta_evento')
-    reservation = models.ManyToManyField(Reservation, verbose_name='Venta_reserva')
-    tournament = models.ManyToManyField(Tournament, verbose_name='Venta_torneo')
+    inventory = models.ManyToManyField(Inventory, verbose_name='SaleInventory')
+    event = models.ManyToManyField(Event, through='SaleEvent')
+    reservation = models.ManyToManyField(Reservation, through='SaleReservation')
+    tournament = models.ManyToManyField(Tournament, through='SaleTournament')
     user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.user.first_name} - {self.date} - {self.type}'
-    
+
+    def cost_to_money(self):
+        money = locale.currency(self.total_cost, symbol=True, grouping=True)
+        return money
+
     class Meta:
         verbose_name = 'Venta'
         verbose_name_plural = 'Ventas'
         db_table = 'venta'
+        ordering = ['id']
+
+class SaleTournament(models.Model):
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(f'{self.sale.type} - {self.tournament.name}')
+
+    class Meta:
+        verbose_name = 'Venta y torneo'
+        verbose_name_plural = 'Ventas y torneos'
+        db_table = 'venta_torneo'
+        ordering = ['id']
+
+class SaleReservation(models.Model):
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(f'{self.sale.type} - {self.reservation.type}')
+
+    class Meta:
+        verbose_name = 'Venta y reserva'
+        verbose_name_plural = 'Ventas y reservas'
+        db_table = 'venta_reserva'
+        ordering = ['id']
+
+class SaleInventory(models.Model):
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(f'{self.sale.type} - {self.inventory.product.name}')
+
+    class Meta:
+        verbose_name = 'Venta e inventario'
+        verbose_name_plural = 'Ventas e inventarios'
+        db_table = 'venta_inventario'
+        ordering = ['id']
+
+class SaleEvent(models.Model):
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(f'{self.sale.type} - {self.event.type}')
+
+    class Meta:
+        verbose_name = 'Venta y evento'
+        verbose_name_plural = 'Ventas y eventos'
+        db_table = 'venta_evento'
         ordering = ['id']

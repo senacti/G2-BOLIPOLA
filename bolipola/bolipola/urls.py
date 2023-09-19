@@ -24,6 +24,7 @@ urlpatterns = [
     path('tournament/player/<int:player_id>/', views.player_edit, name='player_edit'),
     path('store/', views.store, name='store'),
     path('profile/change_password/', views.change_password, name='change_password'),
+    path('sale/<int:type_id>/<str:type_name>/', views.sale, name='sale'),
 ]
 
 if settings.DEBUG:

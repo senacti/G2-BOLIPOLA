@@ -1,16 +1,59 @@
 import os
+import pytz
 from . import settings
-from django.http import Http404
+from django.utils.timezone import now
+from django.http import Http404, HttpResponse
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from core.forms import TeamForm, PlayerForm
+from core.forms import TeamForm, PlayerForm, SaleForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team, Player, Tournament
+from core.models import Team, Player, Tournament, Event, Product,Reservation, Sale, SaleTournament, SaleReservation, SaleEvent, SaleInventory
+
+#------------------Ventas---------------------------
+def sale(request, type_id, type_name):
+
+    #Detectando que tipo de venta es
+    if type_name == 'Torneo':
+        inf = get_object_or_404(Tournament, id=type_id)
+    if type_name == 'Evento':
+        inf = get_object_or_404(Event, id=type_id)
+    if type_name == 'Productos':
+        inf = get_object_or_404(Product, id=type_id)
+    if type_name == 'Reserva':
+        inf = get_object_or_404(Reservation, id=type_id)
+
+    #Guardando venta en tal caso
+    if request.method == 'POST':
+        form = SaleForm(request.POST)
+        if form.is_valid():
+            sale = form.save(commit=False)
+            sale.user_id = request.user.id
+            sale.save()
+
+            #Agregando id's a tabla intermedia
+            if type_name == 'Torneo':
+                intermediate = SaleTournament(sale_id=sale.id, tournament_id=inf.id)
+            if type_name == 'Evento':
+                intermediate = SaleEvent(sale_id=sale.id, event_id=inf.id)
+            if type_name == 'Productos':
+                intermediate = SaleInventory(sale_id=sale.id, inventory_id=inf.id)
+            if type_name == 'Reserva':
+                intermediate = SaleReservation(sale_id=sale.id, reservation_id=inf.id)
+
+            #Guardando tabla intermedia
+            intermediate.save()
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Compra en proceso, consulta tu perfil 😄')
+            return redirect('index')
+    else:
+        form = SaleForm()
+
+    return render(request, 'sale.html', {'form':form, 'type_name':type_name, 'inf':inf})
+
 
 #------------------Productos-----------------------
 #Productos
@@ -31,7 +74,7 @@ def tournament(request):
         team = get_object_or_404(Team, user_id=request.user.id)
     else:
         team = False
-
+     
     tournaments = Tournament.objects.all().filter(active=1)
 
     return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'tournaments':tournaments})
@@ -159,6 +202,12 @@ def index(request):
 @login_required
 def profile(request):
     userForm = request.user
+
+    if userForm.is_staff == 1:
+        shoppings = Sale.objects.all()
+    else:
+        shoppings = Sale.objects.all().filter(user_id=userForm.id)
+
     if request.method == 'POST':
         form = EditProfileForm(request.POST, request.FILES, instance=userForm)
         old_avatar = userForm.avatar
@@ -189,7 +238,7 @@ def profile(request):
         form = EditProfileForm(instance=userForm)
 
     user = get_object_or_404(UserBoli, id=request.user.id)
-    return render(request, 'profile.html', {'user': user, 'form': form})
+    return render(request, 'profile.html', {'user': user, 'form': form, 'shoppings':shoppings})
 
 #Cambio de contraseña
 @login_required

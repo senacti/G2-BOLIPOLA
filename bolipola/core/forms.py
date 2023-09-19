@@ -1,5 +1,62 @@
 from django import forms
-from .models import Team, Player
+from .models import Team, Player, Sale
+
+
+#Formulario de venta
+class SaleForm(forms.ModelForm):
+
+    total_cost = forms.FloatField(
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'id':'totalCost',
+                'readonly':'readonly',
+                'style':'display: none;'
+            }
+        )
+    )
+
+    PAYMENT_TYPE_CHOICES = (
+        ('', '...'),
+        ('Efectivo', 'Efectivo'),
+        ('Nequi', 'Nequi'),
+    )
+
+    payment_type = forms.ChoiceField(
+        required=True,
+        choices=PAYMENT_TYPE_CHOICES,
+        widget=forms.Select(),
+    )
+
+    type = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'id':'typeSale',
+                'readonly':'readonly',
+                'class':'main__titleContainer-title',
+            }
+        )
+    )
+
+    product_quantity = forms.IntegerField(
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'readonly':'readonly',
+                'value':'1',
+            }
+        )
+    )
+
+    class Meta:
+        model = Sale
+        fields = [
+            'total_cost',
+            'payment_type',
+            'type',
+            'product_quantity',
+        ]
 
 #Formulario de equipo
 class TeamForm(forms.ModelForm):
