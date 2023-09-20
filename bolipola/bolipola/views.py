@@ -67,11 +67,11 @@ def sale(request, type_id, type_name):
 def store(request):
     return render(request, 'store.html', {})
 
+#inventario
 def inventory(request):
     products = Product.objects.all()
     form = ProductForm()
 
-    
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -80,6 +80,7 @@ def inventory(request):
     
     return render(request, 'inventario/inventory.html', {'products': products, 'form': form})
  
+#Cantidad de producto
 def quantity_product(request, pk):
     inventorys = Inventory.objects.get(pk=pk)
     form = InventoryForm(instance=inventorys)
@@ -91,7 +92,26 @@ def quantity_product(request, pk):
             return redirect('inventory')
     
     return render(request, 'inventario/quantity_product.html', {'form': form})
-    
+
+#Crear producto
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            new_product = form.save(commit=False)
+            new_product.save()
+
+            return redirect('inventory')
+        else:
+            return HttpResponse(form.errors)
+    else:
+        form = ProductForm()
+
+    return render(request, 'inventario/create_product.html', {'form': form})
+
+
+#Editar producto
 def edit_product(request, pk):
     product = Product.objects.get(pk=pk)
     form = ProductForm(instance=product)
@@ -104,6 +124,7 @@ def edit_product(request, pk):
     
     return render(request, 'inventario/edit_product.html', {'form': form})
 
+#Eliminar producto
 def delete_product(request, pk):
     product = Product.objects.get(pk=pk)
     
@@ -112,10 +133,6 @@ def delete_product(request, pk):
         return redirect('inventory')
     
     return render(request, 'inventario/delete_product.html', {'product': product})
-
-def create_product(request):
-    pass
-
 
 #-------------------Torneos-----------------------
 #Torneos

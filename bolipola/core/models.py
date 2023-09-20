@@ -36,7 +36,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre')
     cost = models.FloatField(verbose_name='Costo')
     description = models.TextField(verbose_name='Descripción')
-    image = models.ImageField(verbose_name='Imágen') #Puede tener un cambio por el tema de imágen
+    image = models.ImageField(verbose_name='Imágen', upload_to='product/')
     due_date = models.DateField(verbose_name='Fecha de vencimiento')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 

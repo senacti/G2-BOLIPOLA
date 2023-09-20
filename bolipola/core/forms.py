@@ -1,7 +1,6 @@
 from django import forms
 from .models import Team, Player, Sale, Product, Inventory, Category
 
-
 #Formulario de venta
 class SaleForm(forms.ModelForm):
 
@@ -175,17 +174,21 @@ class PlayerForm(forms.ModelForm):
             'position',
         ]
 
+#Formulario de producto
 class ProductForm(forms.ModelForm):
     name = forms.CharField(
+        required=True,
         max_length=100,
         widget=forms.TextInput(
             attrs={
                 'class':'form-control',
                 'placeholder':'Nombre del producto'
-            }
+                }
+            )
         )
-        )
+    
     cost = forms.FloatField(
+        required=True,
         widget=forms.NumberInput(
             attrs={
                 'class':'form-control',
@@ -193,7 +196,9 @@ class ProductForm(forms.ModelForm):
             }
         )
     )
+
     description = forms.CharField(
+        required=True,
         widget=forms.Textarea(
             attrs={
                 'class':'form-control',
@@ -201,14 +206,18 @@ class ProductForm(forms.ModelForm):
             }
         )
     )
+
     image = forms.ImageField(
+        required=True,
         widget=forms.FileInput(
             attrs={
                 'class':'form-control',
             }
         )
     )
+
     due_date = forms.DateField(
+        required=True,
         widget=forms.DateInput(
             attrs={
                 'class':'form-control',
@@ -216,14 +225,17 @@ class ProductForm(forms.ModelForm):
             }
         )
     )
+
     category = forms.ModelChoiceField(
         queryset=Category.objects.all(),
+        required=True,
         widget=forms.Select(
             attrs={
                 'class':'form-control',
             }
         )
     )
+
     class Meta:
         model = Product
         fields = [
@@ -258,6 +270,7 @@ class CategoryForm(forms.ModelForm):
         widget=forms.CheckboxInput(
         )
     )
+
     class Meta:
         model = Category
         fields = [
