@@ -1,11 +1,10 @@
 from django import forms
-from .models import Team, Player, Sale, Product, Inventory, Category
+from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam
 
 #Formulario de venta
 class SaleForm(forms.ModelForm):
 
     total_cost = forms.FloatField(
-        required=True,
         widget=forms.NumberInput(
             attrs={
                 'id':'totalCost',
@@ -110,6 +109,61 @@ class TeamForm(forms.ModelForm):
             'color',
             'avatar',
         ]
+class TournamentTeamForm(forms.ModelForm):
+    goals_for = forms.IntegerField(
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'class':'inf',
+            }
+        )
+    )
+
+    goals_against = forms.IntegerField(
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'class':'inf',
+            }
+        )
+    )
+
+    games_tied = forms.IntegerField(
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'class':'inf',
+            }
+        )
+    )
+
+    games_won = forms.IntegerField(
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'class':'inf',
+            }
+        )
+    )
+
+    games_lost = forms.IntegerField(
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'class':'inf',
+            }
+        )
+    )
+
+    class Meta:
+        model = TournamentTeam
+        fields = [
+            'goals_for',
+            'goals_against',
+            'games_tied',
+            'games_won',
+            'games_lost',
+        ]
 
 #Formulario de jugador
 class PlayerForm(forms.ModelForm):
@@ -172,6 +226,48 @@ class PlayerForm(forms.ModelForm):
             'age',
             'gender',
             'position',
+        ]
+class CardPlayerForm(forms.ModelForm):
+
+    yellow_card = forms.IntegerField(
+        required=True,
+        min_value=0,
+        max_value=3,
+        widget=forms.NumberInput(
+            attrs={
+                'class':'inf',
+            }
+        )
+    )
+
+    red_card = forms.IntegerField(
+        required=True,
+        min_value=0,
+        max_value=3,
+        widget=forms.NumberInput(
+            attrs={
+                'class':'inf',
+            }
+        )
+    )
+
+    blue_card = forms.IntegerField(
+        required=True,
+        min_value=0,
+        max_value=3,
+        widget=forms.NumberInput(
+            attrs={
+                'class':'inf',
+            }
+        )
+    )
+
+    class Meta:
+        model = Player
+        fields = [
+            'yellow_card',
+            'red_card',
+            'blue_card',
         ]
 
 #Formulario de producto

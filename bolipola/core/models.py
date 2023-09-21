@@ -1,6 +1,7 @@
 from django.db import models
 from user.models import UserBoli
 from django.utils import timezone
+from django.urls import reverse
 import locale
 locale.setlocale(locale.LC_ALL, '')
 
@@ -183,7 +184,12 @@ class Player(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f'{self.dorsal} - {self.name} {self.last_name} - {self.position}'
+    
+    def save_cards(self, yellow, blue, red):
+        self.yellow_card = yellow
+        self.blue_card = blue
+        self.red_card = red
     
     class Meta:
         verbose_name = 'Jugador'
@@ -193,12 +199,11 @@ class Player(models.Model):
 
 class Tournament(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre', null=True)
-    number_teams = models.PositiveIntegerField(verbose_name='Cantidad de equipos', default=16)
-    registered_teams = models.PositiveIntegerField(verbose_name='Equipos registrados', default=0)
-    date = models.DateTimeField(verbose_name='Fecha del torneo')
+    number_teams = models.PositiveIntegerField(verbose_name='Cantidad de equipos permitidos', default=16)
+    date = models.DateTimeField(verbose_name='Fecha de inicio del torneo')
     prize_payment = models.FloatField(verbose_name='Pago de premio')
     cost = models.FloatField(verbose_name='Costo de inscripción')
-    active = models.BooleanField(verbose_name='Activo', default=True)
+    active = models.BooleanField(verbose_name='Torneo activo (no mover)', default=True)
     team = models.ManyToManyField(Team, through='TournamentTeam')
 
     def __str__(self):
@@ -209,11 +214,21 @@ class Tournament(models.Model):
 
     def payment_to_money(self):
         money = locale.currency(self.prize_payment, symbol=True, grouping=True)
+        money = money[:-3]
         return money
 
     def cost_to_money(self):
         money = locale.currency(self.cost, symbol=True, grouping=True)
+        money = money[:-3]
         return money
+    
+    def registered_teams(self):
+        total = 0
+        intermediates = TournamentTeam.objects.all().filter(tournament_id=self.id)
+        for registered in intermediates:
+            total += 1
+
+        return total
 
     class Meta:
         verbose_name = 'Torneo'
@@ -224,14 +239,14 @@ class Tournament(models.Model):
 class TournamentTeam(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    goals_for = models.IntegerField(verbose_name='Goles a favor')
-    goals_against = models.IntegerField(verbose_name='Goles en contra')
-    goals_diff = models.IntegerField(verbose_name='Diferencia de goles')
-    games_tied = models.IntegerField(verbose_name='Partidos empatados')
-    games_won = models.IntegerField(verbose_name='Partidos ganados')
-    games_lost = models.IntegerField(verbose_name='Partidos perdidos')
-    games_played = models.IntegerField(verbose_name='Partidos jugados')
-    score = models.IntegerField(verbose_name='Puntaje')
+    goals_for = models.IntegerField(verbose_name='Goles a favor', default=0)
+    goals_against = models.IntegerField(verbose_name='Goles en contra', default=0)
+    goals_diff = models.IntegerField(verbose_name='Diferencia de goles', default=0)
+    games_tied = models.IntegerField(verbose_name='Partidos empatados', default=0)
+    games_won = models.IntegerField(verbose_name='Partidos ganados', default=0)
+    games_lost = models.IntegerField(verbose_name='Partidos perdidos', default=0)
+    games_played = models.IntegerField(verbose_name='Partidos jugados', default=0)
+    score = models.IntegerField(verbose_name='Puntaje', default=0)
 
     def __str__(self):
         return str(f'{self.tournament.name} - {self.team.name}')
@@ -260,6 +275,7 @@ class Sale(models.Model):
 
     def cost_to_money(self):
         money = locale.currency(self.total_cost, symbol=True, grouping=True)
+        money = money[:-3]
         return money
 
     def search_intermediate(self):
@@ -275,7 +291,7 @@ class Sale(models.Model):
     def status_number(self):
         if self.status == 'En proceso...':
             return 's1'
-        if self.status == 'Vendido':
+        if self.status == 'Comprado':
             return 's2'
         if self.status == 'Cancelado':
             return 's3'
