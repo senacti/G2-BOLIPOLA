@@ -171,6 +171,8 @@ def inventory(request):
 def quantity_product(request, pk):
     inventorys = Inventory.objects.get(pk=pk)
     form = InventoryForm(instance=inventorys)
+ 
+    product_name = inventorys.product.name
     
     if request.method == 'POST':
         form = InventoryForm(request.POST, instance=inventorys)
@@ -178,7 +180,7 @@ def quantity_product(request, pk):
             form.save()
             return redirect('inventory')
     
-    return render(request, 'inventario/quantity_product.html', {'form': form})
+    return render(request, 'inventario/quantity_product.html', {'form': form, 'product_name': product_name})
 
 #Crear producto
 @login_required
@@ -237,6 +239,8 @@ def edit_product(request, pk):
 @login_required
 def delete_product(request, pk):
     product = Product.objects.get(pk=pk)
+    
+    
     
     if request.method == 'POST':
         product.delete()
