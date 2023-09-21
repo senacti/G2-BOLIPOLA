@@ -1,11 +1,15 @@
 #s1 {
-    background-color: #FCF3CF;
+    background-color: #F9E79F;
 }
 
 #s2 {
-    background-color: #D5F5E3;
+    background-color: #ABEBC6;
 }
 
 #s3 {
-    background-color: #F5B7B1;
+    background-color: #DE3163;
+}
+
+#s1:hover, #s2:hover, #s3:hover {
+    background-color: #e7e8e8;
 }

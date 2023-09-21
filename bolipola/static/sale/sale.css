@@ -16,32 +16,9 @@ html {
 }
 
 .centrador {
-    margin: 0.8rem;
+    height: 100vh;
     display: grid;
     place-items: center;
-}
-
-.exitContainer {
-    position: relative;
-    right: 15rem;
-    height: 2.5rem;
-    width: 2.5rem;
-    padding: 0.3rem;
-    border-radius: 0.5rem;
-    background-color: #CB4335;
-    color: #FBFCFC;
-}
-
-.exitContainer:hover {
-    cursor: pointer;
-    background-color: #ad3e32;
-}
-
-.exitContainer i {
-    position: relative;
-    top: 0.8rem;
-    left: 0.1rem;
-    font-size: 2rem;
 }
 
 .main {
@@ -65,7 +42,7 @@ html {
 }
 
 .main__titleContainer-check {
-    display: grid;
+    display: none;
     place-items: center;
     margin: 1rem auto;
 }
@@ -78,7 +55,7 @@ html {
 .main__inf-item input:read-only, .main__titleContainer input:read-only {
     display: block;
     background-color: transparent;
-    width: 18rem;
+    width: 15rem;
     margin-left: 0.35rem;
     border: none;
     font-size: var(--font_size-);
@@ -92,18 +69,6 @@ html {
     text-align: center;
     font-weight: bold;
     font-size: calc(var(--font_size-) + 1.2rem);
-}
-
-#saleTypeInformation {
-    margin: 2.5rem 0;
-}
-
-#saleTypeInformation div input{
-    font-style: italic;
-}
-
-#saleTypeInformation div span{
-    font-weight: bold;
 }
 
 .main__inf-item select {
@@ -124,10 +89,6 @@ html {
 
 .bottomInf span {
     font-weight: bold;
-}
-
-.bottomInf span, #idSale, #costSale {
-    font-size: 1.42rem;
 }
 
 .buttons {
