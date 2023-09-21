@@ -101,6 +101,9 @@ def create_product(request):
         if form.is_valid():
             new_product = form.save(commit=False)
             new_product.save()
+            
+            new_inventory = Inventory(product_id=new_product.id)
+            new_inventory.save()
 
             return redirect('inventory')
         else:
