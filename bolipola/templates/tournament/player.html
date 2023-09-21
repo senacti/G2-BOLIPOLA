@@ -12,13 +12,20 @@
     <div class="main">
         <div class="main__left">
             <div class="main__left-titleContainer">
+                {% if has_tournament %}
                 <h2 class="main__left-titleContainer-title">
+                    Ver jugador
+                </h2>
+                {% else %}
+                    <h2 class="main__left-titleContainer-title">
                     {% if player_inf %}
                         Editar
                     {% else %}
                         Registrar
                     {% endif %}
-                        jugador</h2>
+                        jugador
+                    </h2>
+                {% endif %} 
             </div>
             <form class="main__left-form" autocomplete="off" method="post">
                 {% csrf_token %}
@@ -55,21 +62,23 @@
                     </div>
                 </div>
 
-                <div class="main__left-form-submitContainer">
-                    {% if player_inf %}
-                    <a href="{% url 'player' %}" class="main__left-form-submitContainer-submit" id="cancelChanges">
-                        Cancelar
-                    </a>
-                    {% endif %}
-
-                    <button type="submit" class="main__left-form-submitContainer-submit">
+                {% if not has_tournament %}
+                    <div class="main__left-form-submitContainer">
                         {% if player_inf %}
-                            Guardar cambios
-                        {% else %}
-                            Guardar
+                        <a href="{% url 'player' %}" class="main__left-form-submitContainer-submit" id="cancelChanges">
+                            Cancelar
+                        </a>
                         {% endif %}
-                    </button>
-                </div>
+
+                        <button type="submit" class="main__left-form-submitContainer-submit">
+                            {% if player_inf %}
+                                Guardar cambios
+                            {% else %}
+                                Guardar
+                            {% endif %}
+                        </button>
+                    </div>
+                {% endif %}
             </form>
 
             <div class="main__left-cancel">
@@ -139,11 +148,18 @@
     <script src="{% static 'tournament/player/player.js' %}"></script>
     <script src="https://kit.fontawesome.com/81581fb069.js"></script>
 
-    <!--
-        Ejemplo item de jugador de lista:
-        <div class="main__right-list-item">
-            <i class="fa-solid fa-user"></i><span>9 - Ángel - Lateral</span>
-        </div>
-    -->
+    {% if has_tournament %}
+    <script>
+        const infPlayers = document.querySelectorAll(".groupInf div input, .groupInf div select")
+
+        function setDisabled() {
+            infPlayers.forEach((element) => {
+                element.setAttribute("disabled", "true")
+            })
+        }
+
+        setDisabled()
+    </script>
+    {% endif %}
 </body>
 </html>

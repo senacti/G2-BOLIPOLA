@@ -65,13 +65,16 @@
                         </div>
                     </div>
                     <div class="box__right">
-                        {% if user.is_staff %}
-                            <h4 id="adminTitleList">Compras de clientes:</h4>
-                        {% endif %}
+                        <h4 id="adminTitleList">
+                            Compras recientes{% if not user.is_staff %}:{% endif %}
+                            {% if user.is_staff %}
+                                de clientes:
+                            {% endif %}
+                        </h4>
                         <div class="box__right-list">
                             {% if shoppings %}
                                 {% for shop in shoppings %}
-                                <div class="box__right-list-element" id="{{ shop.status_number }}">
+                                <div class="box__right-list-element" id="{{ shop.status_number }}" onclick="go(`{% url 'sale_information' shop.id %}`)">
                                     {% if shop.type == 'Torneo' %}
                                     <i class="fa-solid fa-users fa-xl"></i>
                                     <div class="titleAndDesc">
@@ -98,7 +101,9 @@
                         </div>
     
                         <div class="box__right-moreList">
-                            <button type="button" class="box__right-moreList-button" name="editAndMore"><i class="fa-solid fa-list"></i></button>
+                            <a href="{% url 'sale_historic' %}">
+                                <button type="button" class="box__right-moreList-button" name="editAndMore"><i class="fa-solid fa-list"></i></button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -131,5 +136,10 @@
     <span class="birthdateYear" hidden>{{ user.birthdate.year }}</span>
 
     <script src="{% static 'profile/profile.js' %}"></script>
+    <script>
+        function go(url) {
+          window.location.href = url;
+        }
+      </script>
 </body>
 </html>
