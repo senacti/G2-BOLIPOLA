@@ -284,7 +284,7 @@ body {
 
 .box__right-list-element:hover {
     cursor: pointer;
-    background-color: #CCD1D1;
+    background-color: #e7e8e8 !important;
     border-radius: 0.2rem;
 }
 
@@ -309,10 +309,8 @@ body {
     margin-bottom: 0.3rem;
 }
 
-.box__bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.box__right-moreList-button i {
+    font-size: 1.5rem;
 }
 
 .box__bottom-logo {

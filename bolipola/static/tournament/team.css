@@ -119,6 +119,8 @@ body {
 
 .cancel {
     margin-top: 2rem;
+    position: relative;
+    top: 2rem;
 }
 
 .cancel__link {
