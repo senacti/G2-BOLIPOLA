@@ -16,9 +16,10 @@
     {% elif not user.is_staff %}
 
         <script>
-            window.location.href = "{% url 'index' %}";
-    </script>
-    
+             window.location.href = "{% url 'index' %}";
+       </script>
+
+    {% endif %}
     <div class="container">
         <p><a href="{% url 'inventory' %}" class="btn btn-secondary mt-3">Regresar</a></p>
         

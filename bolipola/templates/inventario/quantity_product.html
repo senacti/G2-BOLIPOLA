@@ -8,26 +8,32 @@
 
 <body>
     {% if not user.is_authenticated  %}
-
         <script>
             window.location.href = "{% url 'signin' %}";
         </script>
-
-        
     {% elif not user.is_staff %}
-
         <script>
             window.location.href = "{% url 'index' %}";
-    </script>
-
+        </script>
     {% endif %}
     <div class="container">
         <p><a href="{% url 'inventory' %}" class="btn btn-secondary mt-3">Regresar</a></p>
-        
-        <h1 class="mt-4">Editar Producto</h1>
+
+        <h1 class="mt-4">Editar cantidad de {{ product_name }} </h1>
+
         <form method="post" class="mt-4">
             {% csrf_token %}
-            {{ form.as_p }}
+            
+            <div class="form-group">
+                <label for="entry_date">Fecha de entrada:</label>
+                {{ form.entry_date }}
+            </div>
+            
+            <div class="form-group">
+                <label for="product_quantity">Cantidad del producto:</label>
+                {{ form.product_quantity }}
+            </div>
+                       
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
         </form>
     </div>

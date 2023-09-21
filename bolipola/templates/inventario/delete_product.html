@@ -16,12 +16,13 @@
     {% elif not user.is_staff %}
 
         <script>
-            window.location.href = "{% url 'index' %}";
-    </script>
-    
+             window.location.href = "{% url 'index' %}";
+       </script>
+
+    {% endif %}
     <p><a href="{% url 'inventory' %}" class="btn btn-secondary mt-3">Regresar</a></p>
     <div class="container">
-        <h1 class="mt-5">Eliminar Producto</h1>
+        <h1 class="mt-5">Eliminar {{ product.name }}</h1>
         <p>¿Estás seguro de que deseas eliminar el producto "{{ product.name }}"?</p>
         <form method="post">
             {% csrf_token %}
