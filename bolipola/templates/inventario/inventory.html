@@ -7,7 +7,6 @@
 <body>
     <h1>Lista de Productos</h1>
     <ul>
-    <div>
         {% for product in products %}
 
             <li>{{ product.name }} - {{ product.cost }} -  </li>
@@ -15,17 +14,19 @@
                 <td>{{ product.name }}</td>
                 <!-- ... -->
                 <td>
+                    <a href="{% url 'create_product' %}">Crear</a> |
                     <a href="{% url 'edit_product' product.pk %}">Editar</a> |
                     <a href="{% url 'delete_product' product.pk %}">Eliminar</a> |
                     <a href="{% url 'quantity_product' product.pk %}">Agregar Cantidad</a>
                 </td>
             </tr>
         {% endfor %}
-        <h1>¿Deseás crear más productos?</h1>
-        <div>
-            <a href="{% url 'create_product' %}">Crear Producto</a>
-        </div>
-    </div>
     </ul>
+    {% for lol in inventorys %}
+    <h1>{{ lol.product_quantity }}</h1>
+    {% endfor %}
+    {% for xd in products %}
+    <h1>{{ product.name }}xd</h1>
+    {% endfor %}
 </body>
 </html>

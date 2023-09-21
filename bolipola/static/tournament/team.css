@@ -118,6 +118,8 @@ body {
 }
 
 .cancel {
+    position: relative;
+    top: 2rem;
     margin-top: 2rem;
 }
 

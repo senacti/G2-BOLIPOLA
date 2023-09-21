@@ -14,29 +14,21 @@
                 <legend class="main__legend">
                     <img src="{% static 'register/images/logo.png' %}" alt="logo" class="main__legend-img">
                 </legend>
-                <div class="main__titleContainer">
-                    {{ form.type }}
-                    <div class="main__titleContainer-check">
-                        <span class="main__titleContainer-check-asterisc">
-                            *********************************
-                        </span>
-                        <span class="main__titleContainer-check-title">
-                            RECIBO  
-                        </span>
-                        <span class="main__titleContainer-check-asterisc">
-                            *********************************
-                        </span>
-                    </div>
-                </div>
                 <div class="main__inf">
+                    <div class="main__titleContainer">
+                        <input type="text" class="main__titleContainer-title" value="{{ type_name }}" readonly>
+                    </div>
                     <div class="main__inf-item">
                         <span>Tipo de pago:</span>
                         {{ form.payment_type }}
                     </div>
+                    
+                    <div style="display: none;">
+                        {{ form.type }}
+                    </div>
 
                     <!--Caso de venta torneo-->
                     {% if type_name == 'Torneo'%}
-
                     <div class="main__inf-item">
                         <span>Nombre del torneo:</span>
                         <input type="text" value="{{ inf.name }}" readonly>
@@ -63,8 +55,8 @@
                     
                     <div class="moreInf">
                         <div class="main__inf-item">
-                            <span>Cantidad comprado:</span>
-                            {% if  type_name != 'Productos' %}
+                            <span>Cantidad a comprar:</span>
+                            {% if type_name != 'Productos' %}
 
                             {{ form.product_quantity }}
 
@@ -109,6 +101,7 @@
         <li>{{ type_name }}</li>
         <li>{{ inf.cost }}</li>
     </ul>
+
     <script src="{% static 'sale/sale.js' %}"></script>
 </body>
 </html>

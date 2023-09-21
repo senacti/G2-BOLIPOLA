@@ -29,7 +29,8 @@
                         {{ form.color }}
                     </div>
                 </div>
-    
+                
+                {% if not has_tournament %}
                 <div class="box__containerSubmit">
                     <button class="box__containerSubmit-button" type="submit">
                         {% if team_inf %}
@@ -39,6 +40,7 @@
                         {% endif %}
                     </button>
                 </div>
+                {% endif %}
 
                 <div class="box__containerLogo">
                     <a href="{% url 'index' %}"><img class="box__containerLogo-img" src="{% static 'register/images/logo.png' %} " alt="Logo"></a>
@@ -46,7 +48,7 @@
             </fieldset>
         </form>
         <div class="cancel">
-            <a class="cancel__link" href="{% url 'tournament' %}">Cancelar</a>
+            <a class="cancel__link" href="{% url 'tournament' %}">Salir</a>
         </div>
     </div>
 
@@ -61,6 +63,20 @@
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
+
     <script src="{% static 'tournament/team/team.js' %}"></script>
+    {% if has_tournament %}
+    <script>
+        const infPlayers = document.querySelectorAll("input, select")
+
+        function setDisabled() {
+            infPlayers.forEach((element) => {
+                element.setAttribute("disabled", "true")
+            })
+        }
+
+        setDisabled()
+    </script>
+    {% endif %}
 </body>
 </html>

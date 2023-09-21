@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Historial de Compras</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'sale/historic/sale_historic.css' %}">
+  <link rel="stylesheet" href="{% static 'sale/status/status.css' %}">
+</head>
+<body>
+
+  <a class="exitContainer" href="{% url 'profile' %}">
+    <i class="fa-solid fa-right-from-bracket fa-rotate-180 fa-xl"></i>
+  </a>
+
+  <div class="title">
+    <img src="{% static 'register/images/logo.png' %}" class="title__img">
+    <h1 class="title__h1">
+      Historial de
+      {% if user.is_staff %} 
+        ventas
+      {% else %}
+        compras de {{ user.first_name }} {{ user.last_name }}
+      {% endif %}
+    </h1>
+  </div>
+  <table>
+    <tr>
+      {% if user.is_staff %}
+        <th>ID venta</th>
+        <th>Correo del cliente</th>
+        <th>Nombre del cliente</th>
+        <th>Tipo de venta</th>
+        <th>Estado de venta</th>
+        <th>Tipo de pago</th>
+        <th>Fecha de venta</th>
+        <th>Pago total</th>
+      {% else %}
+        <th>ID compra</th>
+        <th>Tipo de compra</th>
+        <th>Estado de compra</th>
+        <th>Tipo de pago</th>
+        <th>Fecha de compra</th>
+        <th>Total a pagar</th>
+      {% endif %}
+    </tr>
+
+    {% for sale in sales %}
+      <tr id="{{ sale.status_number }}" onclick="go(`{% url 'sale_information' sale.id %}`)">
+        <td>{{ sale.id }}</td>
+        {% if user.is_staff %}
+          <td>{{ sale.user.username }}</td>
+          <td>{{ sale.user.first_name }} {{ sale.user.last_name }}</td>
+        {% endif %}
+        <td>{{ sale.type }}</td>
+        <td>{{ sale.status }}</td>
+        <td>{{ sale.payment_type }}</td>
+        <td>{{ sale.date.date }}</td>
+        <td>{{ sale.cost_to_money }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <script src="https://kit.fontawesome.com/6117eaa017.js" crossorigin="anonymous"></script>
+
+  <script>
+    function go(url) {
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>
