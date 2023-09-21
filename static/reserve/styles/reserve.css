@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 1.2rem;
+}
+
+
+.reserva {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #CB4335; 
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    text-align: center;
+}
+.reserva p{
+    font-size: 2.2rem;
+    padding: 1rem;
+    margin: 1rem;
+    font-family: Comic Sans Ms;
+    
+}
+
+.reserva h2 {
+    background-color: #CB4335; 
+    color: #fff;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+
+.reference-img {
+    width: 50rem;
+    height: 50rem;
+}
+
+button[type="submit"], a button {
+    background-color: #CB4335; 
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover, a button:hover {
+    background-color: #CB4335; 
+}

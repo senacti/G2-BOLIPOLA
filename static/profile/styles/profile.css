@@ -1,0 +1,392 @@
+* {
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #CB4335;
+}
+
+html {
+    font-size: 95%;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 95vh;
+}
+
+.main {
+    display: grid;
+    place-items: center;
+}
+
+.main-form {
+    margin-top: 2rem;
+}
+
+.box {
+    width: 52rem;
+    padding: 2rem;
+    padding-bottom: 0;
+    border: 0.2rem solid var(--primary-color);
+    border-radius: 0.75rem;
+    background-color: #FBFCFC;
+}
+
+.box__legend-img {
+    height: 12rem;
+    width: 12rem;
+    border-radius: 50%;
+    border: 0.3rem solid var(--primary-color);
+}
+
+#modificadorInputFile {
+    display: grid;
+    place-items: center;
+    position: relative;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+    height: 0;
+    width: 0;
+}
+
+.box__legend-imgDef {
+    height: 12rem;
+    width: 12rem;
+    border-radius: 50%;
+    border: 0.3rem solid var(--primary-color);
+}
+
+.box__legend-imgIndication {
+    position: absolute;
+    height: 4.5rem;
+    opacity: 50%;
+}
+
+.box__legend-input {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.box__legend-input:hover {
+    cursor: pointer;
+}
+
+.box__name {
+    position: relative;
+    float: left;
+    bottom: 6.2rem;
+    left: 12rem;
+    width: 41.5rem;
+}
+
+.box__name-input {
+    border: 0;
+    font-size: 2rem;
+    border-bottom: 0.15rem solid #CCD1D1;
+    width: 20rem;
+    background-color: transparent;
+    color: gray;
+    outline: none;
+}
+
+.box__name-input:focus {
+    border-color: var(--primary-color);
+    color: black;
+}
+
+.box__name-input#input_last_name {
+    margin-left: 1rem;
+}
+
+.box__name-text {
+    position: relative;
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.leftAndRight {
+    position: relative;
+    bottom: 3.2rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.box__left {
+    width: 32.5rem;
+}
+
+.box__left-title {
+    margin-bottom: 3rem;
+}
+
+.box__left-title-rango {
+    font-size: 1.8rem;
+}
+
+.box__left-title-rango i {
+    margin-left: 0.15rem;
+}
+
+.container_inf_rango {
+    position: absolute;
+    transform: translate(7rem, -6.5rem);
+    padding: 0.8rem;
+    width: 17rem;
+    background-color: gray;
+    color: #FBFCFC;
+    border-radius: 1rem;
+}
+
+.inf_rango {
+    font-size: 1.2rem;
+}
+
+.box__left-title-value {
+    font-size: 2.4rem;
+    line-height: 2.5rem;
+}
+
+.box__left-box {
+    border: 0.2rem solid black;
+    padding: 3rem 0;
+    margin-left: 0.8rem;
+}
+
+.box__left-box-edit {
+    position: relative;
+    float: right;
+    bottom: 2.3rem;
+    right: 0.7rem;
+}
+
+.box__left-box-inf {
+    margin-left: 0.85rem;
+}
+
+.box__left-box-inf-span {
+    display: flex;
+    margin: 0.75rem 0;
+}
+
+.box__left-box-inf-span i {
+    position: relative;
+    top: 0.2rem;
+    width: 2rem;
+    font-size: 1.4rem;
+}
+
+.box__left-box-inf-span-input {
+    font-size: 1.4rem;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 0.15rem solid #CCD1D1;
+    color: gray;
+    outline: none;
+}
+
+.box__left-box-inf-span-input#selectInput:disabled {
+    appearance: none;
+}
+
+.box__left-box-inf-span-input#birthdate {
+    display: inline-flex;
+    width: 10rem;
+}
+
+::-webkit-calendar-picker-indicator {
+    border-radius: 0.2rem;
+    background-color: #CCD1D1;
+}
+
+.box__left-box-inf-span-input:focus {
+    border-color: var(--primary-color);
+    color: black;
+}
+
+.box__left-box-inf-span-input:disabled {
+    color: black;
+    border-bottom: 0.15rem solid transparent;
+    opacity: 100%;
+}
+
+.box__left-box-inf-span-age {
+    position: relative;
+    left: 0.1rem;
+    font-size: 1.4rem;
+    color: var(--primary-color);
+}
+
+.box__left-box-changePass {
+    position: absolute;
+    bottom: 0;
+}
+
+.box__left-box-changePass-a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.box__left-box-changePass-a:hover {
+    text-decoration: underline;
+}
+
+.box__right {
+    width: 16rem;
+    height: 25rem;
+    padding: 0.5rem;
+    border: 0.2rem solid black;
+    border-top-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+#adminTitleList {
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+    text-decoration: underline;
+}
+
+.box__right-list {
+    padding: 0 0.5rem;
+}
+
+.box__right-list-none {
+    display: grid;
+    place-items: center;
+    margin-top: 50%;
+}
+
+.box__right-list-none-img {
+    height: 5rem;
+    opacity: 30%;
+}
+
+.box__right-list-none-span {
+    font-size: 0.9rem;
+    opacity: 70%;
+}
+
+.box__right-list-element {
+    width: 100%;
+    display: flex;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.1rem solid #CCD1D1;
+}
+
+.box__right-list-element:hover {
+    cursor: pointer;
+    background-color: #e7e8e8 !important;
+    border-radius: 0.2rem;
+}
+
+.box__right-list-element i {
+    position: relative;
+    top: 1.4rem;
+}
+
+.titleAndDesc {
+    display: block;
+    margin: auto 0 auto 0.7rem;
+}
+
+.box__right-list-element-desc {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+}
+
+.box__right-moreList {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0.3rem;
+}
+
+.box__right-moreList-button i {
+    font-size: 1.5rem;
+}
+
+.box__bottom-logo {
+    position: relative;
+    top: 1.8rem
+}
+
+.box__bottom-logo-img {
+    height: 3rem;
+}
+
+.box__bottom-saveOrCancel-button {
+    padding: 0.2rem 1rem;
+    margin: 0 1.8rem;
+    border: 0.15rem solid transparent;
+    font-size: 1.2rem;
+    border-radius: 0.35rem;
+    color: #FBFCFC;
+    box-shadow: 0.2rem 0.2rem #696969;
+    transition: 120ms;
+    transition-timing-function: ease-in;
+}
+
+.box__bottom-saveOrCancel-button:hover {
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.box__bottom-saveOrCancel-button#cancel {
+    background-color: var(--primary-color);
+}
+
+.box__bottom-saveOrCancel-button#cancel:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: #FBFCFC;
+}
+
+.box__bottom-saveOrCancel-button#save {
+    background-color: #228B22;
+}
+
+.box__bottom-saveOrCancel-button#save:hover {
+    color: #228B22;
+    border-color: #228B22;
+    background-color: #FBFCFC;
+}
+
+button[name="editAndMore"] {
+    font-size: 1.2rem;
+    border: 0;
+    background-color: transparent;
+    color: gray;
+    transition: 120ms;
+    transition-timing-function: ease-in;
+}
+
+button[name="editAndMore"]:hover {
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.containerSignout {
+    margin-top: 2.8rem;
+}
+
+.containerSignout__a {
+    position: relative;
+    bottom: 0rem;
+	padding: 0.5rem 1rem;
+	font-size: 1.2rem;
+	font-weight: 500;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.containerSignout__a:hover {
+    text-decoration: underline;
+}
