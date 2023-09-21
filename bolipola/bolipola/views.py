@@ -9,14 +9,15 @@ from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, CategoryForm
+from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team, Player, Tournament, Event, Product,Reservation, Sale, SaleTournament, SaleReservation, SaleEvent, SaleInventory, Inventory, Category
+from core.models import Team, Player, Tournament, TournamentTeam, Event, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleEvent, SaleInventory, Inventory, Category
 
 #------------------Ventas---------------------------
+#Venta
+@login_required
 def sale(request, type_id, type_name):
-
     #Detectando que tipo de venta es
     if type_name == 'Torneo':
         inf = get_object_or_404(Tournament, id=type_id)
@@ -46,9 +47,9 @@ def sale(request, type_id, type_name):
             if type_name == 'Torneo':
                 intermediate = SaleTournament(sale_id=sale.id, tournament_id=inf.id)
             if type_name == 'Evento':
-                intermediate = SaleEvent(sale_id=sale.id, event_id=inf.id,)
+                intermediate = SaleEvent(sale_id=sale.id, event_id=inf.id)
             if type_name == 'Productos':
-                intermediate = SaleInventory(sale_id=sale.id, inventory_id=inf.id,)
+                intermediate = SaleInventory(sale_id=sale.id, inventory_id=inf.id)
             if type_name == 'Reserva':
                 intermediate = SaleReservation(sale_id=sale.id, reservation_id=inf.id)
 
@@ -56,11 +57,92 @@ def sale(request, type_id, type_name):
             intermediate.save()
             messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Compra en proceso, consulta tu perfil 😄')
             return redirect('index')
+        else:
+            raise Http404(form.errors)
+    
     else:
         form = SaleForm()
 
     return render(request, 'sale.html', {'form':form, 'type_name':type_name, 'inf':inf})
+#Información de la venta
+@login_required
+def sale_information(request, sale_id):
+    user = get_object_or_404(UserBoli, id=request.user.id)
+    sale = get_object_or_404(Sale, id=sale_id)
+    team = False
 
+    if sale.type == 'Torneo':
+        inf = get_object_or_404(SaleTournament, sale_id=sale.id)  
+        inf = inf.tournament
+        team = Team.objects.all().filter(user_id=sale.user_id).first()
+
+    if sale.type == 'Evento':
+        inf = get_object_or_404(SaleEvent, sale_id=sale.id)
+        inf = inf.event   
+
+    if sale.type == 'Productos':
+        inf = get_object_or_404(SaleInventory, sale_id=sale.id)   
+        inf = inf.inventory
+
+    if sale.type == 'Reserva':
+        inf = get_object_or_404(SaleReservation, sale_id=sale.id)
+        inf = inf.reservation 
+
+    return render(request, 'sale/sale_information.html', {'user':user, 'sale':sale, 'inf':inf, 'team':team})
+
+#Historial de ventas
+@login_required
+def sale_historic(request):
+    user = get_object_or_404(UserBoli, id=request.user.id)
+
+    if user.is_staff:
+        sales = Sale.objects.all()
+    else:
+        sales = Sale.objects.all().filter(user_id=user.id)
+
+    return render(request, 'sale/sale_historic.html', {'user':user, 'sales':sales})
+
+#Compra confirmada
+@login_required
+def sale_confirm(request, sale_id):
+    sale = Sale.objects.all().filter(id=sale_id).first()
+    user = UserBoli.objects.all().filter(id=sale.user_id).first()
+    if not request.user.is_staff:
+        raise Http404('Restringido')
+
+    if sale.type == 'Torneo':
+        #Obteniendo información del torneo y equipo del cliente
+        team = Team.objects.all().filter(user_id=sale.user_id).first()
+        intermediate_tournament = get_object_or_404(SaleTournament, sale_id=sale.id)
+        tournament = intermediate_tournament.tournament
+
+        #Agregando a tabla intermedia el equipo en el torneo del jugador
+        new_tournament_team = TournamentTeam(team_id=team.id, tournament_id=tournament.id)
+        new_tournament_team.save()
+
+        user.range += 150
+        user.save()
+
+    sale.status = 'Comprado'
+    sale.save()
+
+    messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Venta confirmada')
+    return redirect(f'/sale/information/{sale_id}')
+
+#Compra cancelada
+@login_required
+def sale_cancel(request, sale_id):
+    sale = Sale.objects.all().filter(id=sale_id).first()
+    if not request.user.is_staff:
+        #Verificando que un usuario no está cancelando algo no suyo
+        if not sale.user_id == request.user.id:
+            raise Http404('Restringido')
+
+    sale.status = 'Cancelado'
+    sale.save()
+
+    messages.error(request, f'<i class="fa-solid fa-circle-xmark fa-bounce"></i> Venta cancelada')
+    return redirect(f'/sale/information/{sale_id}')
 
 #------------------Productos-----------------------
 #Productos
@@ -166,6 +248,12 @@ def delete_product(request, pk):
 #Torneos
 def tournament(request):
     #Si el usuario está registrado, entonces buscará coincidencias
+    if not request.user.is_authenticated:
+        return redirect('signin')
+
+    user = get_object_or_404(UserBoli, id=request.user.id)
+    sales = Sale.objects.all().filter(type='Torneo',user_id=user.id)
+    tournaments = Tournament.objects.all()
     if request.user.is_authenticated:
         has_team = Team.objects.filter(user=request.user).exists()
     else:
@@ -176,20 +264,82 @@ def tournament(request):
     else:
         team = False
      
-    tournaments = Tournament.objects.all().filter(active=1)
-    sale_id_user = Sale.objects.all().filter(user_id=request.user.id, type='Torneo').first()
+    #Verificando que no esté en un torneo
+    sales_tournaments = []
+    for sale in sales:
+        sales_tournaments.append(SaleTournament.objects.all().filter(sale_id=sale.id).first())
+    has_tournament = False
 
-    if sale_id_user: 
-        has_tournament = SaleTournament.objects.all().filter(sale_id=sale_id_user.id).first()
+    for sale_tournament in sales_tournaments:
+        if (sale_tournament.sale.status == 'En proceso...' and sale_tournament.tournament.active) or (sale_tournament.sale.status == 'Comprado' and sale_tournament.tournament.active):
+            has_tournament = True
+            break
+
+    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'sales_tournaments':sales_tournaments, 'tournaments':tournaments, 'has_tournament':has_tournament})
+
+@login_required
+def tournament_cancel(request, tournament_id):
+    if not request.user.is_staff:
+        raise Http404('Restringido')
+
+    tournament = get_object_or_404(Tournament, id=tournament_id)
+    tournament.active = False
+    tournament.save()
+
+    messages.warning(request, '¡TORNEO FINALIZADO!')
+    return redirect('tournament')
+
+#Torneo y equipos
+@login_required
+def tournament_teams(request, tournament_id):
+    user = request.user
+    teams = TournamentTeam.objects.all().filter(tournament_id=tournament_id)
+    tournament = get_object_or_404(Tournament, id=tournament_id)
+
+    if request.method == 'POST':
+        intermediate_id = request.POST.get('intermediate_id', '')
+        team_form = get_object_or_404(TournamentTeam, id=intermediate_id)
+        form = TournamentTeamForm(request.POST, instance=team_form)
+
+        if form.is_valid():
+            team_form.goals_diff = form.cleaned_data['goals_for'] - form.cleaned_data['goals_against']
+            if team_form.goals_diff < 0:
+                team_form.goals_diff *= -1
+
+            team_form.games_played = form.cleaned_data['games_tied'] + form.cleaned_data['games_won'] + form.cleaned_data['games_lost']
+
+            team_form.score = form.cleaned_data['games_tied'] * 1 + form.cleaned_data['games_won'] * 3 + form.cleaned_data['games_lost'] * 0
+
+            form.save()
+
+        return redirect(f'/tournament/teams/{tournament_id}/')
     else:
-        has_tournament = False
-        
-    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'tournaments':tournaments, 'has_tournament':has_tournament})
+       form = TournamentTeamForm()
+
+    return render(request, 'tournament/tournament_team.html', {'teams':teams, 'user':user, 'tournament':tournament,'form':form})
 
 #Inscripción a torneo
 @login_required
-def inscription(request):
-    return render(request, 'tournament/inscription.html', {})
+def tournament_players(request, tournament_id, team_id):
+    user = request.user
+    if not user.is_staff:
+        raise Http404('restringido')
+
+    players = Player.objects.all().filter(team_id=team_id)
+    team = get_object_or_404(Team, id=team_id)
+    tournament = Tournament.objects.all().filter(id=tournament_id).first()
+    form = CardPlayerForm()
+
+    if request.method == 'POST':
+        player_id = request.POST.get('player_id', '')
+        player = get_object_or_404(Player, id=player_id)
+        form = CardPlayerForm(request.POST, instance=player)
+        if form.is_valid():
+            form.save()
+
+        return redirect(f'/tournament/teams/{tournament_id}/{team_id}/')
+
+    return render(request, 'tournament/tournament_player.html', {'players':players, 'team':team, 'form':form, 'tournament':tournament})
 
 #Equipo
 @login_required
@@ -214,6 +364,18 @@ def team(request):
 @login_required
 def team_edit(request, team_id):
     team_inf = get_object_or_404(Team, id=team_id)
+    
+        #Verificando que no esté en un torneo
+    user = get_object_or_404(UserBoli, id=request.user.id)
+    sales = Sale.objects.all().filter(type='Torneo', user_id=user.id)
+    sales_tournaments = []
+    for sale in sales:
+        sales_tournaments.append(SaleTournament.objects.all().filter(sale_id=sale.id).first())
+    has_tournament = False
+    for sale_tournament in sales_tournaments:
+        if (sale_tournament.sale.status == 'En proceso...' and sale_tournament.tournament.active) or (sale_tournament.sale.status == 'Comprado' and sale_tournament.tournament.active):
+            has_tournament = True
+            break
 
     if request.method == 'POST':
         form = TeamForm(request.POST, request.FILES, instance=team_inf)
@@ -224,13 +386,24 @@ def team_edit(request, team_id):
     else:
         form = TeamForm()
 
-    return render(request, 'tournament/team.html', {'form':form, 'team_inf':team_inf})
+    return render(request, 'tournament/team.html', {'form':form, 'team_inf':team_inf, 'has_tournament':has_tournament})
 
 @login_required
 def player(request):
     #Consiguiendo información del equipo a la que va a pertencer el player
     user = request.user
     team = get_object_or_404(Team, user_id=user.id)
+        #Verificando que no esté en un torneo
+    sales = Sale.objects.all().filter(type='Torneo', user_id=user.id)
+    sales_tournaments = []
+    for sale in sales:
+        sales_tournaments.append(SaleTournament.objects.all().filter(sale_id=sale.id).first())
+
+    has_tournament = False
+    for sale_tournament in sales_tournaments:
+        if (sale_tournament.sale.status == 'En proceso...' and sale_tournament.tournament.active) or (sale_tournament.sale.status == 'Comprado' and sale_tournament.tournament.active):
+            has_tournament = True
+            break
 
     #Si hay jugadores entonces muestra la información de ese jugador
     if Player.objects.all().filter(team_id=team.id).exists():
@@ -255,7 +428,7 @@ def player(request):
     else:
         form = PlayerForm()
 
-    return render(request, 'tournament/player.html', {'form':form, 'team':team, 'players':players})
+    return render(request, 'tournament/player.html', {'form':form, 'team':team, 'players':players, 'has_tournament':has_tournament})
 
 @login_required
 def player_edit(request, player_id):
@@ -263,6 +436,17 @@ def player_edit(request, player_id):
     user = request.user
     player_inf = get_object_or_404(Player, id=player_id)
     team = get_object_or_404(Team, user_id=user.id)
+        #Verificando que no esté en un torneo
+    sales = Sale.objects.all().filter(type='Torneo', user_id=user.id)
+    sales_tournaments = []
+    for sale in sales:
+        sales_tournaments.append(SaleTournament.objects.all().filter(sale_id=sale.id).first())
+
+    has_tournament = False
+    for sale_tournament in sales_tournaments:
+        if (sale_tournament.sale.status == 'En proceso...' and sale_tournament.tournament.active) or (sale_tournament.sale.status == 'Comprado' and sale_tournament.tournament.active):
+            has_tournament = True
+            break
 
     #Comprobando que el jugador que se va a editar pertenezca al equipo consultado
     if team.id != player_inf.team_id:
@@ -285,7 +469,7 @@ def player_edit(request, player_id):
     else:
         form = PlayerForm()
 
-    return render(request, 'tournament/player.html', {'form':form, 'team':team, 'players':players, 'player_inf':player_inf})
+    return render(request, 'tournament/player.html', {'form':form, 'team':team, 'players':players, 'player_inf':player_inf, 'has_tournament':has_tournament})
 
 #------------------Reservas---------------------------
 #Reservas
@@ -311,9 +495,9 @@ def profile(request):
     userForm = request.user
 
     if userForm.is_staff == 1:
-        shoppings = Sale.objects.all()
+        shoppings = Sale.objects.all().order_by('-date')[:5]
     else:
-        shoppings = Sale.objects.all().filter(user_id=userForm.id)
+        shoppings = Sale.objects.all().filter(user_id=userForm.id).order_by('-date')[:5]
 
     if request.method == 'POST':
         form = EditProfileForm(request.POST, request.FILES, instance=userForm)
