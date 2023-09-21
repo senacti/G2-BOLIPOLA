@@ -222,6 +222,9 @@ def delete_product(request, pk):
 #Torneos
 def tournament(request):
     #Si el usuario está registrado, entonces buscará coincidencias
+    if not request.user.is_authenticated:
+        return redirect('signin')
+
     user = get_object_or_404(UserBoli, id=request.user.id)
     sales = Sale.objects.all().filter(type='Torneo', user_id=user.id)
     tournaments = Tournament.objects.all()
@@ -241,7 +244,7 @@ def tournament(request):
     for sale in sales:
         sales_tournaments.append(SaleTournament.objects.all().filter(sale_id=sale.id).first())
     has_tournament = False
-    
+
     for sale_tournament in sales_tournaments:
         if (sale_tournament.sale.status == 'En proceso...' and sale_tournament.tournament.active) or (sale_tournament.sale.status == 'Comprado' and sale_tournament.tournament.active):
             has_tournament = True
