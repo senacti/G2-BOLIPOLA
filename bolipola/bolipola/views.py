@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm
+from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm, EventForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
 from core.models import Team, Player, Tournament, TournamentTeam, Event, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleEvent, SaleInventory, Inventory, Category
@@ -150,9 +150,28 @@ def sale_cancel(request, sale_id):
 
     messages.error(request, f'<i class="fa-solid fa-circle-xmark fa-bounce"></i> Venta cancelada')
     return redirect(f'/sale/information/{sale_id}')
+#------------------Eventos---------------------------#
+#Eventos
+@login_required
+def event(request):
+    events = Event.objects.all()
+    if request.method == 'POST':
+        form = EventForm(request.POST)
 
+        if form.is_valid():
+            new_category = form.save(commit=False)
+            new_category.save()
+
+            return redirect('event')
+        else:
+            return HttpResponse(form.errors)
+    else:
+        form = EventForm()
+
+    return render(request, 'event.html', {'form': form, 'events':events})
 #------------------Productos-----------------------
 #Productos
+@login_required
 def store(request):
     inventorys = Inventory.objects.all()
 

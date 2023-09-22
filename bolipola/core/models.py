@@ -131,11 +131,11 @@ class Event(models.Model):
     place = models.CharField(max_length=50, verbose_name='Lugar del evento')
     date = models.DateTimeField(verbose_name='Fecha del evento')
     cost = models.FloatField(verbose_name='Costo del evento')
-    guests = models.PositiveIntegerField(verbose_name='Cantidad de invitados')
+    guests = models.PositiveIntegerField(verbose_name='Cantidad de invitados', default=0)
     description = models.TextField(verbose_name='Descripción', default='Fiesta')
 
     def sale_type(self):
-        return 'Evento'
+        return 'Eventos'
 
     def __str__(self):
         return self.type
@@ -288,7 +288,7 @@ class Sale(models.Model):
         return money
 
     def search_intermediate(self):
-        listTables = [SaleTournament, SaleReservation, SaleInventory, SaleEvent]
+        listTables = [SaleTournament, SaleReservation, SaleInventory, SaleEvent, SaleEvent]
 
         for table in listTables:
             intermediate = table.objects.filter(sale_id=self.id)

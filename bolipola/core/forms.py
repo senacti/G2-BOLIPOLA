@@ -1,5 +1,5 @@
 from django import forms
-from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam
+from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam, Event
 
 #Formulario de venta
 class SaleForm(forms.ModelForm):
@@ -112,6 +112,7 @@ class TeamForm(forms.ModelForm):
 class TournamentTeamForm(forms.ModelForm):
     goals_for = forms.IntegerField(
         required=True,
+        min_value=0,
         widget=forms.NumberInput(
             attrs={
                 'class':'inf',
@@ -121,6 +122,7 @@ class TournamentTeamForm(forms.ModelForm):
 
     goals_against = forms.IntegerField(
         required=True,
+        min_value=0,
         widget=forms.NumberInput(
             attrs={
                 'class':'inf',
@@ -130,6 +132,7 @@ class TournamentTeamForm(forms.ModelForm):
 
     games_tied = forms.IntegerField(
         required=True,
+        min_value=0,
         widget=forms.NumberInput(
             attrs={
                 'class':'inf',
@@ -139,6 +142,7 @@ class TournamentTeamForm(forms.ModelForm):
 
     games_won = forms.IntegerField(
         required=True,
+        min_value=0,
         widget=forms.NumberInput(
             attrs={
                 'class':'inf',
@@ -148,6 +152,7 @@ class TournamentTeamForm(forms.ModelForm):
 
     games_lost = forms.IntegerField(
         required=True,
+        min_value=0,
         widget=forms.NumberInput(
             attrs={
                 'class':'inf',
@@ -232,7 +237,6 @@ class CardPlayerForm(forms.ModelForm):
     yellow_card = forms.IntegerField(
         required=True,
         min_value=0,
-        max_value=3,
         widget=forms.NumberInput(
             attrs={
                 'class':'inf',
@@ -243,7 +247,6 @@ class CardPlayerForm(forms.ModelForm):
     red_card = forms.IntegerField(
         required=True,
         min_value=0,
-        max_value=3,
         widget=forms.NumberInput(
             attrs={
                 'class':'inf',
@@ -254,7 +257,6 @@ class CardPlayerForm(forms.ModelForm):
     blue_card = forms.IntegerField(
         required=True,
         min_value=0,
-        max_value=3,
         widget=forms.NumberInput(
             attrs={
                 'class':'inf',
@@ -343,7 +345,7 @@ class ProductForm(forms.ModelForm):
             'due_date',
             'category'
         ]
-        
+#Formulario de inventario
 class InventoryForm(forms.ModelForm):
     product_quantity = forms.IntegerField(
         required=True,
@@ -360,7 +362,7 @@ class InventoryForm(forms.ModelForm):
         fields = [
             'product_quantity',
         ]
-
+#-----------Categorias-----------------#
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(
         max_length=100,
@@ -382,4 +384,69 @@ class CategoryForm(forms.ModelForm):
         fields = [
             'name',
             'forOlder'
+        ]
+#-----------Eventos-----------------#
+class EventForm(forms.ModelForm):
+    type = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Tipo de evento'
+            }
+        )
+    )
+    place = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Lugar del evento'
+            }
+        )
+    )
+    date = forms.DateField(
+        widget=forms.DateInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Fecha del evento',
+                'type':'date'
+            }
+        )
+    )
+    cost = forms.FloatField(
+        widget=forms.NumberInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Costo del evento'
+            }
+        )
+    )
+    guest = forms.CharField(
+        max_length=100,
+        
+        widget=forms.TextInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Invitados del evento'
+            }
+        )
+    )
+    description = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Descripción del evento'
+            }
+        )
+    )
+    class Meta:
+        model = Event
+        fields = [
+            'type',
+            'place',
+            'date',
+            'cost',
+            'guest',
+            'description',
         ]
