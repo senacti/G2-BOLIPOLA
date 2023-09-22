@@ -18,6 +18,18 @@ body {
     height: 95vh;
 }
 
+.exitContainer {
+    position: absolute;
+    margin-top: 3rem;
+    margin-bottom: 57rem;
+    margin-right: 54rem;
+}
+
+.exitContainer i {
+    font-size: 2.2rem;
+    color: #CB4335;
+}
+
 .main {
     display: grid;
     place-items: center;
@@ -311,6 +323,12 @@ body {
 
 .box__right-moreList-button i {
     font-size: 1.5rem;
+}
+
+.box__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .box__bottom-logo {

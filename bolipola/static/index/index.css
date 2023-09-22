@@ -36,7 +36,7 @@ html {
 /* ********************************** */
 .banner {
 	background-image: linear-gradient(100deg, #000000, #00000020),
-		url('./images/coctel.png');
+		url('../index/images/banner.jpg');
 	height: 60rem;
 	background-size: cover;
 	background-position: center;
@@ -289,7 +289,6 @@ html {
 .button-group span {
 	border: 1px solid var(--primary-color);
 	padding: 0.8rem;
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -327,7 +326,6 @@ html {
 .content-card-product h3 {
 	grid-row: 2/3;
 	grid-column: 1/-1;
-
 	font-weight: 400;
 	font-size: 1.6rem;
 	margin-bottom: 1rem;
@@ -341,9 +339,10 @@ html {
 	justify-self: start;
 	border: 2px solid var(--primary-color);
 	padding: 1rem;
+	width: 4.5rem;
+	height: 4.5rem;
 	border-radius: 50%;
 	transition: all 0.4s ease;
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -356,6 +355,12 @@ html {
 .add-cart a {
 	font-size: 1.5rem;
 	color: var(--primary-color);
+}
+
+.add-cart a i {
+	position: relative;
+	top: 0.2rem;
+	font-size: 2rem;
 }
 
 .add-cart:hover a {

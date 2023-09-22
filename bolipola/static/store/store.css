@@ -24,12 +24,25 @@
 }
 .list .item .title{
     font-weight: 600;
+	font-size: 1.4rem;
     color: #000;
 }
 .list .item .price{
     margin: 10px;
     color: #000;
 }
+
+.list .item .quantity {
+	margin-bottom: 0.5rem;
+	color: #000;
+}
+
+.list .item .description {
+	margin-bottom: 1.5rem;
+	font-size: 1.2rem;
+	color: #000;
+}
+
 .list .item button{
 	border-radius: 10px;
 	background-color: #c63424;
@@ -42,6 +55,7 @@
 	position: relative;
 }	
 .list .item button:hover{
+	cursor: pointer;
 	background-color: #da4332;
 }
 .card{
