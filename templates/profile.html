@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'sale/status/status.css' %}">
+    <link rel="stylesheet" href="{% static 'profile/styles/profile.css' %}">
+    <script src="https://kit.fontawesome.com/6117eaa017.js" crossorigin="anonymous"></script>
+    <title>Perfil</title>
+</head>
+<body>
+
+    <a class="exitContainer" href="{% url 'index' %}">
+        <i class="fa-regular fa-circle-left fa-xl"></i>
+    </a>
+
+    <div class="main">
+        <form class="main-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="box">
+                <legend class="box__legend">
+                    <img class="box__legend-img" src="{{ user.avatar.url }}" alt="Foto de perfil">
+
+                    <div id="modificadorInputFile">
+                        <img class="box__legend-imgDef" src="{{ user.avatar.url }}" hidden>
+                        <img class="box__legend-imgIndication" src="{% static 'profile/images/imagen.png' %}" hidden>
+                        {{ form.avatar }}
+                    </div>
+                </legend>
+
+                <div class="box__name">
+                    {{ form.first_name }}
+                    {{ form.last_name }}
+
+                    <span class="box__name-text" id="text_name"></span>
+                </div>
+
+                <div class="leftAndRight">
+                    <div class="box__left">
+                        <div class="box__left-title">
+                            <h3 class="box__left-title-rango">Rango<i class="fa-solid fa-circle-question fa-2xs"></i></h3>
+                            <div class="container_inf_rango" hidden>
+                                <span class="inf_rango">
+                                    Ganas puntos cada vez que completas una compra, entre más puntos más subiras tu rango
+                                </span>
+                            </div>
+                            <h2 class="box__left-title-value" id="rangeName" style="color: {{user.range_alias.0}};">{{ user.range_alias.1 }}</h2>
+                        </div>
+                        <div class="box__left-box">
+                            <div class="box__left-box-edit">
+                                <button type="button" class="box__left-box-edit-button" name="editAndMore"><i class="fa-solid fa-pen-to-square"></i></button>
+                            </div>
+                            <div class="box__left-box-inf">
+                                <span class="box__left-box-inf-span">
+                                    <i class="fa-solid fa-venus-mars"></i>{{ form.gender }}
+                                </span>
+                                <span class="box__left-box-inf-span">
+                                    <i class="fa-solid fa-phone"></i>{{ form.phone }}
+                                </span>
+                                <span class="box__left-box-inf-span">
+                                    <i class="fa-solid fa-envelope"></i>{{ form.email }}
+                                </span>
+                                <span class="box__left-box-inf-span">
+                                    <i class="fa-solid fa-cake-candles"></i>{{ form.birthdate }}<span class="box__left-box-inf-span-age">{{ user.age }} años</span>
+                                </span>
+                            </div>
+                            <div class="box__left-box-changePass">
+                                <a class="box__left-box-changePass-a" href="{% url 'change_password' %}" hidden>¿Cambiar contraseña?</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box__right">
+                            <h4 id="adminTitleList">
+                                Compras recientes{% if not user.is_staff %}:{% endif %}
+                                {% if user.is_staff %}
+                                    de clientes:
+                                {% endif %}
+                            </h4>
+                        <div class="box__right-list">
+                            {% if shoppings %}
+                                {% for shop in shoppings %}
+                                <div class="box__right-list-element" id="{{ shop.status_number }}" onclick="go(`{% url 'sale_information' shop.id %}`)">
+                                    {% if shop.type == 'Torneo' %}
+                                    <i class="fa-solid fa-users fa-xl"></i>
+                                    {% elif shop.type == 'Productos' %}
+                                    <i class="fa-solid fa-cart-shopping fa-xl"></i>
+                                    {% elif shop.type == 'Reserva' %}
+                                    <i class="fa-solid fa-face-laugh-wink fa-xl"></i>
+                                    {% else %}
+                                    <i class="fa-solid fa-cake-candles fa-xl"></i>
+                                    {% endif %}
+                                    <div class="titleAndDesc">
+                                        <h3 class="box__right-list-element-title">
+                                            {{ shop.type }}
+                                        </h3>
+                                        <p class="box__right-list-element-desc">{{ shop.date.date }}</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                            <div class="box__right-list-none" name="none">
+                                <img class="box__right-list-none-img" src="{% static 'profile/images/nada.png' %}">
+                                <span class="box__right-list-none-span">No hay nada que mostrar</span>
+                            </div>
+                            {% endif %}
+                        </div>
+    
+                        <div class="box__right-moreList">
+                            <a href="{% url 'sale_historic' %}">
+                                <button type="button" class="box__right-moreList-button" name="editAndMore"><i class="fa-solid fa-list"></i></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box__bottom">
+                    <div class="box__bottom-cancel">
+                        <button class="box__bottom-saveOrCancel-button" id="cancel" type="button" hidden>Cancelar</button>
+                    </div>
+                    <div class="box__bottom-logo">
+                        <a href="{% url 'index' %}">
+                            <img class="box__bottom-logo-img" src="{% static 'register/images/logo.png' %}" alt="Logo">
+                        </a>
+                    </div>  
+                    <div class="box__bottom-save">
+                        <button class="box__bottom-saveOrCancel-button" id="save" type="submit" hidden>Guardar</button>
+                    </div> 
+                </div>
+            </fieldset>
+        </form>
+
+        <div class="containerSignout">
+            <a class="containerSignout__a" href="{% url 'signout' %}">Cerrar sesión</a>
+        </div>
+    </div>
+
+
+    <!--Detectando fechas y color de rango para el js-->
+    <span class="birthdateDay" hidden>{{ user.birthdate.day }}</span>
+    <span class="birthdateMonth" hidden>{{ user.birthdate.month }}</span>
+    <span class="birthdateYear" hidden>{{ user.birthdate.year }}</span>
+
+    <script src="{% static 'profile/profile.js' %}"></script>
+    <script>
+        function go(url) {
+          window.location.href = url;
+        }
+      </script>
+</body>
+</html>

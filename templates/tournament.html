@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'tournament/tournament.css' %}">
+    <link rel="stylesheet" href="{% static 'header/header.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
+    <title>Torneos</title>
+</head>
+<body>
+    {% if not user.is_authenticated %}
+
+    <script>
+        window.location.href = "{% url 'signin' %}";
+    </script>
+
+    {% endif %}
+    <header>
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message-container" style="margin: 0;">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <div class="container-hero">
+            <div class="container hero">
+                <div class="customer-support">
+                    {% if user.is_staff and user.is_authenticated %}
+                    
+                    <div class="container-button-db">
+                        <a href="{% url 'admin:index' %}">
+                            <button class="button-db">
+                                <i class="fa-solid fa-database"></i><span>Base de datos</span>
+                            </button>  
+                        </a>          
+                    </div>
+
+                    {% else %}
+
+                    <i class="fa-brands fa-whatsapp" id="whatsappIcon"></i>
+                    <div class="content-customer-support">
+                        <span class="numberTop">+57 3202127187</span>             
+                    </div>
+
+                    {% endif %}
+                </div>
+
+                <div class="container-logo">
+                    <a class="logo" href="/"></a>
+                </div>
+
+                <div class="container-user">
+                    {% if user.is_authenticated %}
+                    <div class="linePerfil">
+                    </div>
+                    <div class="carAndPerfil" id="perfil">
+                        <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
+                    </div>
+
+                    {% else %}
+
+                    <div>
+                        <a class="linkUser" id="register" href="{% url 'register' %}">Regístrate</a></span>
+                        <a class="linkUser" id="signin" href="{% url 'signin' %}">Inicia sesión</a>
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container-navbar">
+            <nav class="navbar container">
+                <i class="fa-solid fa-bars" id="dropdown"></i>
+                <ul class="menu">
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    <li><a href="{% url 'store' %}">Productos</a></li>
+                    <li><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li><a href="{% url 'tournament' %}">Torneos</a></li>
+                    {% if user.is_staff and user.is_authenticated %}
+                    <li><a href="{% url 'inventory' %}">Inventario</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="menuDropDown" hidden>
+                    <li hidden><a href="{% url 'index' %}">Inicio</a></li>
+                    <li hidden><a href="{% url 'store' %}">Productos</a></li>
+                    <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
+                    {% if user.is_staff %}
+                    <li hidden><a href="{% url 'admin:index' %}">Base de datos</a></li>
+                    <li hidden><a href="{% url 'inventory' %}">Inventario</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="main">
+        {% if not user.is_staff and not has_team %}
+
+        <div class="main-top">
+            <a href="{% url 'team' %}"><button class="main-top-button">¡Crear equipo!</button></a>
+        </div>
+
+        {% elif not user.is_staff and has_team %}
+
+        <div class="teamCreatedButtons">
+            {% if has_tournament %}
+            <div class="main-top">
+                <a href="{% url 'team_edit' team.id %}"><button class="main-top-button">Ver equipo</button></a>
+            </div>
+            <div class="main-top">
+                <a href="{% url 'player' %}"><button class="main-top-button">Mis jugadores</button></a>
+            </div>
+            {% else %}
+            <div class="main-top">
+                <a href="{% url 'team_edit' team.id %}"><button class="main-top-button">Editar equipo</button></a>
+            </div>
+            <div class="main-top">
+                <a href="{% url 'player' %}"><button class="main-top-button">Consultar jugadores</button></a>
+            </div>
+            {% endif %}
+        </div>
+
+        {% elif user.is_staff %}
+
+        <div class="main-top">
+            <a href="/admin/core/tournament/add/"><button class="main-top-button">¡Crear torneo!</button></a>
+        </div>
+
+        {% endif %}
+
+
+        {% if has_team and not user.is_staff %}
+        <div class="tarjeta">
+            {% for tournament in tournaments %} 
+                <div class="box">
+                    <img src="{% static 'register/images/logo.png' %}">
+
+                    {% if not tournament.active %}
+                        <h1 style="color: #CB4335">FINALIZADO</h1>
+                    {% endif %}
+
+                    <div class="titulos">
+                        <h1>{{tournament.name}}</h1>
+                        <h3>TORNEO {{tournament.number_teams}} equipos</h3>
+                        <h3>Inscritos: {{ tournament.registered_teams }}</h3>
+                    </div>
+                    <p>En este torneo habran 16 equipos los cuales competiran por un premio de <b>{{ tournament.payment_to_money }}</b> de pesos colombianos</p>
+                    <p>el valor de inscripcion es de <b>{{tournament.cost_to_money}}</b> pesos cada equipo</p>
+
+                    {% if user.is_staff %}
+                        <a href="{% url 'tournament_teams' tournament.id %}"><input type="submit" value="Consultar" class="boton2"></a>
+                    {% else %}
+                    {% if sales_tournaments %}
+                    {% for sale_tournament in sales_tournaments %}
+                        {% if sale_tournament.tournament.id == tournament.id %}
+                            {% if sale_tournament.sale.status == 'Comprado' %}
+                                {% if sale_tournament.tournament.active %}
+                                    <a href="{% url 'tournament_teams' tournament.id %}">
+                                        <input type="submit" value="Ver estadisticas" class="boton2" style="background-color: green;">
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'tournament_teams' tournament.id %}">
+                                        <input type="submit" value="Consultar resultados" class="boton2">
+                                    </a>
+                                {% endif %}
+                            {% elif sale_tournament.sale.status == 'En proceso...' %}
+                                {% if saleournament.tournament.active %}
+                                    <a href="{% url 'sale_information' sale_tournament.sale.id %}">
+                                        <input type="submit" value="Cancelar inscripción" class="boton2">
+                                    </a>
+                                {% else %}
+                                    <a href="#">
+                                        <input type="submit" value="El torneo ha sido cancelado" class="boton2">
+                                    </a>
+                                {% endif %}
+                            {% elif sale_tournament.sale.status == 'Cancelado' %}
+                                <a href="#">
+                                    <input type="submit" value="Cancelado" class="boton2">
+                                </a>
+                            {% endif %}
+
+                        {% else %}
+                            {% if not has_tournament and tournament.active %}
+                            <a href="{% url 'sale' tournament.id tournament.sale_type %}">
+                                <input type="submit" value="Inscribirse" class="boton2">
+                            </a>
+                            {% endif %}
+                        {% endif %}
+                    {% empty %}
+                        <a href="{% url 'sale' tournament.id tournament.sale_type %}">
+                            <input type="submit" value="Inscribirse" class="boton2">
+                        </a>
+                    {% endfor %}
+                {% else %}
+                <a href="{% url 'sale' tournament.id tournament.sale_type %}">
+                    <input type="submit" value="Inscribirse" class="boton2">
+                </a>
+                {% endif %}
+                    {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+        {% endif %}
+    </div>
+    <script
+        src="https://kit.fontawesome.com/81581fb069.js"
+        crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'header/header.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrarme</title>
+    <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'register/register.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
+</head>
+<body>
+    <form class="form" autocomplete="off" method="POST" action="{% url 'register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="formBox">
+            <legend class="formBox__legend">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'register/images/logo.png' %}" alt="Logo empresa"class="formBox__legend-img">
+                </a>
+            </legend>
+
+            <div class="formBox__title">
+                <h1 class="formBox__title-h1">Crear cuenta</h1>
+            </div>
+
+            <div class="formBox__inf">
+                <div class="formBox__inf-box" id="boxLeft">
+
+                    <div class="formBox__inf-box-name" centrado="on">
+                        <label for="{{ form.first_name.id_for_label }}" class="formBox__inf-box-name-label">Nombre:</label>
+                        {{ form.first_name }}
+                    </div>
+
+                    <div class="formBox__inf-box-phone" centrado="off">
+                        <label for="{{ form.phone.id_for_label }}" class="formBox__inf-box-phone-label">Teléfono:</label>
+                        {{ form.phone }}
+                    </div>
+
+                    <div class="formBox__inf-box-date" centrado="off">
+                        <label for="{{ form.birthdate.id_for_label }}" class="formBox__inf-box-date-label">F. Nacimiento:</label>
+                        {{ form.birthdate }}
+                    </div>
+
+                    <div class="formBox__inf-box-pass" centrado="on">
+                        <label for="{{ form.password1.id_for_label }}" class="formBox__inf-box-pass-label">Contraseña:</label>
+                        {{ form.password1 }}
+                    </div>
+
+                </div>
+
+                <div class="formBox__inf-box" id="boxCenter">
+
+                    <div class="formBox__inf-box-avatar">
+                        <label for="{{ form.avatar.id_for_label }}" class="formBox__inf-box-avatar-label">Avatar</label>
+                        <div id="modificadorInputFile">
+                            {{ form.avatar }}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="formBox__inf-box" id="boxRight">
+                    
+                    <div class="formBox__inf-box-lastName" centrado="on">
+                        <label for="{{ form.last_name.id_for_label }}" class="formBox__inf-box-lastName-label">Apellido:</label>
+                        {{ form.last_name }}
+                    </div>
+
+                    <div class="formBox__inf-box-email" centrado="off">
+                        <label for="{{ form.email.id_for_label }}" class="formBox__inf-box-email-label">Correo:</label>
+                        {{ form.email }}
+                    </div>
+
+                    <div class="formBox__inf-box-gender" centrado="off">
+                        <label for="{{ form.gender.id_for_label }}" class="formBox__inf-box-gender-label">Género:</label>
+                        {{ form.gender }}
+                    </div>
+
+                    <div class="formBox__inf-box-pass" centrado="on">
+                        <label for="{{ form.password2.id_for_label }}" class="formBox__inf-box-pass-label">Confirmar contraseña:</label>
+                        {{ form.password2 }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="formBox__termsAndRegister">
+
+                <div class="formBox__terms">
+                    <input type="checkbox" class="formBox__terms-input" required>
+                    <span class="formBox__terms-span">Acepto los <a href="https://www.google.com" target="_blank" class="formBox__terms-span-a">términos y condiciones</a></span>
+                </div>
+    
+                <div class="formBox__register">
+                    <input type="submit" value="Registrarse" class="formBox__register-submit">
+                </div>
+                
+                {% if messages %}
+                    {% for msg in messages %}
+                    <div class="message-container">
+                        <span group="messages"
+                        class="
+                            {% if msg.tags == 'success' %}message-success{% endif %}
+                            {% if msg.tags == 'error' %}message-error{% endif %}
+                            {% if msg.tags == 'info' %}message-info{% endif %}
+                        "
+                        >
+                            {{ msg.message|safe }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </fieldset>
+
+        {{ form.password }}
+        {{ form.username }}
+    </form>
+    <script
+        src="https://kit.fontawesome.com/81581fb069.js"
+        crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'register/register.js' %}"></script>
+</body>
+</html>

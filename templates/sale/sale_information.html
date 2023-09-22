@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
+    <link rel="stylesheet" href="{% static 'sale/status/status.css' %}">
+    <link rel="stylesheet" href="{% static 'sale/sale.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="centrador">
+        <a class="exitContainer" href="{% url 'sale_historic' %}">
+            <i class="fa-solid fa-right-from-bracket fa-rotate-180 fa-xl"></i>
+        </a>
+
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message-container" style="margin: 1rem 0;">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        <form action="" class="form">
+            <fieldset class="main" id="{{ sale.status_number }}">
+                <legend class="main__legend">
+                    <img src="{% static 'register/images/logo.png' %}" alt="logo" class="main__legend-img">
+                </legend>
+                <div class="main__titleContainer">
+                    <input type="text" class="main__titleContainer-title" value="{{ sale.type }}" readonly>
+                    <div class="main__titleContainer-check">
+                        <span class="main__titleContainer-check-asterisc">
+                            *********************************
+                        </span>
+                        <span class="main__titleContainer-check-title">
+                            {% if user.is_staff %}
+                            VENTA
+                            {% else %}
+                            RECIBO
+                            {% endif %}
+                        </span>
+                        <span class="main__titleContainer-check-asterisc">
+                            *********************************
+                        </span>
+                    </div>
+                </div>
+                <div class="main__inf">
+                    {% if user.is_staff %}
+                        <div class="main__inf-item">
+                            <span style="font-weight: bold;">Comprador:</span>
+                            <input type="text" value="{{sale.user.first_name}} {{sale.user.last_name}}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span style="font-weight: bold;">Correo del comprador:</span>
+                            <input type="text" value="{{ sale.user.email }}" readonly>
+                        </div>
+                    {% endif %}
+                    
+                    <!--Caso de venta torneo-->
+                    {% if sale.type == 'Torneo'%}
+                    
+                    <div id="saleTypeInformation">
+                        <span>-------------- INFORMACIÓN DEL TORNEO --------------</span>
+
+                        <div class="main__inf-item">
+                            <span>Equipo del comprador:</span>
+                            <input type="text" value="{{ team.name }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Nombre del torneo:</span>
+                            <input type="text" value="{{ inf.name }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Fecha de inicio:</span>
+                            <input type="text" value="{{ inf.date.date }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Costo de inscripción:</span>
+                            <input type="text" value="{{ inf.cost_to_money }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Premio:</span>
+                            <input type="text" value="{{ inf.payment_to_money }}" readonly>
+                        </div>
+
+                        <span>------------------------------------------------------------------------</span>
+                    </div>
+
+                    {% elif sale.type == 'Reserva'%}
+                    <div id="saleTypeInformation">
+                        <span>-------------- INFORMACIÓN DE LA RESERVA --------------</span>
+
+                        <div class="main__inf-item">
+                            <span>Tipo de reserva:</span>
+                            <input type="text" value="{{ inf.type }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Fecha reservado:</span>
+                            <input type="text" value="{{ inf.date }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Hora inicio:</span>
+                            <input type="text" value="{{ inf.start_time }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Hora fin:</span>
+                            <input type="text" value="{{ inf.end_time }}" readonly>
+                        </div>
+                        
+                        <span>------------------------------------------------------------------------</span>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="moreInf">
+                        <div class="main__inf-item">
+                            <span>Tipo de pago:</span>
+                            <input type="text" value="{{ sale.payment_type }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Estado:</span>
+                            <input type="text" value="{{ sale.status }}" readonly>
+                        </div>
+    
+                        <div class="main__inf-item">
+                            <span>Fecha de compra:</span>
+                            <input type="text" value="{{ sale.date.date }}" readonly>
+                        </div>
+                        <div class="main__inf-item">
+                            <span>Hora:</span>
+                            <input type="text" value="{{ sale.date.time }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Cantidad total comprado:</span>
+                            <input type="number" value="{{ sale.product_quantity }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="bottomInf">
+                        <div class="main__inf-item">
+                            <span>Código recibo:</span>
+                            <input id="idSale" type="number" value="{{ sale.id }}" readonly>
+                        </div>
+                        <div class="main__inf-item">
+                            <span>Costo total:</span>
+                            <input id="costSale" type="text" value="{{ sale.cost_to_money }}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            {% if user.is_staff and sale.status == 'En proceso...' %}
+            <div class="buttons">
+                <div class="buttons_container">
+                    <a href="{% url 'sale_cancel' sale.id %}">
+                        <button type="button" class="buttons__container-button" id="cancel">Cancelar<br>venta</button>
+                    </a>
+                </div>
+                <div class="buttons__container">
+                    <a href="{% url 'sale_confirm' sale.id %}">
+                        <button type="button" class="buttons__container-button" id="buy">Confirmar<br>venta</button>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if not user.is_staff and sale.status == 'En proceso...'%}
+            <div class="buttons">
+                <div class="buttons_container">
+                    <a href="{% url 'sale_cancel' sale.id %}">
+                        <button type="button" class="buttons__container-button" id="cancel">Cancelar<br>venta</button>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+
+    <script src="https://kit.fontawesome.com/6117eaa017.js" crossorigin="anonymous"></script>
+</body>
+</html>
