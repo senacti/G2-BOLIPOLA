@@ -122,7 +122,7 @@
              <h2 class="reservas">Boliranas</h2>
              <img src="{% static 'reserve/images/bolirana.jpg' %}" class="reference-img"/>
              {% if not user.is_staff %}
-             <p>¡Reserva ya tu(s) mesa(s)<br>de Bolirana!</p>
+             <p>¡Reserva ya tu<br>Bolirana!</p>
              <a href="{% url 'bolirana_form' %}">
                 <button>Reservar Boliranas</button>
              </a>

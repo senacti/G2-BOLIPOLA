@@ -140,6 +140,8 @@
 
         {% endif %}
 
+
+        {% if has_team and not user.is_staff %}
         <div class="tarjeta">
             {% for tournament in tournaments %} 
                 <div class="box">
@@ -211,6 +213,7 @@
             {% endfor %}
         </div>
         </div>
+        {% endif %}
     </div>
     <script
         src="https://kit.fontawesome.com/81581fb069.js"
