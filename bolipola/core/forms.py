@@ -1,5 +1,6 @@
 from django import forms
 from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam, Event
+from datetime import datetime
 
 #Formulario de venta
 class SaleForm(forms.ModelForm):
@@ -271,7 +272,8 @@ class CardPlayerForm(forms.ModelForm):
             'red_card',
             'blue_card',
         ]
-
+fecha_hoy = datetime.now()
+fecha_hoy_str = fecha_hoy.strftime('%Y-%m-%d')
 #Formulario de producto
 class ProductForm(forms.ModelForm):
     name = forms.CharField(
@@ -316,13 +318,15 @@ class ProductForm(forms.ModelForm):
         )
     )
 
+
     due_date = forms.DateField(
         required=True,
         widget=forms.DateInput(
             attrs={
                 'class':'form-control',
                 'placeholder':'Fecha de vencimiento',
-                'type':'date'
+                'type':'date',
+                'min': fecha_hoy_str
             }
         )
     )
