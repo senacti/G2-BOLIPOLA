@@ -83,7 +83,7 @@ CREATE TABLE `admin_interface_theme` (
   `collapsible_tabular_inlines_collapsed` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admin_interface_theme_name_30bda70f_uniq` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,7 @@ CREATE TABLE `admin_interface_theme` (
 
 LOCK TABLES `admin_interface_theme` WRITE;
 /*!40000 ALTER TABLE `admin_interface_theme` DISABLE KEYS */;
-INSERT INTO `admin_interface_theme` VALUES (1,'Django',0,'Administración de Django',1,'',1,'#0C4B33','#F5DD5D','#44B78B','#FFFFFF','#C9F0DD','#44B78B','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0C3C26','#156641','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'','0.3','',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0,'#29B864',0,1,0,1),(2,'Bolipola',1,'BoliPola admin',1,'admin-interface/logo/logo.png',1,'#CB4335','#FBFCFC','#FBFCFC','#FFFFFF','#F1F1F1','#B23B2E','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0C3C26','#156641','#CB4335','#BABBBB','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'admin-interface/favicon/logo.png','0.3','',1,'#2BFF32',1,1,1,'code',1,0,0,'#DADBDB','#FFFFFF',70,400,1,'default-select',1,0,0,0,'#29B864',0,1,0,1);
+INSERT INTO `admin_interface_theme` VALUES (1,'Django',1,'Administración de Django',1,'',1,'#0C4B33','#F5DD5D','#44B78B','#FFFFFF','#C9F0DD','#44B78B','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0C3C26','#156641','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'','0.3','',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0,'#29B864',0,1,0,1);
 /*!40000 ALTER TABLE `admin_interface_theme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +172,7 @@ CREATE TABLE `auth_permission` (
 
 LOCK TABLES `auth_permission` WRITE;
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add Theme',1,'add_theme'),(2,'Can change Theme',1,'change_theme'),(3,'Can delete Theme',1,'delete_theme'),(4,'Can view Theme',1,'view_theme'),(5,'Can add log entry',2,'add_logentry'),(6,'Can change log entry',2,'change_logentry'),(7,'Can delete log entry',2,'delete_logentry'),(8,'Can view log entry',2,'view_logentry'),(9,'Can add permission',3,'add_permission'),(10,'Can change permission',3,'change_permission'),(11,'Can delete permission',3,'delete_permission'),(12,'Can view permission',3,'view_permission'),(13,'Can add group',4,'add_group'),(14,'Can change group',4,'change_group'),(15,'Can delete group',4,'delete_group'),(16,'Can view group',4,'view_group'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add Calendario',7,'add_calendar'),(26,'Can change Calendario',7,'change_calendar'),(27,'Can delete Calendario',7,'delete_calendar'),(28,'Can view Calendario',7,'view_calendar'),(29,'Can add Categoría',8,'add_category'),(30,'Can change Categoría',8,'change_category'),(31,'Can delete Categoría',8,'delete_category'),(32,'Can view Categoría',8,'view_category'),(33,'Can add Comentario',9,'add_comment'),(34,'Can change Comentario',9,'change_comment'),(35,'Can delete Comentario',9,'delete_comment'),(36,'Can view Comentario',9,'view_comment'),(37,'Can add Evento',10,'add_event'),(38,'Can change Evento',10,'change_event'),(39,'Can delete Evento',10,'delete_event'),(40,'Can view Evento',10,'view_event'),(41,'Can add Inventario',11,'add_inventory'),(42,'Can change Inventario',11,'change_inventory'),(43,'Can delete Inventario',11,'delete_inventory'),(44,'Can view Inventario',11,'view_inventory'),(45,'Can add Salida',12,'add_output'),(46,'Can change Salida',12,'change_output'),(47,'Can delete Salida',12,'delete_output'),(48,'Can view Salida',12,'view_output'),(49,'Can add Jugador',13,'add_player'),(50,'Can change Jugador',13,'change_player'),(51,'Can delete Jugador',13,'delete_player'),(52,'Can view Jugador',13,'view_player'),(53,'Can add Producto',14,'add_product'),(54,'Can change Producto',14,'change_product'),(55,'Can delete Producto',14,'delete_product'),(56,'Can view Producto',14,'view_product'),(57,'Can add Reserva',15,'add_reservation'),(58,'Can change Reserva',15,'change_reservation'),(59,'Can delete Reserva',15,'delete_reservation'),(60,'Can view Reserva',15,'view_reservation'),(61,'Can add Venta',16,'add_sale'),(62,'Can change Venta',16,'change_sale'),(63,'Can delete Venta',16,'delete_sale'),(64,'Can view Venta',16,'view_sale'),(65,'Can add Equipo',17,'add_team'),(66,'Can change Equipo',17,'change_team'),(67,'Can delete Equipo',17,'delete_team'),(68,'Can view Equipo',17,'view_team'),(69,'Can add Torneo',18,'add_tournament'),(70,'Can change Torneo',18,'change_tournament'),(71,'Can delete Torneo',18,'delete_tournament'),(72,'Can view Torneo',18,'view_tournament'),(73,'Can add Torneo y equipo',19,'add_tournamentteam'),(74,'Can change Torneo y equipo',19,'change_tournamentteam'),(75,'Can delete Torneo y equipo',19,'delete_tournamentteam'),(76,'Can view Torneo y equipo',19,'view_tournamentteam'),(77,'Can add user',20,'add_userboli'),(78,'Can change user',20,'change_userboli'),(79,'Can delete user',20,'delete_userboli'),(80,'Can view user',20,'view_userboli'),(81,'Can add Venta y torneo',21,'add_saletournament'),(82,'Can change Venta y torneo',21,'change_saletournament'),(83,'Can delete Venta y torneo',21,'delete_saletournament'),(84,'Can view Venta y torneo',21,'view_saletournament'),(85,'Can add Venta y reserva',22,'add_salereservation'),(86,'Can change Venta y reserva',22,'change_salereservation'),(87,'Can delete Venta y reserva',22,'delete_salereservation'),(88,'Can view Venta y reserva',22,'view_salereservation'),(89,'Can add Venta e inventario',23,'add_saleinventory'),(90,'Can change Venta e inventario',23,'change_saleinventory'),(91,'Can delete Venta e inventario',23,'delete_saleinventory'),(92,'Can view Venta e inventario',23,'view_saleinventory'),(93,'Can add Venta y evento',24,'add_saleevent'),(94,'Can change Venta y evento',24,'change_saleevent'),(95,'Can delete Venta y evento',24,'delete_saleevent'),(96,'Can view Venta y evento',24,'view_saleevent');
+INSERT INTO `auth_permission` VALUES (1,'Can add Theme',1,'add_theme'),(2,'Can change Theme',1,'change_theme'),(3,'Can delete Theme',1,'delete_theme'),(4,'Can view Theme',1,'view_theme'),(5,'Can add log entry',2,'add_logentry'),(6,'Can change log entry',2,'change_logentry'),(7,'Can delete log entry',2,'delete_logentry'),(8,'Can view log entry',2,'view_logentry'),(9,'Can add permission',3,'add_permission'),(10,'Can change permission',3,'change_permission'),(11,'Can delete permission',3,'delete_permission'),(12,'Can view permission',3,'view_permission'),(13,'Can add group',4,'add_group'),(14,'Can change group',4,'change_group'),(15,'Can delete group',4,'delete_group'),(16,'Can view group',4,'view_group'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add Calendario',7,'add_calendar'),(26,'Can change Calendario',7,'change_calendar'),(27,'Can delete Calendario',7,'delete_calendar'),(28,'Can view Calendario',7,'view_calendar'),(29,'Can add Categoría',8,'add_category'),(30,'Can change Categoría',8,'change_category'),(31,'Can delete Categoría',8,'delete_category'),(32,'Can view Categoría',8,'view_category'),(33,'Can add Comentario',9,'add_comment'),(34,'Can change Comentario',9,'change_comment'),(35,'Can delete Comentario',9,'delete_comment'),(36,'Can view Comentario',9,'view_comment'),(37,'Can add Evento',10,'add_event'),(38,'Can change Evento',10,'change_event'),(39,'Can delete Evento',10,'delete_event'),(40,'Can view Evento',10,'view_event'),(41,'Can add Inventario',11,'add_inventory'),(42,'Can change Inventario',11,'change_inventory'),(43,'Can delete Inventario',11,'delete_inventory'),(44,'Can view Inventario',11,'view_inventory'),(45,'Can add Salida',12,'add_output'),(46,'Can change Salida',12,'change_output'),(47,'Can delete Salida',12,'delete_output'),(48,'Can view Salida',12,'view_output'),(49,'Can add Jugador',13,'add_player'),(50,'Can change Jugador',13,'change_player'),(51,'Can delete Jugador',13,'delete_player'),(52,'Can view Jugador',13,'view_player'),(53,'Can add Producto',14,'add_product'),(54,'Can change Producto',14,'change_product'),(55,'Can delete Producto',14,'delete_product'),(56,'Can view Producto',14,'view_product'),(57,'Can add Reserva',15,'add_reservation'),(58,'Can change Reserva',15,'change_reservation'),(59,'Can delete Reserva',15,'delete_reservation'),(60,'Can view Reserva',15,'view_reservation'),(61,'Can add Venta',16,'add_sale'),(62,'Can change Venta',16,'change_sale'),(63,'Can delete Venta',16,'delete_sale'),(64,'Can view Venta',16,'view_sale'),(65,'Can add Venta y evento',17,'add_saleevent'),(66,'Can change Venta y evento',17,'change_saleevent'),(67,'Can delete Venta y evento',17,'delete_saleevent'),(68,'Can view Venta y evento',17,'view_saleevent'),(69,'Can add Venta e inventario',18,'add_saleinventory'),(70,'Can change Venta e inventario',18,'change_saleinventory'),(71,'Can delete Venta e inventario',18,'delete_saleinventory'),(72,'Can view Venta e inventario',18,'view_saleinventory'),(73,'Can add Venta y reserva',19,'add_salereservation'),(74,'Can change Venta y reserva',19,'change_salereservation'),(75,'Can delete Venta y reserva',19,'delete_salereservation'),(76,'Can view Venta y reserva',19,'view_salereservation'),(77,'Can add Venta y torneo',20,'add_saletournament'),(78,'Can change Venta y torneo',20,'change_saletournament'),(79,'Can delete Venta y torneo',20,'delete_saletournament'),(80,'Can view Venta y torneo',20,'view_saletournament'),(81,'Can add Equipo',21,'add_team'),(82,'Can change Equipo',21,'change_team'),(83,'Can delete Equipo',21,'delete_team'),(84,'Can view Equipo',21,'view_team'),(85,'Can add Torneo',22,'add_tournament'),(86,'Can change Torneo',22,'change_tournament'),(87,'Can delete Torneo',22,'delete_tournament'),(88,'Can view Torneo',22,'view_tournament'),(89,'Can add Torneo y equipo',23,'add_tournamentteam'),(90,'Can change Torneo y equipo',23,'change_tournamentteam'),(91,'Can delete Torneo y equipo',23,'delete_tournamentteam'),(92,'Can view Torneo y equipo',23,'view_tournamentteam'),(93,'Can add user',24,'add_userboli'),(94,'Can change user',24,'change_userboli'),(95,'Can delete user',24,'delete_userboli'),(96,'Can view user',24,'view_userboli');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +185,7 @@ DROP TABLE IF EXISTS `calendario`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `calendario` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `date` datetime(6) NOT NULL,
+  `date` date NOT NULL,
   `availability` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -212,7 +212,7 @@ CREATE TABLE `categoria` (
   `name` varchar(100) NOT NULL,
   `forOlder` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,6 +221,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (1,'A',0),(2,'Alcohol',1),(3,'Paquetes',0),(4,'Cigarros',1),(5,'Bebidas',0);
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +283,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2023-09-18 04:10:49.421570','2','Bolipola',1,'[{\"added\": {}}]',1,1),(2,'2023-09-18 13:50:20.024976','1','Torneo Bolipola',1,'[{\"added\": {}}]',18,1);
+INSERT INTO `django_admin_log` VALUES (1,'2023-09-21 21:54:54.587056','1','Pelea de pollos',1,'[{\"added\": {}}]',22,1),(2,'2023-09-22 01:48:43.981596','2','Duendes navideños',1,'[{\"added\": {}}]',22,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,7 +309,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (2,'admin','logentry'),(1,'admin_interface','theme'),(4,'auth','group'),(3,'auth','permission'),(5,'contenttypes','contenttype'),(7,'core','calendar'),(8,'core','category'),(9,'core','comment'),(10,'core','event'),(11,'core','inventory'),(12,'core','output'),(13,'core','player'),(14,'core','product'),(15,'core','reservation'),(16,'core','sale'),(24,'core','saleevent'),(23,'core','saleinventory'),(22,'core','salereservation'),(21,'core','saletournament'),(17,'core','team'),(18,'core','tournament'),(19,'core','tournamentteam'),(6,'sessions','session'),(20,'user','userboli');
+INSERT INTO `django_content_type` VALUES (2,'admin','logentry'),(1,'admin_interface','theme'),(4,'auth','group'),(3,'auth','permission'),(5,'contenttypes','contenttype'),(7,'core','calendar'),(8,'core','category'),(9,'core','comment'),(10,'core','event'),(11,'core','inventory'),(12,'core','output'),(13,'core','player'),(14,'core','product'),(15,'core','reservation'),(16,'core','sale'),(17,'core','saleevent'),(18,'core','saleinventory'),(19,'core','salereservation'),(20,'core','saletournament'),(21,'core','team'),(22,'core','tournament'),(23,'core','tournamentteam'),(6,'sessions','session'),(24,'user','userboli');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,7 +326,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,7 +335,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-09-18 04:02:29.552109'),(2,'contenttypes','0002_remove_content_type_name','2023-09-18 04:02:30.343525'),(3,'auth','0001_initial','2023-09-18 04:02:34.285548'),(4,'auth','0002_alter_permission_name_max_length','2023-09-18 04:02:35.894732'),(5,'auth','0003_alter_user_email_max_length','2023-09-18 04:02:35.991884'),(6,'auth','0004_alter_user_username_opts','2023-09-18 04:02:36.064170'),(7,'auth','0005_alter_user_last_login_null','2023-09-18 04:02:36.095286'),(8,'auth','0006_require_contenttypes_0002','2023-09-18 04:02:36.160555'),(9,'auth','0007_alter_validators_add_error_messages','2023-09-18 04:02:36.270024'),(10,'auth','0008_alter_user_username_max_length','2023-09-18 04:02:36.370627'),(11,'auth','0009_alter_user_last_name_max_length','2023-09-18 04:02:36.554484'),(12,'auth','0010_alter_group_name_max_length','2023-09-18 04:02:36.962009'),(13,'auth','0011_update_proxy_permissions','2023-09-18 04:02:37.020227'),(14,'auth','0012_alter_user_first_name_max_length','2023-09-18 04:02:37.087559'),(15,'user','0001_initial','2023-09-18 04:02:41.193013'),(16,'admin','0001_initial','2023-09-18 04:02:44.184523'),(17,'admin','0002_logentry_remove_auto_add','2023-09-18 04:02:44.255874'),(18,'admin','0003_logentry_add_action_flag_choices','2023-09-18 04:02:44.286345'),(19,'admin_interface','0001_initial','2023-09-18 04:02:44.533745'),(20,'admin_interface','0002_add_related_modal','2023-09-18 04:02:45.038409'),(21,'admin_interface','0003_add_logo_color','2023-09-18 04:02:45.169046'),(22,'admin_interface','0004_rename_title_color','2023-09-18 04:02:45.275572'),(23,'admin_interface','0005_add_recent_actions_visible','2023-09-18 04:02:45.407276'),(24,'admin_interface','0006_bytes_to_str','2023-09-18 04:02:45.468608'),(25,'admin_interface','0007_add_favicon','2023-09-18 04:02:45.594795'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-09-18 04:02:45.840900'),(27,'admin_interface','0009_add_enviroment','2023-09-18 04:02:46.205082'),(28,'admin_interface','0010_add_localization','2023-09-18 04:02:46.249271'),(29,'admin_interface','0011_add_environment_options','2023-09-18 04:02:46.830469'),(30,'admin_interface','0012_update_verbose_names','2023-09-18 04:02:46.869902'),(31,'admin_interface','0013_add_related_modal_close_button','2023-09-18 04:02:47.092789'),(32,'admin_interface','0014_name_unique','2023-09-18 04:02:47.350980'),(33,'admin_interface','0015_add_language_chooser_active','2023-09-18 04:02:47.505662'),(34,'admin_interface','0016_add_language_chooser_display','2023-09-18 04:02:47.911285'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-09-18 04:02:47.977515'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-09-18 04:02:48.351512'),(37,'admin_interface','0019_add_form_sticky','2023-09-18 04:02:48.643359'),(38,'admin_interface','0020_module_selected_colors','2023-09-18 04:02:49.201206'),(39,'admin_interface','0021_file_extension_validator','2023-09-18 04:02:49.352794'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-09-18 04:02:49.611098'),(41,'admin_interface','0023_theme_foldable_apps','2023-09-18 04:02:49.741915'),(42,'admin_interface','0024_remove_theme_css','2023-09-18 04:02:49.842382'),(43,'admin_interface','0025_theme_language_chooser_control','2023-09-18 04:02:50.213036'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-09-18 04:02:50.495861'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-09-18 04:02:50.616717'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-09-18 04:02:50.842905'),(47,'admin_interface','0029_theme_css_generic_link_active_color','2023-09-18 04:02:51.002849'),(48,'admin_interface','0030_theme_collapsible_stacked_inlines_and_more','2023-09-18 04:02:51.793800'),(49,'core','0001_initial','2023-09-18 04:02:58.832757'),(50,'core','0002_initial','2023-09-18 04:03:20.480896'),(51,'sessions','0001_initial','2023-09-18 04:03:21.156150'),(52,'core','0003_tournament_active','2023-09-18 13:27:22.136214'),(53,'core','0004_alter_tournament_number_teams_and_more','2023-09-18 13:42:01.503216'),(54,'core','0005_remove_sale_discount_remove_sale_total_discount','2023-09-18 14:02:49.577940'),(55,'core','0006_sale_name','2023-09-18 14:26:07.450636'),(56,'core','0007_remove_sale_name','2023-09-18 16:19:34.153833'),(57,'core','0002_rename_registration_cost_tournament_cost','2023-09-18 21:11:06.431411'),(58,'core','0003_alter_sale_status','2023-09-18 21:42:28.859695'),(59,'core','0004_alter_sale_inventory','2023-09-18 23:58:47.911653'),(60,'core','0002_alter_inventory_entry_date_alter_output_output_date_and_more','2023-09-19 01:03:21.722776'),(61,'core','0003_alter_inventory_entry_date_alter_output_output_date_and_more','2023-09-19 01:11:49.998548'),(62,'core','0004_alter_inventory_entry_date_alter_output_output_date_and_more','2023-09-19 01:34:52.292329'),(63,'core','0005_alter_inventory_entry_date_alter_output_output_date_and_more','2023-09-19 01:46:04.548899'),(64,'core','0006_alter_inventory_entry_date_alter_output_output_date_and_more','2023-09-19 01:49:21.075484');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-09-21 21:43:10.605045'),(2,'contenttypes','0002_remove_content_type_name','2023-09-21 21:43:11.638856'),(3,'auth','0001_initial','2023-09-21 21:43:16.971088'),(4,'auth','0002_alter_permission_name_max_length','2023-09-21 21:43:18.045787'),(5,'auth','0003_alter_user_email_max_length','2023-09-21 21:43:18.097834'),(6,'auth','0004_alter_user_username_opts','2023-09-21 21:43:18.138872'),(7,'auth','0005_alter_user_last_login_null','2023-09-21 21:43:18.180910'),(8,'auth','0006_require_contenttypes_0002','2023-09-21 21:43:18.220947'),(9,'auth','0007_alter_validators_add_error_messages','2023-09-21 21:43:18.323039'),(10,'auth','0008_alter_user_username_max_length','2023-09-21 21:43:18.364076'),(11,'auth','0009_alter_user_last_name_max_length','2023-09-21 21:43:18.407115'),(12,'auth','0010_alter_group_name_max_length','2023-09-21 21:43:18.538002'),(13,'auth','0011_update_proxy_permissions','2023-09-21 21:43:18.581041'),(14,'auth','0012_alter_user_first_name_max_length','2023-09-21 21:43:18.622079'),(15,'user','0001_initial','2023-09-21 21:43:23.837394'),(16,'admin','0001_initial','2023-09-21 21:43:25.628516'),(17,'admin','0002_logentry_remove_auto_add','2023-09-21 21:43:25.673550'),(18,'admin','0003_logentry_add_action_flag_choices','2023-09-21 21:43:25.799665'),(19,'admin_interface','0001_initial','2023-09-21 21:43:26.186075'),(20,'admin_interface','0002_add_related_modal','2023-09-21 21:43:26.741647'),(21,'admin_interface','0003_add_logo_color','2023-09-21 21:43:26.879772'),(22,'admin_interface','0004_rename_title_color','2023-09-21 21:43:27.295069'),(23,'admin_interface','0005_add_recent_actions_visible','2023-09-21 21:43:27.866564'),(24,'admin_interface','0006_bytes_to_str','2023-09-21 21:43:27.936628'),(25,'admin_interface','0007_add_favicon','2023-09-21 21:43:28.232896'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-09-21 21:43:28.487965'),(27,'admin_interface','0009_add_enviroment','2023-09-21 21:43:28.964441'),(28,'admin_interface','0010_add_localization','2023-09-21 21:43:29.069302'),(29,'admin_interface','0011_add_environment_options','2023-09-21 21:43:29.743236'),(30,'admin_interface','0012_update_verbose_names','2023-09-21 21:43:29.780235'),(31,'admin_interface','0013_add_related_modal_close_button','2023-09-21 21:43:30.172236'),(32,'admin_interface','0014_name_unique','2023-09-21 21:43:30.527672'),(33,'admin_interface','0015_add_language_chooser_active','2023-09-21 21:43:30.686816'),(34,'admin_interface','0016_add_language_chooser_display','2023-09-21 21:43:30.825809'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-09-21 21:43:30.863262'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-09-21 21:43:31.001387'),(37,'admin_interface','0019_add_form_sticky','2023-09-21 21:43:31.430929'),(38,'admin_interface','0020_module_selected_colors','2023-09-21 21:43:31.698171'),(39,'admin_interface','0021_file_extension_validator','2023-09-21 21:43:31.738208'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-09-21 21:43:32.017034'),(41,'admin_interface','0023_theme_foldable_apps','2023-09-21 21:43:32.238234'),(42,'admin_interface','0024_remove_theme_css','2023-09-21 21:43:32.336324'),(43,'admin_interface','0025_theme_language_chooser_control','2023-09-21 21:43:32.545496'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-09-21 21:43:32.680619'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-09-21 21:43:32.830755'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-09-21 21:43:33.084398'),(47,'admin_interface','0029_theme_css_generic_link_active_color','2023-09-21 21:43:33.317610'),(48,'admin_interface','0030_theme_collapsible_stacked_inlines_and_more','2023-09-21 21:43:33.847595'),(49,'core','0001_initial','2023-09-21 21:43:42.527992'),(50,'core','0002_initial','2023-09-21 21:44:01.942249'),(51,'sessions','0001_initial','2023-09-21 21:44:02.758885');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,7 +361,6 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('8x1cilopkkm28katf7e5uktanr8ctmh4','.eJxVjDsOwjAQBe_iGlns2ma9lPQ5g7X-gAPIkeKkQtwdIqWA9s3Me6kg61LD2sscxqzOCtXhd4uSHqVtIN-l3SadprbMY9Sbonfa9TDl8rzs7t9BlV6_NdhoCBMnB-wNHwt4dsycAawFErZkKYskMgXwilIEEClFjxZP6NT7A62mNog:1qiMlQ:IkE97wBocJmT1l2nwItQ6P5gep3RGGV3QeohqLhYqRE','2023-10-02 22:30:44.400468');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,7 +390,7 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES (1,'Leones pro','Amarillo',2,'team_avatar/miFotoDeGit.jpg',2),(2,'Maria\'s team','Morado',1,'group.png',3);
+INSERT INTO `equipo` VALUES (1,'Los diomedez','Rojo',12,'team_avatar/eliminar.png',2),(2,'Mario y los luigis','Verde',15,'team_avatar/marioteam.jpeg',6);
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,7 +437,7 @@ CREATE TABLE `inventario` (
   PRIMARY KEY (`id`),
   KEY `inventario_product_id_a1edc06a_fk_producto_id` (`product_id`),
   CONSTRAINT `inventario_product_id_a1edc06a_fk_producto_id` FOREIGN KEY (`product_id`) REFERENCES `producto` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -446,6 +446,7 @@ CREATE TABLE `inventario` (
 
 LOCK TABLES `inventario` WRITE;
 /*!40000 ALTER TABLE `inventario` DISABLE KEYS */;
+INSERT INTO `inventario` VALUES (1,'2023-09-21 21:51:55.087442',25,1),(2,'2023-09-21 21:53:24.062129',10,2),(3,'2023-09-22 01:28:58.562125',19,3),(4,'2023-09-22 01:31:40.004380',19,4),(5,'2023-09-22 01:33:53.717422',40,5),(6,'2023-09-22 01:35:35.698512',18,6),(7,'2023-09-22 01:37:38.221147',15,7);
 /*!40000 ALTER TABLE `inventario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -471,7 +472,7 @@ CREATE TABLE `jugador` (
   PRIMARY KEY (`id`),
   KEY `jugador_team_id_ade94278_fk_equipo_id` (`team_id`),
   CONSTRAINT `jugador_team_id_ade94278_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -480,7 +481,7 @@ CREATE TABLE `jugador` (
 
 LOCK TABLES `jugador` WRITE;
 /*!40000 ALTER TABLE `jugador` DISABLE KEYS */;
-INSERT INTO `jugador` VALUES (1,'Juan','Ochoa',19,17,'Masculino','Delantero',0,0,0,1),(2,'Julián','Gómez',11,24,'Masculino','Portero',0,0,0,1),(3,'Juanita','Molana',15,19,'Femenino','Centrocampista',0,0,0,2);
+INSERT INTO `jugador` VALUES (1,'Juan','Ochoa',14,17,'Masculino','Centrocampista',0,0,0,2),(2,'Marisol','Gomex',12,19,'Otro','Defensa',0,0,0,2),(3,'Cachaco','Peñazco',19,15,'Masculino','Portero',0,0,0,2),(4,'Miguel','Kika',13,25,'Masculino','Delantero',0,0,0,2),(5,'Luis','Ibañez',24,19,'Masculino','Defensa',0,0,0,2),(6,'Carolina','Ñuñez',99,32,'Femenino','Delantero',0,0,0,2),(7,'Julián','Bernardo',7,17,'Masculino','Defensa',0,0,0,2),(8,'Dragui','Sao',32,24,'Otro','Delantero',0,0,0,2),(9,'Felipe','Mendoza',1,54,'Masculino','Delantero',0,0,0,2),(10,'Maria','Basquez',76,18,'Femenino','Centrocampista',0,0,0,2),(11,'Mario','Volador',8,13,'Otro','Centrocampista',0,0,0,2),(12,'Miguel','Pulido',65,19,'Masculino','Defensa',0,0,0,2),(13,'Diego','Perez',4,16,'Masculino','Portero',0,0,0,2),(14,'Camilo','Hernesto',45,45,'Masculino','Centrocampista',0,0,0,2),(15,'Vichado','Ñunez',98,27,'Masculino','Defensa',0,0,0,2),(17,'Juan','Ochoa',14,17,'Masculino','Centrocampista',0,0,0,1),(18,'Marisol','Gomex',12,19,'Otro','Defensa',0,0,0,1),(19,'Cachaco','Peñazco',19,15,'Masculino','Portero',0,0,0,1),(20,'Miguel','Kika',13,25,'Masculino','Delantero',0,0,0,1),(21,'Luis','Ibañez',24,19,'Masculino','Defensa',0,0,0,1),(22,'Carolina','Ñuñez',99,32,'Femenino','Delantero',0,0,0,1),(23,'Julián','Bernardo',7,17,'Masculino','Defensa',0,0,0,1),(24,'Dragui','Sao',32,24,'Otro','Delantero',0,0,0,1),(25,'Felipe','Mendoza',1,54,'Masculino','Delantero',0,0,0,1),(26,'Maria','Basquez',76,18,'Femenino','Centrocampista',0,0,0,1),(27,'Mario','Volador',8,13,'Otro','Centrocampista',0,0,0,1),(28,'Miguel','Pulido',65,19,'Masculino','Defensa',0,0,0,1);
 /*!40000 ALTER TABLE `jugador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -502,7 +503,7 @@ CREATE TABLE `producto` (
   PRIMARY KEY (`id`),
   KEY `producto_category_id_d39dad7c_fk_categoria_id` (`category_id`),
   CONSTRAINT `producto_category_id_d39dad7c_fk_categoria_id` FOREIGN KEY (`category_id`) REFERENCES `categoria` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -511,6 +512,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` VALUES (1,'Tequila',150000,'Tequila patrón reposado','product/960022-TEQUILA_PATRON_REPOSADO_BOTELLA_700ML_cOaB8qq.png','2024-12-12',2),(2,'Aguardiente',15000,'Medio litro de aguardiente azul','product/example.jpg','2024-12-12',2),(3,'Papas margarita',3400,'Papas margarita de 130g','product/papas-margarita-tomate-130g.webp','2024-07-20',3),(4,'Marboro',12000,'Media caja marboro, 20 unidades','product/477dc5_7a85a1376b274ae5be033608141920eemv2.webp','2024-09-12',4),(5,'Lucky Strike',6000,'Lucky Strike Azul x10','product/10007_202102242259134412668-600x600.jpeg','2025-08-12',4),(6,'Aguardiente',20000,'Aguardiente antioqueño verde 375ml','product/asfadsf_9mAP6cI.webp','2026-05-12',2),(7,'Gatorade',4000,'Gatorade naranja 500ml','product/supermercados_la_vaquita_supervaquita_gatorade_500ml_frutas_tropicales_bebidas__Q9DfUSU.webp','2025-08-09',5);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -523,17 +525,15 @@ DROP TABLE IF EXISTS `reserva`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reserva` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `availability` tinyint(1) NOT NULL,
   `place` varchar(50) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `start_time` datetime(6) NOT NULL,
-  `end_time` datetime(6) NOT NULL,
+  `date` date NOT NULL,
+  `start_time` time(6) NOT NULL,
+  `end_time` time(6) NOT NULL,
   `cost` double NOT NULL,
-  `calendar_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `reserva_calendar_id_0e77bd6e_fk_calendario_id` (`calendar_id`),
-  CONSTRAINT `reserva_calendar_id_0e77bd6e_fk_calendario_id` FOREIGN KEY (`calendar_id`) REFERENCES `calendario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `confirmed` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -542,6 +542,7 @@ CREATE TABLE `reserva` (
 
 LOCK TABLES `reserva` WRITE;
 /*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
+INSERT INTO `reserva` VALUES (1,'2','Bolirana','2023-09-24','12:12:00.000000','14:56:00.000000',98400,1),(2,'2','Bolirana','2023-09-24','13:45:00.000000','15:34:00.000000',65400,1);
 /*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -583,13 +584,12 @@ CREATE TABLE `torneo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `number_teams` int(10) unsigned NOT NULL CHECK (`number_teams` >= 0),
-  `registered_teams` int(10) unsigned NOT NULL CHECK (`registered_teams` >= 0),
   `date` datetime(6) NOT NULL,
   `prize_payment` double NOT NULL,
   `cost` double NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -598,7 +598,7 @@ CREATE TABLE `torneo` (
 
 LOCK TABLES `torneo` WRITE;
 /*!40000 ALTER TABLE `torneo` DISABLE KEYS */;
-INSERT INTO `torneo` VALUES (1,'Torneo Bolipola',16,0,'2024-12-12 12:00:00.000000',5000000,200000,1);
+INSERT INTO `torneo` VALUES (1,'Pelea de pollos',16,'2024-12-12 12:30:00.000000',10000000,20000,1),(2,'Duendes navideños',10,'2023-10-10 14:15:00.000000',2400000,120000,1);
 /*!40000 ALTER TABLE `torneo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -626,7 +626,7 @@ CREATE TABLE `torneo_equipo` (
   KEY `torneo_equipo_tournament_id_2a153cdb_fk_torneo_id` (`tournament_id`),
   CONSTRAINT `torneo_equipo_team_id_aff5ce69_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`),
   CONSTRAINT `torneo_equipo_tournament_id_2a153cdb_fk_torneo_id` FOREIGN KEY (`tournament_id`) REFERENCES `torneo` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -635,6 +635,7 @@ CREATE TABLE `torneo_equipo` (
 
 LOCK TABLES `torneo_equipo` WRITE;
 /*!40000 ALTER TABLE `torneo_equipo` DISABLE KEYS */;
+INSERT INTO `torneo_equipo` VALUES (1,0,0,0,0,0,0,0,0,2,1);
 /*!40000 ALTER TABLE `torneo_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -665,7 +666,7 @@ CREATE TABLE `user_userboli` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -674,7 +675,7 @@ CREATE TABLE `user_userboli` (
 
 LOCK TABLES `user_userboli` WRITE;
 /*!40000 ALTER TABLE `user_userboli` DISABLE KEYS */;
-INSERT INTO `user_userboli` VALUES (1,'pbkdf2_sha256$600000$i762hqy2ckcb9g4EKvS5u2$l/JivSr81q3uLw2RKRNzvi9BSsR4YkscmN20XVJlK8s=','2023-09-18 22:29:43.872226',1,'admin@admin.com','Juanjo','Ochoa',1,1,'2023-09-18 04:04:00.696989','admin@admin.com','avatar/miFotoDeGit.jpg','2005-12-14','3111234567','Masculino',0),(2,'pbkdf2_sha256$600000$dm1naVl76cJ2xesJ8OzfwI$8XZwefJG4o9FlYFHCMU5Q53gZ4h98yTcThi9Zm6RL1g=','2023-09-18 22:30:44.358430',0,'calisto@hotmail.com','Eduardo','Calisto',0,1,'2023-09-18 04:12:09.778209','calisto@hotmail.com','avatar/anImage.jpg','2000-08-09','8723411316','Otro',0),(3,'pbkdf2_sha256$600000$wBsJ11HtC6n5dybGM5qz6f$byJpydm5CcTl1wH/gS79VfNGy0/aSOCk1/dYuGBsxBQ=','2023-09-18 06:06:45.739453',0,'sopa@gmail.com','María','Ibañez',0,1,'2023-09-18 05:57:26.603003','sopa@gmail.com','avatar/pensando.png','1998-12-12','6545645465','Femenino',0);
+INSERT INTO `user_userboli` VALUES (1,'pbkdf2_sha256$600000$8IDOdeuJRmtqRYS3dgo1Mj$8uVyG2jEv1orAReTNgwQ2XYWSIq462H0OE44O9wU1lI=','2023-09-22 01:46:51.918207',1,'admin@admin.com','Juan','Ochoa',1,1,'2023-09-21 21:46:34.184997','admin@admin.com','avatar/miFotoDeGit_ZfFF493.jpg','2005-12-14','3225452102','Otro',0),(2,'pbkdf2_sha256$600000$OikFUkoMpadJ1OfKTWHIch$R+P9zL2LRbu2aJRg+J5KDzuXmz7zgbTQa/e+sV8id4g=','2023-09-22 02:18:04.871480',0,'sopa@gmail.com','Sopita','Fiu Fiu',0,1,'2023-09-21 21:56:23.931162','sopa@gmail.com','avatar/9yr7_ifq5_221215.jpg','2003-09-10','3115698784','Femenino',0),(3,'pbkdf2_sha256$600000$IYBSemf7A00wGN0aPcKnba$cr6Dy6GachFlawetcLCKi13QkbqYRgQolfvux4/AFEk=','2023-09-21 22:56:08.726909',0,'carro@hotmail.com','Felipe','Mendoza',0,1,'2023-09-21 22:56:08.431641','carro@hotmail.com','avatar/internet.png','1997-10-13','3254169874','Masculino',0),(4,'pbkdf2_sha256$600000$zOI57xW5IYllH9VLVlF3vO$KK272K8VCMRVTIrO+up4guvDQTEZVF4VFLbH0XXPz8I=','2023-09-22 02:23:09.917208',0,'calisto@hotmail.com','Miguel','Fernandez',0,1,'2023-09-21 23:03:12.339924','calisto@hotmail.com','avatar/nerd.png','2003-01-10','3547896215','Masculino',0),(5,'pbkdf2_sha256$600000$t2nP0FrdmLtU7CduFf7Hnb$phf9sZO5jDw3SEwyIC7mS6AkFL0dO6LWhPrxA6FK1B0=','2023-09-21 23:07:34.993857',0,'maribel@gmail.com','Sara','Mendoza',0,1,'2023-09-21 23:07:34.711361','maribel@gmail.com','avatar/como.png','2005-07-05','3225414756','Femenino',0),(6,'pbkdf2_sha256$600000$bEUBAYu3U3VowHcCoAx24N$m6Zx9BWkKBf+DcHMjMz6EHbbDwhaNGmOwpF36wIsU2s=','2023-09-22 02:19:07.190625',0,'mario@gmail.com','Mario','Boloñez',0,1,'2023-09-21 23:10:46.617006','mario@gmail.com','avatar/mario.png','2010-10-12','3524178555','Masculino',150);
 /*!40000 ALTER TABLE `user_userboli` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -753,7 +754,7 @@ CREATE TABLE `venta` (
   PRIMARY KEY (`id`),
   KEY `venta_user_id_9f98c281_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `venta_user_id_9f98c281_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -762,7 +763,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (10,200000,'Efectivo','En proceso...','2023-09-18 20:53:46.153024','Torneo',1,2);
+INSERT INTO `venta` VALUES (1,98400,'Efectivo','Cancelado','2023-09-21 22:09:46.701553','Reserva',1,2),(2,20000,'Efectivo','Comprado','2023-09-21 23:56:07.371521','Torneo',1,6),(3,65400,'Efectivo','En proceso...','2023-09-22 00:24:41.749095','Reserva',1,6),(4,20000,'Efectivo','En proceso...','2023-09-22 01:45:40.180694','Torneo',1,2);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -777,7 +778,11 @@ CREATE TABLE `venta_evento` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `event_id` bigint(20) NOT NULL,
   `sale_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `venta_evento_event_id_3cafcce1_fk_evento_id` (`event_id`),
+  KEY `venta_evento_sale_id_cd044d82_fk_venta_id` (`sale_id`),
+  CONSTRAINT `venta_evento_event_id_3cafcce1_fk_evento_id` FOREIGN KEY (`event_id`) REFERENCES `evento` (`id`),
+  CONSTRAINT `venta_evento_sale_id_cd044d82_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -801,7 +806,11 @@ CREATE TABLE `venta_inventario` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `inventory_id` bigint(20) NOT NULL,
   `sale_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `venta_inventario_inventory_id_af4ad961_fk_inventario_id` (`inventory_id`),
+  KEY `venta_inventario_sale_id_f994260c_fk_venta_id` (`sale_id`),
+  CONSTRAINT `venta_inventario_inventory_id_af4ad961_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`),
+  CONSTRAINT `venta_inventario_sale_id_f994260c_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -825,8 +834,12 @@ CREATE TABLE `venta_reserva` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `reservation_id` bigint(20) NOT NULL,
   `sale_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`),
+  KEY `venta_reserva_reservation_id_0075a4d9_fk_reserva_id` (`reservation_id`),
+  KEY `venta_reserva_sale_id_3d4f7ed0_fk_venta_id` (`sale_id`),
+  CONSTRAINT `venta_reserva_reservation_id_0075a4d9_fk_reserva_id` FOREIGN KEY (`reservation_id`) REFERENCES `reserva` (`id`),
+  CONSTRAINT `venta_reserva_sale_id_3d4f7ed0_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -835,6 +848,7 @@ CREATE TABLE `venta_reserva` (
 
 LOCK TABLES `venta_reserva` WRITE;
 /*!40000 ALTER TABLE `venta_reserva` DISABLE KEYS */;
+INSERT INTO `venta_reserva` VALUES (1,1,1),(2,2,3);
 /*!40000 ALTER TABLE `venta_reserva` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -849,8 +863,12 @@ CREATE TABLE `venta_torneo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `sale_id` bigint(20) NOT NULL,
   `tournament_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`),
+  KEY `venta_torneo_sale_id_ffa6bfa1_fk_venta_id` (`sale_id`),
+  KEY `venta_torneo_tournament_id_0114354e_fk_torneo_id` (`tournament_id`),
+  CONSTRAINT `venta_torneo_sale_id_ffa6bfa1_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`),
+  CONSTRAINT `venta_torneo_tournament_id_0114354e_fk_torneo_id` FOREIGN KEY (`tournament_id`) REFERENCES `torneo` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -859,7 +877,7 @@ CREATE TABLE `venta_torneo` (
 
 LOCK TABLES `venta_torneo` WRITE;
 /*!40000 ALTER TABLE `venta_torneo` DISABLE KEYS */;
-INSERT INTO `venta_torneo` VALUES (9,10,1);
+INSERT INTO `venta_torneo` VALUES (1,2,1),(2,4,1);
 /*!40000 ALTER TABLE `venta_torneo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -872,4 +890,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-18 21:08:42
+-- Dump completed on 2023-09-22  2:27:56
