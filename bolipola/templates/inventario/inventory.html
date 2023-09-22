@@ -39,9 +39,9 @@
                         <p class="card-text"><span>Cantidad: {{ inventory.product_quantity }}</span></p>
                             <img src="{{ inventory.product.image.url }}" class="card-img-top" alt="Foto de Producto">
                         <div class="card-body">
-                            <a href="{% url 'edit_product' inventory.product.pk %}" class="btn btn-primary">Editar</a>
-                            <a href="{% url 'delete_product' inventory.product.pk %}" class="btn btn-danger">Eliminar</a>
-                            <a href="{% url 'quantity_product' inventory.product.pk %}" class="btn btn-success">Agregar Cantidad</a>
+                            <button class="boton" id="button-1"><a href="{% url 'edit_product' inventory.product.pk %}">Editar</a></button>
+                            <button class="boton" id="button-2"><a href="{% url 'delete_product' inventory.product.pk %}">Eliminar</a></button>
+                            <button class="boton" id="button-3"><a href="{% url 'quantity_product' inventory.product.pk %}">Agregar Cantidad</a></button>
                         </div>
                     </div>
                 </div>
