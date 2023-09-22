@@ -171,8 +171,10 @@ def event(request):
     return render(request, 'event.html', {'form': form, 'events':events})
 #------------------Productos-----------------------
 #Productos
-@login_required
 def store(request):
+    if not request.user.is_authenticated:
+        return redirect('signin')
+    
     inventorys = Inventory.objects.all()
 
     return render(request, 'store.html', {'inventorys':inventorys})
@@ -301,13 +303,15 @@ def tournament(request):
     for sale in sales:
         sales_tournaments.append(SaleTournament.objects.all().filter(sale_id=sale.id).first())
     has_tournament = False
-
+    the_tournament = False
+    
     for sale_tournament in sales_tournaments:
         if (sale_tournament.sale.status == 'En proceso...' and sale_tournament.tournament.active) or (sale_tournament.sale.status == 'Comprado' and sale_tournament.tournament.active):
+            the_tournament = sale_tournament.tournament
             has_tournament = True
             break
-
-    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'sales_tournaments':sales_tournaments, 'tournaments':tournaments, 'has_tournament':has_tournament})
+    
+    return render(request, 'tournament.html', { 'the_tournament':the_tournament ,'has_team':has_team, 'team':team, 'sales_tournaments':sales_tournaments, 'tournaments':tournaments, 'has_tournament':has_tournament})
 
 @login_required
 def tournament_cancel(request, tournament_id):

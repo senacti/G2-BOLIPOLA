@@ -201,6 +201,7 @@ class PlayerForm(forms.ModelForm):
     age = forms.IntegerField(
         required=True,
         min_value=10,
+        max_value=99,
     )
 
     POSITION_CHOICES = (
