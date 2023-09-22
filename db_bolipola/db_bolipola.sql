@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.4.28-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.19  Distrib 10.4.24-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: db_bolipola
 -- ------------------------------------------------------
--- Server version	10.4.28-MariaDB
+-- Server version	10.4.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -83,7 +83,7 @@ CREATE TABLE `admin_interface_theme` (
   `collapsible_tabular_inlines_collapsed` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admin_interface_theme_name_30bda70f_uniq` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,7 @@ CREATE TABLE `admin_interface_theme` (
 
 LOCK TABLES `admin_interface_theme` WRITE;
 /*!40000 ALTER TABLE `admin_interface_theme` DISABLE KEYS */;
-INSERT INTO `admin_interface_theme` VALUES (1,'Django',1,'Administración de Django',1,'',1,'#0C4B33','#F5DD5D','#44B78B','#FFFFFF','#C9F0DD','#44B78B','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0C3C26','#156641','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'','0.3','',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0,'#29B864',0,1,0,1);
+INSERT INTO `admin_interface_theme` VALUES (1,'Django',0,'Administración de Django',1,'',1,'#0C4B33','#F5DD5D','#44B78B','#FFFFFF','#C9F0DD','#44B78B','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0C3C26','#156641','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'','0.3','',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0,'#29B864',0,1,0,1),(2,'BoliPola',1,'Bolipola Admin',1,'admin-interface/logo/logo_dB2Zd3S.png',1,'#CB4335','#FBFCFC','#FBFCFC','#FFFFFF','#F1F1F1','#B23B2E','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0C3C26','#156641','#CB4335','#BABBBB','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'admin-interface/favicon/logo_20tSYhH.png','0.3','',1,'#2BFF32',1,1,1,'code',1,0,0,'#DADBDB','#FFFFFF',100,400,1,'default-select',1,0,0,0,'#29B864',0,1,0,1);
 /*!40000 ALTER TABLE `admin_interface_theme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +108,7 @@ CREATE TABLE `auth_group` (
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +136,7 @@ CREATE TABLE `auth_group_permissions` (
   KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +163,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +188,7 @@ CREATE TABLE `calendario` (
   `date` date NOT NULL,
   `availability` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,6 +197,7 @@ CREATE TABLE `calendario` (
 
 LOCK TABLES `calendario` WRITE;
 /*!40000 ALTER TABLE `calendario` DISABLE KEYS */;
+INSERT INTO `calendario` VALUES (1,'2023-09-24',0);
 /*!40000 ALTER TABLE `calendario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +213,7 @@ CREATE TABLE `categoria` (
   `name` varchar(100) NOT NULL,
   `forOlder` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +242,7 @@ CREATE TABLE `comentario` (
   PRIMARY KEY (`id`),
   KEY `comentario_user_id_a50ac53c_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `comentario_user_id_a50ac53c_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -274,7 +275,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -283,7 +284,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2023-09-21 21:54:54.587056','1','Pelea de pollos',1,'[{\"added\": {}}]',22,1),(2,'2023-09-22 01:48:43.981596','2','Duendes navideños',1,'[{\"added\": {}}]',22,1);
+INSERT INTO `django_admin_log` VALUES (1,'2023-09-21 21:54:54.587056','1','Pelea de pollos',1,'[{\"added\": {}}]',22,1),(2,'2023-09-22 01:48:43.981596','2','Duendes navideños',1,'[{\"added\": {}}]',22,1),(3,'2023-09-22 13:48:07.814288','2','BoliPola',1,'[{\"added\": {}}]',1,1),(4,'2023-09-22 15:04:55.752191','1','False - 2023-09-24',1,'[{\"added\": {}}]',7,1),(5,'2023-09-22 15:14:54.470428','3','Sena',1,'[{\"added\": {}}]',22,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,7 +301,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,7 +327,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,7 +353,7 @@ CREATE TABLE `django_session` (
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -361,6 +362,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('6c3cop7e2rc1gp1u2z6mm6ifvn4ikydq','.eJxVjEEOwiAQRe_C2pCxZYC4dO8ZyDADUjWQlHbVeHdt0oVu_3vvbyrQupSw9jSHSdRFGXX63SLxM9UdyIPqvWludZmnqHdFH7TrW5P0uh7u30GhXr51pjOIgJjRZ0wmDeOAhJSBs0QGFIiCZHEEF9FZQOOBJSfHPltiUu8PA3k42w:1qjmYc:Y_33CIOAGHWGvMAoNoUNrnm1egaBtimjjac2piasmGo','2023-10-06 15:15:22.621705');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -381,7 +383,7 @@ CREATE TABLE `equipo` (
   PRIMARY KEY (`id`),
   KEY `equipo_user_id_6697ca39_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `equipo_user_id_6697ca39_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -390,7 +392,7 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES (1,'Los diomedez','Rojo',12,'team_avatar/eliminar.png',2),(2,'Mario y los luigis','Verde',15,'team_avatar/marioteam.jpeg',6);
+INSERT INTO `equipo` VALUES (1,'Los diomedez','Rojo',12,'team_avatar/eliminar.png',2),(2,'Mario y los luigis','Verde',15,'team_avatar/marioteam.jpeg',6),(3,'julian','Azul',0,'group.png',10),(4,'Gallinas ciegas','Amarillo',1,'team_avatar/fondo.jpg',4);
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -410,7 +412,7 @@ CREATE TABLE `evento` (
   `guests` int(10) unsigned NOT NULL CHECK (`guests` >= 0),
   `description` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -437,7 +439,7 @@ CREATE TABLE `inventario` (
   PRIMARY KEY (`id`),
   KEY `inventario_product_id_a1edc06a_fk_producto_id` (`product_id`),
   CONSTRAINT `inventario_product_id_a1edc06a_fk_producto_id` FOREIGN KEY (`product_id`) REFERENCES `producto` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -446,7 +448,7 @@ CREATE TABLE `inventario` (
 
 LOCK TABLES `inventario` WRITE;
 /*!40000 ALTER TABLE `inventario` DISABLE KEYS */;
-INSERT INTO `inventario` VALUES (1,'2023-09-21 21:51:55.087442',25,1),(2,'2023-09-21 21:53:24.062129',10,2),(3,'2023-09-22 01:28:58.562125',19,3),(4,'2023-09-22 01:31:40.004380',19,4),(5,'2023-09-22 01:33:53.717422',40,5),(6,'2023-09-22 01:35:35.698512',18,6),(7,'2023-09-22 01:37:38.221147',15,7);
+INSERT INTO `inventario` VALUES (1,'2023-09-21 21:51:55.087442',25,1),(2,'2023-09-21 21:53:24.062129',10,2),(4,'2023-09-22 01:31:40.004380',19,4),(5,'2023-09-22 01:33:53.717422',40,5),(6,'2023-09-22 01:35:35.698512',18,6),(7,'2023-09-22 01:37:38.221147',15,7);
 /*!40000 ALTER TABLE `inventario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -472,7 +474,7 @@ CREATE TABLE `jugador` (
   PRIMARY KEY (`id`),
   KEY `jugador_team_id_ade94278_fk_equipo_id` (`team_id`),
   CONSTRAINT `jugador_team_id_ade94278_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -481,7 +483,7 @@ CREATE TABLE `jugador` (
 
 LOCK TABLES `jugador` WRITE;
 /*!40000 ALTER TABLE `jugador` DISABLE KEYS */;
-INSERT INTO `jugador` VALUES (1,'Juan','Ochoa',14,17,'Masculino','Centrocampista',0,0,0,2),(2,'Marisol','Gomex',12,19,'Otro','Defensa',0,0,0,2),(3,'Cachaco','Peñazco',19,15,'Masculino','Portero',0,0,0,2),(4,'Miguel','Kika',13,25,'Masculino','Delantero',0,0,0,2),(5,'Luis','Ibañez',24,19,'Masculino','Defensa',0,0,0,2),(6,'Carolina','Ñuñez',99,32,'Femenino','Delantero',0,0,0,2),(7,'Julián','Bernardo',7,17,'Masculino','Defensa',0,0,0,2),(8,'Dragui','Sao',32,24,'Otro','Delantero',0,0,0,2),(9,'Felipe','Mendoza',1,54,'Masculino','Delantero',0,0,0,2),(10,'Maria','Basquez',76,18,'Femenino','Centrocampista',0,0,0,2),(11,'Mario','Volador',8,13,'Otro','Centrocampista',0,0,0,2),(12,'Miguel','Pulido',65,19,'Masculino','Defensa',0,0,0,2),(13,'Diego','Perez',4,16,'Masculino','Portero',0,0,0,2),(14,'Camilo','Hernesto',45,45,'Masculino','Centrocampista',0,0,0,2),(15,'Vichado','Ñunez',98,27,'Masculino','Defensa',0,0,0,2),(17,'Juan','Ochoa',14,17,'Masculino','Centrocampista',0,0,0,1),(18,'Marisol','Gomex',12,19,'Otro','Defensa',0,0,0,1),(19,'Cachaco','Peñazco',19,15,'Masculino','Portero',0,0,0,1),(20,'Miguel','Kika',13,25,'Masculino','Delantero',0,0,0,1),(21,'Luis','Ibañez',24,19,'Masculino','Defensa',0,0,0,1),(22,'Carolina','Ñuñez',99,32,'Femenino','Delantero',0,0,0,1),(23,'Julián','Bernardo',7,17,'Masculino','Defensa',0,0,0,1),(24,'Dragui','Sao',32,24,'Otro','Delantero',0,0,0,1),(25,'Felipe','Mendoza',1,54,'Masculino','Delantero',0,0,0,1),(26,'Maria','Basquez',76,18,'Femenino','Centrocampista',0,0,0,1),(27,'Mario','Volador',8,13,'Otro','Centrocampista',0,0,0,1),(28,'Miguel','Pulido',65,19,'Masculino','Defensa',0,0,0,1);
+INSERT INTO `jugador` VALUES (1,'Juan','Ochoa',14,17,'Masculino','Centrocampista',0,0,0,2),(2,'Marisol','Gomex',12,19,'Otro','Defensa',0,0,0,2),(3,'Cachaco','Peñazco',19,15,'Masculino','Portero',0,0,0,2),(4,'Miguel','Kika',13,25,'Masculino','Delantero',0,0,0,2),(5,'Luis','Ibañez',24,19,'Masculino','Defensa',0,0,0,2),(6,'Carolina','Ñuñez',99,32,'Femenino','Delantero',0,0,0,2),(7,'Julián','Bernardo',7,17,'Masculino','Defensa',0,0,0,2),(8,'Dragui','Sao',32,24,'Otro','Delantero',0,0,0,2),(9,'Felipe','Mendoza',1,54,'Masculino','Delantero',0,0,0,2),(10,'Maria','Basquez',76,18,'Femenino','Centrocampista',0,0,0,2),(11,'Mario','Volador',8,13,'Otro','Centrocampista',0,0,0,2),(12,'Miguel','Pulido',65,19,'Masculino','Defensa',0,0,0,2),(13,'Diego','Perez',4,16,'Masculino','Portero',0,0,0,2),(14,'Camilo','Hernesto',45,45,'Masculino','Centrocampista',0,0,0,2),(15,'Vichado','Ñunez',98,27,'Masculino','Defensa',0,0,0,2),(17,'Juan','Ochoa',14,17,'Masculino','Centrocampista',3,2,1,1),(18,'Marisol','Gomex',12,19,'Otro','Defensa',0,0,0,1),(19,'Cachaco','Peñazco',19,15,'Masculino','Portero',0,0,0,1),(20,'Miguel','Kika',13,25,'Masculino','Delantero',0,0,23,1),(21,'Luis','Ibañez',24,19,'Masculino','Defensa',0,0,0,1),(22,'Carolina','Ñuñez',99,32,'Femenino','Delantero',0,0,0,1),(23,'Julián','Bernardo',7,17,'Masculino','Defensa',0,0,0,1),(24,'Dragui','Sao',32,24,'Otro','Delantero',0,0,0,1),(25,'Felipe','Mendoza',1,54,'Masculino','Delantero',0,0,0,1),(26,'Maria','Basquez',76,18,'Femenino','Centrocampista',0,0,0,1),(27,'Mario','Volador',8,13,'Otro','Centrocampista',0,0,0,1),(28,'Miguel','Pulido',65,19,'Masculino','Defensa',0,0,0,1),(29,'julian','castro',13,15,'Masculino','Delantero',0,0,0,4);
 /*!40000 ALTER TABLE `jugador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -503,7 +505,7 @@ CREATE TABLE `producto` (
   PRIMARY KEY (`id`),
   KEY `producto_category_id_d39dad7c_fk_categoria_id` (`category_id`),
   CONSTRAINT `producto_category_id_d39dad7c_fk_categoria_id` FOREIGN KEY (`category_id`) REFERENCES `categoria` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -512,7 +514,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'Tequila',150000,'Tequila patrón reposado','product/960022-TEQUILA_PATRON_REPOSADO_BOTELLA_700ML_cOaB8qq.png','2024-12-12',2),(2,'Aguardiente',15000,'Medio litro de aguardiente azul','product/example.jpg','2024-12-12',2),(3,'Papas margarita',3400,'Papas margarita de 130g','product/papas-margarita-tomate-130g.webp','2024-07-20',3),(4,'Marboro',12000,'Media caja marboro, 20 unidades','product/477dc5_7a85a1376b274ae5be033608141920eemv2.webp','2024-09-12',4),(5,'Lucky Strike',6000,'Lucky Strike Azul x10','product/10007_202102242259134412668-600x600.jpeg','2025-08-12',4),(6,'Aguardiente',20000,'Aguardiente antioqueño verde 375ml','product/asfadsf_9mAP6cI.webp','2026-05-12',2),(7,'Gatorade',4000,'Gatorade naranja 500ml','product/supermercados_la_vaquita_supervaquita_gatorade_500ml_frutas_tropicales_bebidas__Q9DfUSU.webp','2025-08-09',5);
+INSERT INTO `producto` VALUES (1,'Tequila',150000,'Tequila patrón reposado','product/960022-TEQUILA_PATRON_REPOSADO_BOTELLA_700ML_cOaB8qq.png','2024-12-12',2),(2,'Aguardiente',15000,'Medio litro de aguardiente azul','product/example.jpg','2024-12-12',2),(4,'Marboro',12000,'Media caja marboro, 20 unidades','product/477dc5_7a85a1376b274ae5be033608141920eemv2.webp','2024-09-12',4),(5,'Lucky Strike',6000,'Lucky Strike Azul x10','product/10007_202102242259134412668-600x600.jpeg','2025-08-12',4),(6,'Aguardiente',20000,'Aguardiente antioqueño verde 375ml','product/asfadsf_9mAP6cI.webp','2026-05-12',2),(7,'Gatorade',4000,'Gatorade naranja 500ml','product/supermercados_la_vaquita_supervaquita_gatorade_500ml_frutas_tropicales_bebidas__Q9DfUSU.webp','2025-08-09',5);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -533,7 +535,7 @@ CREATE TABLE `reserva` (
   `cost` double NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -542,7 +544,7 @@ CREATE TABLE `reserva` (
 
 LOCK TABLES `reserva` WRITE;
 /*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
-INSERT INTO `reserva` VALUES (1,'2','Bolirana','2023-09-24','12:12:00.000000','14:56:00.000000',98400,1),(2,'2','Bolirana','2023-09-24','13:45:00.000000','15:34:00.000000',65400,1);
+INSERT INTO `reserva` VALUES (1,'2','Bolirana','2023-09-24','12:12:00.000000','14:56:00.000000',98400,1),(2,'2','Bolirana','2023-09-24','13:45:00.000000','15:34:00.000000',65400,1),(3,'2','Bolirana','2004-09-12','02:30:00.000000','16:30:00.000000',504000,0);
 /*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -561,7 +563,7 @@ CREATE TABLE `salida` (
   PRIMARY KEY (`id`),
   KEY `salida_inventory_id_3d569ade_fk_inventario_id` (`inventory_id`),
   CONSTRAINT `salida_inventory_id_3d569ade_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -589,7 +591,7 @@ CREATE TABLE `torneo` (
   `cost` double NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -598,7 +600,7 @@ CREATE TABLE `torneo` (
 
 LOCK TABLES `torneo` WRITE;
 /*!40000 ALTER TABLE `torneo` DISABLE KEYS */;
-INSERT INTO `torneo` VALUES (1,'Pelea de pollos',16,'2024-12-12 12:30:00.000000',10000000,20000,1),(2,'Duendes navideños',10,'2023-10-10 14:15:00.000000',2400000,120000,1);
+INSERT INTO `torneo` VALUES (1,'Pelea de pollos',16,'2024-12-12 12:30:00.000000',10000000,20000,0),(2,'Duendes navideños',10,'2023-10-10 14:15:00.000000',2400000,120000,1),(3,'Sena',16,'2023-09-22 15:14:14.000000',-5000000,200000,1);
 /*!40000 ALTER TABLE `torneo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -626,7 +628,7 @@ CREATE TABLE `torneo_equipo` (
   KEY `torneo_equipo_tournament_id_2a153cdb_fk_torneo_id` (`tournament_id`),
   CONSTRAINT `torneo_equipo_team_id_aff5ce69_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`),
   CONSTRAINT `torneo_equipo_tournament_id_2a153cdb_fk_torneo_id` FOREIGN KEY (`tournament_id`) REFERENCES `torneo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -635,7 +637,7 @@ CREATE TABLE `torneo_equipo` (
 
 LOCK TABLES `torneo_equipo` WRITE;
 /*!40000 ALTER TABLE `torneo_equipo` DISABLE KEYS */;
-INSERT INTO `torneo_equipo` VALUES (1,0,0,0,0,0,0,0,0,2,1);
+INSERT INTO `torneo_equipo` VALUES (1,0,0,0,0,0,0,0,0,2,1),(2,2,1,1,3,5,1,9,18,1,2);
 /*!40000 ALTER TABLE `torneo_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -666,7 +668,7 @@ CREATE TABLE `user_userboli` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -675,7 +677,7 @@ CREATE TABLE `user_userboli` (
 
 LOCK TABLES `user_userboli` WRITE;
 /*!40000 ALTER TABLE `user_userboli` DISABLE KEYS */;
-INSERT INTO `user_userboli` VALUES (1,'pbkdf2_sha256$600000$8IDOdeuJRmtqRYS3dgo1Mj$8uVyG2jEv1orAReTNgwQ2XYWSIq462H0OE44O9wU1lI=','2023-09-22 01:46:51.918207',1,'admin@admin.com','Juan','Ochoa',1,1,'2023-09-21 21:46:34.184997','admin@admin.com','avatar/miFotoDeGit_ZfFF493.jpg','2005-12-14','3225452102','Otro',0),(2,'pbkdf2_sha256$600000$OikFUkoMpadJ1OfKTWHIch$R+P9zL2LRbu2aJRg+J5KDzuXmz7zgbTQa/e+sV8id4g=','2023-09-22 02:18:04.871480',0,'sopa@gmail.com','Sopita','Fiu Fiu',0,1,'2023-09-21 21:56:23.931162','sopa@gmail.com','avatar/9yr7_ifq5_221215.jpg','2003-09-10','3115698784','Femenino',0),(3,'pbkdf2_sha256$600000$IYBSemf7A00wGN0aPcKnba$cr6Dy6GachFlawetcLCKi13QkbqYRgQolfvux4/AFEk=','2023-09-21 22:56:08.726909',0,'carro@hotmail.com','Felipe','Mendoza',0,1,'2023-09-21 22:56:08.431641','carro@hotmail.com','avatar/internet.png','1997-10-13','3254169874','Masculino',0),(4,'pbkdf2_sha256$600000$zOI57xW5IYllH9VLVlF3vO$KK272K8VCMRVTIrO+up4guvDQTEZVF4VFLbH0XXPz8I=','2023-09-22 02:23:09.917208',0,'calisto@hotmail.com','Miguel','Fernandez',0,1,'2023-09-21 23:03:12.339924','calisto@hotmail.com','avatar/nerd.png','2003-01-10','3547896215','Masculino',0),(5,'pbkdf2_sha256$600000$t2nP0FrdmLtU7CduFf7Hnb$phf9sZO5jDw3SEwyIC7mS6AkFL0dO6LWhPrxA6FK1B0=','2023-09-21 23:07:34.993857',0,'maribel@gmail.com','Sara','Mendoza',0,1,'2023-09-21 23:07:34.711361','maribel@gmail.com','avatar/como.png','2005-07-05','3225414756','Femenino',0),(6,'pbkdf2_sha256$600000$bEUBAYu3U3VowHcCoAx24N$m6Zx9BWkKBf+DcHMjMz6EHbbDwhaNGmOwpF36wIsU2s=','2023-09-22 02:19:07.190625',0,'mario@gmail.com','Mario','Boloñez',0,1,'2023-09-21 23:10:46.617006','mario@gmail.com','avatar/mario.png','2010-10-12','3524178555','Masculino',150);
+INSERT INTO `user_userboli` VALUES (1,'pbkdf2_sha256$600000$8IDOdeuJRmtqRYS3dgo1Mj$8uVyG2jEv1orAReTNgwQ2XYWSIq462H0OE44O9wU1lI=','2023-09-22 15:10:24.393997',1,'admin@admin.com','Juan','Ochoa',1,1,'2023-09-21 21:46:34.184997','admin@admin.com','avatar/miFotoDeGit_ZfFF493.jpg','2005-12-14','3225452102','Otro',0),(2,'pbkdf2_sha256$600000$OikFUkoMpadJ1OfKTWHIch$R+P9zL2LRbu2aJRg+J5KDzuXmz7zgbTQa/e+sV8id4g=','2023-09-22 15:05:28.528667',0,'sopa@gmail.com','Sopita','Fiu Fiu',0,1,'2023-09-21 21:56:23.931162','sopa@gmail.com','avatar/9yr7_ifq5_221215.jpg','2003-09-10','3115698784','Femenino',300),(3,'pbkdf2_sha256$600000$IYBSemf7A00wGN0aPcKnba$cr6Dy6GachFlawetcLCKi13QkbqYRgQolfvux4/AFEk=','2023-09-21 22:56:08.726909',0,'carro@hotmail.com','Felipe','Mendoza',0,1,'2023-09-21 22:56:08.431641','carro@hotmail.com','avatar/internet.png','1997-10-13','3254169874','Masculino',0),(4,'pbkdf2_sha256$600000$zOI57xW5IYllH9VLVlF3vO$KK272K8VCMRVTIrO+up4guvDQTEZVF4VFLbH0XXPz8I=','2023-09-22 15:15:22.618718',0,'calisto@hotmail.com','Miguel','Fernandez',0,1,'2023-09-21 23:03:12.339924','calisto@hotmail.com','avatar/nerd.png','2003-01-10','3547896215','Masculino',0),(5,'pbkdf2_sha256$600000$t2nP0FrdmLtU7CduFf7Hnb$phf9sZO5jDw3SEwyIC7mS6AkFL0dO6LWhPrxA6FK1B0=','2023-09-21 23:07:34.993857',0,'maribel@gmail.com','Sara','Mendoza',0,1,'2023-09-21 23:07:34.711361','maribel@gmail.com','avatar/como.png','2005-07-05','3225414756','Femenino',0),(6,'pbkdf2_sha256$600000$bEUBAYu3U3VowHcCoAx24N$m6Zx9BWkKBf+DcHMjMz6EHbbDwhaNGmOwpF36wIsU2s=','2023-09-22 02:19:07.190625',0,'mario@gmail.com','Mario','Boloñez',0,1,'2023-09-21 23:10:46.617006','mario@gmail.com','avatar/mario.png','2010-10-12','3524178555','Masculino',150),(10,'pbkdf2_sha256$600000$tGEyBC9yBYc1VPjiRf4ro9$P6QMWFA6HEkjmpTAaXjl1RpeQUGOlvFMMbzZ5G+kiCU=','2023-09-22 14:44:32.958246',0,'julian@hotmail.com','julian','castro',0,1,'2023-09-22 14:41:37.222338','julian@hotmail.com','exampleUser.png','2006-11-09','3015415613','Masculino',0),(11,'pbkdf2_sha256$600000$cm4AP2uSJjd8JznIwqRh2X$kyia7KIW9YxCUXng25g0lXsRCjbh2hb1E/VntA41x6Y=','2023-09-22 14:58:28.908990',0,'miguel@gmail.com','Miguel','Pulido',0,1,'2023-09-22 14:58:28.141627','miguel@gmail.com','avatar/editar.png','2003-09-12','3225478695','Masculino',0);
 /*!40000 ALTER TABLE `user_userboli` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -695,7 +697,7 @@ CREATE TABLE `user_userboli_groups` (
   KEY `user_userboli_groups_group_id_c57ab420_fk_auth_group_id` (`group_id`),
   CONSTRAINT `user_userboli_groups_group_id_c57ab420_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `user_userboli_groups_userboli_id_3cbe31ac_fk_user_userboli_id` FOREIGN KEY (`userboli_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -723,7 +725,7 @@ CREATE TABLE `user_userboli_user_permissions` (
   KEY `user_userboli_user_p_permission_id_b052ddf3_fk_auth_perm` (`permission_id`),
   CONSTRAINT `user_userboli_user_p_permission_id_b052ddf3_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `user_userboli_user_p_userboli_id_0c75c885_fk_user_user` FOREIGN KEY (`userboli_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -754,7 +756,7 @@ CREATE TABLE `venta` (
   PRIMARY KEY (`id`),
   KEY `venta_user_id_9f98c281_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `venta_user_id_9f98c281_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -763,7 +765,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (1,98400,'Efectivo','Cancelado','2023-09-21 22:09:46.701553','Reserva',1,2),(2,20000,'Efectivo','Comprado','2023-09-21 23:56:07.371521','Torneo',1,6),(3,65400,'Efectivo','En proceso...','2023-09-22 00:24:41.749095','Reserva',1,6),(4,20000,'Efectivo','En proceso...','2023-09-22 01:45:40.180694','Torneo',1,2);
+INSERT INTO `venta` VALUES (1,98400,'Efectivo','Cancelado','2023-09-21 22:09:46.701553','Reserva',1,2),(2,20000,'Efectivo','Comprado','2023-09-21 23:56:07.371521','Torneo',1,6),(3,65400,'Efectivo','En proceso...','2023-09-22 00:24:41.749095','Reserva',1,6),(4,20000,'Efectivo','En proceso...','2023-09-22 01:45:40.180694','Torneo',1,2),(5,120000,'Efectivo','Comprado','2023-09-22 13:21:16.319903','Torneo',1,2);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -783,7 +785,7 @@ CREATE TABLE `venta_evento` (
   KEY `venta_evento_sale_id_cd044d82_fk_venta_id` (`sale_id`),
   CONSTRAINT `venta_evento_event_id_3cafcce1_fk_evento_id` FOREIGN KEY (`event_id`) REFERENCES `evento` (`id`),
   CONSTRAINT `venta_evento_sale_id_cd044d82_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -811,7 +813,7 @@ CREATE TABLE `venta_inventario` (
   KEY `venta_inventario_sale_id_f994260c_fk_venta_id` (`sale_id`),
   CONSTRAINT `venta_inventario_inventory_id_af4ad961_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`),
   CONSTRAINT `venta_inventario_sale_id_f994260c_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -839,7 +841,7 @@ CREATE TABLE `venta_reserva` (
   KEY `venta_reserva_sale_id_3d4f7ed0_fk_venta_id` (`sale_id`),
   CONSTRAINT `venta_reserva_reservation_id_0075a4d9_fk_reserva_id` FOREIGN KEY (`reservation_id`) REFERENCES `reserva` (`id`),
   CONSTRAINT `venta_reserva_sale_id_3d4f7ed0_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -868,7 +870,7 @@ CREATE TABLE `venta_torneo` (
   KEY `venta_torneo_tournament_id_0114354e_fk_torneo_id` (`tournament_id`),
   CONSTRAINT `venta_torneo_sale_id_ffa6bfa1_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`),
   CONSTRAINT `venta_torneo_tournament_id_0114354e_fk_torneo_id` FOREIGN KEY (`tournament_id`) REFERENCES `torneo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -877,7 +879,7 @@ CREATE TABLE `venta_torneo` (
 
 LOCK TABLES `venta_torneo` WRITE;
 /*!40000 ALTER TABLE `venta_torneo` DISABLE KEYS */;
-INSERT INTO `venta_torneo` VALUES (1,2,1),(2,4,1);
+INSERT INTO `venta_torneo` VALUES (1,2,1),(2,4,1),(3,5,2);
 /*!40000 ALTER TABLE `venta_torneo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -890,4 +892,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-22  2:27:56
+-- Dump completed on 2023-09-22 16:16:19
