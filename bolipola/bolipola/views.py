@@ -52,6 +52,8 @@ def sale(request, type_id, type_name):
                 intermediate = SaleInventory(sale_id=sale.id, inventory_id=inf.id)
             if type_name == 'Reserva':
                 intermediate = SaleReservation(sale_id=sale.id, reservation_id=inf.id)
+                inf.confirmed = True
+                inf.save()
 
             #Guardando tabla intermedia
             intermediate.save()
@@ -64,6 +66,7 @@ def sale(request, type_id, type_name):
         form = SaleForm()
 
     return render(request, 'sale.html', {'form':form, 'type_name':type_name, 'inf':inf})
+
 #Información de la venta
 @login_required
 def sale_information(request, sale_id):
@@ -78,7 +81,7 @@ def sale_information(request, sale_id):
 
     if sale.type == 'Evento':
         inf = get_object_or_404(SaleEvent, sale_id=sale.id)
-        inf = inf.event   
+        inf = inf.event
 
     if sale.type == 'Productos':
         inf = get_object_or_404(SaleInventory, sale_id=sale.id)   
@@ -86,7 +89,7 @@ def sale_information(request, sale_id):
 
     if sale.type == 'Reserva':
         inf = get_object_or_404(SaleReservation, sale_id=sale.id)
-        inf = inf.reservation 
+        inf = inf.reservation
 
     return render(request, 'sale/sale_information.html', {'user':user, 'sale':sale, 'inf':inf, 'team':team})
 
@@ -96,9 +99,9 @@ def sale_historic(request):
     user = get_object_or_404(UserBoli, id=request.user.id)
 
     if user.is_staff:
-        sales = Sale.objects.all()
+        sales = Sale.objects.all().order_by('-date')
     else:
-        sales = Sale.objects.all().filter(user_id=user.id)
+        sales = Sale.objects.all().filter(user_id=user.id).order_by('-date')
 
     return render(request, 'sale/sale_historic.html', {'user':user, 'sales':sales})
 
@@ -120,7 +123,11 @@ def sale_confirm(request, sale_id):
         new_tournament_team = TournamentTeam(team_id=team.id, tournament_id=tournament.id)
         new_tournament_team.save()
 
-        user.range += 150
+        user.range += 300
+        user.save()
+
+    if sale.type == 'Reserva':
+        user.range += 120
         user.save()
 
     sale.status = 'Comprado'
@@ -147,7 +154,9 @@ def sale_cancel(request, sale_id):
 #------------------Productos-----------------------
 #Productos
 def store(request):
-    return render(request, 'store.html', {})
+    inventorys = Inventory.objects.all()
+
+    return render(request, 'store.html', {'inventorys':inventorys})
 
 #inventario
 @login_required
@@ -169,7 +178,7 @@ def inventory(request):
 #Cantidad de producto
 @login_required
 def quantity_product(request, pk):
-    inventorys = Inventory.objects.get(pk=pk)
+    inventorys = Inventory.objects.all().filter(product_id=pk).first()
     form = InventoryForm(instance=inventorys)
  
     product_name = inventorys.product.name
@@ -478,7 +487,11 @@ def player_edit(request, player_id):
 #------------------Reservas---------------------------
 #Reservas
 def reserve(request):
-    return render(request, 'reserve.html', {})
+    if not request.user.is_authenticated:
+        return redirect('signin')
+    
+    user = get_object_or_404(UserBoli, id=request.user.id)
+    return render(request, 'reserve.html', {'user':user})
 
 
 #--------------------Inicio---------------------------
@@ -488,8 +501,10 @@ def index(request):
         user = get_object_or_404(UserBoli, id=request.user.id)
     else:
         user = False
+
+    inventorys = Inventory.objects.all().order_by('-product_quantity')[:5]
         
-    return render(request, 'index.html', {'user': user})
+    return render(request, 'index.html', {'user': user, 'inventorys':inventorys})
 
 
 #------------------------Cuenta de usuario----------------
@@ -501,7 +516,7 @@ def profile(request):
     if userForm.is_staff == 1:
         shoppings = Sale.objects.all().order_by('-date')[:5]
     else:
-        shoppings = Sale.objects.all().filter(user_id=userForm.id).order_by('-date')[:5]
+        shoppings = Sale.objects.all().filter(user_id=userForm.id).order_by('-date')[:7]
 
     if request.method == 'POST':
         form = EditProfileForm(request.POST, request.FILES, instance=userForm)

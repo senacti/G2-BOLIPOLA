@@ -345,16 +345,6 @@ class ProductForm(forms.ModelForm):
         ]
         
 class InventoryForm(forms.ModelForm):
-    entry_date = forms.DateField(
-        required=True,
-        widget=forms.DateInput(
-            attrs={
-                'class':'form-control',
-                'placeholder':'Fecha de entrada',
-                'type':'date'
-            }
-        )
-    )
     product_quantity = forms.IntegerField(
         required=True,
         widget=forms.NumberInput(
@@ -364,22 +354,11 @@ class InventoryForm(forms.ModelForm):
             }
         )
     )
-    product = forms.ModelChoiceField(
-        queryset=Product.objects.all(),
-        required=True,
-        widget=forms.Select(
-            attrs={
-                'class':'form-control',
-            }
-        )
-    )
     
     class Meta:
         model = Inventory
         fields = [
-            'entry_date',
             'product_quantity',
-            'product'  
         ]
 
 class CategoryForm(forms.ModelForm):

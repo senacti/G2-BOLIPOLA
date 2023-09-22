@@ -1,7 +1,6 @@
 from django.db import models
 from user.models import UserBoli
 from django.utils import timezone
-from django.urls import reverse
 import locale
 locale.setlocale(locale.LC_ALL, '')
 
@@ -47,6 +46,11 @@ class Product(models.Model):
     def sale_type(self):
         return 'Productos'
 
+    def cost_to_money(self):
+        money = locale.currency(self.cost, symbol=True, grouping=True)
+        money = money[:-3]
+        return money
+
     class Meta:
         verbose_name = 'Producto'
         verbose_name_plural = 'Productos'
@@ -60,7 +64,7 @@ class Inventory(models.Model):
 
     def __str__(self):
         return str(f'{self.product_quantity} - {self.product.name}')
-    
+
     class Meta:
         verbose_name = 'Inventario'
         verbose_name_plural = 'Inventarios'
@@ -83,8 +87,8 @@ class Output(models.Model):
       
       
 class Calendar(models.Model):
-    date = models.DateTimeField(verbose_name='Fecha')
-    availability = models.BooleanField(verbose_name='Disponibilidad', default=True)
+    date = models.DateField(verbose_name='Fecha del día')
+    availability = models.BooleanField(verbose_name='Dia disponible (no lo marques para reconocer que no esta disponible el día establecido)', default=False)
 
     def __str__(self):
         return str(f'{self.availability} - {self.date}')
@@ -97,20 +101,25 @@ class Calendar(models.Model):
         
   
 class Reservation(models.Model):
-    availability = models.BooleanField(verbose_name='Disponibilidad', default=True)
     place = models.CharField(max_length=50, verbose_name='Lugar de la reserva')
     type = models.CharField(max_length=50, verbose_name='Tipo de reserva')
-    start_time = models.DateTimeField(verbose_name='Hora de inicio')
-    end_time = models.DateTimeField(verbose_name='Hora de finalización')
+    date = models.DateField(verbose_name='Dia de reserva')
+    start_time = models.TimeField(verbose_name='Hora de inicio')
+    end_time = models.TimeField(verbose_name='Hora de finalización')
     cost = models.FloatField(verbose_name='Costo de la reserva')
-    calendar = models.ForeignKey(Calendar, on_delete=models.CASCADE)
+    confirmed = models.BooleanField(verbose_name='Confirmado', default=False)
 
     def __str__(self):
-        return str(f'{self.availability} - {self.calendar.date}')
+        return str(f'{self.type}')
     
     def sale_type(self):
         return 'Reserva'
-
+    
+    def cost_to_money(self):
+        money = locale.currency(self.cost, symbol=True, grouping=True)
+        money = money[:-3]
+        return money
+    
     class Meta:
         verbose_name = 'Reserva'
         verbose_name_plural = 'Reservas'
