@@ -46,6 +46,40 @@ h1 {
     padding: 10px;
 }
 
+.card-body button{
+    border-radius: 0.9rem;
+    margin: 0.2rem;
+}
+
+.card-body button a{
+    text-decoration: none;
+    color: black;
+}
+
+#button-1{
+    background-color: rgb(244, 244, 22);
+}
+
+#button-1:hover{
+    background-color: rgb(255, 255, 0);
+}
+
+#button-2{
+    background-color: rgb(238, 32, 32);
+}
+
+#button-2:hover{
+    background-color: rgb(255, 0, 0);
+}
+
+#button-3{
+    background-color: rgb(33, 238, 33);
+}
+
+#button-3:hover{
+    background-color: rgb(0, 255, 0);
+}
+
 /* Alineación de la imagen a la derecha */
 .row img {
     width: 8rem;
