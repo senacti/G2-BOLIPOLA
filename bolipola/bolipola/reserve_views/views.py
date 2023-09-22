@@ -39,7 +39,7 @@ def court(request):
         time_start = request.POST.get('hora-inicio', '')
         time_end = request.POST.get('hora-fin', '')
         cost = request.POST.get('cost', '')
-        type = 'Bolirana'
+        type = 'Cancha'
 
         calendars = Calendar.objects.all()
         for calendar in calendars:
@@ -62,7 +62,7 @@ def tables(request):
         time_start = request.POST.get('hora-inicio', '')
         time_end = request.POST.get('hora-fin', '')
         cost = request.POST.get('cost', '')
-        type = 'Bolirana'
+        type = 'Mesa'
 
         calendars = Calendar.objects.all()
         for calendar in calendars:
