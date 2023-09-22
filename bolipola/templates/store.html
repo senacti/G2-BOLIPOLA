@@ -35,7 +35,7 @@
 
                     <i class="fa-brands fa-whatsapp" id="whatsappIcon"></i>
                     <div class="content-customer-support">
-                        <span class="numberTop">+57 1234567890</span>             
+                        <span class="numberTop">+57 3202127187</span>             
                     </div>
 
                     {% endif %}
@@ -99,29 +99,47 @@
 
     <div class="container">
         <div class="list">
-
+            {% for inventory in inventorys %}
+                {% if not inventory.product_quantity <= 0 %}
+                <div class="item">
+                    <img src="{{ inventory.product.image.url }}">
+                    <div class="title">{{ inventory.product.name }}</div>
+                    <div class="price">{{ inventory.product.cost_to_money }}</div>
+                    <div class="quantity">Disponible: {{ inventory.product_quantity }}</div>
+                    <div class="description">{{ inventory.product.description }}</div>
+                    <button class="Boton1" id="{{ inventory.id }}">Añadir al carrito</button>
+                    <div class="price_number" hidden>{{ inventory.product.cost }}</div>
+                </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
     <div class="card">
         <h1>Card</h1>
-        <ul class="listCard">
-        </ul>
-            <div class="checkOut">
-                <h1>Total</h1>
-                <h1 class="total">0</h1>
-                <div class="closeShopping">Cerrar</div>
-                <div class="total">Pagar</div>
-        </div>
+        <form action="" method="post">
+            <ul class="listCard">
+
+            </ul>
+                <div class="checkOut">
+                    <h1>Total</h1>
+                    <h1 class="total">0</h1>
+                    <div class="closeShopping">Cerrar</div>
+                <button type="submit" class="total">Pagar</button>
+            </div>
+        </form>
     </div>
 
     <script>
         let staticUrl = "{% static '' %}";
     </script>
+
     <script src="{% static 'store/store.js' %}"></script>
+
     <script
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
+    
     <script src="{% static 'header/header.js' %}"></script>
 </body>
 </html>

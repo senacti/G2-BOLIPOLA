@@ -99,6 +99,33 @@
 
                         <span>------------------------------------------------------------------------</span>
                     </div>
+
+                    {% elif sale.type == 'Reserva'%}
+                    <div id="saleTypeInformation">
+                        <span>-------------- INFORMACIÓN DE LA RESERVA --------------</span>
+
+                        <div class="main__inf-item">
+                            <span>Tipo de reserva:</span>
+                            <input type="text" value="{{ inf.type }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Fecha reservado:</span>
+                            <input type="text" value="{{ inf.date }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Hora inicio:</span>
+                            <input type="text" value="{{ inf.start_time }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Hora fin:</span>
+                            <input type="text" value="{{ inf.end_time }}" readonly>
+                        </div>
+                        
+                        <span>------------------------------------------------------------------------</span>
+                    </div>
                     {% endif %}
                     
                     <div class="moreInf">

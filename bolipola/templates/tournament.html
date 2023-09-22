@@ -49,7 +49,7 @@
 
                     <i class="fa-brands fa-whatsapp" id="whatsappIcon"></i>
                     <div class="content-customer-support">
-                        <span class="numberTop">+57 1234567890</span>             
+                        <span class="numberTop">+57 3202127187</span>             
                     </div>
 
                     {% endif %}
@@ -145,14 +145,16 @@
                     <img src="{% static 'register/images/logo.png' %}">
 
                     {% if not tournament.active %}
-                        <h1 >FINALIZADO</h1>
+                        <h1 style="color: #CB4335">FINALIZADO</h1>
                     {% endif %}
 
-                    <h1>{{tournament.name}}</h1>
-                    <h5>TORNEO {{tournament.number_teams}} equipos</h5>
-                    <h3>Inscritos: {{ tournament.registered_teams }}</h3>
-                    <p>En este torneo habran 16 equipos los cuales competiran por un premio de {{ tournament.payment_to_money }} de pesos colombianos</p>
-                    <p>el valor de inscripcion es de {{tournament.cost_to_money}} pesos cada equipo</p>
+                    <div class="titulos">
+                        <h1>{{tournament.name}}</h1>
+                        <h3>TORNEO {{tournament.number_teams}} equipos</h3>
+                        <h3>Inscritos: {{ tournament.registered_teams }}</h3>
+                    </div>
+                    <p>En este torneo habran 16 equipos los cuales competiran por un premio de <b>{{ tournament.payment_to_money }}</b> de pesos colombianos</p>
+                    <p>el valor de inscripcion es de <b>{{tournament.cost_to_money}}</b> pesos cada equipo</p>
 
                     {% if user.is_staff %}
                         <a href="{% url 'tournament_teams' tournament.id %}"><input type="submit" value="Consultar" class="boton2"></a>

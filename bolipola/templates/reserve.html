@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservas</title>
+    <link rel="stylesheet" href="{% static 'event/event.css' %}">
     <link rel="stylesheet" href="{% static 'reserve/styles/reserve.css' %}">
     <link rel="stylesheet" href="{% static 'header/header.css' %}">
 </head>
@@ -51,7 +52,7 @@
 
                     <i class="fa-brands fa-whatsapp" id="whatsappIcon"></i>
                     <div class="content-customer-support">
-                        <span class="numberTop">+57 1234567890</span>             
+                        <span class="numberTop">+57 3202127187</span>             
                     </div>
 
                     {% endif %}
@@ -107,40 +108,117 @@
         </div>
     </header>
 
-    <div class="container">
+    {% if user.is_staff %}
+        <div class="admin">
+            <a href="/admin/core/calendar/add/">
+                <button>Establecer disponibilidad</button>
+            </a>
+        </div>
+    {% endif %}
 
+    <div class="container">
         <div class="reserva">
              <h2 class="reservas">Boliranas</h2>
              <img src="{% static 'reserve/images/bolirana.jpg' %}" class="reference-img"/>
-             <p>!Reserva ya tu(s) mesa(s) de Bolirana!</p>
+             {% if not user.is_staff %}
+             <p>¡Reserva ya tu(s) mesa(s)<br>de Bolirana!</p>
              <a href="{% url 'bolirana_form' %}">
                 <button>Reservar Boliranas</button>
              </a>
+             {% endif %}
         </div>
         
         <div class="reserva">
             <h2 class="reservas">Canchas de Futbol</h2>
             <img src="{% static 'reserve/images/court.jpg' %}" class="reference-img"/>
-            <p>!Reserva ya la cancha de futbol!</p>
+            {% if not user.is_staff %}
+            <p>¡Reserva ya la<br>cancha de futbol!</p>
             <a href="{% url 'court_form' %}">
                 <button>Reservar Cancha</button>
             </a>
+            {% endif %}
         </div>
     
         <div class="reserva">
             <h2 class="reservas">Mesas</h2>
             <img src="{% static 'reserve/images/tables.jpg' %}" class="reference-img"/>
-            <p>!Reserva ya tu mesa!</p>
+            {% if not user.is_staff %}
+            <p>¡Reserva ya<br>tu mesa!</p>
             <a href="{% url 'tables_form' %}">
                 <button>Reservar Mesa</button>
             </a>
-          
+          {% endif %}
         </div>
     </div>
+
+    {% if not user.is_staff %}
+    <div class="separadorContainer">
+        <div class="separador">
+        </div>
+    </div>
+
+    <div class="containerMain">
+
+        <div>
+            <h1>¡Reserva un evento!</h1>
+        </div>
+
+        <div class="containerxd">
+            <h1>Reserva de Eventos</h1>
+            <form action="#" method="POST">
+                <label for="nombre">Nombre del Evento:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                <label for="fecha">Fecha:</label> 
+                <input type= "datetime-local"> <br>
+                
+                <label for="tipo">Tipo de Evento:</label> 
+                <select id="tipo" name="tipo" required onchange="mostrarOtra()">
+                    <option value="...">...</option>
+                    <option value="cumpleaños">Cumpleaños</option>
+                    <option value="bautizos">Bautizos</option>
+                    <option value="primera comunion">Primera Comunion</option>
+                    <option value="Otra">Otra</option>
+                </select><br>
+                <input id="otraInput" value="" placeholder="coloque aqui que tipo de Evento" style="display: none;">
+
+                
+
+                <label for="Pisos">Pisos</label>
+                <select name="Pisos" id="Pisos">
+                    <option value="...">...</option>
+                    <option value="piso 2">piso 2</option>
+                    <option value="piso 3">piso 3</option>
+                </select>
+                
+                <label for="personas">Asistentes para el Evento</label>
+                <input type="number" id="personas" name="personas" required>
+
+                
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+                
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
     <script
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
+    <script>
+        function mostrarOtra() {
+            var selectElement = document.getElementById("tipo");
+            var otraInput = document.getElementById("otraInput");
+        
+            if (selectElement.value === "Otra") {
+                otraInput.style.display = "block";
+            } else {
+                otraInput.style.display = "none";
+            }
+        }
+        </script>
     <script src="{% static 'header/header.js' %}"></script>
 </body>
 </html>

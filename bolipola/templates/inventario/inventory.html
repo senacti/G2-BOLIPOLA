@@ -29,23 +29,19 @@
         <h1 class="mt-5 mb-4">Lista de Productos</h1>
         <ul class="list-unstyled">
             <div class="row">
-                {% for product in products %}
+                {% for inventory in inventorys %}
                 <div class="col-md-4 mb-3" >
                     <div class="card border-danger mb-3"id="cardxd" >
 
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">Costo: ${{ product.cost }}</p>
-                        <p class="card-text">Categoria: {{ product.category }}</p>
-                        {% for inventory in inventorys %}
-                        {% if inventory.id == product.id %}
+                        <h5 class="card-title">{{ inventory.product.name }}</h5>
+                        <p class="card-text">Costo: ${{ inventory.product.cost }}</p>
+                        <p class="card-text">Categoria: {{ inventory.product.category }}</p>
                         <p class="card-text"><span>Cantidad: {{ inventory.product_quantity }}</span></p>
-                        {% endif %}
-                        {% endfor %}
-                            <img src="{{ product.image.url }}" class="card-img-top" alt="Foto de Producto">
+                            <img src="{{ inventory.product.image.url }}" class="card-img-top" alt="Foto de Producto">
                         <div class="card-body">
-                            <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary">Editar</a>
-                            <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Eliminar</a>
-                            <a href="{% url 'quantity_product' product.pk %}" class="btn btn-success">Agregar Cantidad</a>
+                            <a href="{% url 'edit_product' inventory.product.pk %}" class="btn btn-primary">Editar</a>
+                            <a href="{% url 'delete_product' inventory.product.pk %}" class="btn btn-danger">Eliminar</a>
+                            <a href="{% url 'quantity_product' inventory.product.pk %}" class="btn btn-success">Agregar Cantidad</a>
                         </div>
                     </div>
                 </div>

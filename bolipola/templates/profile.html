@@ -9,6 +9,11 @@
     <title>Perfil</title>
 </head>
 <body>
+
+    <a class="exitContainer" href="{% url 'index' %}">
+        <i class="fa-regular fa-circle-left fa-xl"></i>
+    </a>
+
     <div class="main">
         <form class="main-form" method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -65,22 +70,18 @@
                         </div>
                     </div>
                     <div class="box__right">
-                        <h4 id="adminTitleList">
-                            Compras recientes{% if not user.is_staff %}:{% endif %}
-                            {% if user.is_staff %}
-                                de clientes:
-                            {% endif %}
-                        </h4>
+                            <h4 id="adminTitleList">
+                                Compras recientes{% if not user.is_staff %}:{% endif %}
+                                {% if user.is_staff %}
+                                    de clientes:
+                                {% endif %}
+                            </h4>
                         <div class="box__right-list">
                             {% if shoppings %}
                                 {% for shop in shoppings %}
                                 <div class="box__right-list-element" id="{{ shop.status_number }}" onclick="go(`{% url 'sale_information' shop.id %}`)">
                                     {% if shop.type == 'Torneo' %}
                                     <i class="fa-solid fa-users fa-xl"></i>
-                                    <div class="titleAndDesc">
-                                        <h3 class="box__right-list-element-title">
-                                            {{ shop.search_intermediate.tournament.name }}
-                                        </h3>
                                     {% elif shop.type == 'Productos' %}
                                     <i class="fa-solid fa-cart-shopping fa-xl"></i>
                                     {% elif shop.type == 'Reserva' %}
@@ -88,6 +89,10 @@
                                     {% else %}
                                     <i class="fa-solid fa-cake-candles fa-xl"></i>
                                     {% endif %}
+                                    <div class="titleAndDesc">
+                                        <h3 class="box__right-list-element-title">
+                                            {{ shop.type }}
+                                        </h3>
                                         <p class="box__right-list-element-desc">{{ shop.date.date }}</p>
                                     </div>
                                 </div>

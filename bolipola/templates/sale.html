@@ -51,9 +51,35 @@
                             <input type="text" value="{{ inf.payment_to_money }}" readonly>
                         </div>
 
-                        {{ form.total_cost }}
+                        {% elif type_name == 'Reserva' %}
+                        
+                        <div class="main__inf-item">
+                            <span>Tipo:</span>
+                            <input type="text" value="{{ inf.type }}" readonly>
+                        </div>
+                        
+                        <div class="main__inf-item">
+                            <span>Hora de inicio:</span>
+                            <input type="text" value="{{ inf.date }}" readonly>
+                        </div>
 
+                        <div class="main__inf-item">
+                            <span>Hora de inicio:</span>
+                            <input type="text" value="{{ inf.start_time }}" readonly>
+                        </div>
+
+                        <div class="main__inf-item">
+                            <span>Hora fin:</span>
+                            <input type="text" value="{{ inf.end_time }}" readonly>
+                        </div>
+                    
+                        <div class="main__inf-item">
+                            <span>Costo:</span>
+                            <input type="text" value="{{ inf.cost_to_money }}" readonly>
+                        </div>
+                        
                         {% endif %}
+                        {{ form.total_cost }}
                     
                         <div class="moreInf">
                             <div class="main__inf-item">

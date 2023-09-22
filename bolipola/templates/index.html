@@ -43,7 +43,7 @@
 
                     <i class="fa-brands fa-whatsapp" id="whatsappIcon"></i>
                     <div class="content-customer-support">
-                        <span class="numberTop">+57 1234567890</span>             
+                        <span class="numberTop">+57 3202127187</span>             
                     </div>
 
                     {% endif %}
@@ -100,9 +100,13 @@
     </header>
     <section class="banner">
         <div class="content-banner">
-            <p>¡Las mejores ofertas!</p>
-            <h2>4 Pack Coctel<br />Strawberry Mykes Lata</h2>
-            <a href="{% url 'store' %}">Comprar ahora</a>
+            <p>¡Hola!</p>
+            <h2>Bienvenido a BoliPola<br/>Tomate una pola</h2>
+            {% if user.is_authenticated %}
+                <a href="{% url 'tournament' %}">Ir a torneos</a>
+            {% else %}
+                <a href="{% url 'register' %}">Regístrate</a>
+            {% endif %}
         </div>
     </section>
 
@@ -116,173 +120,22 @@
 
             <div class="container-products">
                 <!-- Producto 1 -->
+                {% for inventory in inventorys %}
                 <div class="card-product">
                     <div class="container-img">
-                        <img src="{% static 'index/images/aguardiente.jpg' %}" alt="aguardiente" />
+                        <img src="{{ inventory.product.image.url }}" alt="aguardiente" />
                         <div class="button-group">
                         </div>
                     </div>
                     <div class="content-card-product">
-                        <h3>Aguardiente Antioqueño litro</h3>
-                        <span class="add-cart">
-                            <a class="fa-solid fa-basket-shopping" href="{% url 'store' %}"></a>
-                        </span>
-                        <p class="price">$56.300</p>
-                    </div>
-                </div>
-                <!-- Producto 2 -->
-                <div class="card-product">
-                    <div class="container-img">
-                        <img
-                            src="{% static 'index/images/ron.png' %}"
-                            alt="ron.png"
-                        />
-                        <div class="button-group">
-                        </div>
-                    </div>
-                    <div class="content-card-product">
-                        <h3>Ron de Caldas</h3>
-                        <span class="add-cart">
-                            <a class="fa-solid fa-basket-shopping" href="{% url 'store' %}"></a>
-                        </span>
-                        <p class="price">$50.000</p>
-                    </div>
-                </div>
-                <!--  -->
-                <div class="card-product">
-                    <div class="container-img">
-                        <img
-                            src="{% static 'index/images/vodka.png' %}"
-                            alt="Smirnoff lulo"
-                        />
-                        <div class="button-group">
-                        </div>
-                    </div>
-                    <div class="content-card-product">
-                        <h3>Smirnoff lulo</h3>
-                        <span class="add-cart">
-                            <a class="fa-solid fa-basket-shopping" href="{% url 'store' %}"></a>
-                        </span>
-                        <p class="price">$55.500</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="container blogs">
-            <h1 class="heading-1">Últimos Torneos</h1>
-
-            <div class="container-blogs">
-                <div class="card-blog">
-                    <div class="container-img">
-                        <img src="img/blog-1.jpg" alt="Imagen Blog 1" />
-                        <div class="button-group-blog">
-                            <span>
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                        <h3>{{ inventory.product.name }}</h3>
+                            <span class="add-cart">
+                                <a href="{% url 'store' %}"><i class="fa-solid fa-basket-shopping"></i></a>
                             </span>
-                            <span>
-                                <i class="fa-solid fa-link"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="content-blog">
-                        <h3>Lorem, ipsum dolor sit</h3>
-                        <span>29 Noviembre 2022</span>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Iste, molestiae! Ratione et, dolore ipsum
-                            quaerat iure illum reprehenderit non maxime amet dolor
-                            voluptas facilis corporis, consequatur eius est sunt
-                            suscipit?
-                        </p>
-                        <div class="btn-read-more">Leer más</div>
+                        <p class="price">{{ inventory.product.cost_to_money }}</p>
                     </div>
                 </div>
-                <div class="card-blog">
-                    <div class="container-img">
-                        <img src="img/blog-2.jpg" alt="Imagen Blog 2" />
-                        <div class="button-group-blog">
-                            <span>
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </span>
-                            <span>
-                                <i class="fa-solid fa-link"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="content-blog">
-                        <h3>Lorem, ipsum dolor sit</h3>
-                        <span>29 Noviembre 2022</span>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Iste, molestiae! Ratione et, dolore ipsum
-                            quaerat iure illum reprehenderit non maxime amet dolor
-                            voluptas facilis corporis, consequatur eius est sunt
-                            suscipit?
-                        </p>
-                        <div class="btn-read-more">Leer más</div>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="container blogs">
-            <h1 class="heading-1">Últimos Eventos</h1>
-
-            <div class="container-blogs">
-                <div class="card-blog">
-                    <div class="container-img">
-                        <img src="img/blog-1.jpg" alt="Imagen Blog 1" />
-                        <div class="button-group-blog">
-                            <span>
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </span>
-                            <span>
-                                <i class="fa-solid fa-link"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="content-blog">
-                        <h3>Lorem, ipsum dolor sit</h3>
-                        <span>29 Noviembre 2022</span>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Iste, molestiae! Ratione et, dolore ipsum
-                            quaerat iure illum reprehenderit non maxime amet dolor
-                            voluptas facilis corporis, consequatur eius est sunt
-                            suscipit?
-                        </p>
-                        <div class="btn-read-more">Leer más</div>
-                    </div>
-                </div>
-                <div class="card-blog">
-                    <div class="container-img">
-                        <img src="img/blog-2.jpg" alt="Imagen Blog 2" />
-                        <div class="button-group-blog">
-                            <span>
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </span>
-                            <span>
-                                <i class="fa-solid fa-link"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="content-blog">
-                        <h3>Lorem, ipsum dolor sit</h3>
-                        <span>29 Noviembre 2022</span>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Iste, molestiae! Ratione et, dolore ipsum
-                            quaerat iure illum reprehenderit non maxime amet dolor
-                            voluptas facilis corporis, consequatur eius est sunt
-                            suscipit?
-                        </p>
-                        <div class="btn-read-more">Leer más</div>
-                    </div>
-                </div>
-                </div>
-            </div>
+                {% endfor %}
         </section>
     </main>
 
@@ -293,9 +146,9 @@
                     <p class="title-footer">Información de Contacto</p>
                     <ul>
                         <li>
-                            Dirección: Calle de la fantasia Miguelin
+                            Dirección: Cl. 64 Sur #77g-68, Bosa, Bogotá, Cundinamarca
                         </li>
-                        <li>Teléfono: 123-456-7890</li>
+                        <li>Teléfono: 320 2127187</li>
                         <li>EmaiL: bolipola@support.com</li>
                     </ul>
                     <div class="social-icons">
@@ -313,7 +166,6 @@
                     <ul>
                         <li><a href="#">Politicas de Privacidad</a></li>
                         <li><a href="#">Términos y condiciones</a></li>
-                        <li><a href="#">Contactános</a></li>
                     </ul>
                 </div>
 
@@ -321,15 +173,18 @@
                     <p class="title-footer">Mi cuenta</p>
 
                     <ul>
-                        <li><a href="#">Mi cuenta</a></li>
-                        <li><a href="#">Historial de ordenes</a></li>
-                        <li><a href="#">Reembolsos</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' %}">Mi cuenta</a></li>
+                        <li><a href="{% url 'sale_historic' %}">Historial de ordenes</a></li>
+                        {% else %}
+                        <li><a href="{% url 'signin' %}">Mi cuenta</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
             <div class="copyright">
                 <p>
-                    copyright jiji &copy; 2023
+                    #2714094-Gaes2 &copy; 2023
                 </p>
             </div>
         </div>
