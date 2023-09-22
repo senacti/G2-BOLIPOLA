@@ -219,8 +219,7 @@ class PlayerForm(forms.ModelForm):
 
     dorsal = forms.IntegerField(
         required=True,
-        min_value=1,
-        max_value=99,
+        min_value=0
     )
 
     class Meta:
@@ -281,7 +280,7 @@ class ProductForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'class':'form-control',
-                'placeholder':'Nombre del producto'
+                'placeholder':'Nombre del producto',
                 }
             )
         )
@@ -291,13 +290,15 @@ class ProductForm(forms.ModelForm):
         widget=forms.NumberInput(
             attrs={
                 'class':'form-control',
-                'placeholder':'Costo del producto'
+                'placeholder':'Costo del producto',
+                'min':'0'
             }
         )
     )
 
     description = forms.CharField(
         required=True,
+        max_length=250,
         widget=forms.Textarea(
             attrs={
                 'class':'form-control',
@@ -419,25 +420,27 @@ class EventForm(forms.ModelForm):
         widget=forms.NumberInput(
             attrs={
                 'class':'form-control',
-                'placeholder':'Costo del evento'
+                'placeholder':'Costo del evento',
+                'min':'0'
             }
         )
     )
     guest = forms.CharField(
         max_length=100,
-        
         widget=forms.TextInput(
             attrs={
                 'class':'form-control',
-                'placeholder':'Invitados del evento'
+                'placeholder':'Invitados del evento',
+                'min':'0'
             }
         )
     )
     description = forms.CharField(
+        max_length=250,
         widget=forms.Textarea(
             attrs={
                 'class':'form-control',
-                'placeholder':'Descripción del evento'
+                'placeholder':'Descripción del evento',
             }
         )
     )
