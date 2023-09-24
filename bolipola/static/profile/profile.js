@@ -53,6 +53,11 @@ edit.addEventListener("click", () => {
 
     //Quitando ocultos o deshabilitados de los inputs
     inputs.forEach((element) => {
+        //Si es email no se podrá cambiar
+        if (element.id == "unique") {
+            return
+        }
+
         element.removeAttribute("disabled")
         element.removeAttribute("hidden")
     })

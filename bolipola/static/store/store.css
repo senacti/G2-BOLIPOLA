@@ -148,6 +148,24 @@
 /* ********************************** */
 /*       MEDIA QUERIES -- 468px       */
 /* ********************************** */
+@media (max-width: 1080px) {
+	.list {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (max-width: 870px) {
+	.list {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 520px) {
+	.list {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
 @media (max-width: 468px) {
 	html {
 		font-size: 42.5%;

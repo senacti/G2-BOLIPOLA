@@ -291,6 +291,7 @@ body {
     width: 100%;
     display: flex;
     padding-bottom: 0.5rem;
+    padding-left: 0.35rem;
     border-bottom: 0.1rem solid #CCD1D1;
 }
 

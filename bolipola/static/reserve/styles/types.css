@@ -290,12 +290,11 @@ a.button:hover {
 
 .reserva {
     background-color: #FBFCFC;
-    padding: 20px;
-    margin: 20px;
+    padding: 1.65rem;
+    margin: 1.65rem;
     border: 0.2rem solid #CB4335;
     border-radius: 2rem;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    width: calc(50% - 40px);
     box-sizing: border-box;
     text-align: center;
     display: flex;
