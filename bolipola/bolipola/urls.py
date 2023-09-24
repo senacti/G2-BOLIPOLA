@@ -7,6 +7,7 @@ from .reserve_views import views as reserve_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('terms/', views.terms, name='terms'),
     path('', views.index, name='index'),
     path('register/', views.register, name='register'),
     path('signin/', views.signin, name='signin'),

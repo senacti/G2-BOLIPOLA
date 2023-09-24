@@ -1,6 +1,13 @@
 from django import forms
-from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam, Event
-from datetime import datetime
+from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam, Event, Reservation
+from datetime import datetime, timedelta
+
+fecha_hoy = datetime.now()
+fecha_hoy_str = fecha_hoy.strftime('%Y-%m-%d')
+mas_6_meses = fecha_hoy + timedelta(days=30*6)
+mas_6_meses_str = mas_6_meses.strftime('%Y-%m-%d')
+mas_1_semana = fecha_hoy + timedelta(days=7)
+mas_1_semana_str = mas_1_semana.strftime('%Y-%m-%d')
 
 #Formulario de venta
 class SaleForm(forms.ModelForm):
@@ -56,6 +63,23 @@ class SaleForm(forms.ModelForm):
             'type',
             'product_quantity',
         ]
+
+#Formulario de reserva
+class ReservationForm(forms.ModelForm):
+    the_date = forms.DateField(
+        required=True,
+        widget=forms.DateInput(
+            attrs={
+                'type':'date',
+                'min':fecha_hoy_str,
+                'max':mas_6_meses_str,
+            }
+        )
+    )
+
+    class Meta:
+        model = Reservation
+        fields = []
 
 #Formulario de equipo
 class TeamForm(forms.ModelForm):
@@ -174,16 +198,16 @@ class TournamentTeamForm(forms.ModelForm):
 #Formulario de jugador
 class PlayerForm(forms.ModelForm):
     name = forms.CharField(
+        min_length=2,
         max_length=15,
-        min_length=2, 
         required=True,
         widget=forms.TextInput(attrs={'pattern':'[A-Za-záéíóúüñÁÉÍÓÚÜÑ ]+'}),
     )
 
     last_name = forms.CharField(
         widget=forms.TextInput(attrs={'pattern': '[A-Za-záéíóúüñÁÉÍÓÚÜÑ ]+'}), 
+        min_length=2,
         max_length=15, 
-        min_length=2, 
         required=True,
     )
 
@@ -272,8 +296,8 @@ class CardPlayerForm(forms.ModelForm):
             'red_card',
             'blue_card',
         ]
-fecha_hoy = datetime.now()
-fecha_hoy_str = fecha_hoy.strftime('%Y-%m-%d')
+
+
 #Formulario de producto
 class ProductForm(forms.ModelForm):
     name = forms.CharField(
@@ -310,14 +334,13 @@ class ProductForm(forms.ModelForm):
     )
 
     image = forms.ImageField(
-        required=True,
+        required=False,
         widget=forms.FileInput(
             attrs={
                 'class':'form-control',
             }
         )
     )
-
 
     due_date = forms.DateField(
         required=True,
@@ -326,7 +349,7 @@ class ProductForm(forms.ModelForm):
                 'class':'form-control',
                 'placeholder':'Fecha de vencimiento',
                 'type':'date',
-                'min': fecha_hoy_str
+                'min': mas_1_semana_str,
             }
         )
     )

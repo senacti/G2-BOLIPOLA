@@ -1,8 +1,26 @@
 from django.db import models
 from user.models import UserBoli
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 import locale
 locale.setlocale(locale.LC_ALL, '')
+
+def validate_positive(value):
+    if value < 0:
+        raise ValidationError('El valor debe ser positivo.')
+
+def validate_date_with_2_days(value):
+    today = timezone.now()
+    min_date = today + timezone.timedelta(days=2)
+
+    if value < min_date:
+        raise ValidationError("La fecha debe ser a más de dos días a partir de hoy.")
+
+def validate_today(value):
+    today = timezone.now().date()
+
+    if value < today:
+        raise ValidationError("La fecha debe ser mínimo hoy.")
 
 class Comment(models.Model):
     score = models.PositiveIntegerField(verbose_name='Puntuación')
@@ -34,9 +52,9 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre')
-    cost = models.FloatField(verbose_name='Costo')
+    cost = models.FloatField(verbose_name='Costo',  validators=[validate_positive])
     description = models.TextField(verbose_name='Descripción')
-    image = models.ImageField(verbose_name='Imágen', upload_to='product/')
+    image = models.ImageField(verbose_name='Imágen', upload_to='product/', null=False, default='default_product.png')
     due_date = models.DateField(verbose_name='Fecha de vencimiento')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
@@ -59,7 +77,7 @@ class Product(models.Model):
 
 class Inventory(models.Model):
     entry_date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de entrada')
-    product_quantity = models.PositiveIntegerField(verbose_name='Cantidad de producto', default=0)
+    product_quantity = models.PositiveIntegerField(verbose_name='Cantidad de producto', default=0, validators=[validate_positive])
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -85,9 +103,8 @@ class Output(models.Model):
         db_table = 'salida'
         ordering = ['id']
       
-      
 class Calendar(models.Model):
-    date = models.DateField(verbose_name='Fecha del día')
+    date = models.DateField(verbose_name='Fecha del día', validators=[validate_today])
     availability = models.BooleanField(verbose_name='Dia disponible (no lo marques para reconocer que no esta disponible el día establecido)', default=False)
 
     def __str__(self):
@@ -130,7 +147,7 @@ class Event(models.Model):
     type = models.CharField(max_length=50, verbose_name='Tipo de evento')
     place = models.CharField(max_length=50, verbose_name='Lugar del evento')
     date = models.DateTimeField(verbose_name='Fecha del evento')
-    cost = models.FloatField(verbose_name='Costo del evento')
+    cost = models.FloatField(verbose_name='Costo del evento', validators=[validate_positive])
     guests = models.PositiveIntegerField(verbose_name='Cantidad de invitados', default=0)
     description = models.TextField(verbose_name='Descripción', default='Fiesta')
 
@@ -207,11 +224,11 @@ class Player(models.Model):
         ordering = ['id']
 
 class Tournament(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Nombre', null=True)
+    name = models.CharField(max_length=30, verbose_name='Nombre', null=False, default='Campeonato')
     number_teams = models.PositiveIntegerField(verbose_name='Cantidad de equipos permitidos', default=16)
-    date = models.DateTimeField(verbose_name='Fecha de inicio del torneo')
-    prize_payment = models.FloatField(verbose_name='Pago de premio')
-    cost = models.FloatField(verbose_name='Costo de inscripción')
+    date = models.DateTimeField(verbose_name='Fecha de inicio del torneo', validators=[validate_date_with_2_days])
+    prize_payment = models.FloatField(verbose_name='Pago de premio', validators=[validate_positive])
+    cost = models.FloatField(verbose_name='Costo de inscripción', validators=[validate_positive])
     active = models.BooleanField(verbose_name='Torneo activo (no mover)', default=True)
     team = models.ManyToManyField(Team, through='TournamentTeam')
 
@@ -236,7 +253,6 @@ class Tournament(models.Model):
         intermediates = TournamentTeam.objects.all().filter(tournament_id=self.id)
         for registered in intermediates:
             total += 1
-
         return total
 
     class Meta:
@@ -248,14 +264,14 @@ class Tournament(models.Model):
 class TournamentTeam(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    goals_for = models.IntegerField(verbose_name='Goles a favor', default=0)
-    goals_against = models.IntegerField(verbose_name='Goles en contra', default=0)
-    goals_diff = models.IntegerField(verbose_name='Diferencia de goles', default=0)
-    games_tied = models.IntegerField(verbose_name='Partidos empatados', default=0)
-    games_won = models.IntegerField(verbose_name='Partidos ganados', default=0)
-    games_lost = models.IntegerField(verbose_name='Partidos perdidos', default=0)
-    games_played = models.IntegerField(verbose_name='Partidos jugados', default=0)
-    score = models.IntegerField(verbose_name='Puntaje', default=0)
+    goals_for = models.PositiveIntegerField(verbose_name='Goles a favor', default=0)
+    goals_against = models.PositiveIntegerField(verbose_name='Goles en contra', default=0)
+    goals_diff = models.PositiveIntegerField(verbose_name='Diferencia de goles', default=0)
+    games_tied = models.PositiveIntegerField(verbose_name='Partidos empatados', default=0)
+    games_won = models.PositiveIntegerField(verbose_name='Partidos ganados', default=0)
+    games_lost = models.PositiveIntegerField(verbose_name='Partidos perdidos', default=0)
+    games_played = models.PositiveIntegerField(verbose_name='Partidos jugados', default=0)
+    score = models.PositiveIntegerField(verbose_name='Puntaje', default=0)
 
     def __str__(self):
         return str(f'{self.tournament.name} - {self.team.name}')
@@ -267,7 +283,7 @@ class TournamentTeam(models.Model):
         ordering = ['id']
 
 class Sale(models.Model):
-    total_cost = models.FloatField(verbose_name='Costo total')
+    total_cost = models.FloatField(verbose_name='Costo total', validators=[validate_positive])
     payment_type = models.CharField(max_length=50, verbose_name='Tipo de pago')
     status = models.CharField(max_length=50, verbose_name='Estado de venta', default='En proceso...')
     date = models.DateTimeField(default=timezone.now, verbose_name='Fecha')

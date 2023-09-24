@@ -194,7 +194,7 @@ def inventory(request):
             form.save()
             return redirect('inventory')
     
-    return render(request, 'inventario/inventory.html', {'products': products, 'form': form,'inventorys': inventorys, 'form2': form2})
+    return render(request, 'inventario/inventory.html', {'products':products, 'form':form, 'inventorys':inventorys, 'form2':form2})
  
 #Cantidad de producto
 @login_required
@@ -207,9 +207,13 @@ def quantity_product(request, pk):
     if request.method == 'POST':
         form = InventoryForm(request.POST, instance=inventorys)
         if form.is_valid():
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se han agregado {form.cleaned_data["product_quantity"]} productos de {product_name}')
             form.save()
             return redirect('inventory')
-    
+        else:
+            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> No puede haber cantidades negativas')
+            return redirect(f'/quantity-product/{pk}/')
+
     return render(request, 'inventario/quantity_product.html', {'form': form, 'product_name': product_name})
 
 #Crear producto
@@ -225,6 +229,7 @@ def create_product(request):
             new_inventory = Inventory(product_id=new_product.id)
             new_inventory.save()
 
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> El producto {new_product.name} ha sido creado con éxito')
             return redirect('inventory')
         else:
             return HttpResponse(form.errors)
@@ -242,6 +247,7 @@ def create_category(request):
             new_category = form.save(commit=False)
             new_category.save()
 
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> La categoria {new_category.name} ha sido creada')
             return redirect('inventory')
         else:
             return HttpResponse(form.errors)
@@ -261,6 +267,7 @@ def edit_product(request, pk):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> El producto {product.name} ha sido editado')
             return redirect('inventory')
     
     return render(request, 'inventario/edit_product.html', {'form': form})
@@ -269,10 +276,9 @@ def edit_product(request, pk):
 @login_required
 def delete_product(request, pk):
     product = Product.objects.get(pk=pk)
-    
-    
-    
+
     if request.method == 'POST':
+        messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> El producto {product.name} ha sido eliminado')
         product.delete()
         return redirect('inventory')
     
@@ -348,6 +354,7 @@ def tournament_teams(request, tournament_id):
 
             form.save()
 
+        messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Las estadísticas del equipo {team_form.team.name} han sido modificadas')
         return redirect(f'/tournament/teams/{tournament_id}/')
     else:
        form = TournamentTeamForm()
@@ -372,6 +379,13 @@ def tournament_players(request, tournament_id, team_id):
         form = CardPlayerForm(request.POST, instance=player)
         if form.is_valid():
             form.save()
+
+        if player.gender == "Femenino":
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se ha modificado las tarjetas de la jugadora {player.name}')
+        elif player.gender == "Masculino":
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se ha modificado las tarjetas del jugador {player.name}')
+        else:
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se ha modificado las tarjetas de l@ jugador@ {player.name}')
 
         return redirect(f'/tournament/teams/{tournament_id}/{team_id}/')
 
@@ -429,7 +443,8 @@ def player(request):
     #Consiguiendo información del equipo a la que va a pertencer el player
     user = request.user
     team = get_object_or_404(Team, user_id=user.id)
-        #Verificando que no esté en un torneo
+    
+    #Verificando que no esté en un torneo
     sales = Sale.objects.all().filter(type='Torneo', user_id=user.id)
     sales_tournaments = []
     for sale in sales:
@@ -460,6 +475,7 @@ def player(request):
             team.save()
             player.save()
 
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se ha agregado el jugador {player.name} al equipo')
             return redirect('player')
     else:
         form = PlayerForm()
@@ -472,7 +488,8 @@ def player_edit(request, player_id):
     user = request.user
     player_inf = get_object_or_404(Player, id=player_id)
     team = get_object_or_404(Team, user_id=user.id)
-        #Verificando que no esté en un torneo
+
+    #Verificando que no esté en un torneo
     sales = Sale.objects.all().filter(type='Torneo', user_id=user.id)
     sales_tournaments = []
     for sale in sales:
@@ -526,7 +543,7 @@ def index(request):
         user = False
 
     inventorys = Inventory.objects.all().order_by('-product_quantity')[:5]
-        
+    
     return render(request, 'index.html', {'user': user, 'inventorys':inventorys})
 
 
@@ -546,8 +563,6 @@ def profile(request):
         old_avatar = userForm.avatar
 
         if form.is_valid():
-            userForm.username = form.cleaned_data['email']
-
             #Actualizando foto de perfil y borrando la anterior
             new_avatar = form.cleaned_data['avatar']
 
@@ -651,3 +666,7 @@ def register(request):
         form = CustomUserForm()
 
     return render(request, 'register.html', {'form': form})
+
+#Términos y condiciones
+def terms(request):
+    return render(request, 'terms/terms.html', {})

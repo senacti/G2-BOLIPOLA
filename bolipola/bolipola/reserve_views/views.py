@@ -5,12 +5,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from bolipola.views import sale
 from core.models import Calendar, Reservation
+from core.forms import ReservationForm
 import datetime
 
 @login_required
 def bolirana(request):
+    form = ReservationForm()
+
     if request.method == 'POST':
-        disponibility = request.POST.get('fecha', '')
+        disponibility = request.POST.get('the_date', '')
         disponibility_to_date = datetime.datetime.strptime(disponibility, '%Y-%m-%d').date()
         place = request.POST.get('site', '')
         time_start = request.POST.get('hora-inicio', '')
@@ -28,12 +31,14 @@ def bolirana(request):
         new_reservation.save()
         return redirect(f'/sale/{new_reservation.id}/{new_reservation.sale_type()}')
 
-    return render(request, 'reserve_types/bolirana.html', {})
+    return render(request, 'reserve_types/bolirana.html', {'form':form})
 
 @login_required
 def court(request):
+    form = ReservationForm()
+
     if request.method == 'POST':
-        disponibility = request.POST.get('fecha', '')
+        disponibility = request.POST.get('the_date', '')
         disponibility_to_date = datetime.datetime.strptime(disponibility, '%Y-%m-%d').date()
         place = request.POST.get('site', '')
         time_start = request.POST.get('hora-inicio', '')
@@ -51,12 +56,14 @@ def court(request):
         new_reservation.save()
         return redirect(f'/sale/{new_reservation.id}/{new_reservation.sale_type()}')
 
-    return render(request, 'reserve_types/court.html', {})
+    return render(request, 'reserve_types/court.html', {'form':form})
 
 @login_required
 def tables(request):
+    form = ReservationForm()
+
     if request.method == 'POST':
-        disponibility = request.POST.get('fecha', '')
+        disponibility = request.POST.get('the_date', '')
         disponibility_to_date = datetime.datetime.strptime(disponibility, '%Y-%m-%d').date()
         place = request.POST.get('site', '')
         time_start = request.POST.get('hora-inicio', '')
@@ -74,4 +81,4 @@ def tables(request):
         new_reservation.save()
         return redirect(f'/sale/{new_reservation.id}/{new_reservation.sale_type()}')
 
-    return render(request, 'reserve_types/tables.html', {})
+    return render(request, 'reserve_types/tables.html', {'form':form})
