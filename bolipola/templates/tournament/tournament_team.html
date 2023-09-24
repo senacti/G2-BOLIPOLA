@@ -4,6 +4,7 @@
 <head>
     <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
     <title>Document</title>
 </head>
 <body>
@@ -23,6 +24,22 @@
         <span style="color: #CB4335;">Finalizado</span>
         {% endif %}
     </h2>
+
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="message-container" style="margin: 0;">
+            <span group="messages"
+            class="
+                {% if msg.tags == 'success' %}message-success{% endif %}
+                {% if msg.tags == 'error' %}message-error{% endif %}
+                {% if msg.tags == 'info' %}message-info{% endif %}
+            "
+            >
+                {{ msg.message|safe }}
+            </span>
+        </div>
+        {% endfor %}
+    {% endif %}
 
     <div class="form" method="post">
         <table border="1">

@@ -59,7 +59,8 @@
                                     <i class="fa-solid fa-phone"></i>{{ form.phone }}
                                 </span>
                                 <span class="box__left-box-inf-span">
-                                    <i class="fa-solid fa-envelope"></i>{{ form.email }}
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <input type="email" class="box__left-box-inf-span-input" id="unique" value="{{ user.email }}" disabled>
                                 </span>
                                 <span class="box__left-box-inf-span">
                                     <i class="fa-solid fa-cake-candles"></i>{{ form.birthdate }}<span class="box__left-box-inf-span-age">{{ user.age }} años</span>

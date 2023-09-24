@@ -10,22 +10,6 @@
     <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
 </head>
 <body>
-    {% if messages %}
-        {% for msg in messages %}
-        <div class="message-container" style="margin: 0;">
-            <span group="messages"
-            class="
-                {% if msg.tags == 'success' %}message-success{% endif %}
-                {% if msg.tags == 'error' %}message-error{% endif %}
-                {% if msg.tags == 'info' %}message-info{% endif %}
-            "
-            >
-                {{ msg.message|safe }}
-            </span>
-        </div>
-        {% endfor %}
-    {% endif %}
-
 <div class="container">
 
     <div class="reserva">
@@ -38,7 +22,7 @@
             <input type="hidden" name="type_reserve" value="Cancha">
             <div class="letra">
                 <label>Dia reserva:</label>
-                <input type="date" id="fecha" name="fecha" max="12-12-2025" required>
+                {{ form.the_date }}
             </div>
 
             <div class="letra">
@@ -64,6 +48,21 @@
             </button>
         </form>
     </div>
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="message-container" style="margin: 0;">
+            <span group="messages"
+            class="
+                {% if msg.tags == 'success' %}message-success{% endif %}
+                {% if msg.tags == 'error' %}message-error{% endif %}
+                {% if msg.tags == 'info' %}message-info{% endif %}
+            "
+            >
+                {{ msg.message|safe }}
+            </span>
+        </div>
+        {% endfor %}
+    {% endif %}
 </div>
 <script>
     const horaInicio = document.getElementById('hora-inicio');
