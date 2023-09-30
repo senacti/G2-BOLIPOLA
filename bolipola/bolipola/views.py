@@ -294,6 +294,8 @@ def tournament(request):
     user = get_object_or_404(UserBoli, id=request.user.id)
     sales = Sale.objects.all().filter(type='Torneo',user_id=user.id)
     tournaments = Tournament.objects.all()
+    sales_tournaments_all = SaleTournament.objects.all()
+
     if request.user.is_authenticated:
         has_team = Team.objects.filter(user=request.user).exists()
     else:
@@ -304,20 +306,41 @@ def tournament(request):
     else:
         team = False
      
-    #Verificando que no esté en un torneo
     sales_tournaments = []
+    no_tournaments = []
+
+    # Torneos en proceso de compra del cliente
     for sale in sales:
-        sales_tournaments.append(SaleTournament.objects.all().filter(sale_id=sale.id).first())
+        for tournament in tournaments:
+            for sale_tournament_all in sales_tournaments_all:
+                if sale_tournament_all.sale_id == sale.id and sale_tournament_all.tournament_id == tournament.id:
+                    sales_tournaments.append(SaleTournament.objects.all().filter(sale_id=sale.id, tournament_id=tournament.id).first())
+
+    # Verificando ids que ya están comprados por el cliente
+    tournaments_ids = []
+    tournaments_ids_deletes = []
+    for tournament in tournaments:
+        tournaments_ids.append(tournament.id)
+
+    for sale_tournament in sales_tournaments:
+        tournaments_ids_deletes.append(sale_tournament.tournament.id)
+
+    # Torneos agenos al cliente
+    for deleted in tournaments_ids_deletes:
+        index = tournaments_ids.index(deleted)
+        tournaments_ids.pop(index)
+
+    for tournament_id in tournaments_ids:
+        no_tournaments.append(Tournament.objects.all().filter(id=tournament_id).first())
+
+    # Verificando si se encuentra en torneo actualmente
     has_tournament = False
-    the_tournament = False
-    
     for sale_tournament in sales_tournaments:
         if (sale_tournament.sale.status == 'En proceso...' and sale_tournament.tournament.active) or (sale_tournament.sale.status == 'Comprado' and sale_tournament.tournament.active):
-            the_tournament = sale_tournament.tournament
             has_tournament = True
             break
     
-    return render(request, 'tournament.html', { 'the_tournament':the_tournament ,'has_team':has_team, 'team':team, 'sales_tournaments':sales_tournaments, 'tournaments':tournaments, 'has_tournament':has_tournament})
+    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'sales_tournaments':sales_tournaments, 'tournaments':tournaments, 'has_tournament':has_tournament, 'no_tournaments':no_tournaments})
 
 @login_required
 def tournament_cancel(request, tournament_id):
