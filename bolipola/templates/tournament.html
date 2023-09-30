@@ -140,81 +140,79 @@
 
         {% endif %}
 
-
+        <!--Creando tarjeta-->
         {% if has_team or user.is_staff %}
         <div class="tarjeta">
-            {% for tournament in tournaments %} 
+            {% for sale_tournament in sales_tournaments %} 
+                <div class="box">
+                    <img src="{% static 'register/images/logo.png' %}">
+                    
+                        <h1 style="color: #239B56">INSCRITO</h1>
+                    {% if not sale_tournament.tournament.active %}
+                        <h1 style="color: #CB4335">Y FINALIZADO</h1>
+                    {% endif %}
+
+                    <div class="titulos">
+                        <h1>{{ sale_tournament.tournament.name }}</h1>
+                        <h3>TORNEO {{ sale_tournament.tournament.number_teams }} equipos</h3>
+                        <h3>Inscritos: {{ sale_tournament.tournament.registered_teams }}</h3>
+                    </div>
+                    <p>En este torneo habran 16 equipos los cuales competiran por un premio de <b>{{ sale_tournament.tournament.payment_to_money }}</b> de pesos colombianos</p>
+                    <p>el valor de inscripcion es de <b>{{ sale_tournament.tournament.cost_to_money }}</b> pesos cada equipo</p>
+
+                    {% if sale_tournament.tournament.active %}
+                        {% if sale_tournament.sale.status == 'Comprado' %}
+                        <a href="{% url 'tournament_teams' sale_tournament.tournament.id %}"><input type="submit" value="Ver estadisticas" class="boton2" style="background-color: #2471A3"></a>
+                        {% elif sale_tournament.sale.status == 'En proceso...' %}
+                        <a href="#"><input type="submit" value="Pago en proceso" class="boton2" style="background-color: #E67E22"></a>
+                        {% else %}
+                        <a href="#"><input type="submit" value="Compra cancelada" class="boton2" style="background-color:#7F8C8D"></a>
+                        {% endif %}
+                    {% else %}
+                        {% if sale_tournament.sale.status == 'Cancelado' or sale_tournament.sale.status == 'En proceso...' %}
+                        <a href="{% url 'tournament_teams' sale_tournament.tournament.id %}"><button style="background-color: #B7950B;" class="boton2"><i style="font-size: 1.5rem; text-decoration: underline;">No aceptado</i>, ver resultados</button></a>
+                        {% else %}
+                        <a href="{% url 'tournament_teams' sale_tournament.tournament.id %}"><input type="submit" value="Consultar resultados" class="boton2" style="background-color: #239B56;"></a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            {% for no_tournament in no_tournaments %}
                 <div class="box">
                     <img src="{% static 'register/images/logo.png' %}">
 
-                    {% if not tournament.active %}
+                    {% if not no_tournament.active %}
                         <h1 style="color: #CB4335">FINALIZADO</h1>
                     {% endif %}
 
                     <div class="titulos">
-                        <h1>{{tournament.name}}</h1>
-                        <h3>TORNEO {{tournament.number_teams}} equipos</h3>
-                        <h3>Inscritos: {{ tournament.registered_teams }}</h3>
+                        <h1>{{ no_tournament.name }}</h1>
+                        <h3>TORNEO {{ no_tournament.number_teams }} equipos</h3>
+                        <h3>Inscritos: {{ no_tournament.registered_teams }}</h3>
                     </div>
-                    <p>En este torneo habran 16 equipos los cuales competiran por un premio de <b>{{ tournament.payment_to_money }}</b> de pesos colombianos</p>
-                    <p>el valor de inscripcion es de <b>{{tournament.cost_to_money}}</b> pesos cada equipo</p>
+                    <p>En este torneo habran 16 equipos los cuales competiran por un premio de <b>{{ no_tournament.payment_to_money }}</b> de pesos colombianos</p>
+                    <p>el valor de inscripcion es de <b>{{ no_tournament.cost_to_money }}</b> pesos cada equipo</p>
 
                     {% if user.is_staff %}
-                        <a href="{% url 'tournament_teams' tournament.id %}"><input type="submit" value="Consultar" class="boton2"></a>
+                        <a href="{% url 'tournament_teams' no_tournament.id %}"><input type="submit" value="Consultar" class="boton2"></a>
+                    {% elif not no_tournament.active %}
+                        <a href="{% url 'tournament_teams' no_tournament.id %}"><input style="background-color: #B7950B;" type="submit" value="Ver resultados" class="boton2"></a>
                     {% else %}
-                    {% if sales_tournaments %}
-                    {% for sale_tournament in sales_tournaments %}
-                        {% if sale_tournament.tournament.id == tournament.id %}
-                            {% if sale_tournament.sale.status == 'Comprado' %}
-                                {% if sale_tournament.tournament.active %}
-                                    <a href="{% url 'tournament_teams' tournament.id %}">
-                                        <input type="submit" value="Ver estadisticas" class="boton2" style="background-color: green;">
-                                    </a>
-                                {% else %}
-                                    <a href="{% url 'tournament_teams' tournament.id %}">
-                                        <input type="submit" value="Consultar resultados" class="boton2">
-                                    </a>
-                                {% endif %}
-                            {% elif sale_tournament.sale.status == 'En proceso...' %}
-                                {% if saleournament.tournament.active %}
-                                    <a href="{% url 'sale_information' sale_tournament.sale.id %}">
-                                        <input type="submit" value="Cancelar inscripción" class="boton2">
-                                    </a>
-                                {% else %}
-                                    <a href="#">
-                                        <input type="submit" value="El torneo ha sido cancelado" class="boton2">
-                                    </a>
-                                {% endif %}
-                            {% elif sale_tournament.sale.status == 'Cancelado' %}
-                                <a href="#">
-                                    <input type="submit" value="Cancelado" class="boton2">
-                                </a>
-                            {% endif %}
-
+                        {% if has_tournament %}
+                            <a href="#"><input type="submit" value="Estás inscrito en un torneo" class="boton2" style="background-color:#7F8C8D" disabled></a>
                         {% else %}
-                            {% if not has_tournament and tournament.active %}
-                            <a href="{% url 'sale' tournament.id tournament.sale_type %}">
-                                <input type="submit" value="Inscribirse" class="boton2">
-                            </a>
-                            {% endif %}
+                            <a href="{% url 'sale' no_tournament.id no_tournament.sale_type %}"><input type="submit" value="Inscribirse" class="boton2"></a>
                         {% endif %}
-                    {% empty %}
-                        <a href="{% url 'sale' tournament.id tournament.sale_type %}">
-                            <input type="submit" value="Inscribirse" class="boton2">
-                        </a>
-                    {% endfor %}
-                {% else %}
-                <a href="{% url 'sale' tournament.id tournament.sale_type %}">
-                    <input type="submit" value="Inscribirse" class="boton2">
-                </a>
-                {% endif %}
                     {% endif %}
-            </div>
+                </div>
             {% endfor %}
-        </div>
+
         </div>
         {% endif %}
-    </div>
+
+    </div><!--Fin del main-->
+
     <script
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
