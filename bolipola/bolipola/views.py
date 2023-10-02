@@ -293,7 +293,7 @@ def tournament(request):
 
     user = get_object_or_404(UserBoli, id=request.user.id)
     sales = Sale.objects.all().filter(type='Torneo',user_id=user.id)
-    tournaments = Tournament.objects.all()
+    tournaments = Tournament.objects.all().order_by('-active')
     sales_tournaments_all = SaleTournament.objects.all()
 
     if request.user.is_authenticated:
