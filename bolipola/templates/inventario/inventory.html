@@ -49,7 +49,7 @@
                     <div class="card border-danger mb-3"id="cardxd" >
 
                         <h5 class="card-title">{{ inventory.product.name }}</h5>
-                        <p class="card-text">Costo: ${{ inventory.product.cost }}</p>
+                        <p class="card-text">Costo: {{ inventory.product.cost_to_money }}</p>
                         <p class="card-text">Categoria: {{ inventory.product.category }}</p>
                         <p class="card-text"><span>Cantidad: {{ inventory.product_quantity }}</span></p>
                             <img src="{{ inventory.product.image.url }}" class="card-img-top" alt="Foto de Producto">

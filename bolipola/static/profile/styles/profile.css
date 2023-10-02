@@ -19,10 +19,9 @@ body {
 }
 
 .exitContainer {
-    position: absolute;
-    margin-top: 3rem;
-    margin-bottom: 57rem;
-    margin-right: 54rem;
+    position: relative;
+    top: 2rem;
+    right: 27rem;
 }
 
 .exitContainer i {
@@ -239,7 +238,7 @@ body {
 
 .box__left-box-changePass {
     position: absolute;
-    bottom: 0;
+    bottom: -0.5rem;
 }
 
 .box__left-box-changePass-a {
@@ -408,4 +407,114 @@ button[name="editAndMore"]:hover {
 
 .containerSignout__a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 890px) {
+    html {
+        font-size: 85%;
+    }
+}
+
+@media (max-width: 780px) {
+    html {
+        font-size: 90%;
+    }
+
+    .exitContainer {
+        top: 3rem;
+        right: 17rem;
+    }
+
+    .box {
+        width: auto;
+        display: grid;
+        place-items: center;
+    }
+
+    .box__name {
+        display: grid;
+        place-items: center;
+        position: relative;
+        bottom: 1rem;
+        left: 0;
+        float: none;
+        width: auto;
+    }
+
+    .box__name-input#input_last_name {
+        margin-top: 1.5rem;
+        margin-left: 0;
+    }
+
+    .box__name-text {
+        position: static;
+    }
+
+    .box__legend {
+        margin: auto;
+    }
+
+    .leftAndRight {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .box__left {
+        margin-bottom: 2rem;
+    }
+
+    .box__left-title {
+        display: grid;
+        place-items: center;
+        margin-top: 1.5rem;
+    }
+
+    .box__left-box {
+        margin: 0;
+    }
+
+    .box__left-box-changePass {
+        position: relative;
+        left: 2rem;
+        top: 1rem;
+    }
+
+    .box__right-moreList {
+        position: relative;
+        bottom: -7.5rem;
+    }
+
+    .box__bottom {
+        margin: 1rem 0;
+    }
+
+    .box__bottom-logo {
+        top: 2.75rem;
+    }
+}
+
+@media (max-width: 560px) {
+    html {
+        font-size: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 70%;
+    }
+}
+
+@media (max-width: 430px) {
+    html {
+        font-size: 60%;
+    }
+}
+
+@media (max-width: 360px) {
+    html {
+        font-size: 50%;
+    }
 }

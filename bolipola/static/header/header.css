@@ -367,3 +367,31 @@ html {
 		color: #fff;
 	}
 }
+
+@media (max-width: 490px) {
+	.container-logo {
+		position: static;
+		margin-bottom: 2rem;
+	}
+
+	.container-user {
+		margin: 0;
+	}
+
+	.container-user a img {
+		margin: 0;
+	}
+
+	.linkUser {
+		display: flex;
+		justify-content: center;
+		position: static;
+		margin: 0.8rem 0;
+	}
+
+	.hero {
+		flex-direction: column;
+		padding-left: 0;
+		padding-right: 0;
+	}
+}

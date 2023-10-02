@@ -48,18 +48,28 @@
 }
 
 .tarjeta {
-	display: flex;
-	justify-content: center;
+	display: grid;
+	place-items: center;
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(
+			290px,
+			1fr
+		)
+	);
+	column-gap: 1.5rem;
+	row-gap: 3rem;
+	margin: 5rem 0;
 }
 
 .tarjeta .box{
 	width: 30rem;
+	height: 100%;
 	padding: 1rem 0;
 	padding-bottom: 3rem;
 	border-style: solid;
 	border-radius: 22px;
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-	margin: 28px 15px;
 	text-align: center;
 	transition: all 0.25s;
 }

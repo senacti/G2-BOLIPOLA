@@ -3,6 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'tournament/tournament.css' %}">
     <link rel="stylesheet" href="{% static 'header/header.css' %}">
@@ -143,7 +144,7 @@
         <!--Creando tarjeta-->
         {% if has_team or user.is_staff %}
         <div class="tarjeta">
-            {% for sale_tournament in sales_tournaments %} 
+            {% for sale_tournament in sales_tournaments %}
                 <div class="box">
                     <img src="{% static 'register/images/logo.png' %}">
                     

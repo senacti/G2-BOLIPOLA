@@ -213,3 +213,21 @@ html {
         margin-bottom: 5rem;
     }
 }
+
+@media (max-width: 520px) {
+    html {
+        font-size: 90%;
+    }
+}
+
+@media (max-width: 470px) {
+    html {
+        font-size: 75%;
+    }
+}
+
+@media (max-width: 390px) {
+    html {
+        font-size: 60%;
+    }
+}
