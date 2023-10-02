@@ -3,7 +3,7 @@ from user.models import UserBoli
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 import locale
-locale.setlocale(locale.LC_ALL, '')
+locale.setlocale(locale.LC_ALL, 'es_CO.UTF-8')
 
 def validate_positive(value):
     if value < 0:
@@ -67,6 +67,7 @@ class Product(models.Model):
     def cost_to_money(self):
         money = locale.currency(self.cost, symbol=True, grouping=True)
         money = money[:-3]
+        money = money.replace(' ', '')
         return money
 
     class Meta:
@@ -135,6 +136,7 @@ class Reservation(models.Model):
     def cost_to_money(self):
         money = locale.currency(self.cost, symbol=True, grouping=True)
         money = money[:-3]
+        money = money.replace(' ', '')
         return money
     
     class Meta:
@@ -241,11 +243,13 @@ class Tournament(models.Model):
     def payment_to_money(self):
         money = locale.currency(self.prize_payment, symbol=True, grouping=True)
         money = money[:-3]
+        money = money.replace(' ', '')
         return money
 
     def cost_to_money(self):
         money = locale.currency(self.cost, symbol=True, grouping=True)
         money = money[:-3]
+        money = money.replace(' ', '')
         return money
     
     def registered_teams(self):
@@ -301,6 +305,7 @@ class Sale(models.Model):
     def cost_to_money(self):
         money = locale.currency(self.total_cost, symbol=True, grouping=True)
         money = money[:-3]
+        money = money.replace(' ', '')
         return money
 
     def search_intermediate(self):
