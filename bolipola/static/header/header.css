@@ -368,7 +368,7 @@ html {
 	}
 }
 
-@media (max-width: 490px) {
+@media (max-width: 510px) {
 	.container-logo {
 		position: static;
 		margin-bottom: 2rem;
