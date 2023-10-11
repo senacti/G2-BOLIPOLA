@@ -11,12 +11,11 @@
     <title>Perfil</title>
 </head>
 <body>
-
-    <a class="exitContainer" href="{% url 'index' %}">
-        <i class="fa-regular fa-circle-left fa-xl"></i>
-    </a>
-
     <div class="main">
+        <a class="exitContainer" href="{% url 'index' %}">
+            <i class="fa-regular fa-circle-left fa-xl"></i>
+        </a>
+
         <form class="main-form" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="box">
