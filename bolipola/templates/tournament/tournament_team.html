@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<html>
+<head>
+    <title>Equipos de fútbol</title>
+    <link rel="stylesheet" href="{% static 'tournament/tournament_team/tournament_team.css' %}">
+</head>
+    <h1>Equipos del torneo</h1>
+    <h2>Estado del torneo: 
+        {% if tournament.active %}
+        <span style="color: green;">Activo</span>
+        {% else %}
+        <span style="color: #CB4335;">Finalizado</span>
+        {% endif %}
+    </h2>
+
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="message-container" style="margin: 0;">
+            <span group="messages"
+            class="
+                {% if msg.tags == 'success' %}message-success{% endif %}
+                {% if msg.tags == 'error' %}message-error{% endif %}
+                {% if msg.tags == 'info' %}message-info{% endif %}
+            "
+            >
+                {{ msg.message|safe }}
+            </span>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="form" method="post">
+        <table border="1">
+            <thead class="boardHead">
+                <tr class="boardHead__list" id="titles">
+                    <th>Imágen del equipo</th>
+                    <th>Nombre del equipo</th>
+                    <th>Goles a favor</th>
+                    <th>Goles en contra</th>
+                    <th>Diferencia de goles</th>
+                    <th>Partidos empatados</th>
+                    <th>Partidos ganados</th>
+                    <th>Partidos perdidos</th>
+                    <th>Partidos jugados</th>
+                    <th>Puntos</th>
+                    {% if user.is_staff and tournament.active %}
+                    <th>Guardar información</th>
+                    {% endif %}
+                </tr>
+            </thead>
+        
+            <tbody class="boardBody" id="equipoTableBody">
+                {% for team in teams %}
+
+                    {% if user.is_staff and tournament.active %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="intermediate_id" value="{{ team.id }}">
+                        <tr class="boardHead__list" id="titles">
+                            <td><span><img src="{{ team.team.avatar.url }}" alt=""></span></td>
+                            <td><span>
+                                <a href="{% url 'tournament_players' tournament.id team.team.id %}" id="teamName" style="color: {{ team.team.hexcolor }};">{{ team.team.name }}</a>
+                            </span></td>
+                            <td><span>{{ form.goals_for }}</span></td>
+                            <td><span>{{ form.goals_against }}</span></td>
+                            <td><span><input type="number" class="inf" disabled></span></td>
+                            <td><span>{{ form.games_tied }}</span></td>
+                            <td><span>{{ form.games_won }}</span></td>
+                            <td><span>{{ form.games_lost }}</span></td>
+                            <td><span><input type="number" class="inf" disabled></span></td>
+                            <td><span><input type="number" class="inf" disabled></span></td>
+                            <td>
+                                <div class="buttons__container" id="save">
+                                    <button type="submit" id="submit"><i class="fa-solid fa-floppy-disk"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </form>
+                    {% elif not user.is_staff or not tournament.active %}
+                    
+                    <tr class="boardHead__list" id="titles">
+                        <td><span><img src="{{ team.team.avatar.url }}" alt=""></span></td>
+                        <td>
+                            <span>{{ team.team.name }}</span>
+                        </td>
+                        <td><span><input type="number" class="inf" disabled></span></td>
+                        <td><span><input type="number" class="inf" disabled></span></td>
+                        <td><span><input type="number" class="inf" disabled></span></td>
+                        <td><span><input type="number" class="inf" disabled></span></td>
+                        <td><span><input type="number" class="inf" disabled></span></td>
+                        <td><span><input type="number" class="inf" disabled></span></td>
+                        <td><span><input type="number" class="inf" disabled></span></td>
+                        <td><span><input type="number" class="inf" disabled></span></td>
+                    </tr>
+
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="buttons">
+            <div class="buttons__container">
+                <a href="{% url 'tournament' %}"><button type="button">Salir</button></a>
+            </div>
+            {% if user.is_staff and tournament.active %}
+            <div class="buttons__container">
+                <button type="button" id="finalizar">Finalizar torneo
+                    <div class="sure-container">
+                        ¿Estás seguro?
+                        <div class="sure-container-links">
+                            <a href="{% url 'tournament_cancel' tournament.id %}">SI</a>
+                            <a href="{% url 'tournament_teams' tournament.id %}">NO</a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <ul style="display: none;">
+        {% for team in teams %}
+        <li class="infToPut">{{ team.goals_for }}</li>
+        <li class="infToPut">{{ team.goals_against }}</li>
+        <li class="infToPut">{{ team.goals_diff }}</li>
+        <li class="infToPut">{{ team.games_tied }}</li>
+        <li class="infToPut">{{ team.games_won }}</li>
+        <li class="infToPut">{{ team.games_lost }}</li>
+        <li class="infToPut">{{ team.games_played }}</li>
+        <li class="infToPut">{{ team.score }}</li>
+        {% endfor %}
+        <!--Ayuda a evitar bug de addeventlistener-->
+        <span id="finalizar" hidden disabled></span>
+        <span class="sure-container" hidden disabled></span>
+    </ul>
+
+    <script src="https://kit.fontawesome.com/81581fb069.js"></script>
+    <script>
+        const inputValue = document.querySelectorAll('.inf')
+        const information = document.querySelectorAll('.infToPut')
+        const finishButton = document.querySelector('#finalizar')
+        const sureContainer = document.querySelector('.sure-container')
+
+        function setValues() {
+            information.forEach((element, i) => {
+                inputValue[i].value = element.innerHTML
+            })
+        }
+
+        finishButton.addEventListener('click', () => {
+            sureContainer.style.display = 'block'
+        })
+
+        setValues()
+    </script>
+</body>
+</html>
