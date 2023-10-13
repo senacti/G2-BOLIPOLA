@@ -27,6 +27,7 @@ function parseAndEvents(array) {
         name: element.children[1].innerHTML,
         price: Number(element.children[6].innerHTML.slice(0, -2)),
         image: element.children[0].attributes.src.nodeValue,
+        quantity: Number(element.children[3].children[0].innerHTML)
      },
     )
     element.children[5].addEventListener('click', (e) => {
@@ -37,6 +38,8 @@ function parseAndEvents(array) {
 parseAndEvents(products)
 
 function addToCard(key) {
+    //En caso de que sobrepase la cantidad disponible
+
     if (listCards[key] == null) {
         // Copia el producto de la lista a la lista de la tarjeta
         listCards[key] = JSON.parse(JSON.stringify(products[key]));
@@ -44,6 +47,10 @@ function addToCard(key) {
         // Incrementa el precio total
         listCard.totalPrice += listCards[key].price;
     } else {
+        //En caso de que sobrepase la cantidad disponible
+        if (listCards[key].quantity >= products[key].quantity) {
+          return reloadCard();
+        }
         // Si el producto ya está en la tarjeta, incrementa la cantidad y el precio total en consecuencia
         listCards[key].quantity++;
         listCards[key].price += products[key].price;
@@ -52,6 +59,10 @@ function addToCard(key) {
 }
 
 function changeQuantity(key, quantity) {
+  if (quantity > products[key].quantity) {
+    return reloadCard();
+  }
+
     if (quantity <= 0) {
         // Decrementa el precio total cuando se elimina un elemento del carrito
         listCard.totalPrice -= listCards[key].price;

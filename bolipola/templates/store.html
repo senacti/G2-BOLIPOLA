@@ -106,7 +106,7 @@
                     <img src="{{ inventory.product.image.url }}">
                     <div class="title">{{ inventory.product.name }}</div>
                     <div class="price">{{ inventory.product.cost_to_money }}</div>
-                    <div class="quantity">Disponible: {{ inventory.product_quantity }}</div>
+                    <div class="quantity">Disponible: <span>{{ inventory.product_quantity }}</span></div>
                     <div class="description">{{ inventory.product.description }}</div>
                     <button class="Boton1" id="{{ inventory.id }}">Añadir al carrito</button>
                     <div class="price_number" hidden>{{ inventory.product.cost }}</div>
@@ -118,6 +118,7 @@
     <div class="card">
         <h1>Card</h1>
         <form action="" method="post">
+            {% csrf_token %}
             <ul class="listCard">
 
             </ul>
