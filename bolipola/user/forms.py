@@ -23,6 +23,8 @@ class CustomUserForm(forms.ModelForm):
             attrs={'class':'formBox__inf-box-name-input', 
                     'pattern': '^(?! )[\p{L}áéíóúüÁÉÍÓÚÜñÑ]+(?:\s[\p{L}áéíóúüÁÉÍÓÚÜñÑ]+)*(?! )$',
                     'title': 'Verifica que no tengas espacios en blanco al principio, al final o más de dos en medio',
+                    'tabindex': '1',
+                    'autofocus': 'autofocus',
                     }
                 ),
     )
@@ -31,21 +33,21 @@ class CustomUserForm(forms.ModelForm):
         label='Teléfono',
         max_length=10,
         min_length=10,
-        widget=forms.TextInput(attrs={'pattern':'[0-9]{1,10}', 'class':'formBox__inf-box-phone-input', 'title':'Verifica que sean números y no haya espacios en blanco',}),
+        widget=forms.TextInput(attrs={'pattern':'[0-9]{1,10}', 'class':'formBox__inf-box-phone-input', 'title':'Verifica que sean números y no haya espacios en blanco', 'tabindex': '3',}),
         required=True,
     )
 
     birthdate = forms.DateField(
         label='F. nacimiento',
         required=True,
-        widget=forms.DateInput(attrs={'type': 'date', 'max': '2018-01-01', 'min':'1900-01-01', 'class':'formBox__inf-box-date-input'}),
+        widget=forms.DateInput(attrs={'type': 'date', 'max': '2018-01-01', 'min':'1900-01-01', 'class':'formBox__inf-box-date-input', 'tabindex': '5',}),
     )
 
     password1 = forms.CharField(
         label='Contraseña',
         min_length=6,
         max_length=40,
-        widget=forms.PasswordInput(attrs={'class': 'formBox__inf-box-pass-input', 'id': 'pass1', 'pattern':'^(?!.*\s)(.{6,})$', 'title':'No puedes poner espacios en blanco al principio o al final ni en medio',}),
+        widget=forms.PasswordInput(attrs={'class': 'formBox__inf-box-pass-input', 'id': 'pass1', 'pattern':'^(?!.*\s)(.{6,})$', 'title':'No puedes poner espacios en blanco al principio o al final ni en medio', 'tabindex': '7',}),
         required=True,
     )
 
@@ -60,7 +62,8 @@ class CustomUserForm(forms.ModelForm):
         label='Apellido',
         widget=forms.TextInput(attrs={'class': 'formBox__inf-box-lastName-input', 
                                       'pattern':'^(?! )[\p{L}áéíóúüÁÉÍÓÚÜñÑ]+(?:\s[\p{L}áéíóúüÁÉÍÓÚÜñÑ]+)*(?! )$',
-                                      'title': 'Verifica que no tengas espacios en blanco al principio, al final o más de dos en medio',}), 
+                                      'title': 'Verifica que no tengas espacios en blanco al principio, al final o más de dos en medio',
+                                      'tabindex': '2',}), 
         max_length=15, 
         min_length=2, 
         required=True,
@@ -69,7 +72,7 @@ class CustomUserForm(forms.ModelForm):
     email = CustomEmailField(
         label='Correo',
         widget=forms.EmailInput(attrs={
-            'class': 'formBox__inf-box-email-input', 'pattern':'^(?!.*\s)[\w\s]*[\w]+@(?:[\w]+\.)+[a-zA-Z]{2,}$', 'title':'Quita los espacios en blanco al principio, al final o en medio'}),
+            'class': 'formBox__inf-box-email-input', 'pattern':'^(?!.*\s)[\w\s]*[\w]+@(?:[\w]+\.)+[a-zA-Z]{2,}$', 'title':'Quita los espacios en blanco al principio, al final o en medio', 'tabindex': '4',}),
         required=True,
     )
 
@@ -82,7 +85,7 @@ class CustomUserForm(forms.ModelForm):
 
     gender = forms.ChoiceField(
         label='Género',
-        widget=forms.Select(attrs={'class': 'formBox__inf-box-gender-input'}),
+        widget=forms.Select(attrs={'class': 'formBox__inf-box-gender-input', 'tabindex': '6',}),
         choices=GENDER_CHOICES,
         required=True,
     )
@@ -90,7 +93,7 @@ class CustomUserForm(forms.ModelForm):
     password2 = forms.CharField(
         label='Confirmar contraseña',
         max_length=40,
-        widget=forms.PasswordInput(attrs={'class': 'formBox__inf-box-pass-input', 'id': 'pass2'}),
+        widget=forms.PasswordInput(attrs={'class': 'formBox__inf-box-pass-input', 'id': 'pass2', 'tabindex': '8',}),
     )
 
     password = forms.CharField(
