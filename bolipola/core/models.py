@@ -266,6 +266,35 @@ class TournamentTeam(models.Model):
         db_table = 'torneo_equipo'
         ordering = ['id']
 
+class Car(models.Model):
+    total_products = models.PositiveIntegerField(verbose_name='Total de productos')
+    active = models.BooleanField(verbose_name='Activo', default=True) #Detecta si los productos de este carro se han comprado ya o no
+    cost = models.FloatField(verbose_name='Costo de productos', validators=[validate_positive])
+    inventory = models.ManyToManyField(Inventory, through='CarInventory')
+    user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'{self.user.first_name} - {self.total_products} - {self.inventory.product.name}'
+    
+    class Meta:
+        verbose_name = 'Carrito'
+        verbose_name_plural = 'Carritos'
+        db_table = 'carrito'
+        ordering = ['id']
+
+class CarInventory(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(f'{self.inventory.product.name} - {self.car.total_products}')
+
+    class Meta:
+        verbose_name = 'Carrito e inventario'
+        verbose_name_plural = 'Carritos e inventario'
+        db_table = 'carrito_inventario'
+        ordering = ['id']
+
 class Sale(models.Model):
     total_cost = models.FloatField(verbose_name='Costo total', validators=[validate_positive])
     payment_type = models.CharField(max_length=50, verbose_name='Tipo de pago')
@@ -273,7 +302,7 @@ class Sale(models.Model):
     date = models.DateTimeField(default=timezone.now, verbose_name='Fecha')
     type = models.CharField(max_length=50, verbose_name='Tipo de venta')
     product_quantity = models.PositiveIntegerField(verbose_name='Cantidad de productos comprados')
-    inventory = models.ManyToManyField(Inventory, through='SaleInventory')
+    car = models.ManyToManyField(Car, through='SaleCar')
     reservation = models.ManyToManyField(Reservation, through='SaleReservation')
     tournament = models.ManyToManyField(Tournament, through='SaleTournament')
     user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
@@ -337,16 +366,15 @@ class SaleReservation(models.Model):
         db_table = 'venta_reserva'
         ordering = ['id']
 
-class SaleInventory(models.Model):
-    quantity = models.PositiveIntegerField(verbose_name= 'Cantidad producto', default=0)
+class SaleCar(models.Model):
     sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
-    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(f'{self.sale.type} - {self.inventory.product.name}')
+        return str(f'{self.sale.type} - {self.car.inventory.product.name}')
 
     class Meta:
-        verbose_name = 'Venta e inventario'
-        verbose_name_plural = 'Ventas e inventarios'
-        db_table = 'venta_inventario'
+        verbose_name = 'Venta y carrito'
+        verbose_name_plural = 'Ventas y carritos'
+        db_table = 'venta_carrito'
         ordering = ['id']
