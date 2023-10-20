@@ -1,13 +1,13 @@
--- MariaDB dump 10.19  Distrib 10.4.24-MariaDB, for Win64 (AMD64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: db_bolipola
 -- ------------------------------------------------------
--- Server version	10.4.24-MariaDB
+-- Server version	8.0.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,9 +21,9 @@
 
 DROP TABLE IF EXISTS `admin_interface_theme`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admin_interface_theme` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `title` varchar(50) NOT NULL,
@@ -68,8 +68,8 @@ CREATE TABLE `admin_interface_theme` (
   `form_submit_sticky` tinyint(1) NOT NULL,
   `css_module_background_selected_color` varchar(10) NOT NULL,
   `css_module_link_selected_color` varchar(10) NOT NULL,
-  `logo_max_height` smallint(5) unsigned NOT NULL CHECK (`logo_max_height` >= 0),
-  `logo_max_width` smallint(5) unsigned NOT NULL CHECK (`logo_max_width` >= 0),
+  `logo_max_height` smallint unsigned NOT NULL,
+  `logo_max_width` smallint unsigned NOT NULL,
   `foldable_apps` tinyint(1) NOT NULL,
   `language_chooser_control` varchar(20) NOT NULL,
   `list_filter_highlight` tinyint(1) NOT NULL,
@@ -82,8 +82,10 @@ CREATE TABLE `admin_interface_theme` (
   `collapsible_tabular_inlines` tinyint(1) NOT NULL,
   `collapsible_tabular_inlines_collapsed` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `admin_interface_theme_name_30bda70f_uniq` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `admin_interface_theme_name_30bda70f_uniq` (`name`),
+  CONSTRAINT `admin_interface_theme_chk_1` CHECK ((`logo_max_height` >= 0)),
+  CONSTRAINT `admin_interface_theme_chk_2` CHECK ((`logo_max_width` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,13 +104,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `auth_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,17 +128,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_group_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `auth_group_permissions` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `group_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `group_id` int NOT NULL,
+  `permission_id` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
   KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,16 +156,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `auth_permission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `content_type_id` int(11) NOT NULL,
+  `content_type_id` int NOT NULL,
   `codename` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +174,7 @@ CREATE TABLE `auth_permission` (
 
 LOCK TABLES `auth_permission` WRITE;
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add Theme',1,'add_theme'),(2,'Can change Theme',1,'change_theme'),(3,'Can delete Theme',1,'delete_theme'),(4,'Can view Theme',1,'view_theme'),(5,'Can add log entry',2,'add_logentry'),(6,'Can change log entry',2,'change_logentry'),(7,'Can delete log entry',2,'delete_logentry'),(8,'Can view log entry',2,'view_logentry'),(9,'Can add permission',3,'add_permission'),(10,'Can change permission',3,'change_permission'),(11,'Can delete permission',3,'delete_permission'),(12,'Can view permission',3,'view_permission'),(13,'Can add group',4,'add_group'),(14,'Can change group',4,'change_group'),(15,'Can delete group',4,'delete_group'),(16,'Can view group',4,'view_group'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add Calendario',7,'add_calendar'),(26,'Can change Calendario',7,'change_calendar'),(27,'Can delete Calendario',7,'delete_calendar'),(28,'Can view Calendario',7,'view_calendar'),(29,'Can add Categoría',8,'add_category'),(30,'Can change Categoría',8,'change_category'),(31,'Can delete Categoría',8,'delete_category'),(32,'Can view Categoría',8,'view_category'),(33,'Can add Comentario',9,'add_comment'),(34,'Can change Comentario',9,'change_comment'),(35,'Can delete Comentario',9,'delete_comment'),(36,'Can view Comentario',9,'view_comment'),(37,'Can add Evento',10,'add_event'),(38,'Can change Evento',10,'change_event'),(39,'Can delete Evento',10,'delete_event'),(40,'Can view Evento',10,'view_event'),(41,'Can add Inventario',11,'add_inventory'),(42,'Can change Inventario',11,'change_inventory'),(43,'Can delete Inventario',11,'delete_inventory'),(44,'Can view Inventario',11,'view_inventory'),(45,'Can add Salida',12,'add_output'),(46,'Can change Salida',12,'change_output'),(47,'Can delete Salida',12,'delete_output'),(48,'Can view Salida',12,'view_output'),(49,'Can add Jugador',13,'add_player'),(50,'Can change Jugador',13,'change_player'),(51,'Can delete Jugador',13,'delete_player'),(52,'Can view Jugador',13,'view_player'),(53,'Can add Producto',14,'add_product'),(54,'Can change Producto',14,'change_product'),(55,'Can delete Producto',14,'delete_product'),(56,'Can view Producto',14,'view_product'),(57,'Can add Reserva',15,'add_reservation'),(58,'Can change Reserva',15,'change_reservation'),(59,'Can delete Reserva',15,'delete_reservation'),(60,'Can view Reserva',15,'view_reservation'),(61,'Can add Venta',16,'add_sale'),(62,'Can change Venta',16,'change_sale'),(63,'Can delete Venta',16,'delete_sale'),(64,'Can view Venta',16,'view_sale'),(65,'Can add Venta y evento',17,'add_saleevent'),(66,'Can change Venta y evento',17,'change_saleevent'),(67,'Can delete Venta y evento',17,'delete_saleevent'),(68,'Can view Venta y evento',17,'view_saleevent'),(69,'Can add Venta e inventario',18,'add_saleinventory'),(70,'Can change Venta e inventario',18,'change_saleinventory'),(71,'Can delete Venta e inventario',18,'delete_saleinventory'),(72,'Can view Venta e inventario',18,'view_saleinventory'),(73,'Can add Venta y reserva',19,'add_salereservation'),(74,'Can change Venta y reserva',19,'change_salereservation'),(75,'Can delete Venta y reserva',19,'delete_salereservation'),(76,'Can view Venta y reserva',19,'view_salereservation'),(77,'Can add Venta y torneo',20,'add_saletournament'),(78,'Can change Venta y torneo',20,'change_saletournament'),(79,'Can delete Venta y torneo',20,'delete_saletournament'),(80,'Can view Venta y torneo',20,'view_saletournament'),(81,'Can add Equipo',21,'add_team'),(82,'Can change Equipo',21,'change_team'),(83,'Can delete Equipo',21,'delete_team'),(84,'Can view Equipo',21,'view_team'),(85,'Can add Torneo',22,'add_tournament'),(86,'Can change Torneo',22,'change_tournament'),(87,'Can delete Torneo',22,'delete_tournament'),(88,'Can view Torneo',22,'view_tournament'),(89,'Can add Torneo y equipo',23,'add_tournamentteam'),(90,'Can change Torneo y equipo',23,'change_tournamentteam'),(91,'Can delete Torneo y equipo',23,'delete_tournamentteam'),(92,'Can view Torneo y equipo',23,'view_tournamentteam'),(93,'Can add user',24,'add_userboli'),(94,'Can change user',24,'change_userboli'),(95,'Can delete user',24,'delete_userboli'),(96,'Can view user',24,'view_userboli');
+INSERT INTO `auth_permission` VALUES (1,'Can add Theme',1,'add_theme'),(2,'Can change Theme',1,'change_theme'),(3,'Can delete Theme',1,'delete_theme'),(4,'Can view Theme',1,'view_theme'),(5,'Can add log entry',2,'add_logentry'),(6,'Can change log entry',2,'change_logentry'),(7,'Can delete log entry',2,'delete_logentry'),(8,'Can view log entry',2,'view_logentry'),(9,'Can add permission',3,'add_permission'),(10,'Can change permission',3,'change_permission'),(11,'Can delete permission',3,'delete_permission'),(12,'Can view permission',3,'view_permission'),(13,'Can add group',4,'add_group'),(14,'Can change group',4,'change_group'),(15,'Can delete group',4,'delete_group'),(16,'Can view group',4,'view_group'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add Calendario',7,'add_calendar'),(26,'Can change Calendario',7,'change_calendar'),(27,'Can delete Calendario',7,'delete_calendar'),(28,'Can view Calendario',7,'view_calendar'),(29,'Can add Categoría',8,'add_category'),(30,'Can change Categoría',8,'change_category'),(31,'Can delete Categoría',8,'delete_category'),(32,'Can view Categoría',8,'view_category'),(33,'Can add Comentario',9,'add_comment'),(34,'Can change Comentario',9,'change_comment'),(35,'Can delete Comentario',9,'delete_comment'),(36,'Can view Comentario',9,'view_comment'),(37,'Can add Evento',10,'add_event'),(38,'Can change Evento',10,'change_event'),(39,'Can delete Evento',10,'delete_event'),(40,'Can view Evento',10,'view_event'),(41,'Can add Inventario',11,'add_inventory'),(42,'Can change Inventario',11,'change_inventory'),(43,'Can delete Inventario',11,'delete_inventory'),(44,'Can view Inventario',11,'view_inventory'),(45,'Can add Salida',12,'add_output'),(46,'Can change Salida',12,'change_output'),(47,'Can delete Salida',12,'delete_output'),(48,'Can view Salida',12,'view_output'),(49,'Can add Jugador',13,'add_player'),(50,'Can change Jugador',13,'change_player'),(51,'Can delete Jugador',13,'delete_player'),(52,'Can view Jugador',13,'view_player'),(53,'Can add Producto',14,'add_product'),(54,'Can change Producto',14,'change_product'),(55,'Can delete Producto',14,'delete_product'),(56,'Can view Producto',14,'view_product'),(57,'Can add Reserva',15,'add_reservation'),(58,'Can change Reserva',15,'change_reservation'),(59,'Can delete Reserva',15,'delete_reservation'),(60,'Can view Reserva',15,'view_reservation'),(61,'Can add Venta',16,'add_sale'),(62,'Can change Venta',16,'change_sale'),(63,'Can delete Venta',16,'delete_sale'),(64,'Can view Venta',16,'view_sale'),(65,'Can add Venta y evento',17,'add_saleevent'),(66,'Can change Venta y evento',17,'change_saleevent'),(67,'Can delete Venta y evento',17,'delete_saleevent'),(68,'Can view Venta y evento',17,'view_saleevent'),(69,'Can add Venta e inventario',18,'add_saleinventory'),(70,'Can change Venta e inventario',18,'change_saleinventory'),(71,'Can delete Venta e inventario',18,'delete_saleinventory'),(72,'Can view Venta e inventario',18,'view_saleinventory'),(73,'Can add Venta y reserva',19,'add_salereservation'),(74,'Can change Venta y reserva',19,'change_salereservation'),(75,'Can delete Venta y reserva',19,'delete_salereservation'),(76,'Can view Venta y reserva',19,'view_salereservation'),(77,'Can add Venta y torneo',20,'add_saletournament'),(78,'Can change Venta y torneo',20,'change_saletournament'),(79,'Can delete Venta y torneo',20,'delete_saletournament'),(80,'Can view Venta y torneo',20,'view_saletournament'),(81,'Can add Equipo',21,'add_team'),(82,'Can change Equipo',21,'change_team'),(83,'Can delete Equipo',21,'delete_team'),(84,'Can view Equipo',21,'view_team'),(85,'Can add Torneo',22,'add_tournament'),(86,'Can change Torneo',22,'change_tournament'),(87,'Can delete Torneo',22,'delete_tournament'),(88,'Can view Torneo',22,'view_tournament'),(89,'Can add Torneo y equipo',23,'add_tournamentteam'),(90,'Can change Torneo y equipo',23,'change_tournamentteam'),(91,'Can delete Torneo y equipo',23,'delete_tournamentteam'),(92,'Can view Torneo y equipo',23,'view_tournamentteam'),(93,'Can add user',24,'add_userboli'),(94,'Can change user',24,'change_userboli'),(95,'Can delete user',24,'delete_userboli'),(96,'Can view user',24,'view_userboli'),(97,'Can add Carrito',25,'add_car'),(98,'Can change Carrito',25,'change_car'),(99,'Can delete Carrito',25,'delete_car'),(100,'Can view Carrito',25,'view_car'),(101,'Can add Carrito e inventario',26,'add_carinventory'),(102,'Can change Carrito e inventario',26,'change_carinventory'),(103,'Can delete Carrito e inventario',26,'delete_carinventory'),(104,'Can view Carrito e inventario',26,'view_carinventory'),(105,'Can add Venta y carrito',27,'add_salecar'),(106,'Can change Venta y carrito',27,'change_salecar'),(107,'Can delete Venta y carrito',27,'delete_salecar'),(108,'Can view Venta y carrito',27,'view_salecar');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,13 +184,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `calendario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `calendario` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
   `availability` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,18 +204,77 @@ INSERT INTO `calendario` VALUES (1,'2023-09-24',0);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `carrito`
+--
+
+DROP TABLE IF EXISTS `carrito`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `carrito` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `total_products` int unsigned NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `cost` double NOT NULL,
+  `user_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `carrito_user_id_f2eb18ff_fk_user_userboli_id` (`user_id`),
+  CONSTRAINT `carrito_user_id_f2eb18ff_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`),
+  CONSTRAINT `carrito_chk_1` CHECK ((`total_products` >= 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carrito`
+--
+
+LOCK TABLES `carrito` WRITE;
+/*!40000 ALTER TABLE `carrito` DISABLE KEYS */;
+/*!40000 ALTER TABLE `carrito` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `carrito_inventario`
+--
+
+DROP TABLE IF EXISTS `carrito_inventario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `carrito_inventario` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `car_id` bigint NOT NULL,
+  `inventory_id` bigint NOT NULL,
+  `quantity` int unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `carrito_inventario_car_id_11d06df3_fk_carrito_id` (`car_id`),
+  KEY `carrito_inventario_inventory_id_6f91f89b_fk_inventario_id` (`inventory_id`),
+  CONSTRAINT `carrito_inventario_car_id_11d06df3_fk_carrito_id` FOREIGN KEY (`car_id`) REFERENCES `carrito` (`id`),
+  CONSTRAINT `carrito_inventario_inventory_id_6f91f89b_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`),
+  CONSTRAINT `carrito_inventario_chk_1` CHECK ((`quantity` >= 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carrito_inventario`
+--
+
+LOCK TABLES `carrito_inventario` WRITE;
+/*!40000 ALTER TABLE `carrito_inventario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `carrito_inventario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categoria`
 --
 
 DROP TABLE IF EXISTS `categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categoria` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `forOlder` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,17 +293,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `comentario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comentario` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `score` int(10) unsigned NOT NULL CHECK (`score` >= 0),
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `score` int unsigned NOT NULL,
   `text` longtext NOT NULL,
   `date` date NOT NULL,
-  `user_id` bigint(20) NOT NULL,
+  `user_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `comentario_user_id_a50ac53c_fk_user_userboli_id` (`user_id`),
-  CONSTRAINT `comentario_user_id_a50ac53c_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `comentario_user_id_a50ac53c_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`),
+  CONSTRAINT `comentario_chk_1` CHECK ((`score` >= 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,22 +322,23 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_admin_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `django_admin_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
-  `object_id` longtext DEFAULT NULL,
+  `object_id` longtext,
   `object_repr` varchar(200) NOT NULL,
-  `action_flag` smallint(5) unsigned NOT NULL CHECK (`action_flag` >= 0),
+  `action_flag` smallint unsigned NOT NULL,
   `change_message` longtext NOT NULL,
-  `content_type_id` int(11) DEFAULT NULL,
-  `user_id` bigint(20) NOT NULL,
+  `content_type_id` int DEFAULT NULL,
+  `user_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
   KEY `django_admin_log_user_id_c564eba6_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
-  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`),
+  CONSTRAINT `django_admin_log_chk_1` CHECK ((`action_flag` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,14 +357,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_content_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `django_content_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `app_label` varchar(100) NOT NULL,
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,7 +373,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (2,'admin','logentry'),(1,'admin_interface','theme'),(4,'auth','group'),(3,'auth','permission'),(5,'contenttypes','contenttype'),(7,'core','calendar'),(8,'core','category'),(9,'core','comment'),(10,'core','event'),(11,'core','inventory'),(12,'core','output'),(13,'core','player'),(14,'core','product'),(15,'core','reservation'),(16,'core','sale'),(17,'core','saleevent'),(18,'core','saleinventory'),(19,'core','salereservation'),(20,'core','saletournament'),(21,'core','team'),(22,'core','tournament'),(23,'core','tournamentteam'),(6,'sessions','session'),(24,'user','userboli');
+INSERT INTO `django_content_type` VALUES (2,'admin','logentry'),(1,'admin_interface','theme'),(4,'auth','group'),(3,'auth','permission'),(5,'contenttypes','contenttype'),(7,'core','calendar'),(25,'core','car'),(26,'core','carinventory'),(8,'core','category'),(9,'core','comment'),(10,'core','event'),(11,'core','inventory'),(12,'core','output'),(13,'core','player'),(14,'core','product'),(15,'core','reservation'),(16,'core','sale'),(27,'core','salecar'),(17,'core','saleevent'),(18,'core','saleinventory'),(19,'core','salereservation'),(20,'core','saletournament'),(21,'core','team'),(22,'core','tournament'),(23,'core','tournamentteam'),(6,'sessions','session'),(24,'user','userboli');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,14 +383,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `django_migrations` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -336,7 +399,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-09-21 21:43:10.605045'),(2,'contenttypes','0002_remove_content_type_name','2023-09-21 21:43:11.638856'),(3,'auth','0001_initial','2023-09-21 21:43:16.971088'),(4,'auth','0002_alter_permission_name_max_length','2023-09-21 21:43:18.045787'),(5,'auth','0003_alter_user_email_max_length','2023-09-21 21:43:18.097834'),(6,'auth','0004_alter_user_username_opts','2023-09-21 21:43:18.138872'),(7,'auth','0005_alter_user_last_login_null','2023-09-21 21:43:18.180910'),(8,'auth','0006_require_contenttypes_0002','2023-09-21 21:43:18.220947'),(9,'auth','0007_alter_validators_add_error_messages','2023-09-21 21:43:18.323039'),(10,'auth','0008_alter_user_username_max_length','2023-09-21 21:43:18.364076'),(11,'auth','0009_alter_user_last_name_max_length','2023-09-21 21:43:18.407115'),(12,'auth','0010_alter_group_name_max_length','2023-09-21 21:43:18.538002'),(13,'auth','0011_update_proxy_permissions','2023-09-21 21:43:18.581041'),(14,'auth','0012_alter_user_first_name_max_length','2023-09-21 21:43:18.622079'),(15,'user','0001_initial','2023-09-21 21:43:23.837394'),(16,'admin','0001_initial','2023-09-21 21:43:25.628516'),(17,'admin','0002_logentry_remove_auto_add','2023-09-21 21:43:25.673550'),(18,'admin','0003_logentry_add_action_flag_choices','2023-09-21 21:43:25.799665'),(19,'admin_interface','0001_initial','2023-09-21 21:43:26.186075'),(20,'admin_interface','0002_add_related_modal','2023-09-21 21:43:26.741647'),(21,'admin_interface','0003_add_logo_color','2023-09-21 21:43:26.879772'),(22,'admin_interface','0004_rename_title_color','2023-09-21 21:43:27.295069'),(23,'admin_interface','0005_add_recent_actions_visible','2023-09-21 21:43:27.866564'),(24,'admin_interface','0006_bytes_to_str','2023-09-21 21:43:27.936628'),(25,'admin_interface','0007_add_favicon','2023-09-21 21:43:28.232896'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-09-21 21:43:28.487965'),(27,'admin_interface','0009_add_enviroment','2023-09-21 21:43:28.964441'),(28,'admin_interface','0010_add_localization','2023-09-21 21:43:29.069302'),(29,'admin_interface','0011_add_environment_options','2023-09-21 21:43:29.743236'),(30,'admin_interface','0012_update_verbose_names','2023-09-21 21:43:29.780235'),(31,'admin_interface','0013_add_related_modal_close_button','2023-09-21 21:43:30.172236'),(32,'admin_interface','0014_name_unique','2023-09-21 21:43:30.527672'),(33,'admin_interface','0015_add_language_chooser_active','2023-09-21 21:43:30.686816'),(34,'admin_interface','0016_add_language_chooser_display','2023-09-21 21:43:30.825809'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-09-21 21:43:30.863262'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-09-21 21:43:31.001387'),(37,'admin_interface','0019_add_form_sticky','2023-09-21 21:43:31.430929'),(38,'admin_interface','0020_module_selected_colors','2023-09-21 21:43:31.698171'),(39,'admin_interface','0021_file_extension_validator','2023-09-21 21:43:31.738208'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-09-21 21:43:32.017034'),(41,'admin_interface','0023_theme_foldable_apps','2023-09-21 21:43:32.238234'),(42,'admin_interface','0024_remove_theme_css','2023-09-21 21:43:32.336324'),(43,'admin_interface','0025_theme_language_chooser_control','2023-09-21 21:43:32.545496'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-09-21 21:43:32.680619'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-09-21 21:43:32.830755'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-09-21 21:43:33.084398'),(47,'admin_interface','0029_theme_css_generic_link_active_color','2023-09-21 21:43:33.317610'),(48,'admin_interface','0030_theme_collapsible_stacked_inlines_and_more','2023-09-21 21:43:33.847595'),(49,'core','0001_initial','2023-09-21 21:43:42.527992'),(50,'core','0002_initial','2023-09-21 21:44:01.942249'),(51,'sessions','0001_initial','2023-09-21 21:44:02.758885');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-09-21 21:43:10.605045'),(2,'contenttypes','0002_remove_content_type_name','2023-09-21 21:43:11.638856'),(3,'auth','0001_initial','2023-09-21 21:43:16.971088'),(4,'auth','0002_alter_permission_name_max_length','2023-09-21 21:43:18.045787'),(5,'auth','0003_alter_user_email_max_length','2023-09-21 21:43:18.097834'),(6,'auth','0004_alter_user_username_opts','2023-09-21 21:43:18.138872'),(7,'auth','0005_alter_user_last_login_null','2023-09-21 21:43:18.180910'),(8,'auth','0006_require_contenttypes_0002','2023-09-21 21:43:18.220947'),(9,'auth','0007_alter_validators_add_error_messages','2023-09-21 21:43:18.323039'),(10,'auth','0008_alter_user_username_max_length','2023-09-21 21:43:18.364076'),(11,'auth','0009_alter_user_last_name_max_length','2023-09-21 21:43:18.407115'),(12,'auth','0010_alter_group_name_max_length','2023-09-21 21:43:18.538002'),(13,'auth','0011_update_proxy_permissions','2023-09-21 21:43:18.581041'),(14,'auth','0012_alter_user_first_name_max_length','2023-09-21 21:43:18.622079'),(15,'user','0001_initial','2023-09-21 21:43:23.837394'),(16,'admin','0001_initial','2023-09-21 21:43:25.628516'),(17,'admin','0002_logentry_remove_auto_add','2023-09-21 21:43:25.673550'),(18,'admin','0003_logentry_add_action_flag_choices','2023-09-21 21:43:25.799665'),(19,'admin_interface','0001_initial','2023-09-21 21:43:26.186075'),(20,'admin_interface','0002_add_related_modal','2023-09-21 21:43:26.741647'),(21,'admin_interface','0003_add_logo_color','2023-09-21 21:43:26.879772'),(22,'admin_interface','0004_rename_title_color','2023-09-21 21:43:27.295069'),(23,'admin_interface','0005_add_recent_actions_visible','2023-09-21 21:43:27.866564'),(24,'admin_interface','0006_bytes_to_str','2023-09-21 21:43:27.936628'),(25,'admin_interface','0007_add_favicon','2023-09-21 21:43:28.232896'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-09-21 21:43:28.487965'),(27,'admin_interface','0009_add_enviroment','2023-09-21 21:43:28.964441'),(28,'admin_interface','0010_add_localization','2023-09-21 21:43:29.069302'),(29,'admin_interface','0011_add_environment_options','2023-09-21 21:43:29.743236'),(30,'admin_interface','0012_update_verbose_names','2023-09-21 21:43:29.780235'),(31,'admin_interface','0013_add_related_modal_close_button','2023-09-21 21:43:30.172236'),(32,'admin_interface','0014_name_unique','2023-09-21 21:43:30.527672'),(33,'admin_interface','0015_add_language_chooser_active','2023-09-21 21:43:30.686816'),(34,'admin_interface','0016_add_language_chooser_display','2023-09-21 21:43:30.825809'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-09-21 21:43:30.863262'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-09-21 21:43:31.001387'),(37,'admin_interface','0019_add_form_sticky','2023-09-21 21:43:31.430929'),(38,'admin_interface','0020_module_selected_colors','2023-09-21 21:43:31.698171'),(39,'admin_interface','0021_file_extension_validator','2023-09-21 21:43:31.738208'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-09-21 21:43:32.017034'),(41,'admin_interface','0023_theme_foldable_apps','2023-09-21 21:43:32.238234'),(42,'admin_interface','0024_remove_theme_css','2023-09-21 21:43:32.336324'),(43,'admin_interface','0025_theme_language_chooser_control','2023-09-21 21:43:32.545496'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-09-21 21:43:32.680619'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-09-21 21:43:32.830755'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-09-21 21:43:33.084398'),(47,'admin_interface','0029_theme_css_generic_link_active_color','2023-09-21 21:43:33.317610'),(48,'admin_interface','0030_theme_collapsible_stacked_inlines_and_more','2023-09-21 21:43:33.847595'),(49,'core','0001_initial','2023-09-21 21:43:42.527992'),(50,'core','0002_initial','2023-09-21 21:44:01.942249'),(51,'sessions','0001_initial','2023-09-21 21:44:02.758885'),(52,'core','0003_carinventory_quantity_inventory_quantity_reserved','2023-10-20 00:25:43.699254');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,14 +409,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -372,18 +435,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `equipo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipo` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `color` varchar(20) NOT NULL,
-  `players_num` int(10) unsigned NOT NULL CHECK (`players_num` >= 0),
+  `players_num` int unsigned NOT NULL,
   `avatar` varchar(100) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
+  `user_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `equipo_user_id_6697ca39_fk_user_userboli_id` (`user_id`),
-  CONSTRAINT `equipo_user_id_6697ca39_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `equipo_user_id_6697ca39_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`),
+  CONSTRAINT `equipo_chk_1` CHECK ((`players_num` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -397,49 +461,24 @@ INSERT INTO `equipo` VALUES (1,'Los diomedez','Rojo',12,'team_avatar/eliminar.pn
 UNLOCK TABLES;
 
 --
--- Table structure for table `evento`
---
-
-DROP TABLE IF EXISTS `evento`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `evento` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `type` varchar(50) NOT NULL,
-  `place` varchar(50) NOT NULL,
-  `date` datetime(6) NOT NULL,
-  `cost` double NOT NULL,
-  `guests` int(10) unsigned NOT NULL CHECK (`guests` >= 0),
-  `description` longtext NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `evento`
---
-
-LOCK TABLES `evento` WRITE;
-/*!40000 ALTER TABLE `evento` DISABLE KEYS */;
-/*!40000 ALTER TABLE `evento` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `inventario`
 --
 
 DROP TABLE IF EXISTS `inventario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `inventario` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `entry_date` datetime(6) NOT NULL,
-  `product_quantity` int(10) unsigned NOT NULL CHECK (`product_quantity` >= 0),
-  `product_id` bigint(20) NOT NULL,
+  `product_quantity` int unsigned NOT NULL,
+  `product_id` bigint NOT NULL,
+  `quantity_reserved` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `inventario_product_id_a1edc06a_fk_producto_id` (`product_id`),
-  CONSTRAINT `inventario_product_id_a1edc06a_fk_producto_id` FOREIGN KEY (`product_id`) REFERENCES `producto` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `inventario_product_id_a1edc06a_fk_producto_id` FOREIGN KEY (`product_id`) REFERENCES `producto` (`id`),
+  CONSTRAINT `inventario_chk_1` CHECK ((`product_quantity` >= 0)),
+  CONSTRAINT `inventario_chk_2` CHECK ((`quantity_reserved` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -448,7 +487,7 @@ CREATE TABLE `inventario` (
 
 LOCK TABLES `inventario` WRITE;
 /*!40000 ALTER TABLE `inventario` DISABLE KEYS */;
-INSERT INTO `inventario` VALUES (1,'2023-09-21 21:51:55.087442',25,1),(2,'2023-09-21 21:53:24.062129',10,2),(4,'2023-09-22 01:31:40.004380',19,4),(5,'2023-09-22 01:33:53.717422',40,5),(6,'2023-09-22 01:35:35.698512',18,6),(7,'2023-09-22 01:37:38.221147',15,7);
+INSERT INTO `inventario` VALUES (1,'2023-09-21 21:51:55.087442',25,1,0),(2,'2023-09-21 21:53:24.062129',10,2,0),(4,'2023-09-22 01:31:40.004380',19,4,0),(5,'2023-09-22 01:33:53.717422',40,5,0),(6,'2023-09-22 01:35:35.698512',18,6,0),(7,'2023-09-22 01:37:38.221147',15,7,0);
 /*!40000 ALTER TABLE `inventario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -458,23 +497,25 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `jugador`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `jugador` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `dorsal` bigint(20) unsigned NOT NULL CHECK (`dorsal` >= 0),
-  `age` int(10) unsigned NOT NULL CHECK (`age` >= 0),
+  `dorsal` bigint unsigned NOT NULL,
+  `age` int unsigned NOT NULL,
   `gender` varchar(50) NOT NULL,
   `position` varchar(60) NOT NULL,
-  `yellow_card` int(11) NOT NULL,
-  `blue_card` int(11) NOT NULL,
-  `red_card` int(11) NOT NULL,
-  `team_id` bigint(20) NOT NULL,
+  `yellow_card` int NOT NULL,
+  `blue_card` int NOT NULL,
+  `red_card` int NOT NULL,
+  `team_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `jugador_team_id_ade94278_fk_equipo_id` (`team_id`),
-  CONSTRAINT `jugador_team_id_ade94278_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `jugador_team_id_ade94278_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`),
+  CONSTRAINT `jugador_chk_1` CHECK ((`dorsal` >= 0)),
+  CONSTRAINT `jugador_chk_2` CHECK ((`age` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -493,19 +534,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `producto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `producto` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `cost` double NOT NULL,
   `description` longtext NOT NULL,
   `image` varchar(100) NOT NULL,
   `due_date` date NOT NULL,
-  `category_id` bigint(20) NOT NULL,
+  `category_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `producto_category_id_d39dad7c_fk_categoria_id` (`category_id`),
   CONSTRAINT `producto_category_id_d39dad7c_fk_categoria_id` FOREIGN KEY (`category_id`) REFERENCES `categoria` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -524,9 +565,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `reserva`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reserva` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `place` varchar(50) NOT NULL,
   `type` varchar(50) NOT NULL,
   `date` date NOT NULL,
@@ -535,7 +576,7 @@ CREATE TABLE `reserva` (
   `cost` double NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -554,16 +595,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `salida`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `salida` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `output_date` datetime(6) NOT NULL,
-  `product_quantity_out` int(10) unsigned NOT NULL CHECK (`product_quantity_out` >= 0),
-  `inventory_id` bigint(20) NOT NULL,
+  `product_quantity_out` int unsigned NOT NULL,
+  `inventory_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `salida_inventory_id_3d569ade_fk_inventario_id` (`inventory_id`),
-  CONSTRAINT `salida_inventory_id_3d569ade_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `salida_inventory_id_3d569ade_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`),
+  CONSTRAINT `salida_chk_1` CHECK ((`product_quantity_out` >= 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -581,17 +623,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `torneo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `torneo` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
-  `number_teams` int(10) unsigned NOT NULL CHECK (`number_teams` >= 0),
+  `number_teams` int unsigned NOT NULL,
   `date` datetime(6) NOT NULL,
   `prize_payment` double NOT NULL,
   `cost` double NOT NULL,
   `active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`),
+  CONSTRAINT `torneo_chk_1` CHECK ((`number_teams` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -610,25 +653,25 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `torneo_equipo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `torneo_equipo` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `goals_for` int(11) NOT NULL,
-  `goals_against` int(11) NOT NULL,
-  `goals_diff` int(11) NOT NULL,
-  `games_tied` int(11) NOT NULL,
-  `games_won` int(11) NOT NULL,
-  `games_lost` int(11) NOT NULL,
-  `games_played` int(11) NOT NULL,
-  `score` int(11) NOT NULL,
-  `team_id` bigint(20) NOT NULL,
-  `tournament_id` bigint(20) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `goals_for` int NOT NULL,
+  `goals_against` int NOT NULL,
+  `goals_diff` int NOT NULL,
+  `games_tied` int NOT NULL,
+  `games_won` int NOT NULL,
+  `games_lost` int NOT NULL,
+  `games_played` int NOT NULL,
+  `score` int NOT NULL,
+  `team_id` bigint NOT NULL,
+  `tournament_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `torneo_equipo_team_id_aff5ce69_fk_equipo_id` (`team_id`),
   KEY `torneo_equipo_tournament_id_2a153cdb_fk_torneo_id` (`tournament_id`),
   CONSTRAINT `torneo_equipo_team_id_aff5ce69_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`),
   CONSTRAINT `torneo_equipo_tournament_id_2a153cdb_fk_torneo_id` FOREIGN KEY (`tournament_id`) REFERENCES `torneo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -647,9 +690,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_userboli`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_userboli` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `password` varchar(128) NOT NULL,
   `last_login` datetime(6) DEFAULT NULL,
   `is_superuser` tinyint(1) NOT NULL,
@@ -664,11 +707,12 @@ CREATE TABLE `user_userboli` (
   `birthdate` date DEFAULT NULL,
   `phone` varchar(10) DEFAULT NULL,
   `gender` varchar(50) DEFAULT NULL,
-  `range` int(10) unsigned NOT NULL CHECK (`range` >= 0),
+  `range` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `email` (`email`),
+  CONSTRAINT `user_userboli_chk_1` CHECK ((`range` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -687,17 +731,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_userboli_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_userboli_groups` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `userboli_id` bigint(20) NOT NULL,
-  `group_id` int(11) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `userboli_id` bigint NOT NULL,
+  `group_id` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_userboli_groups_userboli_id_group_id_a1fadfcc_uniq` (`userboli_id`,`group_id`),
   KEY `user_userboli_groups_group_id_c57ab420_fk_auth_group_id` (`group_id`),
   CONSTRAINT `user_userboli_groups_group_id_c57ab420_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `user_userboli_groups_userboli_id_3cbe31ac_fk_user_userboli_id` FOREIGN KEY (`userboli_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -715,17 +759,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_userboli_user_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_userboli_user_permissions` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `userboli_id` bigint(20) NOT NULL,
-  `permission_id` int(11) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `userboli_id` bigint NOT NULL,
+  `permission_id` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_userboli_user_permi_userboli_id_permission_i_046faf5d_uniq` (`userboli_id`,`permission_id`),
   KEY `user_userboli_user_p_permission_id_b052ddf3_fk_auth_perm` (`permission_id`),
   CONSTRAINT `user_userboli_user_p_permission_id_b052ddf3_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `user_userboli_user_p_userboli_id_0c75c885_fk_user_user` FOREIGN KEY (`userboli_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -743,20 +787,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `venta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `venta` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `total_cost` double NOT NULL,
   `payment_type` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL,
   `date` datetime(6) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `product_quantity` int(10) unsigned NOT NULL CHECK (`product_quantity` >= 0),
-  `user_id` bigint(20) NOT NULL,
+  `product_quantity` int unsigned NOT NULL,
+  `user_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `venta_user_id_9f98c281_fk_user_userboli_id` (`user_id`),
-  CONSTRAINT `venta_user_id_9f98c281_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `venta_user_id_9f98c281_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`),
+  CONSTRAINT `venta_chk_1` CHECK ((`product_quantity` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -770,59 +815,31 @@ INSERT INTO `venta` VALUES (1,98400,'Efectivo','Cancelado','2023-09-21 22:09:46.
 UNLOCK TABLES;
 
 --
--- Table structure for table `venta_evento`
+-- Table structure for table `venta_carrito`
 --
 
-DROP TABLE IF EXISTS `venta_evento`;
+DROP TABLE IF EXISTS `venta_carrito`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `venta_evento` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `event_id` bigint(20) NOT NULL,
-  `sale_id` bigint(20) NOT NULL,
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `venta_carrito` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `car_id` bigint NOT NULL,
+  `sale_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `venta_evento_event_id_3cafcce1_fk_evento_id` (`event_id`),
-  KEY `venta_evento_sale_id_cd044d82_fk_venta_id` (`sale_id`),
-  CONSTRAINT `venta_evento_event_id_3cafcce1_fk_evento_id` FOREIGN KEY (`event_id`) REFERENCES `evento` (`id`),
-  CONSTRAINT `venta_evento_sale_id_cd044d82_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY `venta_carrito_car_id_903fc97f_fk_carrito_id` (`car_id`),
+  KEY `venta_carrito_sale_id_0f55ffc7_fk_venta_id` (`sale_id`),
+  CONSTRAINT `venta_carrito_car_id_903fc97f_fk_carrito_id` FOREIGN KEY (`car_id`) REFERENCES `carrito` (`id`),
+  CONSTRAINT `venta_carrito_sale_id_0f55ffc7_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `venta_evento`
+-- Dumping data for table `venta_carrito`
 --
 
-LOCK TABLES `venta_evento` WRITE;
-/*!40000 ALTER TABLE `venta_evento` DISABLE KEYS */;
-/*!40000 ALTER TABLE `venta_evento` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `venta_inventario`
---
-
-DROP TABLE IF EXISTS `venta_inventario`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `venta_inventario` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `inventory_id` bigint(20) NOT NULL,
-  `sale_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `venta_inventario_inventory_id_af4ad961_fk_inventario_id` (`inventory_id`),
-  KEY `venta_inventario_sale_id_f994260c_fk_venta_id` (`sale_id`),
-  CONSTRAINT `venta_inventario_inventory_id_af4ad961_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`),
-  CONSTRAINT `venta_inventario_sale_id_f994260c_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `venta_inventario`
---
-
-LOCK TABLES `venta_inventario` WRITE;
-/*!40000 ALTER TABLE `venta_inventario` DISABLE KEYS */;
-/*!40000 ALTER TABLE `venta_inventario` ENABLE KEYS */;
+LOCK TABLES `venta_carrito` WRITE;
+/*!40000 ALTER TABLE `venta_carrito` DISABLE KEYS */;
+/*!40000 ALTER TABLE `venta_carrito` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -831,17 +848,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `venta_reserva`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `venta_reserva` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `reservation_id` bigint(20) NOT NULL,
-  `sale_id` bigint(20) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `reservation_id` bigint NOT NULL,
+  `sale_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `venta_reserva_reservation_id_0075a4d9_fk_reserva_id` (`reservation_id`),
   KEY `venta_reserva_sale_id_3d4f7ed0_fk_venta_id` (`sale_id`),
   CONSTRAINT `venta_reserva_reservation_id_0075a4d9_fk_reserva_id` FOREIGN KEY (`reservation_id`) REFERENCES `reserva` (`id`),
   CONSTRAINT `venta_reserva_sale_id_3d4f7ed0_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -860,17 +877,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `venta_torneo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `venta_torneo` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `sale_id` bigint(20) NOT NULL,
-  `tournament_id` bigint(20) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `sale_id` bigint NOT NULL,
+  `tournament_id` bigint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `venta_torneo_sale_id_ffa6bfa1_fk_venta_id` (`sale_id`),
   KEY `venta_torneo_tournament_id_0114354e_fk_torneo_id` (`tournament_id`),
   CONSTRAINT `venta_torneo_sale_id_ffa6bfa1_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`),
   CONSTRAINT `venta_torneo_tournament_id_0114354e_fk_torneo_id` FOREIGN KEY (`tournament_id`) REFERENCES `torneo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -892,4 +909,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-22 16:16:19
+-- Dump completed on 2023-10-20  0:31:07
