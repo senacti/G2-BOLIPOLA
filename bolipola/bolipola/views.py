@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleInventory, Inventory, Category
+from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Category
 
 #------------------Ventas---------------------------
 #Venta
@@ -26,7 +26,7 @@ def sale(request, type_id, type_name):
             messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Sin jugadores suficientes, mínimo 11 para un torneo')
             return redirect('tournament')
     if type_name == 'Productos':
-        inf = get_object_or_404(Product, id=type_id)
+        inf = get_object_or_404(Car, id=type_id)
 
     if type_name == 'Reserva':
         inf = get_object_or_404(Reservation, id=type_id)
@@ -43,7 +43,7 @@ def sale(request, type_id, type_name):
             if type_name == 'Torneo':
                 intermediate = SaleTournament(sale_id=sale.id, tournament_id=inf.id)
             if type_name == 'Productos':
-                intermediate = SaleInventory(sale_id=sale.id, inventory_id=inf.id)
+                intermediate = SaleCar(sale_id=sale.id, car_id=inf.id)
             if type_name == 'Reserva':
                 intermediate = SaleReservation(sale_id=sale.id, reservation_id=inf.id)
                 inf.confirmed = True
@@ -74,8 +74,8 @@ def sale_information(request, sale_id):
         team = Team.objects.all().filter(user_id=sale.user_id).first()
 
     if sale.type == 'Productos':
-        inf = get_object_or_404(SaleInventory, sale_id=sale.id)   
-        inf = inf.inventory
+        inf = get_object_or_404(SaleCar, sale_id=sale.id)   
+        inf = inf.car
 
     if sale.type == 'Reserva':
         inf = get_object_or_404(SaleReservation, sale_id=sale.id)
