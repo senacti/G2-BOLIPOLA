@@ -51,7 +51,7 @@
 
                     <div class="carAndPerfil" id="car">
                         <a href="#" class="shopping">
-                            <i class="fa-solid fa-basket-shopping"></i>
+                            <i class="fa-solid fa-cart-shopping"></i>
                         </a>
                     </div>
                     <div class="linePerfil" style="border: 1px solid #CCD1D1;">
@@ -116,17 +116,17 @@
         </div>
     </div>
     <div class="card">
-        <h1>Card</h1>
+        <h1 class="card__title"><span><i class="fa-solid fa-cart-shopping"></i>Carrito</span></h1>
         <form action="" method="post">
             {% csrf_token %}
             <ul class="listCard">
 
             </ul>
                 <div class="checkOut">
-                    <h1>Total</h1>
-                    <h1 class="total">0</h1>
-                    <div class="closeShopping">Cerrar</div>
-                <button type="submit" class="total">Pagar</button>
+                    <h1 class="title">Total:</h1>
+                    <h1 class="totalPrice">$0</h1>
+                    <div class="closeShopping" group="down">Cerrar</div>
+                <button type="submit" class="total" group="down">Pagar</button>
             </div>
         </form>
     </div>

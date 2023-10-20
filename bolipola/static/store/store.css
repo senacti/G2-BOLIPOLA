@@ -53,41 +53,54 @@
 	font-size: 1.3rem;
 	font-weight: 600;
 	position: relative;
-}	
-.list .item button:hover{
-	cursor: pointer;
-	background-color: #da4332;
 }
-.card{
-    position: fixed;
+
+.list .item button:hover {
+	cursor: pointer;
+}
+
+.card {
+	position: fixed;
     top:0;
     left: 100%;
-    width: 500px;
     background-color: whitesmoke;
+	width: 45rem;
     height: 100vh;
     transition: 0.5s;
-    border: var(--primary-color) 1px solid;
 }
+
 .active .card{
-    left: calc(100% - 500px);
-    
+    left: calc(100% - 45rem);
+	box-shadow: 0.2rem 0 5rem black;
 }
 
 .card h1{
+	display: flex;
+	align-items: center;
     background-color: #CB4335;
     color: #fff;
-    padding: 10px;
-    margin: 0 0 5px;
+}
+
+.card .card__title {
+	display: grid;
+	place-items: center;
+	padding: 1rem 0;
+}
+
+.card .card__title i {
+	margin-right: 1rem;
 }
 
 .card .checkOut{
     position: absolute;
     bottom: 0;
     width: 100%;
+	height: 11%;
     background-color: var(--primary-color);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
+
 .card .checkOut div{
     background-color: #CB4335;
     color: #fff;
@@ -97,20 +110,44 @@
     font-weight: bold;
     cursor: pointer;
 }
+
 .card .checkOut .closeShopping {
-    border:#2c0a0a 1px solid;
     background-color: #751c1c;
     grid-column: 1/4;
 }
+
 .checkOut h1{
     background-color: #CB4335;
-    color: #fff;
+    color: #FBFCFC;
+}
 
-}	
+.checkOut .title {
+	margin-left: 1.5rem;
+	font-style: italic;
+}
+
+.checkOut .total {
+	color: #FBFCFC;
+	background-color: #228B22;
+	border: 0;
+}
+
+.checkOut [group="down"] {
+	border-radius: 0.75rem;
+	margin: 0 0.2rem;
+	font-size: 1.4rem;
+	font-weight: bold;
+}
+
+.checkOut [group="down"]:hover {
+	cursor: pointer;
+}
+
 .listCard li{
     display: grid;
-    grid-template-columns: 100px repeat(4, 1fr);
-    color: #fff;
+	border-bottom: 0.25rem solid #CB4335;
+    grid-template-columns: 100px repeat(3, 1fr);
+    color: #FBFCFC;
     row-gap: 10px;
 }
 
@@ -127,24 +164,25 @@
     border: none;
 }
 .listCard .count{
-    margin: 0 10px;
+    margin: 0 1.3rem;
     color: #000;
-    font-size: medium;
+    font-size: large;
 }
 .text-slide{
-    font-size: medium;
+    font-size: large;
     color: #000;
 }
-.fa-minus{
-    color: var(--background-color);
+
+[group="addOrDelete"] {
+	display: grid;
+	place-items: center;
+	color: var(--background-color);
     background-color:var(--primary-color);
     border-radius: 3rem;
+	padding: 0.3rem;
+	font-size: 1.5rem;
 }
-.fa-plus{
-    color: var(--background-color);
-    background-color:var(--primary-color);
-    border-radius: 3rem;
-}
+
 /* ********************************** */
 /*       MEDIA QUERIES -- 468px       */
 /* ********************************** */

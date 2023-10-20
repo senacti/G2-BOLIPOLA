@@ -3,17 +3,20 @@ let closeShopping = document.querySelector('.closeShopping');
 let list = document.querySelector('.list');
 let listCard = document.querySelector('.listCard');
 let body = document.querySelector('body');
-let total = document.querySelector('.total');
+let total = document.querySelector('.totalPrice');
 let quantity = document.querySelector('.quantity');
-let items = document.querySelectorAll('.item')
-let addButtons = document.querySelectorAll('.Boton1')
+let items = document.querySelectorAll('.item');
+let addButtons = document.querySelectorAll('.Boton1');
+let carVisible = false
 
 openShopping.addEventListener('click', () => {
   body.classList.add('active');
+  carVisible = true
 })
 
 closeShopping.addEventListener('click', () => {
   body.classList.remove('active');
+  carVisible = false
 })
 
 let products = [];
@@ -39,6 +42,9 @@ parseAndEvents(products)
 
 function addToCard(key) {
     //En caso de que sobrepase la cantidad disponible
+    if (!carVisible) {
+      body.classList.add('active');
+    }
 
     if (listCards[key] == null) {
         // Copia el producto de la lista a la lista de la tarjeta
@@ -48,7 +54,7 @@ function addToCard(key) {
         listCard.totalPrice += listCards[key].price;
     } else {
         //En caso de que sobrepase la cantidad disponible
-        if (listCards[key].quantity >= products[key].quantity) {
+        if (listCards[key].quantity >= products[key].quantity || listCards[key].quantity >= 5) {
           return reloadCard();
         }
         // Si el producto ya está en la tarjeta, incrementa la cantidad y el precio total en consecuencia
@@ -59,7 +65,7 @@ function addToCard(key) {
 }
 
 function changeQuantity(key, quantity) {
-  if (quantity > products[key].quantity) {
+  if (quantity > products[key].quantity || quantity > 5) {
     return reloadCard();
   }
 
@@ -89,16 +95,21 @@ function reloadCard() {
       newDiv.innerHTML = `
         <div class="img-slide"><img src="${value.image}"/></div>
         <div class="text-slide">${value.name}</div>
-        <div class="text-slide">${value.price.toLocaleString()}</div>
+        <div class="text-slide">$${value.price.toLocaleString()}</div>
         <div>
-          <button onclick="changeQuantity(${key}, ${value.quantity - 1})"><i class="fa-solid fa-minus"></i></button>
+          <button onclick="changeQuantity(${key}, ${value.quantity - 1})"><i class="fa-solid fa-minus" group="addOrDelete"></i></button>
           <div class="count">${value.quantity}</div>
-          <button onclick="changeQuantity(${key}, ${value.quantity + 1})"><i class="fa-solid fa-plus"></i></button>
+          <button onclick="changeQuantity(${key}, ${value.quantity + 1})"><i class="fa-solid fa-plus" group="addOrDelete"></i></button>
           <input type='hidden' name='priceInput' value='${value.price}'>
           <input type='hidden' name='quantityInput' value='${value.quantity}'>
         </div>`;
       listCard.appendChild(newDiv);
     }
   });
-  total.innerText = totalPrice.toLocaleString();
+  total.innerText = `$${totalPrice.toLocaleString()}`;
 }
+
+window.addEventListener("load", () => {
+  body.classList.add('active');
+  addToCard(1);
+})

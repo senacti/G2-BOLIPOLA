@@ -148,7 +148,7 @@ html {
 	width: 7rem;
 }
 
-.container-user .fa-basket-shopping {
+.container-user i {
 	font-size: 4rem;
 	color: var(--primary-color);
 }
