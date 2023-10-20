@@ -108,8 +108,3 @@ function reloadCard() {
   });
   total.innerText = `$${totalPrice.toLocaleString()}`;
 }
-
-window.addEventListener("load", () => {
-  body.classList.add('active');
-  addToCard(1);
-})
