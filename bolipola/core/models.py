@@ -79,6 +79,7 @@ class Product(models.Model):
 class Inventory(models.Model):
     entry_date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de entrada')
     product_quantity = models.PositiveIntegerField(verbose_name='Cantidad de producto', default=0, validators=[validate_positive])
+    quantity_reserved = models.PositiveIntegerField(verbose_name='Cantidad producto reservado', default=0)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -283,11 +284,12 @@ class Car(models.Model):
         ordering = ['id']
 
 class CarInventory(models.Model):
+    quantity = models.PositiveIntegerField(verbose_name='Cantidad', default=0)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(f'{self.inventory.product.name} - {self.car.total_products}')
+        return str(f'{self.inventory.product.name} - {self.quantity}')
 
     class Meta:
         verbose_name = 'Carrito e inventario'
@@ -317,7 +319,7 @@ class Sale(models.Model):
         return money
 
     def search_intermediate(self):
-        listTables = [SaleTournament, SaleReservation, SaleInventory,]
+        listTables = [SaleTournament, SaleReservation,]
 
         for table in listTables:
             intermediate = table.objects.filter(sale_id=self.id)
