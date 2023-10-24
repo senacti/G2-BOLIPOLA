@@ -19,6 +19,13 @@ closeShopping.addEventListener('click', () => {
   carVisible = false
 })
 
+window.addEventListener('click', (e) => {
+  if (e.target.attributes.closeCar != undefined) {
+    body.classList.remove('active');
+    carVisible = false
+  }
+})
+
 let products = [];
 let listCards = [];
 

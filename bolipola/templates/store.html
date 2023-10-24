@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'store/store.css' %}">
     <link rel="stylesheet" href="{% static 'header/header.css' %}">
 </head>
-<body>
+<body closeCar>
     {% if not user.is_authenticated %}
 
     <script>
@@ -19,13 +19,13 @@
 
     {% endif %}
     <header>
-        <div class="container-hero">
-            <div class="container hero">
-                <div class="customer-support">
+        <div class="container-hero" closeCar>
+            <div class="container hero" closeCar>
+                <div class="customer-support" closeCar>
                     {% if user.is_staff and user.is_authenticated %}
                     
-                    <div class="container-button-db">
-                        <a href="{% url 'admin:index' %}">
+                    <div class="container-button-db" closeCar>
+                        <a href="{% url 'admin:index' %}" closeCar>
                             <button class="button-db">
                                 <i class="fa-solid fa-database"></i><span>Base de datos</span>
                             </button>  
@@ -34,16 +34,16 @@
 
                     {% else %}
 
-                    <i class="fa-brands fa-whatsapp" id="whatsappIcon"></i>
-                    <div class="content-customer-support">
-                        <span class="numberTop">+57 3202127187</span>             
+                    <i class="fa-brands fa-whatsapp" id="whatsappIcon" closeCar></i>
+                    <div class="content-customer-support" closeCar>
+                        <span class="numberTop" closeCar>+57 3202127187</span>             
                     </div>
 
                     {% endif %}
                 </div>
 
                 <div class="container-logo">
-                    <a class="logo" href="#"></a>
+                    <a class="logo" href="{% url 'index' %}"></a>
                 </div>
 
                 <div class="container-user">
@@ -54,7 +54,7 @@
                             <i class="fa-solid fa-cart-shopping"></i>
                         </a>
                     </div>
-                    <div class="linePerfil" style="border: 1px solid #CCD1D1;">
+                    <div class="linePerfil" style="border: 1px solid #CCD1D1;" closeCar>
                     </div>
                     <div class="carAndPerfil" id="perfil">
                         <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
@@ -72,10 +72,10 @@
             </div>
         </div>
 
-        <div class="container-navbar">
-            <nav class="navbar container">
-                <i class="fa-solid fa-bars" id="dropdown"></i>
-                <ul class="menu">
+        <div class="container-navbar" closeCar>
+            <nav class="navbar container" closeCar>
+                <i class="fa-solid fa-bars" id="dropdown" closeCar></i>
+                <ul class="menu" closeCar>
                     <li><a href="{% url 'index' %}">Inicio</a></li>
                     <li><a href="{% url 'store' %}">Productos</a></li>
                     <li><a href="{% url 'reserve' %}">Reservas</a></li>
@@ -84,7 +84,7 @@
                     <li><a href="{% url 'inventory' %}">Inventario</a></li>
                     {% endif %}
                 </ul>
-                <ul class="menuDropDown" hidden>
+                <ul class="menuDropDown" hidden closeCar>
                     <li hidden><a href="{% url 'index' %}">Inicio</a></li>
                     <li hidden><a href="{% url 'store' %}">Productos</a></li>
                     <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
@@ -98,23 +98,24 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="list">
+    <div class="container" closeCar>
+        <div class="list" closeCar>
             {% for inventory in inventorys %}
                 {% if not inventory.product_quantity <= 0 %}
-                <div class="item">
-                    <img src="{{ inventory.product.image.url }}">
-                    <div class="title">{{ inventory.product.name }}</div>
-                    <div class="price">{{ inventory.product.cost_to_money }}</div>
-                    <div class="quantity">Disponible: <span>{{ inventory.product_quantity }}</span></div>
-                    <div class="description">{{ inventory.product.description }}</div>
+                <div class="item" closeCar>
+                    <img src="{{ inventory.product.image.url }}" closeCar>
+                    <div class="title" closeCar>{{ inventory.product.name }}</div>
+                    <div class="price" closeCar>{{ inventory.product.cost_to_money }}</div>
+                    <div class="quantity" closeCar>Disponible: <span>{{ inventory.product_quantity }}</span></div>
+                    <div class="description" closeCar>{{ inventory.product.description }}</div>
                     <button class="Boton1" id="{{ inventory.id }}">Añadir al carrito</button>
-                    <div class="price_number" hidden>{{ inventory.product.cost }}</div>
+                    <div class="price_number" hidden closeCar>{{ inventory.product.cost }}</div>
                 </div>
                 {% endif %}
             {% endfor %}
         </div>
     </div>
+
     <div class="card">
         <h1 class="card__title"><span><i class="fa-solid fa-cart-shopping"></i>Carrito</span></h1>
         <form action="" method="post">
