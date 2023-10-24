@@ -1,8 +1,9 @@
 import os
 import pytz
+import json
 from . import settings
 from django.utils.timezone import now
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
@@ -147,11 +148,22 @@ def store(request):
     if not request.user.is_authenticated:
         return redirect('signin')
     
+    #Creando carrito si el usuario no lo tiene
+    car = Car.objects.all().filter(user_id=request.user.id, active=True)
+    if not car.exists():
+        new_car = Car(user_id=request.user.id)
+        new_car.save()
+        car = new_car
+    
     inventorys = Inventory.objects.all()
 
     return render(request, 'store.html', {'inventorys':inventorys})
 
-#inventario
+def store_product_add(request):
+    # inventory = get_object_or_404(Inventory, id=pk_inventory)
+    return HttpResponse(request)
+
+#------------------Inventario-----------------------
 @login_required
 def inventory(request):
     products = Product.objects.all()

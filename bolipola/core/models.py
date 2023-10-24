@@ -268,9 +268,9 @@ class TournamentTeam(models.Model):
         ordering = ['id']
 
 class Car(models.Model):
-    total_products = models.PositiveIntegerField(verbose_name='Total de productos')
+    total_products = models.PositiveIntegerField(verbose_name='Total de productos', default=0)
     active = models.BooleanField(verbose_name='Activo', default=True) #Detecta si los productos de este carro se han comprado ya o no
-    cost = models.FloatField(verbose_name='Costo de productos', validators=[validate_positive])
+    cost = models.FloatField(verbose_name='Costo de productos', validators=[validate_positive], default=0)
     inventory = models.ManyToManyField(Inventory, through='CarInventory')
     user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
     
