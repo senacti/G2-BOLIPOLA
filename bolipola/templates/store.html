@@ -18,6 +18,23 @@
     </script>
 
     {% endif %}
+
+    {% if messages %}
+                    {% for msg in messages %}
+                    <div class="message-container">
+                        <span group="messages"
+                        class="
+                            {% if msg.tags == 'success' %}message-success{% endif %}
+                            {% if msg.tags == 'error' %}message-error{% endif %}
+                            {% if msg.tags == 'info' %}message-info{% endif %}
+                        "
+                        >
+                            {{ msg.message|safe }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
     <header>
         <div class="container-hero" closeCar>
             <div class="container hero" closeCar>
@@ -144,5 +161,46 @@
     ></script>
     
     <script src="{% static 'header/header.js' %}"></script>
+
+    <script>
+        lists_add = document.querySelectorAll(".Boton1")
+        function obtenerCSRFToken() {
+            // Obtiene el token CSRF de las cookies
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith('csrftoken=')) {
+                    return cookie.split('=')[1];
+                }
+            }
+            return null;
+        }
+
+        function ejectFunction(inventory_id) {
+            fetch(`/store/add/`, {
+                method: 'POST',  // Puedes usar POST o GET según tus necesidades
+                headers: {
+                    'X-CSRFToken': obtenerCSRFToken(), // Asegúrate de incluir el token CSRF si lo necesitas
+                },
+                body: JSON.stringify({
+                    inventory_id
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.inventory_id);
+            })
+
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        lists_add.forEach((element, i) => {       
+            element.addEventListener("click", () => {
+                ejectFunction(Number(element.id))
+            })
+        })
+    </script>
 </body>
 </html>
