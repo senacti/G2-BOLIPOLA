@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, CarInventory, Category
+from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Output, CarInventory, Category
 
 #------------------Ventas---------------------------
 #Venta
@@ -50,8 +50,18 @@ def sale(request, type_id, type_name):
             #Agregando id's a tabla intermedia
             if type_name == 'Torneo':
                 intermediate = SaleTournament(sale_id=sale.id, tournament_id=inf.id)
+                
             if type_name == 'Productos':
                 intermediate = SaleCar(sale_id=sale.id, car_id=inf.id)
+                sale.product_quantity = inf.total_products
+                sale.save()
+                for car_inventory in cars_inventorys:
+                    car_inventory.inventory.quantity_reserved += car_inventory.quantity
+                    car_inventory.inventory.product_quantity -= car_inventory.quantity
+                    car_inventory.inventory.save()
+                inf.active = False
+                inf.save()
+                
             if type_name == 'Reserva':
                 intermediate = SaleReservation(sale_id=sale.id, reservation_id=inf.id)
                 inf.confirmed = True
@@ -74,22 +84,24 @@ def sale(request, type_id, type_name):
 def sale_information(request, sale_id):
     user = get_object_or_404(UserBoli, id=request.user.id)
     sale = get_object_or_404(Sale, id=sale_id)
+    cars_inventorys = False
     team = False
-
+    
     if sale.type == 'Torneo':
         inf = get_object_or_404(SaleTournament, sale_id=sale.id)  
         inf = inf.tournament
         team = Team.objects.all().filter(user_id=sale.user_id).first()
 
     if sale.type == 'Productos':
-        inf = get_object_or_404(SaleCar, sale_id=sale.id)   
+        inf = get_object_or_404(SaleCar, sale_id=sale.id)  
         inf = inf.car
+        cars_inventorys = CarInventory.objects.all().filter(car_id=inf.id)
 
     if sale.type == 'Reserva':
         inf = get_object_or_404(SaleReservation, sale_id=sale.id)
         inf = inf.reservation
 
-    return render(request, 'sale/sale_information.html', {'user':user, 'sale':sale, 'inf':inf, 'team':team})
+    return render(request, 'sale/sale_information.html', {'user':user, 'sale':sale, 'inf':inf, 'team':team, 'cars_inventorys':cars_inventorys})
 
 #Historial de ventas
 @login_required
@@ -128,6 +140,20 @@ def sale_confirm(request, sale_id):
         user.range += 120
         user.save()
 
+    if sale.type == 'Productos':
+        sale_car = get_object_or_404(SaleCar, sale_id=sale.id)
+        cars_inventorys = CarInventory.objects.all().filter(car_id=sale_car.car.id)
+        for car_inventory in cars_inventorys:
+            car_inventory.inventory.quantity_reserved -= car_inventory.quantity
+            car_inventory.inventory.save()
+        output = Output(car_id=sale_car.car.id)
+        output.save()
+        
+        #Dando puntos al usuario
+        points = 35 * sale_car.car.total_products
+        user.range += points
+        user.save()
+        
     sale.status = 'Comprado'
     sale.save()
 
@@ -142,7 +168,15 @@ def sale_cancel(request, sale_id):
         #Verificando que un usuario no está cancelando algo no suyo
         if not sale.user_id == request.user.id:
             raise Http404('Restringido')
-
+    
+    if sale.type == 'Productos':
+        sale_car = get_object_or_404(SaleCar, sale_id=sale.id)
+        cars_inventorys = CarInventory.objects.all().filter(car_id=sale_car.car.id)
+        for car_inventory in cars_inventorys:
+            car_inventory.inventory.quantity_reserved -= car_inventory.quantity
+            car_inventory.inventory.product_quantity += car_inventory.quantity
+            car_inventory.inventory.save()
+            
     sale.status = 'Cancelado'
     sale.save()
 
@@ -151,7 +185,6 @@ def sale_cancel(request, sale_id):
 
 #------------------Productos-----------------------
 #Productos
-@login_required
 def store(request):
     if not request.user.is_authenticated:
         return redirect('signin')

@@ -90,20 +90,6 @@ class Inventory(models.Model):
         verbose_name_plural = 'Inventarios'
         db_table = 'inventario'
         ordering = ['id']
-
-class Output(models.Model):
-    output_date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de salida')
-    product_quantity_out = models.PositiveIntegerField(verbose_name='Cantidad de productos fuera')
-    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(f'{self.product_quantity_out}, {self.inventory.product.name}')
-    
-    class Meta:
-        verbose_name = 'Salida'
-        verbose_name_plural = 'Salidas'
-        db_table = 'salida'
-        ordering = ['id']
       
 class Calendar(models.Model):
     date = models.DateField(verbose_name='Fecha del día', validators=[validate_today])
@@ -311,6 +297,19 @@ class CarInventory(models.Model):
         verbose_name = 'Carrito e inventario'
         verbose_name_plural = 'Carritos e inventario'
         db_table = 'carrito_inventario'
+        ordering = ['id']
+
+class Output(models.Model):
+    output_date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de salida')
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return str(f'{self.car.total_products}, {self.car.cost}')
+    
+    class Meta:
+        verbose_name = 'Salida'
+        verbose_name_plural = 'Salidas'
+        db_table = 'salida'
         ordering = ['id']
 
 class Sale(models.Model):
