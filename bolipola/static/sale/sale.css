@@ -91,6 +91,18 @@ html {
     margin: 1rem auto;
 }
 
+.division_up {
+    position: relative;
+    top: 1.2rem;
+    font-weight: 700;
+}
+
+.division_down {
+    position: relative;
+    bottom: 1.2rem;
+    font-weight: 700;
+}
+
 .main__inf-item {
     display: flex;
     margin: 1.2rem 0;

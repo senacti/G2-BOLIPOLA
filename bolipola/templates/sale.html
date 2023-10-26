@@ -51,7 +51,8 @@
                             <span>Premio:</span>
                             <input type="text" value="{{ inf.payment_to_money }}" readonly>
                         </div>
-
+                        
+                        <!--Caso de venta reserva-->
                         {% elif type_name == 'Reserva' %}
                         
                         <div class="main__inf-item">
@@ -79,19 +80,42 @@
                             <input type="text" value="{{ inf.cost_to_money }}" readonly>
                         </div>
                         
+                        <!--Caso de venta productos-->
+                        {% elif type_name == 'Productos' %}
+                            {% for car_inventory in cars_inventorys %}
+                            <div class="division_up">-------------------------------------</div>
+                            <div class="main__inf-item">
+                                <span>Nombre: </span>
+                                <input type="text" value="{{ car_inventory.inventory.product.name }}" readonly>
+                            </div>
+                            <div class="main__inf-item">
+                                <span>Precio: </span>
+                                <input type="text" value="{{ car_inventory.inventory.product.cost_to_money }}" readonly>
+                            </div>
+                            <div class="main__inf-item">
+                                <span>Cantidad: </span>
+                                <input type="text" value="{{ car_inventory.quantity }}" readonly>
+                            </div>
+                            <div class="main__inf-item">
+                                <span>Total: </span>
+                                <input type="text" value="{{ car_inventory.products_price }}" readonly>
+                            </div>
+                            <div class="division_down">-------------------------------------</div>
+                            {% endfor %}
+
                         {% endif %}
                         {{ form.total_cost }}
                     
                         <div class="moreInf">
                             <div class="main__inf-item">
-                                <span>Cantidad a comprar:</span>
+                                <span style="margin-right: 0.4rem;">Cantidad a comprar:</span>
                                 {% if type_name != 'Productos' %}
 
                                 {{ form.product_quantity }}
 
                                 {% else %}
 
-                                {{ form.product_quantity }}
+                                {{ inf.total_products }}
 
                                 {% endif %}
                             </div>

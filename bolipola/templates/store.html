@@ -9,6 +9,7 @@
     <title>Productos</title>
     <link rel="stylesheet" href="{% static 'store/store.css' %}">
     <link rel="stylesheet" href="{% static 'header/header.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
 </head>
 <body closeCar>
     {% if not user.is_authenticated %}
@@ -18,22 +19,6 @@
     </script>
 
     {% endif %}
-
-    {% if messages %}
-                    {% for msg in messages %}
-                    <div class="message-container">
-                        <span group="messages"
-                        class="
-                            {% if msg.tags == 'success' %}message-success{% endif %}
-                            {% if msg.tags == 'error' %}message-error{% endif %}
-                            {% if msg.tags == 'info' %}message-info{% endif %}
-                        "
-                        >
-                            {{ msg.message|safe }}
-                        </span>
-                    </div>
-                    {% endfor %}
-                {% endif %}
 
     <header>
         <div class="container-hero" closeCar>
@@ -116,6 +101,22 @@
     </header>
 
     <div class="container" closeCar>
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message-container">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
+            {% endfor %}
+        {% endif %}
+        
         <div class="list" closeCar>
             {% for inventory in inventorys %}
                 {% if not inventory.product_quantity <= 0 %}
@@ -144,9 +145,22 @@
                     <h1 class="title">Total:</h1>
                     <h1 class="totalPrice">$0</h1>
                     <div class="closeShopping" group="down">Cerrar</div>
-                <button type="submit" class="total" group="down">Pagar</button>
+                <a href="{% url 'sale' car.id car.sale_type %}" class="total" group="down">Pagar</a>
             </div>
         </form>
+    </div>
+
+    <div class="loads" hidden>
+        {% for car_inventory in cars_inventorys %}
+        <span
+            class="loads_span"
+            id="{{ car_inventory.inventory.id }}"
+            name="{{ car_inventory.inventory.product.name }}"
+            price="{{ car_inventory.inventory.product.cost }}"
+            image="{{ car_inventory.inventory.product.image.url }}"
+            quantity="{{ car_inventory.quantity }}"
+        ></span>        
+        {% endfor %}
     </div>
 
     <script>
@@ -164,6 +178,8 @@
 
     <script>
         lists_add = document.querySelectorAll(".Boton1")
+
+        //Ayuda a obtener el token para hacer las funciones de forma correcta en el views
         function obtenerCSRFToken() {
             // Obtiene el token CSRF de las cookies
             const cookies = document.cookie.split(';');
@@ -177,7 +193,7 @@
         }
 
         function ejectFunction(inventory_id) {
-            fetch(`/store/add/`, {
+            fetch(`{% url 'store_product_add' %}`, {
                 method: 'POST',  // Puedes usar POST o GET según tus necesidades
                 headers: {
                     'X-CSRFToken': obtenerCSRFToken(), // Asegúrate de incluir el token CSRF si lo necesitas
@@ -188,19 +204,19 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data.inventory_id);
+                data
             })
-
             .catch(error => {
                 console.error('Error:', error);
             });
         }
 
-        lists_add.forEach((element, i) => {       
+        lists_add.forEach((element, i) => {    
             element.addEventListener("click", () => {
                 ejectFunction(Number(element.id))
             })
         })
+
     </script>
 </body>
 </html>
