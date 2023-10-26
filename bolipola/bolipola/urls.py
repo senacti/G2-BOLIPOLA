@@ -28,6 +28,7 @@ urlpatterns = [
     path('tournament/player/<int:player_id>/', views.player_edit, name='player_edit'),
     path('store/', views.store, name='store'),
     path('store/add/', views.store_product_add, name="store_product_add"),
+    path('store/del/', views.store_product_del, name="store_product_del"),
     path('profile/change_password/', views.change_password, name='change_password'),
     path('sale/<int:type_id>/<str:type_name>/', views.sale, name='sale'),
     path('sale/historic/', views.sale_historic, name='sale_historic'),

@@ -274,6 +274,15 @@ class Car(models.Model):
     inventory = models.ManyToManyField(Inventory, through='CarInventory')
     user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
     
+    def sale_type(self):
+        return 'Productos'
+
+    def cost_to_money(self):
+        money = locale.currency(self.cost, symbol=True, grouping=True)
+        money = money[:-3]
+        money = money.replace(' ', '')
+        return money
+
     def __str__(self):
         return f'{self.user.first_name} - {self.total_products} - {self.inventory.product.name}'
     
@@ -287,6 +296,13 @@ class CarInventory(models.Model):
     quantity = models.PositiveIntegerField(verbose_name='Cantidad', default=0)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+
+    def products_price(self):
+        price = self.quantity * self.inventory.product.cost
+        money = locale.currency(price, symbol=True, grouping=True)
+        money = money[:-3]
+        money = money.replace(' ', '')
+        return money
 
     def __str__(self):
         return str(f'{self.inventory.product.name} - {self.quantity}')

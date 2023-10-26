@@ -2,6 +2,7 @@ import os
 import pytz
 import json
 from . import settings
+from asgiref.sync import sync_to_async
 from django.utils.timezone import now
 from django.http import Http404, HttpResponse, JsonResponse
 from django.urls import reverse
@@ -13,12 +14,13 @@ from django.contrib.auth.decorators import login_required
 from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Category
+from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, CarInventory, Category
 
 #------------------Ventas---------------------------
 #Venta
 @login_required
 def sale(request, type_id, type_name):
+    cars_inventorys = False
     #Detectando que tipo de venta es
     if type_name == 'Torneo':
         inf = get_object_or_404(Tournament, id=type_id)
@@ -26,8 +28,13 @@ def sale(request, type_id, type_name):
         if team.players_num < 11:
             messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Sin jugadores suficientes, mínimo 11 para un torneo')
             return redirect('tournament')
+        
     if type_name == 'Productos':
         inf = get_object_or_404(Car, id=type_id)
+        if inf.total_products <= 0:
+            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> No hay productos para comprar')
+            return redirect('store')
+        cars_inventorys = CarInventory.objects.all().filter(car_id=inf.id)
 
     if type_name == 'Reserva':
         inf = get_object_or_404(Reservation, id=type_id)
@@ -60,7 +67,7 @@ def sale(request, type_id, type_name):
     else:
         form = SaleForm()
 
-    return render(request, 'sale.html', {'form':form, 'type_name':type_name, 'inf':inf})
+    return render(request, 'sale.html', {'form':form, 'type_name':type_name, 'inf':inf, 'cars_inventorys': cars_inventorys})
 
 #Información de la venta
 @login_required
@@ -144,6 +151,7 @@ def sale_cancel(request, sale_id):
 
 #------------------Productos-----------------------
 #Productos
+@login_required
 def store(request):
     if not request.user.is_authenticated:
         return redirect('signin')
@@ -154,14 +162,82 @@ def store(request):
         new_car = Car(user_id=request.user.id)
         new_car.save()
         car = new_car
-    
+    car = Car.objects.all().filter(user_id=request.user.id, active=True).first()
+
+    cars_inventorys = CarInventory.objects.filter(car_id=car.id).all()
     inventorys = Inventory.objects.all()
 
-    return render(request, 'store.html', {'inventorys':inventorys})
+    return render(request, 'store.html', {'inventorys':inventorys, 'cars_inventorys': cars_inventorys, 'car': car})
 
 def store_product_add(request):
-    # inventory = get_object_or_404(Inventory, id=pk_inventory)
-    return HttpResponse(request)
+    car = Car.objects.all().filter(user_id=request.user.id, active=True).first()
+    if request.method == 'POST':
+        data = request.body
+        inventory_id_data = ""
+        response_data = f'{data}'
+        for caracter in response_data:
+            if caracter.isdigit():
+                inventory_id_data = f'{inventory_id_data}{caracter}'
+
+        inventory = Inventory.objects.all().filter(id=int(inventory_id_data)).first()
+
+        #Detectando si existe el carritoInventario
+        car_inventory = CarInventory.objects.all().filter(car_id=car.id, inventory_id=inventory.id)
+        if not car_inventory.exists():
+            car_inventory = CarInventory(car_id=car.id, inventory_id=inventory.id)
+            car_inventory.save()
+        
+        car_inventory = CarInventory.objects.all().filter(car_id=car.id, inventory_id=inventory.id).first()
+
+        #Guardando cantidad
+        if car_inventory.quantity < 5 and car_inventory.quantity < inventory.product_quantity:
+            car_inventory.quantity += 1
+            car_inventory.save()
+            #Actualizando carrito
+            car.total_products += 1
+            car.cost += inventory.product.cost
+            car.save()
+
+        return JsonResponse({'result': f'{inventory_id_data}'})
+    
+    else:
+        return JsonResponse({'error': 'Solo se aceptan solicitudes asincronas'})
+
+def store_product_del(request):
+    car = Car.objects.all().filter(user_id=request.user.id, active=True).first()
+    if request.method == 'POST':
+        data = request.body
+        inventory_id_data = ""
+        response_data = f'{data}'
+        for caracter in response_data:
+            if caracter.isdigit():
+                inventory_id_data = f'{inventory_id_data}{caracter}'
+
+        inventory = Inventory.objects.all().filter(id=int(inventory_id_data)).first()
+
+        #Detectando si existe el carritoInventario
+        car_inventory = CarInventory.objects.all().filter(car_id=car.id, inventory_id=inventory.id)
+        if not car_inventory.exists():
+            car_inventory = CarInventory(car_id=car.id, inventory_id=inventory.id)
+            car_inventory.save()
+        
+        car_inventory = CarInventory.objects.all().filter(car_id=car.id, inventory_id=inventory.id).first()
+
+        #Quitando cantidad
+        car_inventory.quantity -= 1
+        car_inventory.save()
+
+        car.total_products -= 1
+        car.cost -= inventory.product.cost
+        car.save()
+
+        if car_inventory.quantity <= 0:
+            car_inventory.delete()
+
+        return JsonResponse({'result': f'{inventory_id_data}'})
+    
+    else:
+        return JsonResponse({'error': 'Solo se aceptan solicitudes asincronas'})
 
 #------------------Inventario-----------------------
 @login_required
