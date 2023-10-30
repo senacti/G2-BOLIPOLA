@@ -381,7 +381,6 @@ class InventoryForm(forms.ModelForm):
         widget=forms.NumberInput(
             attrs={
                 'class':'form-control',
-                'placeholder':'Cantidad del producto'
             }
         )
     )
@@ -391,6 +390,7 @@ class InventoryForm(forms.ModelForm):
         fields = [
             'product_quantity',
         ]
+
 #-----------Categorias-----------------#
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(

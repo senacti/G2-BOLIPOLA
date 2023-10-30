@@ -198,7 +198,7 @@ def store(request):
     car = Car.objects.all().filter(user_id=request.user.id, active=True).first()
 
     cars_inventorys = CarInventory.objects.filter(car_id=car.id).all()
-    inventorys = Inventory.objects.all()
+    inventorys = Inventory.objects.all().filter(disabled=False)
 
     return render(request, 'store.html', {'inventorys':inventorys, 'cars_inventorys': cars_inventorys, 'car': car})
 
@@ -277,7 +277,7 @@ def store_product_del(request):
 def inventory(request):
     products = Product.objects.all()
     form = ProductForm()
-    inventorys = Inventory.objects.all()
+    inventorys = Inventory.objects.all().filter(disabled=False)
     form2 = InventoryForm()
 
     if request.method == 'POST':
@@ -288,20 +288,22 @@ def inventory(request):
             return redirect('inventory')
     
     return render(request, 'inventario/inventory.html', {'products':products, 'form':form, 'inventorys':inventorys, 'form2':form2})
- 
+
 #Cantidad de producto
 @login_required
 def quantity_product(request, pk):
     inventorys = Inventory.objects.all().filter(product_id=pk).first()
-    form = InventoryForm(instance=inventorys)
- 
+    form = InventoryForm()
     product_name = inventorys.product.name
     
     if request.method == 'POST':
-        form = InventoryForm(request.POST, instance=inventorys)
+        form = InventoryForm(request.POST)
+        
         if form.is_valid():
+            product_quantity = form.cleaned_data['product_quantity']
+            inventorys.product_quantity += product_quantity
+            inventorys.save()
             messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se han agregado {form.cleaned_data["product_quantity"]} productos de {product_name}')
-            form.save()
             return redirect('inventory')
         else:
             messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> No puede haber cantidades negativas')
@@ -330,12 +332,13 @@ def create_product(request):
         form = ProductForm()
 
     return render(request, 'inventario/create_product.html', {'form': form})
+
 #Crear categoría
 @login_required
 def create_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES)
-
+        
         if form.is_valid():
             new_category = form.save(commit=False)
             new_category.save()
@@ -344,6 +347,7 @@ def create_category(request):
             return redirect('inventory')
         else:
             return HttpResponse(form.errors)
+        
     else:
         form = CategoryForm()
 
@@ -369,10 +373,12 @@ def edit_product(request, pk):
 @login_required
 def delete_product(request, pk):
     product = Product.objects.get(pk=pk)
-
+    inventory = Inventory.objects.all().filter(product=pk).first()
+    
     if request.method == 'POST':
         messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> El producto {product.name} ha sido eliminado')
-        product.delete()
+        inventory.disabled = True
+        inventory.save()
         return redirect('inventory')
     
     return render(request, 'inventario/delete_product.html', {'product': product})
@@ -658,7 +664,7 @@ def index(request):
     else:
         user = False
 
-    inventorys = Inventory.objects.all().order_by('-product_quantity')[:5]
+    inventorys = Inventory.objects.all().filter(disabled=False).order_by('-product_quantity')[:5]
     
     return render(request, 'index.html', {'user': user, 'inventorys':inventorys})
 

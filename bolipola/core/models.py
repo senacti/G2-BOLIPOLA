@@ -80,6 +80,7 @@ class Inventory(models.Model):
     entry_date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de entrada')
     product_quantity = models.PositiveIntegerField(verbose_name='Cantidad de producto', default=0, validators=[validate_positive])
     quantity_reserved = models.PositiveIntegerField(verbose_name='Cantidad producto reservado', default=0)
+    disabled = models.BooleanField(verbose_name='Eliminado', default=False)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
