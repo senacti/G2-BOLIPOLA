@@ -126,6 +126,7 @@ form {
 
 .boton2:hover{
 	background-color: #da4332;
+	cursor: pointer;
 }
 
 .boton2:disabled {

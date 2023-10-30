@@ -22,12 +22,12 @@
     <div class="container">
         <p><a href="{% url 'inventory' %}" class="btn btn-secondary mt-3">Regresar</a></p>
 
-        <h1 class="mt-4">Editar cantidad de {{ product_name }} </h1>
+        <h1 class="mt-4">Sumar cantidad de {{ product_name }} </h1>
 
         <form method="post" class="mt-4">
             {% csrf_token %}
             <div class="form-group">
-                <label for="product_quantity">Cantidad del producto:</label>
+                <label for="product_quantity">Añadir cantidad:</label>
                 {{ form.product_quantity }}
             </div>
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>

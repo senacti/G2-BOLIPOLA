@@ -132,7 +132,15 @@
 
                     <div id="saleTypeInformation">
                         <span>------------ INFORMACIÓN DE LOS PRODUCTOS -------------</span>
-                        <br><br>
+                        {% if user.is_staff %}
+                        <div class="main__inf-item">
+                            <span style="color: red;">EL COSTO TOTAL PUEDE VARIAR<br>SI HAZ MODIFICADO EL PRECIO DEL PRODUCTO</span>
+                        </div>
+                        {% else %}
+                        <div class="main__inf-item">
+                            <span style="color: red;">EL COSTO TOTAL NO SE MODIFICA<br> PERO EL PRECIO DE LOS PRODUCTOS<br>PUEDE SER CAMBIADO POR EL ADMINISTRADOR</span>
+                        </div>
+                        {% endif %}
                         {% for car_inventory in cars_inventorys %}
                             <div class="division_up">-------------------------------------</div>
                             <div class="main__inf-item">
