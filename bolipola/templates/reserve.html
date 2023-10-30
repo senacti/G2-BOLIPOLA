@@ -88,21 +88,27 @@
                 <i class="fa-solid fa-bars" id="dropdown"></i>
                 <ul class="menu">
                     <li><a href="{% url 'index' %}">Inicio</a></li>
+                    {% if not user.is_staff %}
                     <li><a href="{% url 'store' %}">Productos</a></li>
-                    <li><a href="{% url 'reserve' %}">Reservas</a></li>
-                    <li><a href="{% url 'tournament' %}">Torneos</a></li>
+                    {% endif %}
                     {% if user.is_staff and user.is_authenticated %}
                     <li><a href="{% url 'inventory' %}">Inventario</a></li>
                     {% endif %}
+                    <li><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li><a href="{% url 'tournament' %}">Torneos</a></li>
                 </ul>
                 <ul class="menuDropDown" hidden>
                     <li hidden><a href="{% url 'index' %}">Inicio</a></li>
-                    <li hidden><a href="{% url 'store' %}">Productos</a></li>
+                    {% if not user.is_staff %}
+                    <li><a href="{% url 'store' %}">Productos</a></li>
+                    {% endif %}
+                    {% if user.is_staff and user.is_authenticated %}
+                    <li hidden><a href="{% url 'inventory' %}">Inventario</a></li>
+                    {% endif %}
                     <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
                     <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
-                    {% if user.is_staff %}
+                    {% if user.is_staff and user.is_authenticated %}
                     <li hidden><a href="{% url 'admin:index' %}">Base de datos</a></li>
-                    <li hidden><a href="{% url 'inventory' %}">Inventario</a></li>
                     {% endif %}
                 </ul>
             </nav>

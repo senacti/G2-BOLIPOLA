@@ -209,6 +209,7 @@ html {
 .menu {
 	display: flex;
 	gap: 2rem;
+	margin: 0;
 }
 
 .menu li {
@@ -218,6 +219,7 @@ html {
 .menu a {
 	text-decoration: none;
 	font-size: 1.55rem;
+	font-family: 'Poppins', sans-serif;
 	color: var(--background-color);
 	font-weight: 600;
 	position: relative;
