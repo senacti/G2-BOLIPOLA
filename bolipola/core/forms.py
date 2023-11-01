@@ -374,6 +374,86 @@ class ProductForm(forms.ModelForm):
             'due_date',
             'category'
         ]
+        
+class EditProductForm(forms.ModelForm):
+    name = forms.CharField(
+        required=True,
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Nombre del producto',
+                'readonly':'readonly',
+                }
+            )
+        )
+    
+    cost = forms.FloatField(
+        required=True,
+        widget=forms.NumberInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Costo del producto',
+                'min':'0',
+                'readonly':'readonly'
+            }
+        )
+    )
+
+    description = forms.CharField(
+        required=True,
+        max_length=250,
+        widget=forms.Textarea(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Descripción del producto'
+            }
+        )
+    )
+
+    image = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(
+            attrs={
+                'class':'form-control',
+            }
+        )
+    )
+
+    due_date = forms.DateField(
+        required=True,
+        widget=forms.DateInput(
+            attrs={
+                'class':'form-control',
+                'placeholder':'Fecha de vencimiento',
+                'type':'date',
+                'min': mas_1_semana_str,
+            }
+        )
+    )
+
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        required=True,
+        widget=forms.Select(
+            attrs={
+                'class':'form-control',
+                'readonly':'readonly'
+            }
+        )
+    )
+
+    class Meta:
+        model = Product
+        fields = [
+            'name',
+            'cost',
+            'description',
+            'image',
+            'due_date',
+            'category'
+        ]   
+
 #Formulario de inventario
 class InventoryForm(forms.ModelForm):
     product_quantity = forms.IntegerField(

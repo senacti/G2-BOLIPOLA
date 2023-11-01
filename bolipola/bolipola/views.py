@@ -11,7 +11,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm
+from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, EditProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
 from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Output, CarInventory, Category
@@ -52,16 +52,23 @@ def sale(request, type_id, type_name):
                 intermediate = SaleTournament(sale_id=sale.id, tournament_id=inf.id)
                 
             if type_name == 'Productos':
+                inf.active = False
+                inf.save()
+                
                 intermediate = SaleCar(sale_id=sale.id, car_id=inf.id)
+                cars = Car.objects.all().filter(active=True)
                 sale.product_quantity = inf.total_products
                 sale.save()
                 for car_inventory in cars_inventorys:
                     car_inventory.inventory.quantity_reserved += car_inventory.quantity
                     car_inventory.inventory.product_quantity -= car_inventory.quantity
                     car_inventory.inventory.save()
-                inf.active = False
-                inf.save()
-                
+                    if car_inventory.inventory.product_quantity < 5:
+                        for car in cars:
+                            car_inventory2 = CarInventory.objects.all().filter(car_id=car.id).first()
+                            if car_inventory2.inventory.id == car_inventory.inventory.id:
+                                pass
+                        
             if type_name == 'Reserva':
                 intermediate = SaleReservation(sale_id=sale.id, reservation_id=inf.id)
                 inf.confirmed = True
@@ -146,8 +153,14 @@ def sale_confirm(request, sale_id):
         for car_inventory in cars_inventorys:
             car_inventory.inventory.quantity_reserved -= car_inventory.quantity
             car_inventory.inventory.save()
-        output = Output(car_id=sale_car.car.id)
+        output = Output(
+            type='compra', 
+            total_products=sale_car.car.total_products,
+            cost=sale_car.sale.cost,
+            car =sale_car.car,
+            )
         output.save()
+        
         
         #Dando puntos al usuario
         points = 35 * sale_car.car.total_products
@@ -358,14 +371,18 @@ def create_category(request):
 @login_required
 def edit_product(request, pk):
     product = Product.objects.get(pk=pk)
-    form = ProductForm(instance=product)
+    cost = str(product.cost)[:-2]
+    cost = int(cost)
+    form = EditProductForm(instance=product, initial={'cost': cost})
     
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES, instance=product)
+        form = EditProductForm(request.POST, request.FILES, instance=product, initial={'cost': cost})
         if form.is_valid():
             form.save()
             messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> El producto {product.name} ha sido editado')
             return redirect('inventory')
+        else:
+            raise Http404(form.errors)
     
     return render(request, 'inventario/edit_product.html', {'form': form})
 

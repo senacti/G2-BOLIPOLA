@@ -301,11 +301,15 @@ class CarInventory(models.Model):
         ordering = ['id']
 
 class Output(models.Model):
-    output_date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de salida')
+    date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de salida')
+    type = models.CharField(max_length=50, verbose_name='Tipo de salida', default='inventario')
+    total_products = models.PositiveIntegerField(verbose_name='Total de productos', default=0)
+    cost = models.FloatField(verbose_name='Costo total', validators=[validate_positive], default=0)
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, null=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, null=True)
-
+    
     def __str__(self):
-        return str(f'{self.car.total_products}, {self.car.cost}')
+        return str(f'{self.type} - {self.date} - {self.total_products} - {self.inventory.product.name}')
     
     class Meta:
         verbose_name = 'Salida'
@@ -313,6 +317,21 @@ class Output(models.Model):
         db_table = 'salida'
         ordering = ['id']
 
+class Entry(models.Model):
+    date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de entrada')
+    total_products = models.PositiveIntegerField(verbose_name='Total de productos', default=0)
+    cost = models.FloatField(verbose_name='Costo total', validators=[validate_positive], default=0)
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, null=True)
+    
+    def __str__(self):
+        return str(f'{self.date} - {self.total_products} - {self.inventory.product.name}')
+    
+    class Meta:
+        verbose_name = 'Entrada'
+        verbose_name_plural = 'Entradas'
+        db_table = 'entrada'
+        ordering = ['id']
+        
 class Sale(models.Model):
     total_cost = models.FloatField(verbose_name='Costo total', validators=[validate_positive])
     payment_type = models.CharField(max_length=50, verbose_name='Tipo de pago')
