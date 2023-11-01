@@ -25,11 +25,36 @@
     <div class="container">
         <p><a href="{% url 'inventory' %}" class="btn btn-secondary mt-3">Regresar</a></p>
         
-        <h1 class="mt-4">Editar Producto</h1>
         <form method="post" enctype="multipart/form-data" class="mt-4">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <h2 class="mt-4">Editar Producto</h2>
+            <form method="post" enctype="multipart/form-data" class="mt-4">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_name">Nombre:</label>
+                    {{ form.name }}
+                </div>
+                <div class="form-group">
+                    <label for="id_cost">Costo:</label>
+                    {{ form.cost }}
+                </div>
+                <div class="form-group">
+                    <label for="id_description">Descripción: <strong style="color: red;">*</strong></label>
+                    {{ form.description }}
+                </div>
+                <div class="form-group">
+                    <label for="id_image">Imagen:</label>
+                    {{ form.image }}
+                </div>
+                <div class="form-group">
+                    <label for="id_due_date" type="date">Fecha de Vencimiento: <span style="color: red;">* RECOMENDADO: COLOCA LA FECHA DEL PRODUCTO MÁS CERCA A VENCER</span></label>
+                    {{ form.due_date }}
+                </div>
+                <div class="form-group">
+                    <label for="id_category">Categoría:</label>
+                    {{ form.category }}
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar Producto</button>
+            </form>
         </form>
     </div>
 

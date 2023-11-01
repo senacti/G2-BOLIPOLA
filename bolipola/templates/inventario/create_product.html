@@ -30,15 +30,15 @@
         <form method="post" enctype="multipart/form-data" class="mt-4">
             {% csrf_token %}
             <div class="form-group">
-                <label for="id_name">Nombre:</label>
+                <label for="id_name">Nombre: <span style="color: red;">* TEN CUIDADO, NO SE PODRÁ CAMBIAR DESPUÉS</span></label>
                 {{ form.name }}
             </div>
             <div class="form-group">
-                <label for="id_cost">Costo:</label>
+                <label for="id_cost">Costo: <strong style="color: red;">*</strong></label>
                 {{ form.cost }}
             </div>
             <div class="form-group">
-                <label for="id_description">Descripción:</label>
+                <label for="id_description">Descripción: <strong style="color: red;">*</strong></label>
                 {{ form.description }}
             </div>
             <div class="form-group">
@@ -46,11 +46,11 @@
                 {{ form.image }}
             </div>
             <div class="form-group">
-                <label for="id_due_date" type="date">Fecha de Vencimiento:</label>
+                <label for="id_due_date" type="date">Fecha de Vencimiento: <span style="color: red;">* RECOMENDADO: COLOCA LA FECHA DEL PRODUCTO MÁS CERCA A VENCER</span></label>
                 {{ form.due_date }}
             </div>
             <div class="form-group">
-                <label for="id_category">Categoría:</label>
+                <label for="id_category">Categoría: <span style="color: red;">* TEN CUIDADO, NO SE PODRÁ CAMBIAR DESPUÉS</span></label>
                 {{ form.category }}
             </div>
             <button type="submit" class="btn btn-primary">Guardar Producto</button>
