@@ -1,5 +1,4 @@
 import os
-import pytz
 import json
 from . import settings
 from asgiref.sync import sync_to_async
@@ -14,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, EditProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Output, CarInventory, Category
+from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Entry, Output, CarInventory, Category
 
 #------------------Ventas---------------------------
 #Venta
@@ -63,11 +62,27 @@ def sale(request, type_id, type_name):
                     car_inventory.inventory.quantity_reserved += car_inventory.quantity
                     car_inventory.inventory.product_quantity -= car_inventory.quantity
                     car_inventory.inventory.save()
+
+                    # En caso tal de que los productos sean menores a 5 se deberá actualizar los carritos de los clientes para evitar conflictos
                     if car_inventory.inventory.product_quantity < 5:
                         for car in cars:
-                            car_inventory2 = CarInventory.objects.all().filter(car_id=car.id).first()
-                            if car_inventory2.inventory.id == car_inventory.inventory.id:
-                                pass
+                            cars_inventorys2 = CarInventory.objects.all().filter(car_id=car.id)
+                            for car_inventory2 in cars_inventorys2:
+                                if car_inventory2.inventory_id == car_inventory.inventory_id:
+                                    # Se cambia cantidad en tabla intermedia
+                                    actual_quantity = car_inventory2.quantity
+                                    car_inventory2.quantity = car_inventory.inventory.product_quantity
+                                    car_inventory2.save()
+
+                                    # Se cambia cantidad total y precio en carrito
+                                    car_inventory2.car.total_products -= (actual_quantity - car_inventory.inventory.product_quantity)
+                                    car_inventory2.car.cost -= car_inventory.inventory.product.cost * (actual_quantity - car_inventory.inventory.product_quantity)
+                                    car_inventory2.car.save()
+
+                                    if car_inventory2.quantity <= 0:
+                                        car_inventory2.delete()
+
+                                    continue
                         
             if type_name == 'Reserva':
                 intermediate = SaleReservation(sale_id=sale.id, reservation_id=inf.id)
@@ -154,9 +169,9 @@ def sale_confirm(request, sale_id):
             car_inventory.inventory.quantity_reserved -= car_inventory.quantity
             car_inventory.inventory.save()
         output = Output(
-            type='compra', 
+            type='compra',
             total_products=sale_car.car.total_products,
-            cost=sale_car.sale.cost,
+            cost=sale_car.sale.total_cost,
             car =sale_car.car,
             )
         output.save()
@@ -316,6 +331,9 @@ def quantity_product(request, pk):
             product_quantity = form.cleaned_data['product_quantity']
             inventorys.product_quantity += product_quantity
             inventorys.save()
+            entry = Entry(total_products=product_quantity, inventory_id=inventorys.id)
+            entry.save()
+
             messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se han agregado {form.cleaned_data["product_quantity"]} productos de {product_name}')
             return redirect('inventory')
         else:

@@ -320,12 +320,14 @@ class Output(models.Model):
 class Entry(models.Model):
     date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de entrada')
     total_products = models.PositiveIntegerField(verbose_name='Total de productos', default=0)
-    cost = models.FloatField(verbose_name='Costo total', validators=[validate_positive], default=0)
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, null=True)
     
     def __str__(self):
         return str(f'{self.date} - {self.total_products} - {self.inventory.product.name}')
     
+    def total_cost(self):
+        return self.total_products * self.inventory.product.cost
+
     class Meta:
         verbose_name = 'Entrada'
         verbose_name_plural = 'Entradas'
