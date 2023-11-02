@@ -29,8 +29,9 @@
             <div class="form-group">
                 <label for="product_quantity">Añadir cantidad:</label>
                 {{ form.product_quantity }}
+                <div>(Al añadir una cantidad de este producto se creará un registro de entrada)</div>
             </div>
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <button type="submit" class="btn btn-primary">Añadir</button>
         </form>
         {% if messages %}
             {% for msg in messages %}
