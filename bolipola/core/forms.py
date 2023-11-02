@@ -461,6 +461,7 @@ class InventoryForm(forms.ModelForm):
         widget=forms.NumberInput(
             attrs={
                 'class':'form-control',
+                'min':'1',
             }
         )
     )

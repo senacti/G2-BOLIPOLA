@@ -171,7 +171,6 @@ def sale_confirm(request, sale_id):
         output = Output(
             type='compra',
             total_products=sale_car.car.total_products,
-            cost=sale_car.sale.total_cost,
             car =sale_car.car,
             )
         output.save()
@@ -319,7 +318,7 @@ def inventory(request):
 
 #Cantidad de producto
 @login_required
-def quantity_product(request, pk):
+def quantity_product(request, pk, add='True'):
     inventorys = Inventory.objects.all().filter(product_id=pk).first()
     form = InventoryForm()
     product_name = inventorys.product.name
@@ -329,18 +328,59 @@ def quantity_product(request, pk):
         
         if form.is_valid():
             product_quantity = form.cleaned_data['product_quantity']
-            inventorys.product_quantity += product_quantity
-            inventorys.save()
-            entry = Entry(total_products=product_quantity, inventory_id=inventorys.id)
-            entry.save()
 
-            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se han agregado {form.cleaned_data["product_quantity"]} productos de {product_name}')
+            # En caso de que se agreguen productos
+            if add == 'True':
+                inventorys.product_quantity += product_quantity
+                inventorys.save()
+                entry = Entry(total_products=product_quantity, inventory_id=inventorys.id)
+                entry.save()
+                messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se han agregado {product_quantity} productos de {product_name}')
+                
+            # En caso de que se quiten productos
+            else:
+                inventorys.product_quantity -= product_quantity
+                if inventorys.product_quantity < 0:
+                    messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Estás quitando más de lo que hay')
+                    return redirect(f'/quantity-product/{pk}/{add}')
+                
+                inventorys.save()
+                output = Output(
+                    total_products=product_quantity, 
+                    inventory_id=inventorys.id, 
+                    )
+                output.save()
+
+                # En caso tal de que los productos sean menores a 5 se deberá actualizar los carritos de los clientes para evitar conflictos
+                cars = Car.objects.all().filter(active=True)
+                if inventorys.product_quantity < 5:
+                        for car in cars:
+                            cars_inventorys2 = CarInventory.objects.all().filter(car_id=car.id)
+                            for car_inventory2 in cars_inventorys2:
+                                if car_inventory2.inventory_id == inventorys.id:
+
+                                    # Se cambia cantidad en tabla intermedia
+                                    actual_quantity = car_inventory2.quantity
+                                    car_inventory2.quantity = inventorys.product_quantity
+                                    car_inventory2.save()
+
+                                    # Se cambia cantidad total y precio en carrito
+                                    car_inventory2.car.total_products -= (actual_quantity - inventorys.product_quantity)
+                                    car_inventory2.car.cost -= inventorys.product.cost * (actual_quantity - inventorys.product_quantity)
+                                    car_inventory2.car.save()
+
+                                    if car_inventory2.quantity <= 0:
+                                        car_inventory2.delete()
+                                    continue
+
+                messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se han eliminado {product_quantity} productos de {product_name}')
             return redirect('inventory')
+        
         else:
             messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> No puede haber cantidades negativas')
-            return redirect(f'/quantity-product/{pk}/')
+            return redirect(f'/quantity-product/{pk}/{add}')
 
-    return render(request, 'inventario/quantity_product.html', {'form': form, 'product_name': product_name})
+    return render(request, 'inventario/quantity_product.html', {'form': form, 'product_name': product_name, 'add': add, 'inventory': inventorys})
 
 #Crear producto
 @login_required

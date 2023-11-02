@@ -304,13 +304,18 @@ class Output(models.Model):
     date = models.DateTimeField(default=timezone.now, verbose_name='Fecha de salida')
     type = models.CharField(max_length=50, verbose_name='Tipo de salida', default='inventario')
     total_products = models.PositiveIntegerField(verbose_name='Total de productos', default=0)
-    cost = models.FloatField(verbose_name='Costo total', validators=[validate_positive], default=0)
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, null=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, null=True)
     
     def __str__(self):
         return str(f'{self.type} - {self.date} - {self.total_products} - {self.inventory.product.name}')
     
+    def total_cost(self):
+        if type == 'inventario':
+            return self.total_products * self.inventory.product.cost
+        if type == 'compra':
+            return self.car.cost
+
     class Meta:
         verbose_name = 'Salida'
         verbose_name_plural = 'Salidas'
