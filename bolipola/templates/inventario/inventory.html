@@ -137,9 +137,10 @@
                             <img src="{{ inventory.product.image.url }}" class="card-img-top" alt="Foto de Producto">
                         <div class="card-body">
                             <button class="boton" id="button-1"><a href="{% url 'edit_product' inventory.product.pk %}"><i class="fa-solid fa-pen-to-square"></i></a></button>
-                            <button class="boton" id="button-3"><a href="{% url 'quantity_product' inventory.product.pk %}"><i class="fa-solid fa-plus"></i></a></button>
+                            <button class="boton" id="button-3"><a href="{% url 'quantity_product' inventory.product.pk True %}"><i class="fa-solid fa-plus"></i></a></button>
+                            <button class="boton" id="button-2"><a href="{% url 'quantity_product' inventory.product.pk False %}"><i class="fa-solid fa-minus"></i></a></button>
                             {% if inventory.product_quantity <= 0 and inventory.quantity_reserved <= 0 %}
-                                <button class="boton" id="button-2"><a href="{% url 'delete_product' inventory.product.pk %}"><i class="fa-solid fa-trash"></i></a></button>
+                                <button class="boton" id="button-4"><a href="{% url 'delete_product' inventory.product.pk %}"><i class="fa-solid fa-trash"></i></a></button>
                             {% endif %}
                         </div>
                     </div>

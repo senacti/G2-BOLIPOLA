@@ -22,16 +22,35 @@
     <div class="container">
         <p><a href="{% url 'inventory' %}" class="btn btn-secondary mt-3">Regresar</a></p>
 
-        <h1 class="mt-4">Sumar cantidad de {{ product_name }} </h1>
+        {% if add == 'True' %}
+        <h1 class="mt-4">Sumar cantidad de {{ product_name }} (Cantidad actual: {{ inventory.product_quantity }})</h1>
+        {% else %}
+        <h1 class="mt-4">Quitar cantidad de {{ product_name }} (Cantidad actual: {{ inventory.product_quantity }})</h1>
+        {% endif %}
 
         <form method="post" class="mt-4">
             {% csrf_token %}
             <div class="form-group">
+                {% if add == 'True' %}
+
                 <label for="product_quantity">Añadir cantidad:</label>
                 {{ form.product_quantity }}
                 <div>(Al añadir una cantidad de este producto se creará un registro de entrada)</div>
+
+                {% else %}
+
+                <label for="product_quantity">Eliminar cantidad:</label>
+                {{ form.product_quantity }}
+                <div>(Al eliminar una cantidad de este producto se creará un registro de salida)</div>
+
+                {% endif %}
             </div>
+
+            {% if add == 'True' %}
             <button type="submit" class="btn btn-primary">Añadir</button>
+            {% else %}
+            <button type="submit" class="btn btn-warning">Eliminar</button>
+            {% endif %}
         </form>
         {% if messages %}
             {% for msg in messages %}

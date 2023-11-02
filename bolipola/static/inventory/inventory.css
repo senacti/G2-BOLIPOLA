@@ -92,6 +92,14 @@ h1 {
     background-color: #1f751f;
 }
 
+#button-4{
+    background-color: #839192;
+}
+
+#button-4:hover{
+    background-color: #717D7E;
+}
+
 /* Alineación de la imagen a la derecha */
 .row img {
     position: absolute;
