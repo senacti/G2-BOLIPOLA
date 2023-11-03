@@ -119,17 +119,19 @@
         
         <div class="list" closeCar>
             {% for inventory in inventorys %}
-                {% if not inventory.product_quantity <= 0 %}
-                <div class="item" closeCar>
-                    <img src="{{ inventory.product.image.url }}" closeCar>
-                    <div class="title" closeCar>{{ inventory.product.name }}</div>
-                    <div class="price" closeCar>{{ inventory.product.cost_to_money }}</div>
-                    <div class="quantity" closeCar>Disponible: <span>{{ inventory.product_quantity }}</span></div>
-                    <div class="description" closeCar>{{ inventory.product.description }}</div>
-                    <button class="Boton1" id="{{ inventory.id }}">Añadir al carrito</button>
-                    <div class="price_number" hidden closeCar>{{ inventory.product.cost }}</div>
-                </div>
-                {% endif %}
+                {% for available_date in available_dates %}
+                    {% if not inventory.product_quantity <= 0 and available_date == inventory.id %}
+                    <div class="item" closeCar>
+                        <img src="{{ inventory.product.image.url }}" closeCar>
+                        <div class="title" closeCar>{{ inventory.product.name }}</div>
+                        <div class="price" closeCar>{{ inventory.product.cost_to_money }}</div>
+                        <div class="quantity" closeCar>Disponible: <span>{{ inventory.product_quantity }}</span></div>
+                        <div class="description" closeCar>{{ inventory.product.description }}</div>
+                        <button class="Boton1" id="{{ inventory.id }}">Añadir al carrito</button>
+                        <div class="price_number" hidden closeCar>{{ inventory.product.cost }}</div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
         </div>
     </div>

@@ -154,7 +154,25 @@
                         {% endif %}
                         </p>
                         <p class="card-text"><span>Reservados: {{ inventory.quantity_reserved }}</span></p>
-                        <p class="card-text">FV: {{ inventory.product.due_date }}</p>
+
+                        <p class="card-text"
+                        id="due_date" 
+                        style="
+                        {% for due_date in due_dates %}
+                            {% if due_date == inventory.id %}
+                            color: #E74C3C;
+                            font-weight: bold;
+                            text-decoration: underline;
+                            {% endif %}
+                        {% endfor %}
+                        ">FV: {{ inventory.product.due_date }} 
+                        {% for due_date in due_dates %}
+                            {% if due_date == inventory.id %}
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #E74C3C"></i>
+                            {% endif %}
+                        {% endfor %}
+                        </p>
+
                         <img src="{{ inventory.product.image.url }}" class="card-img-top" alt="Foto de Producto">
                         <div class="card-body">
                             <button class="boton" id="button-1"><a href="{% url 'edit_product' inventory.product.pk %}"><i class="fa-solid fa-pen-to-square"></i></a></button>
@@ -185,4 +203,3 @@
     ></script>
 </body>
 </html>
-
