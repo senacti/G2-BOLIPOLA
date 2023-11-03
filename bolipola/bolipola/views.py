@@ -2,7 +2,7 @@ import os
 import json
 from . import settings
 from asgiref.sync import sync_to_async
-from django.utils.timezone import now
+from django.utils import timezone
 from django.http import Http404, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
@@ -226,7 +226,29 @@ def store(request):
     cars_inventorys = CarInventory.objects.filter(car_id=car.id).all()
     inventorys = Inventory.objects.all().filter(disabled=False)
 
-    return render(request, 'store.html', {'inventorys':inventorys, 'cars_inventorys': cars_inventorys, 'car': car})
+    # Comparando para que fechas de vencimiento próximas no se muestren
+    today = timezone.now().date()
+    available_dates = [0]
+    due_dates = [0]
+    for inventory in inventorys:
+        comparation = inventory.product.due_date - today
+        if comparation > timezone.timedelta(days=7):
+            available_dates.append(inventory.id)
+            continue
+        else:
+            due_dates.append(inventory.id)
+            continue
+    
+    # Eliminando productos con fecha vencida del carrito
+    for due_date in due_dates:
+        for car_inventory in cars_inventorys:
+            if car_inventory.inventory.id == due_date:
+                car.total_products -= car_inventory.quantity
+                car.cost -= car_inventory.inventory.product.cost * car_inventory.quantity
+                car.save()
+                car_inventory.delete()
+    
+    return render(request, 'store.html', {'inventorys':inventorys, 'cars_inventorys':cars_inventorys, 'car':car, 'available_dates':available_dates})
 
 def store_product_add(request):
     car = Car.objects.all().filter(user_id=request.user.id, active=True).first()
@@ -305,7 +327,14 @@ def inventory(request):
     form = ProductForm()
     inventorys = Inventory.objects.all().filter(disabled=False)
     form2 = InventoryForm()
+    today = timezone.now().date()
+    due_dates = [0]
 
+    for inventory in inventorys:
+        comparation = inventory.product.due_date - today
+        if comparation <= timezone.timedelta(days=7):
+            due_dates.append(inventory.id)
+            
     if request.method == 'POST':
         form = ProductForm(request.POST)
         form = InventoryForm(request.POST)
@@ -313,7 +342,7 @@ def inventory(request):
             form.save()
             return redirect('inventory')
     
-    return render(request, 'inventario/inventory.html', {'products':products, 'form':form, 'inventorys':inventorys, 'form2':form2})
+    return render(request, 'inventario/inventory.html', {'products':products, 'form':form, 'inventorys':inventorys, 'form2':form2, 'due_dates':due_dates})
 
 #Cantidad de producto
 @login_required
@@ -732,14 +761,13 @@ def reserve(request):
 
 #--------------------Inicio---------------------------
 #Inicio
-def index(request):
+def index(request):        
     if request.user.is_authenticated:
         user = get_object_or_404(UserBoli, id=request.user.id)
     else:
         user = False
 
-    inventorys = Inventory.objects.all().filter(disabled=False).order_by('-product_quantity')[:5]
-    
+    inventorys = Inventory.objects.all().filter(disabled=False).order_by('-product_quantity')[:5]    
     return render(request, 'index.html', {'user': user, 'inventorys':inventorys})
 
 
