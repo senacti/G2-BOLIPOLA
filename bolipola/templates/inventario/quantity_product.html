@@ -23,9 +23,9 @@
         <p><a href="{% url 'inventory' %}" class="btn btn-secondary mt-3">Regresar</a></p>
 
         {% if add == 'True' %}
-        <h1 class="mt-4">Sumar cantidad de {{ product_name }} (Cantidad actual: {{ inventory.product_quantity }})</h1>
+        <h1 class="mt-4">Sumar cantidad de {{ product_name }} (Cantidad actual: <span style="color: #228B22;">{{ inventory.product_quantity }}</span>)</h1>
         {% else %}
-        <h1 class="mt-4">Quitar cantidad de {{ product_name }} (Cantidad actual: {{ inventory.product_quantity }})</h1>
+        <h1 class="mt-4">Quitar cantidad de {{ product_name }} (Cantidad actual: <span style="color: #CB4335;">{{ inventory.product_quantity }}</span>)</h1>
         {% endif %}
 
         <form method="post" class="mt-4">

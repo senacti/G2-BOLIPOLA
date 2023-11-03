@@ -248,6 +248,11 @@ html {
 
 .menuDropDown {
 	display: none;
+	margin: 0;
+	padding-bottom: 0.1rem;
+	z-index: 9999;
+	font-family: 'Poppins', sans-serif;
+	font-family: ;
 }
 
 .search-form {

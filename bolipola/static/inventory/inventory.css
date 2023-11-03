@@ -49,6 +49,12 @@ h1 {
 
 .card-text {
     color: #333;
+    z-index: 9999;
+}
+
+#quantity {
+    padding-right: 0.5rem;
+    margin-right: 1.2rem;
 }
 
 .card-body {
