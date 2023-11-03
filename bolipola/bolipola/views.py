@@ -175,7 +175,6 @@ def sale_confirm(request, sale_id):
             )
         output.save()
         
-        
         #Dando puntos al usuario
         points = 35 * sale_car.car.total_products
         user.range += points
