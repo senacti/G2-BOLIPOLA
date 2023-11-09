@@ -215,6 +215,9 @@ def store(request):
     if not request.user.is_authenticated:
         return redirect('signin')
     
+    if request.user.is_staff:
+        return redirect('inventory')
+
     #Creando carrito si el usuario no lo tiene
     car = Car.objects.all().filter(user_id=request.user.id, active=True)
     if not car.exists():
