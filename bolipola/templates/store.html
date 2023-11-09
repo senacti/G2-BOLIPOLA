@@ -79,22 +79,15 @@
                 <i class="fa-solid fa-bars" id="dropdown" closeCar></i>
                 <ul class="menu" closeCar>
                     <li><a href="{% url 'index' %}">Inicio</a></li>
-                    <li><a href="{% url 'store' %}">Productos</a></li>
+                    <li><a href="{% url 'store' %}">Productos <span></span></a></li>
                     <li><a href="{% url 'reserve' %}">Reservas</a></li>
                     <li><a href="{% url 'tournament' %}">Torneos</a></li>
-                    {% if user.is_staff and user.is_authenticated %}
-                    <li><a href="{% url 'inventory' %}">Inventario</a></li>
-                    {% endif %}
                 </ul>
                 <ul class="menuDropDown" hidden closeCar>
                     <li hidden><a href="{% url 'index' %}">Inicio</a></li>
-                    <li hidden><a href="{% url 'store' %}">Productos</a></li>
+                    <li hidden><a href="{% url 'store' %}">Productos <span></span></a></li>
                     <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
                     <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
-                    {% if user.is_staff %}
-                    <li hidden><a href="{% url 'admin:index' %}">Base de datos</a></li>
-                    <li hidden><a href="{% url 'inventory' %}">Inventario</a></li>
-                    {% endif %}
                 </ul>
             </nav>
         </div>
@@ -118,6 +111,7 @@
         {% endif %}
         
         <div class="list" closeCar>
+            <!--Se debe comparar fechas vencidas y productos disponibles para mostrar productos correctos al usuario-->
             {% for inventory in inventorys %}
                 {% for available_date in available_dates %}
                     {% if not inventory.product_quantity <= 0 and available_date == inventory.id %}

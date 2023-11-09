@@ -225,6 +225,16 @@ html {
 	position: relative;
 }
 
+.menu a span {
+	width: 1.5rem;
+	height: 1px;
+	background-color: #fff;
+	position: absolute;
+	bottom: -3px;
+	left: 50%;
+	transform: translate(-50%, 50%);
+}
+
 .menu a::after {
 	content: '';
 	width: 1.5rem;
@@ -252,7 +262,50 @@ html {
 	padding-bottom: 0.1rem;
 	z-index: 9999;
 	font-family: 'Poppins', sans-serif;
-	font-family: ;
+}
+
+.menuDropDown li {
+	list-style: none;
+}
+
+.menuDropDown a {
+	text-decoration: none;
+	font-size: 1.55rem;
+	font-family: 'Poppins', sans-serif;
+	color: var(--background-color);
+	font-weight: 600;
+	position: relative;
+}
+
+.menuDropDown a span {
+	width: 1.5rem;
+	height: 1px;
+	background-color: #fff;
+	position: absolute;
+	bottom: -3px;
+	left: 50%;
+	transform: translate(-50%, 50%);
+}
+
+.menuDropDown a::after {
+	content: '';
+	width: 1.5rem;
+	height: 1px;
+	background-color: #fff;
+	position: absolute;
+	bottom: -3px;
+	left: 50%;
+	transform: translate(-50%, 50%);
+	opacity: 0;
+	transition: all 0.3s ease;
+}
+
+.menuDropDown a:hover::after {
+	opacity: 1;
+}
+
+.menuDropDown a:hover {
+	color: #fff;
 }
 
 .search-form {

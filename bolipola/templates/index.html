@@ -79,7 +79,7 @@
             <nav class="navbar container">
                 <i class="fa-solid fa-bars" id="dropdown"></i>
                 <ul class="menu">
-                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    <li><a href="{% url 'index' %}">Inicio<span></span></a></li>
                     {% if not user.is_staff %}
                     <li><a href="{% url 'store' %}">Productos</a></li>
                     {% endif %}
@@ -90,7 +90,7 @@
                     <li><a href="{% url 'tournament' %}">Torneos</a></li>
                 </ul>
                 <ul class="menuDropDown" hidden>
-                    <li hidden><a href="{% url 'index' %}">Inicio</a></li>
+                    <li hidden><a href="{% url 'index' %}">Inicio<span></span></a></li>
                     {% if not user.is_staff %}
                     <li><a href="{% url 'store' %}">Productos</a></li>
                     {% endif %}

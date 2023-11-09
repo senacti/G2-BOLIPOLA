@@ -3,8 +3,24 @@ const defMenu = document.querySelector(".menu")
 const infMenu = document.querySelectorAll(".menu li")
 const newMenu = document.querySelector(".menuDropDown")
 const infNewMenu = document.querySelectorAll(".menuDropDown li")
-let newMenuActive = false
+let newMenuActive = true
 
+function hideMenu() {
+    if (newMenuActive) {
+        infNewMenu.forEach((element) => {
+            element.setAttribute("hidden", "true")
+        })
+        newMenu.setAttribute("hidden", "true")
+        return newMenuActive = false
+    }
+
+    infNewMenu.forEach((element) => {
+        element.removeAttribute("hidden")
+    })
+    newMenu.removeAttribute("hidden")
+    return newMenuActive = true
+}
+hideMenu();
 
 //--------Esconder o mostrar el menú según se presione---------
 listMenu.addEventListener("click", () => {

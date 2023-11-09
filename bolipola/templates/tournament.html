@@ -93,7 +93,7 @@
                     <li><a href="{% url 'inventory' %}">Inventario</a></li>
                     {% endif %}
                     <li><a href="{% url 'reserve' %}">Reservas</a></li>
-                    <li><a href="{% url 'tournament' %}">Torneos</a></li>
+                    <li><a href="{% url 'tournament' %}">Torneos<span></span></a></li>
                 </ul>
                 <ul class="menuDropDown" hidden>
                     <li hidden><a href="{% url 'index' %}">Inicio</a></li>
@@ -104,7 +104,7 @@
                     <li hidden><a href="{% url 'inventory' %}">Inventario</a></li>
                     {% endif %}
                     <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
-                    <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
+                    <li hidden><a href="{% url 'tournament' %}">Torneos<span></span></a></li>
                     {% if user.is_staff and user.is_authenticated %}
                     <li hidden><a href="{% url 'admin:index' %}">Base de datos</a></li>
                     {% endif %}
