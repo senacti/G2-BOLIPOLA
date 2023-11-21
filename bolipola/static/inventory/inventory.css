@@ -1,8 +1,4 @@
 /* inventory.css */
-
-#button-return {
-}
-
 .containerProducts {
     background-color: #fff;
     padding: 1.4rem;
@@ -49,7 +45,7 @@ h1 {
 
 .card-text {
     color: #333;
-    z-index: 9999;
+    z-index: 9000;
 }
 
 #quantity {

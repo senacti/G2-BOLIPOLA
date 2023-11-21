@@ -61,13 +61,17 @@
                     </div>
                     <div class="carAndPerfil" id="perfil">
                         <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
+                        <ul class="perfilDropDown">
+                            <li><a href="{% url 'profile' %}">Ver perfil</a></li>
+                            <li><a href="{% url 'signout' %}">Cerrar sesión</a></li>
+                        </ul>
                     </div>
 
                     {% else %}
 
-                    <div>
+                    <div class="container-linkUser">
                         <a class="linkUser" id="register" href="{% url 'register' %}">Regístrate</a></span>
-                        <a class="linkUser" id="signin" href="{% url 'signin' %}">Inicia sesión</a>
+                        <a class="linkUser" id="signin" href="{% url 'signin' %}">Iniciar sesión</a>
                     </div>
 
                     {% endif %}

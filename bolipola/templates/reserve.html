@@ -69,6 +69,10 @@
                     </div>
                     <div class="carAndPerfil" id="perfil">
                         <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
+                        <ul class="perfilDropDown">
+                            <li><a href="{% url 'profile' %}">Ver perfil</a></li>
+                            <li><a href="{% url 'signout' %}">Cerrar sesión</a></li>
+                        </ul>
                     </div>
 
                     {% else %}

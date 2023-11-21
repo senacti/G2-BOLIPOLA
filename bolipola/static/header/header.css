@@ -4,6 +4,7 @@
 	--primary-color: #CB4335;
 	--background-color: #FBFCFC;
 	--dark-color: #000000;
+	--perfil-space: 10rem;
 }
 
 html {
@@ -42,12 +43,10 @@ html {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 2rem 0;
+	padding: 2rem 5rem;
 }
 
 .customer-support {
-	margin-left: 2rem;
-	width: 18rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -113,10 +112,9 @@ html {
 
 .container-logo {
 	position: relative;
-	left: 3.5rem;
 	display: grid;
 	place-items: center;
-	gap: 0.5rem;
+	right: 3.1rem;
 }
 
 .container-logo i {
@@ -134,29 +132,30 @@ html {
 .container-user {
 	display: flex;
 	justify-content: center;
-	margin-right: 2rem;
-	width: 26rem;
+	width: var(--perfil-space);
 }
 
 .container-user a img {
 	position: relative;
 	top: 0.2rem;
-	margin-left: 1.5rem;
 	border-radius: 50%;
 	border: 0.2rem solid var(--primary-color);
-	height: 7rem;
-	width: 7rem;
+	height: 7.5rem;
+	width: 7.5rem;
 }
 
 .container-user i {
+	margin-right: 4.5rem;
 	font-size: 4rem;
+	padding-right: 0.8rem;
+	border-right: 0.3rem solid #CCD1D1;
 	color: var(--primary-color);
 }
 
 .carAndPerfil {
+	position: relative;
 	display: grid;
 	place-content: center;
-	margin: 0 2rem;
 	height: 5rem;
 	width: 5rem;
 }
@@ -165,10 +164,52 @@ html {
 	cursor: pointer;
 }
 
-.linkUser {
+.perfilDropDown {
+	display: none;
+	position: absolute;
+	top: 6.5rem;
+	right: -120%;
+	width: 18rem;
+	padding: 0 0.2rem;
+	padding-bottom: 0.4rem;
+	font-size: 2.2rem;
+	border: 0.25rem solid var(--dark-color);
+	border-radius: 0.75rem;
+	background-color: var(--primary-color);
+	list-style-type: none;
+	z-index: 9001;
+}
+
+.perfilDropDown li {
+	display: grid;
+	place-items: center;
+	padding-top: 0.4rem;
+}
+
+.perfilDropDown li:hover {
+	text-decoration: underline;
+}
+
+.perfilDropDown li a {
+	color: var(--background-color);
+	text-decoration: none;
+}
+
+#perfil:hover .perfilDropDown {
+	display: block;
+}
+
+.container-linkUser {
 	position: relative;
-	bottom: 0rem;
+	display: grid;
+	place-content: center;
+}
+
+.linkUser {
+	display: grid;
+	place-items: center;
 	padding: 0.5rem 1rem;
+	width: 14.5rem;
 	font-size: 1.8rem;
 	font-weight: 500;
 	text-decoration: none;
@@ -177,7 +218,11 @@ html {
 	border-left: 0.3rem solid var(--primary-color);
 	border-bottom: 0.3rem solid var(--primary-color);
 	border-radius: 0.5rem;
-	transition: 70ms ease-in;
+	transition: all 70ms ease-in;
+}
+
+.linkUser#register {
+	margin-bottom: 1rem;
 }
 
 .linkUser:hover {
@@ -366,6 +411,14 @@ html {
 		display: none;
 	}
 
+	.container-logo {
+		position: static;
+	}
+
+	.container-linkUser {
+		margin-right: 2rem;
+	}
+
 	.navbar {
 		display: grid;
 		place-items: center;
@@ -440,6 +493,10 @@ html {
 
 	.container-user a img {
 		margin: 0;
+	}
+
+	.container-linkUser {
+		margin-right: 0;
 	}
 
 	.linkUser {
