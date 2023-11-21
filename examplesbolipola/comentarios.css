@@ -1,0 +1,41 @@
+h1{
+font-family: Arial, Helvetica, sans-serif; 
+
+}
+img{
+    margin: 0 12px;
+    width: 80px;
+    border: double rgb(200, 23, 23) ;
+    border-radius: 3rem;
+}
+#comment{
+    position: relative;
+    bottom: 2.5rem;
+    width: 30rem;
+    height: 4.5rem;
+    border-radius: 0.8rem;
+}
+.box-comments{
+    border: solid gray;
+    width: 50rem;
+    border-radius: 12px;
+    padding: 1rem;
+}
+i{
+    position: relative;
+    right: 31rem;
+    top: 1rem;
+    margin: 7px;
+}
+#button-send{
+    background-color: rgb(225, 51, 51);
+    width: 6.2rem;
+    height: 1.9rem;
+    position: relative;
+    border-radius: 0.8rem;
+}
+#comment-send{
+    width: 43rem;
+    height: 1.5rem;
+    border-radius: 0.8rem;
+}
