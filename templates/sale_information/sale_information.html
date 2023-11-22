@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'sale/sale.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="centrador">
+        <form action="" class="form">
+            <fieldset class="main">
+                <legend class="main__legend">
+                    <img src="{% static 'register/images/logo.png' %}" alt="logo" class="main__legend-img">
+                </legend>
+                <div class="main__titleContainer">
+                    <input type="text" class="main__titleContainer-title" value="Torneo" readonly>
+                    <div class="main__titleContainer-check">
+                        <span class="main__titleContainer-check-asterisc">
+                            *********************************
+                        </span>
+                        <span class="main__titleContainer-check-title">
+                            RECIBO  
+                        </span>
+                        <span class="main__titleContainer-check-asterisc">
+                            *********************************
+                        </span>
+                    </div>
+                </div>
+                <div class="main__inf">
+                    <div class="main__inf-item">
+                        <span>Tipo de pago:</span>
+                        <select>
+                            <option value="">...</option>
+                            <option value="efectivo">efectivo</option>
+                            <option value="Nequi">Nequi</option>
+                        </select>
+                    </div>
+
+                    <!--Caso de venta torneo-->
+                    {% if type_name == 'Torneo' or type_name == 'Information' %}
+
+                    <div class="main__inf-item">
+                        <span>Nombre del torneo:</span>
+                        <input type="text" value="{{ inf.name }}" readonly>
+                    </div>
+
+                    <div class="main__inf-item">
+                        <span>Fecha de inicio:</span>
+                        <input type="text" value="{{ inf.date.date }}" readonly>
+                    </div>
+
+                    {% endif %}
+                    
+                    <div class="moreInf">
+                        <div class="main__inf-item">
+                            <span>Estado:</span>
+                            <input type="text" value="En proceso..." readonly>
+                        </div>
+    
+                        <div class="main__inf-item">
+                            <span>Fecha:</span>
+                            <input type="datetime-local" value="2015-04-12T13:00" readonly>
+                        </div>
+                        <div class="main__inf-item">
+                            <span>Cantidad:</span>
+                            <input type="number" value="1" readonly>
+                        </div>
+                    </div>
+
+                    <div class="bottomInf">
+                        <div class="main__inf-item" id="idSale" style="display: none;">
+                            <span>ID:</span>
+                            <input type="number" value="123" readonly>
+                        </div>
+                        <div class="main__inf-item">
+                            <span>Costo total:</span>
+                            <input type="text" value="$200,000" readonly>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="buttons">
+                <div class="buttons_container">
+                    <a href="#"><button type="button" class="buttons__container-button" id="cancel">Cancelar</button></a>
+                </div>
+                <div class="buttons__container">
+                    <button type="submit" class="buttons__container-button" id="buy">Comprar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

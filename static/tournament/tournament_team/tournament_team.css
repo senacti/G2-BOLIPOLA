@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    padding: 1rem;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    display: flex;
+    font-size: 1.9rem;
+    margin: 1.35rem 0;
+}
+
+h2 span {
+    margin-left: 0.6rem;
+}
+
+.form {
+    display: grid;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.35rem;
+}
+
+table, th, td {
+    border: 0.05rem solid #ababab;
+}
+
+th, td {
+    font-size: 1.1rem;
+    padding: 0.8rem;
+    text-align: left;
+}
+
+th {
+    border: 0.15rem solid #CB4335;
+}
+
+td span {
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+}
+
+td span input {
+    font-size: 1.5rem;
+    width: 3.5rem;
+    border: 0.05rem solid #cbcbcb;
+    border-radius: 0.2rem;
+}
+
+td span input:disabled {
+    border: 0;
+    background-color: transparent;
+}
+
+img {
+    width: 3rem;
+    height: 3rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.buttons__container {
+    margin: 0 0.2rem;
+}
+
+#save {
+    display: grid;
+    place-items: center;
+}
+
+.sure-container {
+    display: none;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+}
+
+.sure-container-links {
+    margin-top: 0.5rem;
+}
+
+.sure-container-links a {
+    padding: 0.25rem;
+    margin: 0 0.4rem;
+    font-size: 1.5rem;
+    border-radius: 0.35rem;
+    color: #CB4335;
+    background-color: #FBFCFC;
+    text-decoration: none;
+}
+
+.buttons__container button {
+    padding: 0.8rem 1.25rem;
+    font-size: 1rem;
+    background-color: #CB4335;
+    color: #FBFCFC;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.4rem;
+}
+
+.buttons__container button:hover {
+    background-color: #ba3e30;
+}
+
+.buttons__container button#submit {
+    background-color: #4CAF50;
+}
+
+.buttons__container button#submit:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 995px) {
+    html {
+        font-size: 80%;
+    }
+}
