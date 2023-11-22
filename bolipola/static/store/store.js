@@ -11,6 +11,12 @@ let listCardsToLoad = document.querySelectorAll('.loads_span')
 let carVisible = false
 
 openShopping.addEventListener('click', () => {
+  if (carVisible) {
+    body.classList.remove('active');
+    carVisible = false
+    return
+  }
+
   body.classList.add('active');
   carVisible = true
 })

@@ -79,7 +79,58 @@ html {
 .main-content {
 	background-color: var(--background-color);
 }
+.title-comments{
+	font-family: Arial, Helvetica, sans-serif; 
+	margin: 2rem;
 
+}
+.comments{
+	background-color: var(--background-color);
+}
+img{
+	border: double rgb(200, 23, 23) ;
+	border-radius: 3rem;
+}
+.comment-img{
+	border: double rgb(200, 23, 23) ;
+	border-radius: 5rem;
+	width: 6rem;
+	height: 6rem;
+}
+#comment{
+	position: relative;
+	bottom: 2.8rem;
+	width: 40rem;
+	height: 4.5rem;
+	border-radius: 0.8rem;
+	margin: 8px;
+}
+#comment-like{
+	position: relative;
+	bottom: 2.7rem;
+}
+.box-comments{
+	border: double gray;
+	width: 75rem;
+	border-radius: 12px;
+	padding: 1rem;
+}
+#button-send{
+	background-color: rgb(225, 51, 51);
+	width: 6.2rem;
+	height: 3rem;
+	position: relative;
+	border-radius: 1rem;
+}
+#comment-send{
+	width: 65rem;
+	height: 3rem;
+	border-radius: 1rem;
+}
+.comments{
+	display: grid;
+	place-items: center;
+}
 /* ********************************** */
 /*              FEATURES              */
 /* ********************************** */

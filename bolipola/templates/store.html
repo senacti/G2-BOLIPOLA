@@ -50,14 +50,6 @@
 
                 <div class="container-user">
                     {% if user.is_authenticated %}
-
-                    <div class="carAndPerfil" id="car">
-                        <a href="#" class="shopping">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </a>
-                    </div>
-                    <div class="linePerfil" closeCar>
-                    </div>
                     <div class="carAndPerfil" id="perfil">
                         <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
                         <ul class="perfilDropDown">
@@ -65,7 +57,13 @@
                             <li><a href="{% url 'signout' %}">Cerrar sesión</a></li>
                         </ul>
                     </div>
-
+                    <div class="linePerfil" closeCar>
+                    </div>
+                    <div class="carAndPerfil" id="car">
+                        <a href="#" class="shopping">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </div>
                     {% else %}
 
                     <div>

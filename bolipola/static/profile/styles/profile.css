@@ -9,33 +9,13 @@
 }
 
 html {
-    font-size: 95%;
-}
-
-body {
-    display: grid;
-    place-items: center;
-    height: 95vh;
-}
-
-.exitContainer {
-    position: relative;
-    top: 2rem;
-    right: 27rem;
-}
-
-.exitContainer i {
-    font-size: 2.2rem;
-    color: #CB4335;
+    font-size: 100%;
 }
 
 .main {
     display: grid;
     place-items: center;
-}
-
-.main-form {
-    margin-top: 2rem;
+    margin: 2rem 0;
 }
 
 .box {
@@ -102,7 +82,7 @@ body {
     border: 0;
     font-size: 2rem;
     border-bottom: 0.15rem solid #CCD1D1;
-    width: 20rem;
+    width: 17.5rem;
     background-color: transparent;
     color: gray;
     outline: none;
@@ -238,7 +218,7 @@ body {
 
 .box__left-box-changePass {
     position: absolute;
-    bottom: -0.5rem;
+    bottom: -1.5rem;
 }
 
 .box__left-box-changePass-a {
@@ -257,6 +237,7 @@ body {
     justify-content: space-between;
     width: 16rem;
     height: 25rem;
+    margin-left: 1rem;
     padding: 0.5rem;
     border: 0.2rem solid black;
     border-top-left-radius: 1rem;
@@ -487,7 +468,7 @@ button[name="editAndMore"]:hover {
     }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 570px) {
     html {
         font-size: 80%;
     }
@@ -507,6 +488,6 @@ button[name="editAndMore"]:hover {
 
 @media (max-width: 360px) {
     html {
-        font-size: 50%;
+        font-size: 55%;
     }
 }

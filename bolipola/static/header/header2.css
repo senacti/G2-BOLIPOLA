@@ -1,3 +1,10 @@
+/*
+HEADER2. Es una misma versión del header solo que calcula el porcentaje del rem sin necesidad de ponerlo en el root.
+Se ha creado para evitar conflictos entre páginas que se les han cambiado el font-size del root lo cual afecta el rem
+lo que hace que no se siga un mismo patrón de diseño, entonces se dejan por separado para evitar esto, en este caso
+se usa una lógica para sacar el 62.5% que usa el root de header sin que afecte el de otra página.
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
@@ -5,11 +12,7 @@
 	--background-color: #FBFCFC;
 	--dark-color: #000000;
 	--perfil-space: 10rem;
-}
-
-html {
-	font-size: 62.5%;
-	font-family: 'Poppins', sans-serif;
+    --porcent-rem: 0.625;
 }
 
 * {
@@ -22,14 +25,14 @@ html {
 /*             UTILIDADES             */
 /* ********************************** */
 .container {
-	max-width: 120rem;
+	max-width: calc(120rem * var(--porcent-rem));
 	margin: 0 auto;
 }
 
 .heading-1 {
 	text-align: center;
 	font-weight: 500;
-	font-size: 3rem;
+	font-size: calc(3rem * var(--porcent-rem));
 }
 
 /* ********************************** */
@@ -44,7 +47,7 @@ html {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
-	padding: 2rem 5rem;
+	padding: calc(2rem * var(--porcent-rem)) calc(5rem * var(--porcent-rem));
 }
 
 .customer-support {
@@ -56,11 +59,11 @@ html {
 
 #whatsappIcon {
 	color: var(--primary-color);
-	margin-right: 1rem;
+	margin-right: calc(1rem * var(--porcent-rem));
 }
 
 .numberTop {
-	font-size: 1.6rem;
+	font-size: calc(1.6rem * var(--porcent-rem));
 	font-weight: 600;
 }
 
@@ -72,12 +75,12 @@ html {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 0.6rem 1.2rem;
+	padding: calc(0.6rem * var(--porcent-rem)) calc(1.2rem * var(--porcent-rem));
 	color: var(--background-color);
     background-color: var(--primary-color);
-    border: 0.3rem solid transparent;
-    border-radius: 0.75rem;
-    box-shadow: 0.2rem 0.2rem #696969;
+    border: calc(0.3rem * var(--porcent-rem)) solid transparent;
+    border-radius: calc(0.75rem * var(--porcent-rem));
+    box-shadow: calc(0.2rem * var(--porcent-rem)) calc(0.2rem * var(--porcent-rem)) #696969;
     transition: 120ms;
     transition-timing-function: ease-in;
 }
@@ -91,12 +94,12 @@ html {
 }
 
 .button-db span {
-	margin-left: 1rem;
-	font-size: 1.45rem;
+	margin-left: calc(1rem * var(--porcent-rem));
+	font-size: calc(1.45rem * var(--porcent-rem));
 }
 
 .customer-support i {
-	font-size: 3.3rem;
+	font-size: calc(3.3rem * var(--porcent-rem));
 }
 
 .content-customer-support {
@@ -104,10 +107,10 @@ html {
 	flex-direction: column;
 }
 
-.logo{
+.logo {
 	background-image: url('../register/images/logo.png');
-	height: 10rem;
-	width: 20rem;
+	height: calc(10rem * var(--porcent-rem));
+	width: calc(20rem * var(--porcent-rem));
 	background-size: cover;
 	background-position: center;
 }
@@ -116,18 +119,18 @@ html {
 	position: relative;
 	display: grid;
 	place-items: center;
-	right: -3.1rem;
+	right: calc(-3.1rem * var(--porcent-rem));
 	order: 2;
 }
 
 .container-logo i {
-	font-size: 3rem;
+	font-size: calc(3rem * var(--porcent-rem));
 }
 
 .container-logo h1 a {
 	text-decoration: none;
 	color: #000;
-	font-size: 3rem;
+	font-size: calc(3rem * var(--porcent-rem));
 	text-transform: uppercase;
 	letter-spacing: -1px;
 }
@@ -135,25 +138,25 @@ html {
 .container-user {
 	display: flex;
 	justify-content: center;
-	width: var(--perfil-space);
+	width: calc(var(--perfil-space) * var(--porcent-rem));
 	order: 1;
 }
 
 .container-user a img {
 	position: relative;
-	top: 0.2rem;
+	top: calc(0.2rem * var(--porcent-rem));
 	border-radius: 50%;
-	border: 0.2rem solid var(--primary-color);
-	height: 7.5rem;
-	width: 7.5rem;
+	border: calc(0.2rem * var(--porcent-rem)) solid var(--primary-color);
+	height: calc(7.5rem * var(--porcent-rem));
+	width: calc(7.5rem * var(--porcent-rem));
 }
 
 .container-user i {
 	position: relative;
-	left: 3rem;
-	font-size: 4rem;
-	padding-left: 0.8rem;
-	border-left: 0.3rem solid #CCD1D1;
+	left: calc(3rem * var(--porcent-rem));
+	font-size: calc(4rem * var(--porcent-rem));
+	padding-left: calc(0.8rem * var(--porcent-rem));
+	border-left: calc(0.3rem * var(--porcent-rem)) solid #CCD1D1;
 	color: var(--primary-color);
 }
 
@@ -161,8 +164,8 @@ html {
 	position: relative;
 	display: grid;
 	place-content: center;
-	height: 5rem;
-	width: 5rem;
+	height: calc(5rem * var(--porcent-rem));
+	width: calc(5rem * var(--porcent-rem));
 }
 
 .carAndPerfil:hover {
@@ -172,14 +175,14 @@ html {
 .perfilDropDown {
 	display: none;
 	position: absolute;
-	top: 6.5rem;
+	top: calc(6.5rem * var(--porcent-rem));
 	right: -120%;
-	width: 18rem;
-	padding: 0 0.2rem;
-	padding-bottom: 0.4rem;
-	font-size: 2.2rem;
-	border: 0.25rem solid var(--dark-color);
-	border-radius: 0.75rem;
+	width: calc(18rem * var(--porcent-rem));
+	padding: 0 calc(0.2rem * var(--porcent-rem));
+	padding-bottom: calc(0.4rem * var(--porcent-rem));
+	font-size: calc(2.2rem * var(--porcent-rem));
+	border: calc(0.25rem * var(--porcent-rem)) solid var(--dark-color);
+	border-radius: calc(0.75rem * var(--porcent-rem));
 	background-color: var(--primary-color);
 	list-style-type: none;
 	z-index: 9001;
@@ -188,7 +191,7 @@ html {
 .perfilDropDown li {
 	display: grid;
 	place-items: center;
-	padding-top: 0.4rem;
+	padding-top: calc(0.4rem * var(--porcent-rem));
 }
 
 .perfilDropDown li:hover {
@@ -218,31 +221,31 @@ html {
 .linkUser {
 	display: grid;
 	place-items: center;
-	padding: 0.5rem 1rem;
-	width: 14.5rem;
-	font-size: 1.8rem;
+	padding: calc(0.5rem * var(--porcent-rem)) calc(1rem * var(--porcent-rem));
+	width: calc(14.5rem * var(--porcent-rem));
+	font-size: calc(1.8rem * var(--porcent-rem));
 	font-weight: 500;
 	text-decoration: none;
 	color: var(--primary-color);
-	border: 0.1rem solid var(--primary-color);
-	border-left: 0.3rem solid var(--primary-color);
-	border-bottom: 0.3rem solid var(--primary-color);
-	border-radius: 0.5rem;
+	border: calc(0.1rem * var(--porcent-rem)) solid var(--primary-color);
+	border-left: calc(0.3rem * var(--porcent-rem)) solid var(--primary-color);
+	border-bottom: calc(0.3rem * var(--porcent-rem)) solid var(--primary-color);
+	border-radius: calc(0.5rem * var(--porcent-rem));
 	transition: all 70ms ease-in;
 }
 
 .linkUser#register {
-	margin-bottom: 1rem;
+	margin-bottom: calc(1rem * var(--porcent-rem));
 }
 
 .linkUser:hover {
-	bottom: 0.1rem;
-	box-shadow: 0 0 0.2rem 0.2rem #CCD1D1;
+	bottom: calc(0.1rem * var(--porcent-rem));
+	box-shadow: 0 0 calc(0.2rem * var(--porcent-rem)) calc(0.2rem * var(--porcent-rem)) #CCD1D1;
 }
 
 /* ************* NAVBAR ************* */
 .container-navbar {
-	padding: 0.8rem 0;
+	padding: calc(0.8rem * var(--porcent-rem)) 0;
 	background-color: var(--primary-color);
 }
 
@@ -250,7 +253,7 @@ html {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 1rem 0;
+	padding: calc(1rem * var(--porcent-rem)) 0;
 }
 
 .navbar .fa-bars {
@@ -263,7 +266,7 @@ html {
 
 .menu {
 	display: flex;
-	gap: 2rem;
+	gap: calc(2rem * var(--porcent-rem));
 	margin: 0;
 }
 
@@ -273,7 +276,7 @@ html {
 
 .menu a {
 	text-decoration: none;
-	font-size: 1.55rem;
+	font-size: calc(1.55rem * var(--porcent-rem));
 	font-family: 'Poppins', sans-serif;
 	color: var(--background-color);
 	font-weight: 600;
@@ -281,7 +284,7 @@ html {
 }
 
 .menu a span {
-	width: 1.5rem;
+	width: calc(1.5rem * var(--porcent-rem));
 	height: 1px;
 	background-color: #fff;
 	position: absolute;
@@ -292,7 +295,7 @@ html {
 
 .menu a::after {
 	content: '';
-	width: 1.5rem;
+	width: calc(1.5rem * var(--porcent-rem));
 	height: 1px;
 	background-color: #fff;
 	position: absolute;
@@ -314,7 +317,7 @@ html {
 .menuDropDown {
 	display: none;
 	margin: 0;
-	padding-bottom: 0.1rem;
+	padding-bottom: calc(0.1rem * var(--porcent-rem));
 	z-index: 9999;
 	font-family: 'Poppins', sans-serif;
 }
@@ -325,7 +328,7 @@ html {
 
 .menuDropDown a {
 	text-decoration: none;
-	font-size: 1.55rem;
+	font-size: calc(1.55rem * var(--porcent-rem));
 	font-family: 'Poppins', sans-serif;
 	color: var(--background-color);
 	font-weight: 600;
@@ -333,7 +336,7 @@ html {
 }
 
 .menuDropDown a span {
-	width: 1.5rem;
+	width: calc(1.5rem * var(--porcent-rem));
 	height: 1px;
 	background-color: #fff;
 	position: absolute;
@@ -344,7 +347,7 @@ html {
 
 .menuDropDown a::after {
 	content: '';
-	width: 1.5rem;
+	width: calc(1.5rem * var(--porcent-rem));
 	height: 1px;
 	background-color: #fff;
 	position: absolute;
@@ -368,9 +371,9 @@ html {
 	display: flex;
 	align-items: center;
 	border: 2px solid #fff;
-	border-radius: 2rem;
+	border-radius: calc(2rem * var(--porcent-rem));
 	background-color: #fff;
-	height: 4.4rem;
+	height: calc(4.4rem * var(--porcent-rem));
 	overflow: hidden;
 }
 
@@ -378,9 +381,9 @@ html {
 	outline: none;
 	font-family: inherit;
 	border: none;
-	width: 25rem;
-	font-size: 1.4rem;
-	padding: 0 2rem;
+	width: calc(25rem * var(--porcent-rem));
+	font-size: calc(1.4rem * var(--porcent-rem));
+	padding: 0 calc(2rem * var(--porcent-rem));
 	color: #777;
 	cursor: pointer;
 }
@@ -396,19 +399,15 @@ html {
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	padding: 1rem;
+	padding: calc(1rem * var(--porcent-rem));
 }
 
 .btn-search i {
-	font-size: 2rem;
+	font-size: calc(2rem * var(--porcent-rem));
 	color: #fff;
 }
 
 @media (max-width: 768px) {
-	html {
-		font-size: 55%;
-	}
-
 	.hero {
 		padding: 2rem;
 	}
@@ -497,6 +496,10 @@ html {
 }
 
 @media (max-width: 510px) {
+	.logo {
+		height: 88px;
+		width: 176px;
+	}
 	.container-logo {
 		position: static;
 		margin-bottom: 2rem;
