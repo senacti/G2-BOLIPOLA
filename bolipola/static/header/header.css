@@ -48,13 +48,14 @@ html {
 }
 
 .customer-support {
+	width: 16rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	order: 3;
 }
 
-#whatsappIcon {
+#indexIcon {
 	color: var(--primary-color);
 	margin-right: 1rem;
 }
@@ -218,16 +219,16 @@ html {
 .linkUser {
 	display: grid;
 	place-items: center;
-	padding: 0.5rem 1rem;
-	width: 14.5rem;
-	font-size: 1.8rem;
-	font-weight: 500;
+	padding: 0.75rem 1rem;
+	width: 19rem;
+	font-size: 2.4rem;
+	font-weight: 600;
 	text-decoration: none;
 	color: var(--primary-color);
 	border: 0.1rem solid var(--primary-color);
 	border-left: 0.3rem solid var(--primary-color);
 	border-bottom: 0.3rem solid var(--primary-color);
-	border-radius: 0.5rem;
+	border-radius: 1rem;
 	transition: all 70ms ease-in;
 }
 
@@ -235,9 +236,18 @@ html {
 	margin-bottom: 1rem;
 }
 
+.linkUser#signin {
+	background-color: var(--primary-color);
+	color: var(--background-color);
+	border: 0.1rem solid var(--dark-color);
+	border-left: 0.3rem solid var(--dark-color);
+	border-bottom: 0.3rem solid var(--dark-color);
+}
+
 .linkUser:hover {
 	bottom: 0.1rem;
 	box-shadow: 0 0 0.2rem 0.2rem #CCD1D1;
+	transform: translateY(-0.2rem);
 }
 
 /* ************* NAVBAR ************* */
@@ -515,7 +525,7 @@ html {
 		top: 6.5rem;
 		right: -120%;
 	}
-
+	
 	.container-linkUser {
 		margin-left: 0;
 	}

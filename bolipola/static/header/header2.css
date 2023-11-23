@@ -51,13 +51,14 @@ se usa una lógica para sacar el 62.5% que usa el root de header sin que afecte 
 }
 
 .customer-support {
+	width: calc(16rem * var(--porcent-rem));
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	order: 3;
 }
 
-#whatsappIcon {
+#indexIcon {
 	color: var(--primary-color);
 	margin-right: calc(1rem * var(--porcent-rem));
 }

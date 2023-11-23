@@ -41,13 +41,19 @@
                         </a>          
                     </div>
 
-                    {% else %}
+                    {% elif user.is_authenticated %}
 
-                    <i class="fa-brands fa-whatsapp" id="whatsappIcon"></i>
+                    <i class="fa-solid fa-house" id="indexIcon"></i>
                     <div class="content-customer-support">
-                        <span class="numberTop">+57 3202127187</span>             
+                        <span class="numberTop">INICIO</span>             
                     </div>
 
+                    {% else %}
+                    
+                    <div class="container-linkUser">
+                        <a class="linkUser" id="signin" href="{% url 'signin' %}">Iniciar sesión</a>
+                    </div>
+                    
                     {% endif %}
                 </div>
 
@@ -71,7 +77,6 @@
 
                     <div class="container-linkUser">
                         <a class="linkUser" id="register" href="{% url 'register' %}">Regístrate</a></span>
-                        <a class="linkUser" id="signin" href="{% url 'signin' %}">Iniciar sesión</a>
                     </div>
 
                     {% endif %}
