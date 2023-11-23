@@ -556,7 +556,17 @@ def tournament_cancel(request, tournament_id):
     tournament.active = False
     tournament.save()
 
-    messages.warning(request, '¡TORNEO FINALIZADO!')
+    #Quitando tarjetas de los jugadores al finalizar el torneo
+    tournaments_teams = TournamentTeam.objects.all().filter(tournament_id=tournament_id)
+    for tournament_team in tournaments_teams:
+        players = Player.objects.all().filter(team_id=tournament_team.team.id)
+        for player in players:
+            player.yellow_card = 0
+            player.blue_card = 0
+            player.red_card = 0
+            player.save()
+
+    messages.info(request, '¡TORNEO FINALIZADO!')
     return redirect('tournament')
 
 #Torneo y equipos
