@@ -1,0 +1,56 @@
+.ticket-box{
+    display: grid;
+    place-items: center;
+    width: auto;
+    height: auto;
+}
+.title-ticket{
+    background-color: rgba(204, 56, 56, 0.777);
+    border-radius: 0.8rem;
+    width: 35.5rem;
+    height: 4rem;
+    border: solid;
+    margin: 1px;
+}
+.info-ticket{
+    background-color: rgba(156, 152, 152, 0.286);
+    border-radius: 0.8rem;
+    position: relative;
+    border: solid;
+    width: 25rem;
+    right: 5.2rem;
+}
+.number-ticket{
+    border-radius: 0.8rem;
+    position: relative;
+    top: -14.8rem;
+    right: -12.8rem;
+    border: solid;
+    width: 10rem;
+    height: 14.4rem;
+}
+#t-ticket{
+    position: relative;
+    width: max-content;
+    top: -0.5rem;
+    right: -5rem;
+}
+#eye-icon{
+    position: relative;
+    right: -29rem;
+    top: -4.2rem;
+    font-size: 40px;
+}
+#n-ticket{
+    width: min-content;
+    position: relative;
+    font-size: 80px;
+    right: -3.7rem;
+    top: 1rem;
+}
+#t-info{
+    margin: 1rem;
+}
+#d-info{
+    margin: 0 1rem;
+}
