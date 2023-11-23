@@ -62,7 +62,7 @@
                     <div class="linePerfil">
                     </div>
                     <div class="carAndPerfil" id="perfil">
-                        <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
+                        <a href="{% url 'profile' %}"><img style="box-shadow: 0 0 1.2rem 0.25rem var(--primary-color);" src="{{ user.avatar.url }}"></a>
                         <ul class="perfilDropDown">
                             <li><a href="{% url 'profile' %}">Ver perfil</a></li>
                             <li><a href="{% url 'signout' %}">Cerrar sesión</a></li>
@@ -140,7 +140,11 @@
                             <h3 class="box__left-title-rango">Rango<i class="fa-solid fa-circle-question fa-2xs"></i></h3>
                             <div class="container_inf_rango" hidden>
                                 <span class="inf_rango">
-                                    Ganas puntos cada vez que completas una compra, entre más puntos más subiras tu rango
+                                    {% if user.is_staff %}
+                                    Eres administrador de BoliPola
+                                    {% else %}
+                                    Ganas puntos cada vez que completas una compra, entre más puntos más subirás tu rango :)
+                                    {% endif %}
                                 </span>
                             </div>
                             <h2 class="box__left-title-value" id="rangeName" style="color: {{user.range_alias.0}};">{{ user.range_alias.1 }}</h2>

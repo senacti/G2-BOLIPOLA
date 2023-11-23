@@ -168,8 +168,8 @@
                         <h3>TORNEO {{ sale_tournament.tournament.number_teams }} equipos</h3>
                         <h3>Inscritos: {{ sale_tournament.tournament.registered_teams }}</h3>
                     </div>
-                    <p>En este torneo habran 16 equipos los cuales competiran por un premio de <b>{{ sale_tournament.tournament.payment_to_money }}</b> de pesos colombianos</p>
-                    <p>el valor de inscripcion es de <b>{{ sale_tournament.tournament.cost_to_money }}</b> pesos cada equipo</p>
+                    <p>PREMIO: <b>{{ sale_tournament.tournament.payment_to_money }}</b></p>
+                    <p>INSCRIPCIÓN: <b>{{ sale_tournament.tournament.cost_to_money }}</b></p>
 
                     {% if sale_tournament.tournament.active %}
                         {% if sale_tournament.sale.status == 'Comprado' %}
@@ -202,8 +202,8 @@
                         <h3>TORNEO {{ no_tournament.number_teams }} equipos</h3>
                         <h3>Inscritos: {{ no_tournament.registered_teams }}</h3>
                     </div>
-                    <p>En este torneo habran 16 equipos los cuales competiran por un premio de <b>{{ no_tournament.payment_to_money }}</b> de pesos colombianos</p>
-                    <p>el valor de inscripcion es de <b>{{ no_tournament.cost_to_money }}</b> pesos cada equipo</p>
+                    <p>PREMIO: <b>{{ no_tournament.payment_to_money }}</b></p>
+                    <p>INSCRIPCIÓN: <b>{{ no_tournament.cost_to_money }}</b></p>
 
                     {% if user.is_staff %}
                         <a href="{% url 'tournament_teams' no_tournament.id %}"><input type="submit" value="Consultar" class="boton2"></a>
