@@ -4,7 +4,7 @@
 	--primary-color: #CB4335;
 	--background-color: #FBFCFC;
 	--dark-color: #000000;
-	--perfil-space: 10rem;
+	--perfil-space: 16rem;
 }
 
 html {
@@ -48,11 +48,15 @@ html {
 }
 
 .customer-support {
-	width: 16rem;
 	display: flex;
 	justify-content: center;
+	width: var(--perfil-space);
 	align-items: center;
 	order: 3;
+}
+
+.customer-support span {
+	font-family: 'Poppins', sans-serif;
 }
 
 #indexIcon {
@@ -117,7 +121,6 @@ html {
 	position: relative;
 	display: grid;
 	place-items: center;
-	right: -3.1rem;
 	order: 2;
 }
 
@@ -236,12 +239,16 @@ html {
 	margin-bottom: 1rem;
 }
 
-.linkUser#signin {
+.linkUser#signin, .linkUser#signinLeft {
 	background-color: var(--primary-color);
 	color: var(--background-color);
 	border: 0.1rem solid var(--dark-color);
 	border-left: 0.3rem solid var(--dark-color);
 	border-bottom: 0.3rem solid var(--dark-color);
+}
+
+.linkUser#signinLeft {
+	display: none;
 }
 
 .linkUser:hover {
@@ -441,7 +448,11 @@ html {
 	}
 
 	.container-linkUser {
-		margin-left: 2rem;
+		margin-left: 4rem;
+	}
+
+	.linkUser {
+		margin: 0.8rem 0;
 	}
 
 	.navbar {
@@ -533,8 +544,7 @@ html {
 	.linkUser {
 		display: flex;
 		justify-content: center;
-		position: static;
-		margin: 0.8rem 0;
+		position: relative;
 	}
 
 	.hero {

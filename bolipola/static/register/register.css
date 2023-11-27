@@ -9,14 +9,9 @@ html {
     font-size: 19px;
 }
 
-body {
-   height: 95vh; 
-}
-
 .form {
-    display: grid;
-    place-items: center;
-    height: 100%;
+    max-width: 40rem;
+    margin: 2rem auto;
 }
 
 .formBox {
@@ -46,7 +41,6 @@ body {
 .formBox__title-h1 {
     font-size: 2.9rem;
 }
-
 
 .formBox__inf {
     display: flex;
@@ -87,6 +81,7 @@ body {
 
 .formBox__inf-box select {
     width: 11.05rem;
+    height: 2.161rem;
 }
 
 .formBox__inf-box div {
@@ -109,6 +104,11 @@ body {
     position: relative;
     left: 1rem;
     padding-left: 1.62rem;
+}
+
+.formBox__inf-box#boxRight {
+    position: relative;
+    top: 0.1rem;
 }
 
 .formBox__inf-box#boxRight div[centrado="off"] {
@@ -211,46 +211,4 @@ body {
     border-color: #CB4335;
     background-color: #FBFCFC;
     box-shadow: none;
-}
-
-@media (max-width: 740px) {
-    html {
-        font-size: 17px;
-    }
-}
-
-@media (max-width: 650px) {
-    html {
-        font-size: 15px;
-    }
-}
-
-@media (max-width: 565px) {
-    html {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 480px) {
-    html {
-        font-size: 11px;
-    }
-}
-
-@media (max-width: 400px) {
-    html {
-        font-size: 9px;
-    }
-}
-
-@media (max-width: 320px) {
-    html {
-        font-size: 7px;
-    }
-}
-
-@media (max-width: 250px) {
-    html {
-        font-size: 5px;
-    }
 }

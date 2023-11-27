@@ -33,19 +33,16 @@
                 <div class="customer-support">
                     {% if user.is_staff and user.is_authenticated %}
                     
-                    <div class="container-button-db">
-                        <a href="{% url 'admin:index' %}">
-                            <button class="button-db">
-                                <i class="fa-solid fa-database"></i><span>Base de datos</span>
-                            </button>  
-                        </a>          
+                    <i class="fa-solid fa-user-tie" id="indexIcon"></i>
+                    <div class="content-customer-support">
+                        <span class="numberTop">ADMIN</span>             
                     </div>
 
                     {% elif user.is_authenticated %}
 
                     <i class="fa-solid fa-house" id="indexIcon"></i>
                     <div class="content-customer-support">
-                        <span class="numberTop">INICIO</span>             
+                        <span class="numberTop">INICIO</span>     
                     </div>
 
                     {% else %}
@@ -76,7 +73,8 @@
                     {% else %}
 
                     <div class="container-linkUser">
-                        <a class="linkUser" id="register" href="{% url 'register' %}">Regístrate</a></span>
+                        <a class="linkUser" id="signinLeft" href="{% url 'signin' %}">Iniciar sesión</a>
+                        <a class="linkUser" id="register" href="{% url 'register' %}">Regístrate</a>
                     </div>
 
                     {% endif %}
@@ -108,9 +106,6 @@
                     {% endif %}
                     <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
                     <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
-                    {% if user.is_staff and user.is_authenticated %}
-                    <li hidden><a href="{% url 'admin:index' %}">Base de datos</a></li>
-                    {% endif %}
                 </ul>
             </nav>
         </div>
@@ -129,10 +124,9 @@
 
     <main class="main-content">
         <section class="container top-products">
-            <h1 class="heading-1">Mejores Productos</h1>
 
             <div class="container-options">
-                <span class="active">Destacados</span>
+                <span class="active">Mejores productos</span>
             </div>
 
             <div class="container-products">
@@ -156,45 +150,71 @@
         </section>
     </main>
 
+    <!--COMENTARIOS-->
     <div class="comments">
         <div class="title-comments">
             <h1>Comentarios</h1>
         </div>
         <div class="box-comments">
-            <div class="chat-comments" type="text">
-                <img src="imagenes/descarga.png" class="comment-img">
-                <input type="text"  id="comment" placeholder="(COMENTARIO)">
-                <i class="fa-regular fa-heart fa-lg" id="comment-like"></i>
-                <br>
-                <img src="imagenes/descarga.png" class="comment-img">
-                <input type="text"  id="comment" placeholder="(COMENTARIO)">
-                <i class="fa-regular fa-heart fa-lg" id="comment-like"></i>
-                <br>
-                <img src="imagenes/descarga.png" class="comment-img">
-                <input type="text"  id="comment" placeholder="(COMENTARIO)">
-                <i class="fa-regular fa-heart fa-lg" id="comment-like"></i>
-                <br>
-                <img src="imagenes/descarga.png" class="comment-img">
-                <input type="text"  id="comment" placeholder="(COMENTARIO)">
-                <i class="fa-regular fa-heart fa-lg" id="comment-like"></i>
-                <br>
-                <img src="imagenes/descarga.png" class="comment-img">
-                <input type="text"  id="comment" placeholder="(COMENTARIO)">
-                <i class="fa-regular fa-heart fa-lg" id="comment-like"></i>
-                <br>
-                <img src="imagenes/descarga.png" class="comment-img">
-                <input type="text"  id="comment" placeholder="(COMENTARIO)">
-                <i class="fa-regular fa-heart fa-lg" id="comment-like"></i>
+            <div class="chat-comments">
+                {% for comment in comments %}
+
+                <div class="commentContainer">
+                    <img src="{{ comment.user.avatar.url }}" class="comment-img">
+                    <div class="comment-inf">
+                        <span class="dateAndName">
+                            <span class="name">{{ comment.user.first_name }} {{ comment.user.last_name }}</span> -
+                            <span class="date">{{ comment.date.day }} / {{ comment.date.month }} / {{ comment.date.year }}</span>
+                        </span>
+                        <span class="comment">{{ comment.text }}</span>
+                    </div>
+                    <div class="comment-like">
+                        {% if user.is_authenticated %}
+
+                            {% for comment_like in comments_likes %}
+
+                                {% if comment_like == comment.id %}
+                                <i class="fa-regular fa-heart fa-lg" name="no-liked" id="{{ comment.id }}" style="display: none;"></i>
+                                <i class="fa-solid fa-heart fa-lg" name="liked" id="{{ comment.id }}"></i>
+                                {% endif %}
+
+                            {% endfor %}
+                            {% for comment_no_like in comments_no_likes %}
+
+                                {% if comment_no_like == comment.id %}
+                                <i class="fa-regular fa-heart fa-lg" name="no-liked" id="{{ comment.id }}"></i>
+                                <i class="fa-solid fa-heart fa-lg" name="liked" id="{{ comment.id }}"  style="display: none;"></i>
+                                {% endif %}
+
+                            {% endfor %}
+
+                                <span>{{ comment.score }}</span>
+
+                        {% else %}
+                            <!-- Redireccionar en caso de dar like sin registro -->
+                            <i class="fa-regular fa-heart fa-lg" name="no-liked" id="{{ comment.id }}"
+                                onclick=" window.location.href = '/signin/' "
+                            ></i>
+                            <span>{{ comment.score }}</span>
+
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+                <!--
+                    <i class="fa-solid fa-heart fa-lg" name="liked"></i>
+                -->
             </div>
-            <div class="send-comments">
-                <input type="text" id="comment-send" placeholder="Escribe tu comentario">
-                <button id="button-send" class="fa-solid fa-paper-plane">
-            </div>
-            <div class="send-comment" type="text">
-            </div>
+            
+            {% if user.is_authenticated and not user.is_staff %}
+            <form class="send-comments" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form_comment.text }}
+                <button id="button-send" type="submit" class="fa-solid fa-paper-plane">
+            </form>
+            {% endif %}
         </div>
     </div>
-    <br>
 
     <footer class="footer">
         <div class="container container-footer">
@@ -251,5 +271,9 @@
         crossorigin="anonymous"
     ></script>
     <script src="{% static 'header/header.js' %}"></script>
+
+    {% if user.is_authenticated %}
+    <script src="{% static 'index/comments.js' %}"></script>
+    {% endif %}
 </body>
 </html>

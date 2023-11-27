@@ -3,6 +3,7 @@ const defMenu = document.querySelector(".menu")
 const infMenu = document.querySelectorAll(".menu li")
 const newMenu = document.querySelector(".menuDropDown")
 const infNewMenu = document.querySelectorAll(".menuDropDown li")
+const signinLeft = document.querySelector("#signinLeft")
 let newMenuActive = true
 
 function hideMenu() {
@@ -21,6 +22,15 @@ function hideMenu() {
     return newMenuActive = true
 }
 hideMenu();
+
+//----------Esconder o mostrar botón signin según tamaño de pantalla-----
+function watchSignLeft(watch) {
+    if (watch) {
+        signinLeft.style.display = "block";
+    } else {
+        signinLeft.style.display = "none";
+    }
+}
 
 //--------Esconder o mostrar el menú según se presione---------
 listMenu.addEventListener("click", () => {
@@ -53,7 +63,8 @@ window.addEventListener("click", (e) => {
 //Según el tamaño de la pantalla elimina o vuelve a agregar los elementos de la lista
 window.addEventListener('resize', () => {
     const widthW = window.innerWidth;
-    if (widthW >= 769) {
+    if (widthW > 768) {
+        watchSignLeft(false)
         infMenu.forEach((element) => {
             if (!newMenu.hasAttribute("hidden")) {
                 newMenu.setAttribute("hidden", "true")
@@ -63,5 +74,14 @@ window.addEventListener('resize', () => {
                 defMenu.appendChild(element)
             }
         })
+    } else {
+        watchSignLeft(true)
     }
 });
+
+//Llamando función cada vez que se inicie página
+if (window.innerWidth > 768) {
+    watchSignLeft(false)
+} else {
+    watchSignLeft(true)
+}

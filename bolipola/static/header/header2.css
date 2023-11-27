@@ -11,7 +11,7 @@ se usa una lógica para sacar el 62.5% que usa el root de header sin que afecte 
 	--primary-color: #CB4335;
 	--background-color: #FBFCFC;
 	--dark-color: #000000;
-	--perfil-space: 10rem;
+	--perfil-space: 16rem;
     --porcent-rem: 0.625;
 }
 
@@ -51,7 +51,7 @@ se usa una lógica para sacar el 62.5% que usa el root de header sin que afecte 
 }
 
 .customer-support {
-	width: calc(16rem * var(--porcent-rem));
+	width: calc(var(--perfil-space) * var(--porcent-rem));
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -120,7 +120,6 @@ se usa una lógica para sacar el 62.5% que usa el root de header sin que afecte 
 	position: relative;
 	display: grid;
 	place-items: center;
-	right: calc(-3.1rem * var(--porcent-rem));
 	order: 2;
 }
 

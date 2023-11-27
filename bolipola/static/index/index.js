@@ -34,7 +34,7 @@ window.addEventListener("click", (e) => {
 })
 //------------Fin de ambos eventos----------------
 
-//Según el tamaño de la pantalla elimina o vuelve a agregar los elementos de la lista
+//Según el tamaño de la pantalla elimina o vuelve a agregar los elementos de la lista y se mueve iniciar sesión y registro
 window.addEventListener('resize', () => {
     const widthW = window.innerWidth;
     if (widthW >= 769) {

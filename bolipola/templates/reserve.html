@@ -41,12 +41,9 @@
                 <div class="customer-support">
                     {% if user.is_staff and user.is_authenticated %}
                     
-                    <div class="container-button-db">
-                        <a href="{% url 'admin:index' %}">
-                            <button class="button-db">
-                                <i class="fa-solid fa-database"></i><span>Base de datos</span>
-                            </button>  
-                        </a>          
+                    <i class="fa-solid fa-user-tie" id="indexIcon"></i>
+                    <div class="content-customer-support">
+                        <span class="numberTop">ADMIN</span>             
                     </div>
 
                     {% else %}
@@ -111,9 +108,6 @@
                     {% endif %}
                     <li hidden><a href="{% url 'reserve' %}">Reservas<span></span></a></li>
                     <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
-                    {% if user.is_staff and user.is_authenticated %}
-                    <li hidden><a href="{% url 'admin:index' %}">Base de datos</a></li>
-                    {% endif %}
                 </ul>
             </nav>
         </div>
