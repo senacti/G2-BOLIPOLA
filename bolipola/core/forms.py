@@ -1,5 +1,5 @@
 from django import forms
-from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam, Reservation
+from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam, Reservation, Comment
 from datetime import datetime, timedelta
 
 fecha_hoy = datetime.now()
@@ -8,6 +8,26 @@ mas_6_meses = fecha_hoy + timedelta(days=30*6)
 mas_6_meses_str = mas_6_meses.strftime('%Y-%m-%d')
 mas_1_semana = fecha_hoy + timedelta(days=7)
 mas_1_semana_str = mas_1_semana.strftime('%Y-%m-%d')
+
+#Formulario para validar comentario
+class CommentForm(forms.ModelForm):
+    text = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'id': 'comment-send',
+                'minlength': '10',
+                'maxlength': '150',
+                'placeholder': 'Escribe tu comentario...',
+                'autocomplete': 'off'
+            }
+        )
+    )
+
+    class Meta:
+        model = Comment
+        fields = [
+            'text'
+        ]
 
 #Formulario de venta
 class SaleForm(forms.ModelForm):

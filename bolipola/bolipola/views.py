@@ -10,10 +10,10 @@ from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, EditProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm
+from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, EditProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm, CommentForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Entry, Output, CarInventory, Category
+from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Entry, Output, CarInventory, Category, Comment, Like
 
 #------------------Ventas---------------------------
 #Venta
@@ -255,6 +255,7 @@ def store(request):
 
 def store_product_add(request):
     car = Car.objects.all().filter(user_id=request.user.id, active=True).first()
+
     if request.method == 'POST':
         data = request.body
         inventory_id_data = ""
@@ -774,15 +775,101 @@ def reserve(request):
 
 #--------------------Inicio---------------------------
 #Inicio
-def index(request):        
+def index(request):    
+    comments = Comment.objects.all().order_by('-date')
+
     if request.user.is_authenticated:
         user = get_object_or_404(UserBoli, id=request.user.id)
+        likes = Like.objects.all()
+        comments_likes = []
+        comments_no_likes = []
+
+        #Comentarios likeados por el usuario
+        for like in likes:
+            if like.user_id == user.id:
+                comments_likes.append(like.comment_id)
+
+        #Comentarios no likeados
+        for comment in comments:
+            comments_no_likes.append(comment.id)
+
+            for comment_like in comments_likes:
+                if (comment.id == comment_like):
+                    comments_no_likes.pop()
+                    break
     else:
         user = False
+        comments_likes = False
+        comments_no_likes = False
 
-    inventorys = Inventory.objects.all().filter(disabled=False).order_by('-product_quantity')[:5]    
-    return render(request, 'index.html', {'user': user, 'inventorys':inventorys})
+    inventorys = Inventory.objects.all().filter(disabled=False).order_by('-product_quantity')[:5]
 
+    form_comment = CommentForm()
+
+    if request.method == 'POST':
+        form_comment = CommentForm(request.POST)
+
+        if form_comment.is_valid():
+            #Creando comentario
+            new_comment = Comment(text = form_comment.cleaned_data['text'], user_id=request.user.id)
+            new_comment.save()
+            messages.success(request, '<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Comentario publicado')
+            return redirect('index')
+        
+        else:
+            messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Comentario no válido, mínimo 10 caracteres')
+            return redirect('index')
+
+    return render(request, 'index.html', {'user': user, 'inventorys':inventorys, 'form_comment': form_comment, 'comments': comments, 'comments_likes': comments_likes, 'comments_no_likes': comments_no_likes})
+
+# Fetch para los likes
+def add_like(request):
+    if request.method == 'POST':
+        data = request.body
+        comment_id_data = ""
+        response_data = f'{data}'
+        for caracter in response_data:
+            if caracter.isdigit():
+                comment_id_data = f'{comment_id_data}{caracter}'
+        comment_id_data = int(comment_id_data)
+
+        #Obteniendo informaición para determinar si puso o no un like en ese comentario
+        like = Like.objects.all().filter(comment_id=comment_id_data, user_id=request.user.id)
+
+        if (not like.exists()):
+            new_like = Like(comment_id=comment_id_data, user_id=request.user.id)
+            new_like.save()
+            comment = get_object_or_404(Comment, id=comment_id_data)
+            comment.score += 1
+            comment.save()
+        
+        return JsonResponse({'res': f'{comment_id_data}'})
+    else:
+        return JsonResponse('Error', 'Error')
+
+def del_like(request):
+    if request.method == 'POST':
+        data = request.body
+        comment_id_data = ""
+        response_data = f'{data}'
+        for caracter in response_data:
+            if caracter.isdigit():
+                comment_id_data = f'{comment_id_data}{caracter}'
+        comment_id_data = int(comment_id_data)
+
+        #Obteniendo informaición para determinar si puso o no un like en ese comentario
+        like = Like.objects.all().filter(comment_id=comment_id_data, user_id=request.user.id)
+
+        if (like.exists()):
+            like = like.first()
+            comment = get_object_or_404(Comment, id=comment_id_data)
+            comment.score -= 1
+            comment.save()
+            like.delete()
+
+        return JsonResponse({'res': f'{comment_id_data}'})
+    else:
+        return JsonResponse('Error', 'Error')
 
 #------------------------Cuenta de usuario----------------
 #Perfil

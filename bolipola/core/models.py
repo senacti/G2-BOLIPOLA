@@ -22,14 +22,19 @@ def validate_today(value):
     if value < today:
         raise ValidationError("La fecha debe ser mínimo hoy.")
 
+def validate_min_comment(value):
+    min_length = 10
+    if len(value) < min_length:
+        raise ValidationError(f"El comentario debe ser de al menos {min_length} letras")
+
 class Comment(models.Model):
-    score = models.PositiveIntegerField(verbose_name='Puntuación')
-    text = models.TextField(verbose_name='Texto')
-    date = models.DateField(auto_now_add=True)
+    score = models.PositiveIntegerField(verbose_name='Puntuación', default=0)
+    text = models.TextField(max_length=150, verbose_name='Texto', validators=[validate_min_comment])
+    date = models.DateTimeField(auto_now_add=True, verbose_name='Fecha publicado')
     user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.user.first_name} {self.text[:15]}...'
+        return f'{self.user.first_name} - {self.text[:15]}...'
     
     class Meta:
         verbose_name = 'Comentario'
@@ -37,6 +42,19 @@ class Comment(models.Model):
         db_table = 'comentario'
         ordering = ['id']
 
+class Like(models.Model):
+    user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user} - {self.comment.text[:15]}...'
+    
+    class Meta:
+        verbose_name = 'Like'
+        verbose_name_plural = 'Likes'
+        db_table = 'like'
+        ordering = ['id']
+    
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre')
     forOlder = models.BooleanField(verbose_name='Para mayores')

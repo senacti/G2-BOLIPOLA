@@ -9,6 +9,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('terms/', views.terms, name='terms'),
     path('', views.index, name='index'),
+    path('add_like/', views.add_like, name='add_like'),
+    path('del_like/', views.del_like, name='del_like'),
     path('register/', views.register, name='register'),
     path('signin/', views.signin, name='signin'),
     path('signout/', views.signout, name='signout'),
