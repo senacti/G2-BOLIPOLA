@@ -1,5 +1,5 @@
 from django import forms
-from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam, Tournament, Reservation, Comment
+from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam, Tournament, Reservation, Calendar, Comment
 from datetime import datetime, timedelta
 
 fecha_hoy = datetime.now()
@@ -103,6 +103,25 @@ class ReservationForm(forms.ModelForm):
         model = Reservation
         fields = []
 
+# Formulario calendario de reserva
+class ReserveCalendarForm(forms.ModelForm):
+    date = forms.DateField(
+        required=True,
+        widget=forms.DateInput(
+            attrs={
+                'type':'date',
+                'group': 'form',
+                'value':fecha_hoy_str,
+            }
+        )
+    )
+
+    class Meta:
+        model = Calendar
+        fields = [
+            'date',
+        ]
+        
 #Formulario crear torneo
 class TournamentCreateForm(forms.ModelForm):
     name = forms.CharField(
@@ -220,6 +239,7 @@ class TeamForm(forms.ModelForm):
             'color',
             'avatar',
         ]
+        
 class TournamentTeamForm(forms.ModelForm):
     goals_for = forms.IntegerField(
         required=True,

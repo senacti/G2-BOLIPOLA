@@ -29,7 +29,7 @@ class UserBoli(AbstractUser):
 
     def range_alias(self):
         if self.is_superuser == 1:
-            return ['#CB4335', 'Admin']
+            return ['#CB4335', 'Administrador']
 
         #Estableciendo nombres según puntos de rango
         if self.range == 0:

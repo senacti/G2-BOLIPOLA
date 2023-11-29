@@ -10,10 +10,10 @@ from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, EditProductForm, CategoryForm, TournamentTeamForm, TournamentCreateForm, CardPlayerForm, CommentForm
+from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, EditProductForm, CategoryForm, TournamentTeamForm, TournamentCreateForm, CardPlayerForm, ReserveCalendarForm, CommentForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
-from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Entry, Output, CarInventory, Category, Comment, Like
+from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Entry, Output, CarInventory, Category, Calendar, Comment, Like
 
 #------------------Ventas---------------------------
 #Venta
@@ -779,9 +779,25 @@ def player_edit(request, player_id):
 def reserve(request):
     if not request.user.is_authenticated:
         return redirect('signin')
-    user = get_object_or_404(UserBoli, id=request.user.id)
-    return render(request, 'reserve.html', {'user':user})
-
+    
+    user = get_object_or_404(UserBoli, id=request.user.id) 
+    if request.method == 'POST':
+        form = ReserveCalendarForm(request.POST)
+        if form.is_valid():
+            disponibility = form.cleaned_data['date']
+            calendars = Calendar.objects.all()
+            for calendar in calendars:
+                if disponibility == calendar.date:
+                    messages.info(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> La fecha ya ha sido puesta')
+                    return redirect('reserve')
+            
+            form.save()
+            messages.success(request, '<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Día no disponible establecido')
+            return redirect('reserve')
+    else:
+        form = ReserveCalendarForm()
+    
+    return render(request, 'reserve.html', {'user':user, 'form':form})
 
 #--------------------Inicio---------------------------
 #Inicio
