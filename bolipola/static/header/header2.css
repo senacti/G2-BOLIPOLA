@@ -96,7 +96,8 @@ se usa una lógica para sacar el 62.5% que usa el root de header sin que afecte 
 
 .button-db span {
 	margin-left: calc(1rem * var(--porcent-rem));
-	font-size: calc(1.45rem * var(--porcent-rem));
+	font-size: calc(2rem * var(--porcent-rem));
+	font-family: 'Poppins', sans-serif;
 }
 
 .customer-support i {
@@ -206,6 +207,14 @@ se usa una lógica para sacar el 62.5% que usa el root de header sin que afecte 
 
 #perfil {
 	z-index: 9000;
+}
+
+#perfil img {
+	transition: 300ms ease;
+}
+
+#perfil:hover img {
+	box-shadow: 0 0 calc(1.92rem * var(--porcent-rem)) calc(0.4rem * var(--porcent-rem)) var(--primary-color);
 }
 
 #perfil:hover .perfilDropDown {

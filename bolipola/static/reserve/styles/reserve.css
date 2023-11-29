@@ -11,6 +11,7 @@ html {
 }
 
 .admin {
+    position: relative;
     margin: 2rem 0;
     display: grid;
     place-items: center;
@@ -83,6 +84,68 @@ button[type="submit"], a button {
 button[type="submit"]:hover, a button:hover {
     background-color: #CB4335; 
 }
+
+.form-calendar {
+	position: absolute;
+	display: none;
+    top: 6rem;
+	width: fit-content;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+	border: 0.2rem solid #CB4335;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+	z-index: 9102;
+}
+  
+.form-calendar form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-calendar .input-container {
+	width: 100%;
+	margin: 2rem 0;
+}
+
+.form-calendar span {
+	display: block;
+	width: max-content;
+	font-size: 2rem;
+    color: #CB4335;
+}
+  
+.form-calendar input {
+    padding: 1rem;
+	width: 100%;
+    border: 0.2rem solid #ccc;
+    border-radius: 0.8rem;
+    outline: none;
+}
+
+.form-calendar input:focus {
+	border-color: #CB4335;
+}
+
+.form-calendar button {
+    position: relative;
+	left: 50%;
+	transform: translate(-50%, 0);
+    background-color: #CB4335;
+    color: white;
+    padding: 1.1rem;
+    border: none;
+    border-radius: 1rem;
+	font-size: 2.3rem;
+    font-weight: bold;
+	transition: 250ms ease;
+}
+  
+.form-calendar button:hover {
+	cursor: pointer;
+    background-color: #a33529;
+}
+
 /* Estilos para pantallas pequeñas */
 @media screen and (max-width: 600px) {
     .container {

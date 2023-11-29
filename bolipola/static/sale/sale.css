@@ -22,48 +22,26 @@ html {
 }
 
 .exitContainer {
+    display: grid;
+    place-items: center;
     position: relative;
     right: 15rem;
+    width: fit-content;
     height: 2.5rem;
-    width: 2.5rem;
-    padding: 0.3rem;
-    border-radius: 0.5rem;
-    background-color: #CB4335;
-    color: #FBFCFC;
+    border-radius: 50%;
+    color: #CB4335;
+    text-decoration: none;
 }
 
 .exitContainer:hover {
     cursor: pointer;
-    background-color: #ad3e32;
+    color: #ad3e32;
 }
 
 .exitContainer i {
-    position: relative;
-    top: 0.8rem;
-    left: 0.1rem;
-    font-size: 2rem;
-}.exitContainer {
-    position: relative;
-    right: 15rem;
-    height: 2.5rem;
-    width: 2.5rem;
-    padding: 0.3rem;
-    border-radius: 0.5rem;
-    background-color: #CB4335;
-    color: #FBFCFC;
+    font-size: 3rem;
 }
 
-.exitContainer:hover {
-    cursor: pointer;
-    background-color: #ad3e32;
-}
-
-.exitContainer i {
-    position: relative;
-    top: 0.8rem;
-    left: 0.1rem;
-    font-size: 2rem;
-}
 
 .main {
     font-size: var(--font_size-);

@@ -10,8 +10,8 @@ let formActive = false;
 buttonTourForm.addEventListener("click", () => {
     formActive = true;
     tourForm.style.display = "block";
-    main.style.cssText = "opacity: 0.3;";
-    header.style.cssText = "opacity: 0.3;";
+    main.style.cssText = "opacity: 0.2;";
+    header.style.cssText = "opacity: 0.2;";
     firstInput.focus();
 })
 

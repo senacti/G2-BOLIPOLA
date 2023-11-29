@@ -2,66 +2,143 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
-  <title>Historial de Compras</title>
+  <title>Historial</title>
   <link rel="stylesheet" type="text/css" href="{% static 'sale/historic/sale_historic.css' %}">
+  <link rel="stylesheet" href="{% static 'header/header2.css' %}">
   <link rel="stylesheet" href="{% static 'sale/status/status.css' %}">
 </head>
 <body>
 
-  <a class="exitContainer" href="{% url 'profile' %}">
-    <i class="fa-solid fa-right-from-bracket fa-rotate-180 fa-xl"></i>
-  </a>
+  <header>
+    <div class="container-hero">
+        <div class="container hero">
+            <div class="customer-support">
+                {% if user.is_staff and user.is_authenticated %}
+                
+                <a href="{% url 'sale_historic' %}" class="content-customer-support" style="text-decoration: none;">
+                    <button class="button-db" style="
+                      color: #CB4335;
+                      border-color: #CB4335;
+                      background-color: #FBFCFC;
+                      box-shadow: none;
+                    ">
+                        <i class="fa-solid fa-coins"></i> <span>Ventas</span>
+                    </button>
+                </a>
 
-  <div class="title">
-    <img src="{% static 'register/images/logo.png' %}" class="title__img">
-    <h1 class="title__h1">
-      Historial de
-      {% if user.is_staff %} 
-        ventas
-      {% else %}
-        compras de {{ user.first_name }} {{ user.last_name }}
-      {% endif %}
-    </h1>
-  </div>
-  <table>
-    <tr>
-      {% if user.is_staff %}
-        <th>ID venta</th>
-        <th>Correo del cliente</th>
-        <th>Nombre del cliente</th>
-        <th>Tipo de venta</th>
-        <th>Estado de venta</th>
-        <th>Tipo de pago</th>
-        <th>Fecha de venta</th>
-        <th>Pago total</th>
-      {% else %}
-        <th>ID compra</th>
-        <th>Tipo de compra</th>
-        <th>Estado de compra</th>
-        <th>Tipo de pago</th>
-        <th>Fecha de compra</th>
-        <th>Total a pagar</th>
-      {% endif %}
-    </tr>
+                {% else %}
 
-    {% for sale in sales %}
-      <tr id="{{ sale.status_number }}" onclick="go(`{% url 'sale_information' sale.id %}`)">
-        <td>{{ sale.id }}</td>
+                <i class="fa-solid fa-clock-rotate-left" id="indexIcon"></i>
+                <div class="content-customer-support">
+                    <span class="numberTop">HISTORIAL</span>             
+                </div>
+
+                {% endif %}
+            </div>
+
+            <div class="container-logo">
+                <a class="logo" href="/"></a>
+            </div>
+
+            <div class="container-user">
+                {% if user.is_authenticated %}
+                <div class="linePerfil">
+                </div>
+                <div class="carAndPerfil" id="perfil">
+                    <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
+                    <ul class="perfilDropDown">
+                        <li><a href="{% url 'profile' %}">Ver perfil</a></li>
+                        {% if not user.is_staff %}
+                        <li><a href="{% url 'sale_historic' %}">Historial</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'signout' %}">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+
+                {% else %}
+
+                <div class="container-linkUser">
+                    <a class="linkUser" id="register" href="{% url 'register' %}">Regístrate</a></span>
+                    <a class="linkUser" id="signin" href="{% url 'signin' %}">Iniciar sesión</a>
+                </div>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container-navbar">
+        <nav class="navbar container">
+            <i class="fa-solid fa-bars" id="dropdown"></i>
+            <ul class="menu">
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                {% if not user.is_staff %}
+                <li><a href="{% url 'store' %}">Productos</a></li>
+                {% endif %}
+                {% if user.is_staff and user.is_authenticated %}
+                <li><a href="{% url 'inventory' %}">Inventario</a></li>
+                {% endif %}
+                <li><a href="{% url 'reserve' %}">Reservas</a></li>
+                <li><a href="{% url 'tournament' %}">Torneos</a></li>
+            </ul>
+            <ul class="menuDropDown" hidden>
+                <li hidden><a href="{% url 'index' %}">Inicio</a></li>
+                {% if not user.is_staff %}
+                <li><a href="{% url 'store' %}">Productos</a></li>
+                {% endif %}
+                {% if user.is_staff and user.is_authenticated %}
+                <li hidden><a href="{% url 'inventory' %}">Inventario</a></li>
+                {% endif %}
+                <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
+                <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
+            </ul>
+        </nav>
+    </div>
+  </header>
+
+  <div class="main">
+    <table>
+      <tr>
         {% if user.is_staff %}
-          <td>{{ sale.user.username }}</td>
-          <td>{{ sale.user.first_name }} {{ sale.user.last_name }}</td>
+          <th>ID venta</th>
+          <th class="userInf">Correo del cliente</th>
+          <th class="userInf">Nombre del cliente</th>
+          <th>Tipo de venta</th>
+          <th class="status">Estado de compra</th>
+          <th class="paymentType">Tipo de pago</th>
+          <th class="date">Fecha de compra</th>
+          <th>Pago total</th>
+        {% else %}
+          <th>ID compra</th>
+          <th>Tipo de compra</th>
+          <th class="status">Estado de compra</th>
+          <th class="paymentType">Tipo de pago</th>
+          <th class="date">Fecha de compra</th>
+          <th>Total a pagar</th>
         {% endif %}
-        <td>{{ sale.type }}</td>
-        <td>{{ sale.status }}</td>
-        <td>{{ sale.payment_type }}</td>
-        <td>{{ sale.date.date }}</td>
-        <td>{{ sale.cost_to_money }}</td>
       </tr>
-    {% endfor %}
-  </table>
+  
+      {% for sale in sales %}
+        <tr id="{{ sale.status_number }}" onclick="go(`{% url 'sale_information' sale.id %}`)">
+          <td>{{ sale.id }}</td>
+          {% if user.is_staff %}
+            <td class="userInf">{{ sale.user.username }}</td>
+            <td class="userInf">{{ sale.user.first_name }} {{ sale.user.last_name }}</td>
+          {% endif %}
+          <td>{{ sale.type }}</td>
+          <td class="status">{{ sale.status }}</td>
+          <td class="paymentType">{{ sale.payment_type }}</td>
+          <td class="date">{{ sale.date.date }}</td>
+          <td>{{ sale.cost_to_money }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
 
   <script src="https://kit.fontawesome.com/6117eaa017.js" crossorigin="anonymous"></script>
+  <script src="{% static 'header/header.js' %}"></script>
 
   <script>
     function go(url) {

@@ -1,44 +1,14 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 1.2rem;
 }
 
-.exitContainer {
-    position: absolute;
-    height: 2.5rem;
-    width: 2.5rem;
-    padding: 0.3rem;
-    margin-top: 0.5rem;
-    border-radius: 0.5rem;
-    background-color: #CB4335;
-    color: #FBFCFC;
-}
-
-.exitContainer:hover {
-    cursor: pointer;
-    background-color: #ad3e32;
-}
-
-.exitContainer i {
-    position: relative;
-    top: 0.8rem;
-    left: 0.1rem;
-    font-size: 2rem;
-}
-
-.title {
-    display: grid;
-    place-items: center;
-}
-
-.title__img {
-    width: 10rem;
+.main {
+    margin: 2rem 1.5rem;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1.2rem;
 }
 
 th, td {
@@ -48,7 +18,7 @@ th, td {
 }
 
 th {
-    background-color: #CB4335;
+    background-color: #b74033;
     color: #FBFCFC;
     border: 0.15rem solid black;
 }
@@ -56,4 +26,28 @@ th {
 tr:hover {
     cursor: pointer;
     background-color: #e7e8e8 !important;
+}
+
+@media (max-width: 880px) {
+    .userInf {
+        display: none;
+    }
+}
+
+@media (max-width: 590px) {
+    .status {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .date {
+        display: none;
+    }
+}
+
+@media (max-width: 390px) {
+    .paymentType {
+        display: none;
+    }
 }

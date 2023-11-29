@@ -42,10 +42,11 @@
                 <div class="customer-support">
                     {% if user.is_staff and user.is_authenticated %}
                     
-                    <i class="fa-solid fa-user-tie" id="indexIcon"></i>
-                    <div class="content-customer-support">
-                        <span class="numberTop">ADMIN</span>             
-                    </div>
+                    <a href="{% url 'sale_historic' %}" class="content-customer-support" style="text-decoration: none;">
+                        <button class="button-db">
+                            <i class="fa-solid fa-coins"></i> <span>Ventas</span>
+                        </button>             
+                    </a>
 
                     {% else %}
 
@@ -69,6 +70,9 @@
                         <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
                         <ul class="perfilDropDown">
                             <li><a href="{% url 'profile' %}">Ver perfil</a></li>
+                            {% if not user.is_staff %}
+                            <li><a href="{% url 'sale_historic' %}">Historial</a></li>
+                            {% endif %}
                             <li><a href="{% url 'signout' %}">Cerrar sesión</a></li>
                         </ul>
                     </div>
@@ -116,9 +120,23 @@
 
     {% if user.is_staff %}
         <div class="admin">
-            <a href="/admin/core/calendar/add/">
-                <button>Establecer disponibilidad</button>
+            <a>
+                <button class="dispButton" group="form">
+                    Establecer día no disponible
+                </button>
             </a>
+
+            <form method="post" class="form-calendar" group="form">
+                {% csrf_token %}
+                <div class="input-container" group="form">
+                    <span group="form">Fecha:</span>
+                    {{ form.date }}
+                </div>
+
+                <div class="input-container" group="form">
+                    <button type="submit" class="buttonActive" id="submitTournament" group="form">Establecer</button>
+                </div>
+            </form>
         </div>
     {% endif %}
 
@@ -175,5 +193,6 @@
         </script>
     <script src="{% static 'header/header.js' %}"></script>
     <script src="{% static 'messages/messages.js' %}"></script>
+    <script src="{% static 'reserve/reserve.js' %}"></script>
 </body>
 </html>

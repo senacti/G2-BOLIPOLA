@@ -34,10 +34,11 @@
                 <div class="customer-support">
                     {% if user.is_staff and user.is_authenticated %}
                     
-                    <i class="fa-solid fa-user-tie" id="indexIcon"></i>
-                    <div class="content-customer-support">
-                        <span class="numberTop">ADMIN</span>             
-                    </div>
+                    <a href="{% url 'sale_historic' %}" class="content-customer-support" style="text-decoration: none;">
+                        <button class="button-db">
+                            <i class="fa-solid fa-coins"></i> <span>Ventas</span>
+                        </button>             
+                    </a>
 
                     {% elif user.is_authenticated %}
 
@@ -67,6 +68,9 @@
                         <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
                         <ul class="perfilDropDown">
                             <li><a href="{% url 'profile' %}">Ver perfil</a></li>
+                            {% if not user.is_staff %}
+                            <li><a href="{% url 'sale_historic' %}">Historial</a></li>
+                            {% endif %}
                             <li><a href="{% url 'signout' %}">Cerrar sesión</a></li>
                         </ul>
                     </div>
