@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, EditProductForm, CategoryForm, TournamentTeamForm, CardPlayerForm, CommentForm
+from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductForm, EditProductForm, CategoryForm, TournamentTeamForm, TournamentCreateForm, CardPlayerForm, CommentForm
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
 from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Entry, Output, CarInventory, Category, Comment, Like
@@ -545,8 +545,19 @@ def tournament(request):
         if (sale_tournament.sale.status == 'En proceso...' and sale_tournament.tournament.active) or (sale_tournament.sale.status == 'Comprado' and sale_tournament.tournament.active):
             has_tournament = True
             break
+    
+    # Formulario para crear torneo por parte del admin
+    if request.method == 'POST':
+        form = TournamentCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            name = form.cleaned_data['name']
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> El torneo {name} ha sido creado')
+            return redirect('tournament')
+    else:
+        form = TournamentCreateForm()
 
-    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'sales_tournaments':sales_tournaments, 'tournaments':tournaments, 'has_tournament':has_tournament, 'no_tournaments':no_tournaments})
+    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'sales_tournaments':sales_tournaments, 'tournaments':tournaments, 'has_tournament':has_tournament, 'no_tournaments':no_tournaments, 'form':form})
 
 @login_required
 def tournament_cancel(request, tournament_id):

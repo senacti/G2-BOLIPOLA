@@ -1,13 +1,15 @@
 from django import forms
-from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam, Reservation, Comment
+from .models import Team, Player, Sale, Product, Inventory, Category, TournamentTeam, Tournament, Reservation, Comment
 from datetime import datetime, timedelta
 
 fecha_hoy = datetime.now()
 fecha_hoy_str = fecha_hoy.strftime('%Y-%m-%d')
-mas_6_meses = fecha_hoy + timedelta(days=30*6)
-mas_6_meses_str = mas_6_meses.strftime('%Y-%m-%d')
+mas_2_dias = fecha_hoy + timedelta(days=2)
+mas_2_dias_str = mas_2_dias.strftime('%Y-%m-%d')
 mas_1_semana = fecha_hoy + timedelta(days=7)
 mas_1_semana_str = mas_1_semana.strftime('%Y-%m-%d')
+mas_6_meses = fecha_hoy + timedelta(days=30*6)
+mas_6_meses_str = mas_6_meses.strftime('%Y-%m-%d')
 
 #Formulario para validar comentario
 class CommentForm(forms.ModelForm):
@@ -100,6 +102,70 @@ class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
         fields = []
+
+#Formulario crear torneo
+class TournamentCreateForm(forms.ModelForm):
+    name = forms.CharField(
+        max_length=30, 
+        min_length=5,
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'id':'registerName',
+            }
+        )
+    )
+
+    number_teams = forms.IntegerField(
+        required=True,
+        min_value=2,
+        widget=forms.NumberInput(
+            attrs={
+                'value':'16',
+            }
+        )
+    )
+
+    date = forms.DateTimeField(
+        required=True,
+        widget=forms.DateTimeInput(
+            attrs={
+                'type':'datetime-local',
+                'min':mas_2_dias_str + 'T12:00',
+                'value':mas_2_dias_str + 'T12:00',
+            }
+        )
+    )
+
+    prize_payment = forms.IntegerField(
+        required=True,
+        min_value=2000,
+        widget=forms.NumberInput(
+            attrs={
+                'value':'1000000',
+            }
+        )
+    )
+
+    cost = forms.IntegerField(
+        required=True,
+        min_value=100,
+        widget=forms.NumberInput(
+            attrs={
+                'value':'50000',
+            }
+        )
+    )
+
+    class Meta:
+        model = Tournament
+        fields = [
+            'name',
+            'number_teams',
+            'date',
+            'prize_payment',
+            'cost',
+        ]
 
 #Formulario de equipo
 class TeamForm(forms.ModelForm):
