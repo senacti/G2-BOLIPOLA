@@ -112,6 +112,48 @@
         </div>
 
     </header>
+
+    {% if user.is_staff %}
+    <div class="tournament_form">
+        <form method="post"> 
+            {% csrf_token %}
+            <div class="exit-create-container">
+                <button class="buttonActive"><i class="fa-solid fa-xmark fa-lg"></i></button>
+            </div>
+
+            <div class="t_create_camp">
+                <span>Nombre del torneo:</span>
+                {{ form.name }}
+            </div>
+
+            <div class="t_create_camp">
+                <span>Cantidad de equipos:</span>
+                {{ form.number_teams }}
+            </div>
+            
+            <div class="t_create_camp">
+                <span>Fecha y hora de inicio:</span>
+                {{ form.date }}
+            </div>
+            
+            <div class="t_create_camp">
+                <span>Pago de premio:</span>
+                {{ form.prize_payment }}
+            </div>
+
+            <div class="t_create_camp">
+                <span>Costo de inscripción:</span>
+                {{ form.cost }}
+            </div>
+
+            <div class="t_create_camp">
+                <button type="submit" class="buttonActive" id="submitTournament">Crear</button>
+            </div>
+        </form>
+    </div>
+
+    {% endif %}
+
     <div class="main">
         {% if not user.is_staff and not has_team %}
 
@@ -142,7 +184,8 @@
         {% elif user.is_staff %}
 
         <div class="main-top">
-            <a href="/admin/core/tournament/add/"><button class="main-top-button">¡Crear torneo!</button></a>
+            <a><button class="main-top-button" id="createTournament">¡Crear torneo!</button>
+            </a>
         </div>
 
         {% endif %}
@@ -224,6 +267,7 @@
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
+    <script src="{% static 'tournament/tournament.js' %}"></script>
     <script src="{% static 'header/header.js' %}"></script>
     <script src="{% static 'messages/messages.js' %}"></script>
 </body>

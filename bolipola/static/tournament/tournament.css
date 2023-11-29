@@ -35,6 +35,93 @@
 	cursor: pointer;
 	background-color: #a33529;
 }
+  
+.tournament_form {
+	position: fixed;
+	display: none;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: fit-content;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+	border: 0.2rem solid #CB4335;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+	z-index: 9102;
+}
+
+.tournament_form .exit-create-container {
+	position: absolute;
+	right: -2.5rem;
+	top: -2rem;
+	border-radius: 50%;
+}
+
+.tournament_form .exit-create-container button {
+	font-size: 3rem;
+	padding: 1.2rem 1.3rem 0.9rem;
+	color: white;
+	background-color: #CB4335;
+	border: 0.15rem solid black;
+	border-radius: 50%;
+}
+
+.tournament_form h2 {
+    color: #CB4335;
+    text-align: center;
+}
+  
+.tournament_form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.tournament_form .t_create_camp {
+	width: 100%;
+	margin: 2rem 0;
+}
+
+.tournament_form span {
+	display: block;
+	width: max-content;
+	font-size: 2rem;
+    color: #CB4335;
+}
+  
+.tournament_form input {
+    padding: 1rem;
+	width: 100%;
+    border: 0.2rem solid #ccc;
+    border-radius: 0.8rem;
+    outline: none;
+}
+
+.tournament_form input:focus {
+	border-color: #CB4335;
+}
+
+.tournament_form button {
+	transition: 250ms ease;
+}
+
+.tournament_form #submitTournament {
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0);
+    background-color: #CB4335;
+    color: white;
+    padding: 1.1rem;
+    border: none;
+    border-radius: 1rem;
+	font-size: 2.3rem;
+    font-weight: bold;
+}
+  
+.tournament_form button:hover, #submitTournament:hover {
+	cursor: pointer;
+    background-color: #a33529;
+}
 
 .info-torneo{
 	margin: 1.2rem 0;
