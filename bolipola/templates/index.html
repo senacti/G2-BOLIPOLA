@@ -27,6 +27,7 @@
             </div>
             {% endfor %}
         {% endif %}
+
         <div class="container-hero">
 
             <div class="container hero">
@@ -271,6 +272,7 @@
         crossorigin="anonymous"
     ></script>
     <script src="{% static 'header/header.js' %}"></script>
+    <script src="{% static 'messages/messages.js' %}"></script>
 
     {% if user.is_authenticated %}
     <script src="{% static 'index/comments.js' %}"></script>

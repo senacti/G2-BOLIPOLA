@@ -1,8 +1,8 @@
 .message-container {
-    position: fixed;
-	left: 50%;
-	transform: translate(-50%, 25vh);
-    z-index: 9100;
+    position: relative;
+    width: fit-content;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
 .message-success {
@@ -27,7 +27,7 @@ span[group="messages"] {
     justify-content: left;
     height: 100%;
     border-radius: 0.5rem;
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     font-weight: 600;
 }
 

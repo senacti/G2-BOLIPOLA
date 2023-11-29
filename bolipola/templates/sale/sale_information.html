@@ -4,7 +4,7 @@
 <head>
     <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/crud/messages.css' %}">
     <link rel="stylesheet" href="{% static 'sale/status/status.css' %}">
     <link rel="stylesheet" href="{% static 'sale/sale.css' %}">
     <title>Document</title>
@@ -17,7 +17,7 @@
 
         {% if messages %}
             {% for msg in messages %}
-            <div class="message-container" style="margin: 1rem 0;">
+            <div class="message-container" style="transform: translate(0, 0); left: 0; margin: 1rem 0;">
                 <span group="messages"
                 class="
                     {% if msg.tags == 'success' %}message-success{% endif %}
@@ -223,5 +223,6 @@
     </div>
 
     <script src="https://kit.fontawesome.com/6117eaa017.js" crossorigin="anonymous"></script>
+    <script src="{% static 'messages/messages.js' %}"></script>
 </body>
 </html>

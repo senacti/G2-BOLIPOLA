@@ -21,6 +21,22 @@
     {% endif %}
 
     <header>
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message-container">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
+            {% endfor %}
+        {% endif %}
+
         <div class="container-hero" closeCar>
             <div class="container hero" closeCar>
                 <div class="customer-support" closeCar>
@@ -96,21 +112,6 @@
     </header>
 
     <div class="container" closeCar>
-        {% if messages %}
-            {% for msg in messages %}
-            <div class="message-container">
-                <span group="messages"
-                class="
-                    {% if msg.tags == 'success' %}message-success{% endif %}
-                    {% if msg.tags == 'error' %}message-error{% endif %}
-                    {% if msg.tags == 'info' %}message-info{% endif %}
-                "
-                >
-                    {{ msg.message|safe }}
-                </span>
-            </div>
-            {% endfor %}
-        {% endif %}
         
         <div class="list" closeCar>
             <!--Se debe comparar fechas vencidas y productos disponibles para mostrar productos correctos al usuario-->
@@ -173,7 +174,8 @@
     ></script>
     
     <script src="{% static 'header/header.js' %}"></script>
-
+    <script src="{% static 'messages/messages.js' %}"></script>
+    
     <script>
         lists_add = document.querySelectorAll(".Boton1")
 

@@ -26,6 +26,22 @@
     {% endif %}
     
     <header>
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message-container" style="margin: 0;">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
+            {% endfor %}
+        {% endif %}
+
         <div class="container-hero">
 
             <div class="container hero">
@@ -103,21 +119,6 @@
             </nav>
         </div>
     </header>
-        {% if messages %}
-            {% for msg in messages %}
-            <div class="message-container" style="margin: 0;">
-                <span group="messages"
-                class="
-                    {% if msg.tags == 'success' %}message-success{% endif %}
-                    {% if msg.tags == 'error' %}message-error{% endif %}
-                    {% if msg.tags == 'info' %}message-info{% endif %}
-                "
-                >
-                    {{ msg.message|safe }}
-                </span>
-            </div>
-            {% endfor %}
-        {% endif %}
 
     <div class="containerProducts">
         <h1 class="mt-5 mb-4">Lista de Productos</h1>
@@ -199,5 +200,6 @@
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
+    <script src="{% static 'messages/messages.js' %}"></script>
 </body>
 </html>

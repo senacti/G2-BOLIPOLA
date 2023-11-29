@@ -25,6 +25,10 @@ hideMenu();
 
 //----------Esconder o mostrar botón signin según tamaño de pantalla-----
 function watchSignLeft(watch) {
+    if (signinLeft == null) {
+        return;
+    }
+
     if (watch) {
         signinLeft.style.display = "block";
     } else {

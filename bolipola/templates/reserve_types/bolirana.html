@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservas</title>
     <link rel="stylesheet" href="{% static 'reserve/styles/types.css' %}">
-    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/crud/messages.css' %}">
 </head>
 <body>
 <div class="container">
@@ -15,6 +15,22 @@
     <div class="reserva">
          <h2 class="reservas">BoliRana</h2>
          <img src="{% static 'reserve/images/bolirana.jpg' %}" width="400"/>
+
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message-container" style="margin-top: 2rem;">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
+            {% endfor %}
+        {% endif %}
 
         <form action="" method="post">
             {% csrf_token %}
@@ -47,21 +63,6 @@
                 <span>Hacer reserva</span>
             </button>
         </form>
-        {% if messages %}
-            {% for msg in messages %}
-            <div class="message-container" style="margin: 0;">
-                <span group="messages"
-                class="
-                    {% if msg.tags == 'success' %}message-success{% endif %}
-                    {% if msg.tags == 'error' %}message-error{% endif %}
-                    {% if msg.tags == 'info' %}message-info{% endif %}
-                "
-                >
-                    {{ msg.message|safe }}
-                </span>
-            </div>
-            {% endfor %}
-        {% endif %}
     </div>
 </div>
 <script>
@@ -108,5 +109,6 @@
     src="https://kit.fontawesome.com/81581fb069.js"
     crossorigin="anonymous"
     ></script>
+    <script src="{% static 'messages/messages.js' %}"></script>
 </body>
 </html>

@@ -34,6 +34,7 @@
             </div>
             {% endfor %}
         {% endif %}
+
         <div class="container-hero">
             <div class="container hero">
                 <div class="customer-support">
@@ -109,6 +110,7 @@
                 </ul>
             </nav>
         </div>
+
     </header>
     <div class="main">
         {% if not user.is_staff and not has_team %}
@@ -223,5 +225,6 @@
         crossorigin="anonymous"
     ></script>
     <script src="{% static 'header/header.js' %}"></script>
+    <script src="{% static 'messages/messages.js' %}"></script>
 </body>
 </html>
