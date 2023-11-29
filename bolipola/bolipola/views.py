@@ -345,7 +345,7 @@ def inventory(request):
         if form.is_valid():
             form.save()
             return redirect('inventory')
-    
+
     return render(request, 'inventario/inventory.html', {'products':products, 'form':form, 'inventorys':inventorys, 'form2':form2, 'due_dates':due_dates})
 
 #Cantidad de producto
@@ -545,7 +545,7 @@ def tournament(request):
         if (sale_tournament.sale.status == 'En proceso...' and sale_tournament.tournament.active) or (sale_tournament.sale.status == 'Comprado' and sale_tournament.tournament.active):
             has_tournament = True
             break
-    
+
     return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'sales_tournaments':sales_tournaments, 'tournaments':tournaments, 'has_tournament':has_tournament, 'no_tournaments':no_tournaments})
 
 @login_required
@@ -768,7 +768,6 @@ def player_edit(request, player_id):
 def reserve(request):
     if not request.user.is_authenticated:
         return redirect('signin')
-    
     user = get_object_or_404(UserBoli, id=request.user.id)
     return render(request, 'reserve.html', {'user':user})
 
@@ -905,6 +904,7 @@ def profile(request):
             userForm.avatar = new_avatar
             form.save()
 
+            messages.success(request, '<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Cambios guardados')
             return redirect('profile')
     else:
         form = EditProfileForm(instance=userForm)

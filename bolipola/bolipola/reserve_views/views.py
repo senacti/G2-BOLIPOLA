@@ -25,7 +25,7 @@ def bolirana(request):
         for calendar in calendars:
             if disponibility_to_date == calendar.date:
                 messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Fecha no disponible, elige otro día')
-                return redirect('court_form')
+                return redirect('bolirana_form')
 
         new_reservation = Reservation(place=place, type=type, date=disponibility_to_date, start_time=time_start, end_time=time_end, cost=cost)
         new_reservation.save()
@@ -75,7 +75,7 @@ def tables(request):
         for calendar in calendars:
             if disponibility_to_date == calendar.date:
                 messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Fecha no disponible, elige otro día')
-                return redirect('court_form')
+                return redirect('tables_form')
 
         new_reservation = Reservation(place=place, type=type, date=disponibility_to_date, start_time=time_start, end_time=time_end, cost=cost)
         new_reservation.save()
