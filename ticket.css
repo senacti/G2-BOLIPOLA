@@ -1,3 +1,6 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
 .ticket-box{
     display: grid;
     place-items: center;
@@ -5,7 +8,7 @@
     height: auto;
 }
 .title-ticket{
-    background-color: rgba(204, 56, 56, 0.777);
+    background-color: rgba(13, 236, 54, 0.777);
     border-radius: 0.8rem;
     width: 35.5rem;
     height: 4rem;
@@ -18,16 +21,36 @@
     position: relative;
     border: solid;
     width: 25rem;
-    right: 5.2rem;
+    right: 5.3rem;
 }
 .number-ticket{
+    display: grid;
+    place-items: center;
     border-radius: 0.8rem;
     position: relative;
-    top: -14.8rem;
+    top: -24.7rem;
     right: -12.8rem;
     border: solid;
     width: 10rem;
-    height: 14.4rem;
+    height: 24.4rem;
+}
+.menu{
+    background-color: white;
+    position: relative;
+    right: -25.55rem;
+    top: -0.2rem;
+    width: 10rem;
+    border-radius: 0.8rem;
+    z-index: 9000;
+}
+.menu-items{
+    height: 20.6rem;
+    list-style: none;
+    display: none;
+    background-color: white;
+}
+#info-icon:hover + .menu-items, .menu-items:hover{
+    display: block;
 }
 #t-ticket{
     position: relative;
@@ -35,22 +58,35 @@
     top: -0.5rem;
     right: -5rem;
 }
-#eye-icon{
+#info-icon{
     position: relative;
-    right: -29rem;
-    top: -4.2rem;
-    font-size: 40px;
+    right: -4.2rem;
+    top: -3.4rem;
+    font-size: 24px;
+    border-radius: 2rem;
+    cursor: pointer;
+    box-shadow: 0px 0px 11px 0.2rem rgb(241, 237, 237);
 }
-#n-ticket{
-    width: min-content;
-    position: relative;
-    font-size: 80px;
-    right: -3.7rem;
-    top: 1rem;
+#info-icon:hover{
+    color: rgb(243, 243, 243);
 }
 #t-info{
     margin: 1rem;
 }
-#d-info{
-    margin: 0 1rem;
+#n-ticket{
+    font-size: 5rem;
 }
+#d-info{
+    margin: 0 1.1rem;
+}
+#m-info {
+    position: relative;
+    right: 1.7rem;
+    top: -2rem;
+}
+#m-desc{
+    position: relative;
+    right: 1.7rem;
+    top: -2.3rem;
+}
+  
