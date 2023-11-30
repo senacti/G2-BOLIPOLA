@@ -99,6 +99,64 @@
   </header>
 
   <div class="main">
+    <div class="filters">
+
+      <div class="status-filter-container">
+        <div class="filter-container">
+          <span>Ver confirmadas:</span>
+          <input type="checkbox" id="confirm" class="status-filter" checked>
+        </div>
+
+        <div class="filter-container">
+          <span>Ver en proceso:</span>
+          <input type="checkbox" id="process" class="status-filter" checked>
+        </div>
+
+        <div class="filter-container">
+          <span>Ver canceladas:</span>
+          <input type="checkbox" id="cancel" class="status-filter">
+        </div>
+      </div>
+
+      <div class="date-filter-container">
+
+        <div class="filter-container">
+          <span>Año:</span>
+          <select id="year" class="date-filter">
+            <option value="all">Todos</option>
+            {% for year in years %}
+            <option value="{{ year }}">{{ year }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="filter-container">
+          <span>Mes:</span>
+          <select id="month" class="date-filter">
+            <option value="all">Todos</option>
+            <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+            <option value="5">Mayo</option>
+            <option value="6">Junio</option>
+            <option value="7">Julio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+          </select>
+        </div>
+
+        <div class="filter-container">
+          <span>Día:</span>
+          <input type="number" min="1" max="31" id="day" class="date-filter">
+        </div>
+
+      </div>
+    </div>
+
     <table>
       <tr>
         {% if user.is_staff %}
@@ -121,16 +179,16 @@
       </tr>
   
       {% for sale in sales %}
-        <tr id="{{ sale.status_number }}" onclick="go(`{% url 'sale_information' sale.id %}`)">
+        <tr class="data-row" id="{{ sale.status_number }}" onclick="go(`{% url 'sale_information' sale.id %}`)">
           <td>{{ sale.id }}</td>
           {% if user.is_staff %}
             <td class="userInf">{{ sale.user.username }}</td>
             <td class="userInf">{{ sale.user.first_name }} {{ sale.user.last_name }}</td>
           {% endif %}
           <td>{{ sale.type }}</td>
-          <td class="status">{{ sale.status }}</td>
+          <td class="status" id="status">{{ sale.status }}</td>
           <td class="paymentType">{{ sale.payment_type }}</td>
-          <td class="date">{{ sale.date.date }}</td>
+          <td class="date" id="date" day="{{ sale.date.day }}" month="{{ sale.date.month }}" year="{{ sale.date.year }}">{{ sale.date.date }}</td>
           <td>{{ sale.cost_to_money }}</td>
         </tr>
       {% endfor %}
@@ -139,6 +197,7 @@
 
   <script src="https://kit.fontawesome.com/6117eaa017.js" crossorigin="anonymous"></script>
   <script src="{% static 'header/header.js' %}"></script>
+  <script src="{% static 'sale/historic/filter.js' %}"></script>
 
   <script>
     function go(url) {
