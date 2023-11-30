@@ -1,10 +1,19 @@
 document.addEventListener("DOMContentLoaded", function() {
   const icon = document.querySelector('#info-icon');
-  const menuItem = document.querySelector('li#m.info');
+  const menu = document.querySelector('.show-menu');
 
-  if (icon && menuItem) {
+  let menuOpen = false;
+
+  if (icon && menu) {
     icon.addEventListener('click', function() {
-      menuItem.classList.toggle('active');
+      menuOpen = !menuOpen;
+
+      if (menuOpen) {
+        menu.classList.add('visible');
+      } else {
+        menu.classList.remove('visible');
+      }
     });
   }
 });
+

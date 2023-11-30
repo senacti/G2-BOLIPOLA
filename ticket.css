@@ -28,28 +28,37 @@
     place-items: center;
     border-radius: 0.8rem;
     position: relative;
-    top: -24.7rem;
+    top: -24.5rem;
     right: -12.8rem;
     border: solid;
     width: 10rem;
-    height: 24.4rem;
+    height: 24.3rem;
 }
 .menu{
-    background-color: white;
     position: relative;
     right: -25.55rem;
     top: -0.2rem;
-    width: 10rem;
-    border-radius: 0.8rem;
-    z-index: 9000;
 }
-.menu-items{
-    height: 20.6rem;
-    list-style: none;
-    display: none;
+.show-menu{
     background-color: white;
+    z-index: 9000;
+    height: 24.3rem;
+    width: 10rem;
+    position: relative;
+    top: -3.1rem;
+    border-radius: 0.8rem;
+    display: none;
 }
-#info-icon:hover + .menu-items, .menu-items:hover{
+.show-menu.visible {
+    display: block;
+  }
+#show-inf{
+    position: relative;
+    right: -2rem;
+    top: 2.4rem;
+    list-style: none;
+}
+#info-icon:hover + .show-menu{
     display: block;
 }
 #t-ticket{
