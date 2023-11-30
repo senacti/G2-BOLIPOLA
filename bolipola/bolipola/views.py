@@ -129,13 +129,25 @@ def sale_information(request, sale_id):
 @login_required
 def sale_historic(request):
     user = get_object_or_404(UserBoli, id=request.user.id)
+    years = []
 
     if user.is_staff:
         sales = Sale.objects.all().order_by('-date')
     else:
         sales = Sale.objects.all().filter(user_id=user.id).order_by('-date')
 
-    return render(request, 'sale/sale_historic.html', {'user':user, 'sales':sales})
+    for sale in sales:
+        if not years:
+            years.append(sale.date.year)
+            continue
+
+        years.append(sale.date.year)
+        for year in years:
+            if sale.date.year == year:
+                years.pop()
+                break
+
+    return render(request, 'sale/sale_historic.html', {'user':user, 'sales':sales, 'years':years})
 
 #Compra confirmada
 @login_required
