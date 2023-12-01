@@ -17,16 +17,30 @@ def bolirana(request):
         disponibility_to_date = datetime.datetime.strptime(disponibility, '%Y-%m-%d').date()
         place = request.POST.get('site', '')
         time_start = request.POST.get('hora-inicio', '')
+        time_start_to_hour = datetime.datetime.strptime(time_start, "%H:%M")
         time_end = request.POST.get('hora-fin', '')
+        time_end_to_hour = datetime.datetime.strptime(time_end, "%H:%M")
         cost = request.POST.get('cost', '')
         type = 'Bolirana'
 
+        if cost == "":
+            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Costo no válido')
+            return redirect('bolirana_form')
+        
+        if (str(time_start_to_hour.minute) == "30" or str(time_start_to_hour.minute) == "0") and (str(time_end_to_hour.minute) == "30" or str(time_end_to_hour.minute) == "0"):
+            pass
+        else:
+            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> La hora puesta no es correcta')
+            return redirect('bolirana_form')
+                    
         calendars = Calendar.objects.all()
+        reserves = Reservation.objects.all().filter(confirmed=True) # Falta terminar
+        
         for calendar in calendars:
             if disponibility_to_date == calendar.date:
                 messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Fecha no disponible, elige otro día')
-                return redirect('bolirana_form')
-
+                return redirect('bolirana_form')    
+        
         new_reservation = Reservation(place=place, type=type, date=disponibility_to_date, start_time=time_start, end_time=time_end, cost=cost)
         new_reservation.save()
         return redirect(f'/sale/{new_reservation.id}/{new_reservation.sale_type()}')
