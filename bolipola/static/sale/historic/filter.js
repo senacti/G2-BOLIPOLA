@@ -2,10 +2,37 @@ const filtersStatus = document.querySelectorAll(".status-filter");
 const filtersDate = document.querySelectorAll(".date-filter");
 const filterCancel = document.querySelector("#cancel");
 const dataRow = document.querySelectorAll(".data-row");
+const adversiment = document.querySelector("#adversiment");
+const selectYear = document.querySelector("#year");
+const selectMonth = document.querySelector("#month");
 let confirmated = true, process = true, cancel = false, dayActive = "", monthActive = "all", yearActive = "all"; 
+
+function putAdversiment(hide) {
+    if (hide) {
+        adversiment.style.display = "none";
+    } else {
+        adversiment.style.display = "grid";
+    }
+}
 
 // Lógica para acomodar todos los filtros mediante una condicional amplia
 function put() {
+    totalHidden = 0;
+
+    //Ajustando colores
+    if (yearActive == "all") {
+        selectYear.style.color = "#b74033";
+    } else {
+        selectYear.style.color = "black";
+    }
+
+    if (monthActive == "all") {
+        selectMonth.style.color = "#b74033";
+    } else {
+        selectMonth.style.color = "black";
+    }
+
+    //Escondiendo o mostrando según la lógica
     dataRow.forEach(element => {
         let type = element.cells.namedItem('status').innerHTML;
         let statusBool;
@@ -30,8 +57,15 @@ function put() {
             element.removeAttribute("hidden");
         } else {
             element.setAttribute("hidden", "true");
+            totalHidden++;
         }
     })
+
+    if (totalHidden == dataRow.length) {
+        putAdversiment(false);
+    } else {
+        putAdversiment(true);
+    }
 }
 
 function filterDate(value_year, value_month, value_day) {

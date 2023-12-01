@@ -103,27 +103,27 @@
 
       <div class="status-filter-container">
         <div class="filter-container">
-          <span>Ver confirmadas:</span>
-          <input type="checkbox" id="confirm" class="status-filter" checked>
+          <span>Confirmados</span>
+          <input type="checkbox" id="confirm" class="status-filter" style="accent-color: #aee8c7;" checked>
         </div>
 
         <div class="filter-container">
-          <span>Ver en proceso:</span>
-          <input type="checkbox" id="process" class="status-filter" checked>
+          <span>En proceso</span>
+          <input type="checkbox" id="process" class="status-filter" style="accent-color: #eedb8e;" checked>
         </div>
 
         <div class="filter-container">
-          <span>Ver canceladas:</span>
-          <input type="checkbox" id="cancel" class="status-filter">
+          <span>Cancelados</span>
+          <input type="checkbox" id="cancel" class="status-filter" style="accent-color: #dd8c85;">
         </div>
       </div>
 
       <div class="date-filter-container">
 
         <div class="filter-container">
-          <span>Año:</span>
+          <span>Año</span>
           <select id="year" class="date-filter">
-            <option value="all">Todos</option>
+            <option value="all" style="color: #b74033;">Todos</option>
             {% for year in years %}
             <option value="{{ year }}">{{ year }}</option>
             {% endfor %}
@@ -131,9 +131,9 @@
         </div>
 
         <div class="filter-container">
-          <span>Mes:</span>
+          <span>Mes</span>
           <select id="month" class="date-filter">
-            <option value="all">Todos</option>
+            <option value="all" style="color: #b74033;">Todos</option>
             <option value="1">Enero</option>
             <option value="2">Febrero</option>
             <option value="3">Marzo</option>
@@ -150,11 +150,16 @@
         </div>
 
         <div class="filter-container">
-          <span>Día:</span>
-          <input type="number" min="1" max="31" id="day" class="date-filter">
+          <span>Día</span>
+          <input type="number" min="1" max="31" id="day" class="date-filter" placeholder="Todos">
         </div>
 
       </div>
+    </div>
+
+    <div class="box__right-list-none" id="adversiment" name="none">
+      <img class="box__right-list-none-img" src="{% static 'profile/images/nada.png' %}">
+      <span class="box__right-list-none-span">No hay nada que mostrar</span>
     </div>
 
     <table>
@@ -177,7 +182,7 @@
           <th>Total a pagar</th>
         {% endif %}
       </tr>
-  
+
       {% for sale in sales %}
         <tr class="data-row" id="{{ sale.status_number }}" onclick="go(`{% url 'sale_information' sale.id %}`)">
           <td>{{ sale.id }}</td>
