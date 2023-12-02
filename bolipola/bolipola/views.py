@@ -1,5 +1,6 @@
 import os
 import json
+import time
 from . import settings
 from asgiref.sync import sync_to_async
 from django.utils import timezone
@@ -15,10 +16,35 @@ from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, Edi
 from user.models import UserBoli
 from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Entry, Output, CarInventory, Category, Calendar, Comment, Like
 
+#Funcionas extras
+def ajax_for_cooldown(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'res': 'null'})
+
+    if request.method == 'POST':
+        data = str(request.body)
+        data = data[2:]
+        data = data[:-1]
+        data_to_dictionary = json.loads(data)
+        num = int(data_to_dictionary['send'])
+        result_to_add = request.user.buy_cooldown - num
+        
+        if result_to_add <= 0:
+            request.user.buy_cooldown = 0
+        else:
+            request.user.buy_cooldown = result_to_add
+        request.user.save()
+
+        return JsonResponse({'res': num})
+
 #------------------Ventas---------------------------
 #Venta
 @login_required
 def sale(request, type_id, type_name):
+    if request.user.buy_cooldown > 0:
+        messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Cancelaste una compra hace poco, debes esperar {request.user.buy_cooldown} segundos')
+        return redirect('index')
+
     cars_inventorys = False
     #Detectando que tipo de venta es
     if type_name == 'Torneo':
@@ -222,6 +248,10 @@ def sale_cancel(request, sale_id):
 
     sale.status = 'Cancelado'
     sale.save()
+
+    if not request.user.is_staff:
+        request.user.buy_cooldown = 900
+        request.user.save()
 
     messages.error(request, f'<i class="fa-solid fa-circle-xmark fa-bounce"></i> Venta cancelada')
     return redirect(f'/sale/information/{sale_id}')
@@ -999,7 +1029,7 @@ def signin(request):
         else:
             messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Datos inválidos')
             return redirect('signin')
-    
+
     form = CustomSigninForm()
     return render(request, 'signin.html', {'form': form})
 

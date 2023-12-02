@@ -37,6 +37,7 @@ urlpatterns = [
     path('sale/information/<int:sale_id>/', views.sale_information, name='sale_information'),
     path('sale/confirm/<int:sale_id>/', views.sale_confirm, name='sale_confirm'),
     path('sale/cancel/<int:sale_id>/', views.sale_cancel, name='sale_cancel'),
+    path('cooldown/', views.ajax_for_cooldown, name='ajax_for_cooldown'),
     path('inventory/', views.inventory, name='inventory'),
     path('edit-product/<int:pk>/', views.edit_product, name='edit_product'),
     path('delete-product/<int:pk>/', views.delete_product, name='delete_product'),

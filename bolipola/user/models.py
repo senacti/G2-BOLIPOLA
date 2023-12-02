@@ -10,6 +10,7 @@ class UserBoli(AbstractUser):
     phone = models.CharField(null=True, max_length=10, verbose_name='Teléfono')
     gender = models.CharField(default='Otro',max_length=50, verbose_name='Género', null=True)
     range = models.PositiveIntegerField(default=0, verbose_name='Rango')
+    buy_cooldown = models.PositiveIntegerField(default=0, verbose_name='Enfriamiento para comprar')
     
     @property
     def age(self):
