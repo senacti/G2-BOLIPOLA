@@ -27,8 +27,8 @@ def validate_camps(date_strp, time_start_str, time_end_str, time_start_strp, tim
     reason = 'nada'
     i_minutes = 30
 
-    if time_start_strp > time_end_strp:
-        reason = '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Costo no válido'
+    if time_start_strp >= time_end_strp:
+        reason = '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Horas no válidas'
         return [False, reason]
 
     if cost == "":
