@@ -215,6 +215,11 @@ def sale_cancel(request, sale_id):
             car_inventory.inventory.product_quantity += car_inventory.quantity
             car_inventory.inventory.save()
             
+    if sale.type == 'Reserva':
+        sale_reservation = get_object_or_404(SaleReservation, sale_id=sale.id)
+        sale_reservation.reservation.confirmed = False
+        sale_reservation.reservation.save()
+
     sale.status = 'Cancelado'
     sale.save()
 
