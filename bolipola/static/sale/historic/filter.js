@@ -5,7 +5,7 @@ const dataRow = document.querySelectorAll(".data-row");
 const adversiment = document.querySelector("#adversiment");
 const selectYear = document.querySelector("#year");
 const selectMonth = document.querySelector("#month");
-let confirmated = true, process = true, cancel = false, dayActive = "", monthActive = "all", yearActive = "all"; 
+let confirmated = true, process = true, cancel = true, dayActive = "", monthActive = "all", yearActive = "all"; 
 
 function putAdversiment(hide) {
     if (hide) {

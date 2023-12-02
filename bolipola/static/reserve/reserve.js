@@ -9,7 +9,7 @@ function verifyMinutes(node) {
 
     if (minutes != 30 || minutes != 0) {
 
-        if (minutes > 0 && minutes <= 15) {
+        if (minutes >= 0 && minutes <= 15) {
             minutes = 0;
         } else if (minutes > 15 && minutes <= 30) {
             minutes = 30;

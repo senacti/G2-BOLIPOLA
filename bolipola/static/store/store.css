@@ -69,6 +69,7 @@
 	width: 45rem;
     height: 100vh;
     transition: 0.5s;
+	z-index: 9002;
 }
 
 .active .card{
