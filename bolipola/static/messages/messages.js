@@ -7,7 +7,7 @@ function removeMessage() {
 
     setTimeout(() => {
         message.style.display = "none";
-    }, 4000)
+    }, 4500)
 }
 
 removeMessage();

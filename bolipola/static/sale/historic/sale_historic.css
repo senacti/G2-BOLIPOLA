@@ -16,6 +16,7 @@ body {
 .status-filter-container {
     display: grid;
     place-items: center;
+    order: 1;
 }
 
 .status-filter-title {
@@ -49,6 +50,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.8rem;
+    order: 2;
 }
 
 .date-filter-container .filter-container {
@@ -86,6 +88,32 @@ body {
 
 .date-filter-container .filter-container input::placeholder {
     color: #b74033;
+}
+
+.calc-money {
+    order: 3;
+}
+
+.button-calc-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 29.5rem;
+}
+
+.button-calc-container #indicate-date, .button-calc-container #watch-calculated-money{
+    display: block;
+}
+
+.button-calc-container #indicate-date {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-style: oblique;
+}
+
+.button-calc-container #watch-calculated-money {
+    font-size: 1.6rem;
+    font-weight: bold;
 }
 
 .box__right-list-none {

@@ -3,7 +3,6 @@ let send = "0";
 let sum = 0;
 
 if (!localStorage.getItem("cooldownToQuit")) {
-    console.log(true)
     localStorage.setItem("cooldownToQuit", sum);
 }
 
@@ -49,7 +48,6 @@ window.addEventListener('beforeunload', e => {
 })
 
 if (localStorage.getItem("cooldownToQuit")) {
-    console.log(`quitando ${localStorage.getItem("cooldownToQuit")}`)
     sendJson();
 }
 

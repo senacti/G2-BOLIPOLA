@@ -276,12 +276,18 @@ html {
     padding-bottom: 0.5rem;
     padding-left: 0.35rem;
     border-bottom: 0.1rem solid #CCD1D1;
+    transition: 270ms ease;
 }
 
 .box__right-list-element:hover {
     cursor: pointer;
     background-color: #e7e8e8 !important;
     border-radius: 0.2rem;
+    color: var(--primary-color);
+}
+
+.box__right-list-element:hover .box__right-list-element-desc {
+    color: var(--primary-color);
 }
 
 .box__right-list-element i {
@@ -296,7 +302,7 @@ html {
 
 .box__right-list-element-desc {
     font-size: 0.8rem;
-    color: var(--primary-color);
+    color: rgb(39, 39, 39);
 }
 
 .box__right-moreList-button i {

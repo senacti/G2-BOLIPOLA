@@ -118,6 +118,15 @@
         </div>
       </div>
 
+      {% if user.is_staff %}
+      <div class="calc-money">
+        <div class="button-calc-container">
+          <span id="indicate-date">Total ganancias <span></span>:</span>
+          <span id="watch-calculated-money"></span>
+        </div>
+      </div>
+      {% endif %}
+
       <div class="date-filter-container">
 
         <div class="filter-container">
@@ -194,7 +203,7 @@
           <td class="status" id="status">{{ sale.status }}</td>
           <td class="paymentType">{{ sale.payment_type }}</td>
           <td class="date" id="date" day="{{ sale.date.day }}" month="{{ sale.date.month }}" year="{{ sale.date.year }}">{{ sale.date.date }}</td>
-          <td>{{ sale.cost_to_money }}</td>
+          <td id="cost">{{ sale.cost_to_money }}</td>
         </tr>
       {% endfor %}
     </table>

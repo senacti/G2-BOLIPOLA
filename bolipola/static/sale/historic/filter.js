@@ -1,11 +1,73 @@
 const filtersStatus = document.querySelectorAll(".status-filter");
 const filtersDate = document.querySelectorAll(".date-filter");
 const filterCancel = document.querySelector("#cancel");
+const watchProfits = document.querySelector("#watch-calculated-money");
+const watchProfitsDate = document.querySelector("#indicate-date span");
 const dataRow = document.querySelectorAll(".data-row");
 const adversiment = document.querySelector("#adversiment");
 const selectYear = document.querySelector("#year");
 const selectMonth = document.querySelector("#month");
+const selectDay = document.querySelector('#day');
 let confirmated = true, process = true, cancel = true, dayActive = "", monthActive = "all", yearActive = "all"; 
+
+function putProfits(cost) {
+    watchProfits.style.color = "black";
+    let moneyResult = "<span style='color: #145A32; margin-right: 0.2rem;'>$</span>" + cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    let dateResult = "";
+
+    watchProfits.innerHTML = moneyResult;
+
+    if (!confirmated) {
+        dateResult = "Confirmados desactivado";
+        watchProfits.style.color = "#b74033";
+        return watchProfits.innerHTML = dateResult;
+    }
+
+    if (dayActive == "" && monthActive == "all" && yearActive == "all") {
+        dateResult += "en todo este tiempo";
+    }
+
+    if (dayActive != "") {
+        if (monthActive == "all" || yearActive == "all") {
+            dateResult += `días ${selectDay.value} `;
+        } else {
+            dateResult += `día ${selectDay.value} `;
+        }
+    }
+
+    if (monthActive != "all") {
+        dateResult += `de ${selectMonth.selectedOptions[0].innerHTML.toLowerCase()} `;
+    }
+
+    if (yearActive != "all") {
+        dateResult += `de ${selectYear.value}`;
+    }
+
+    return watchProfitsDate.innerHTML = dateResult;
+}
+
+function calculateProfits() {
+    let arrayMoney = [];
+    let result = 0;
+    dataRow.forEach(element => {
+        if (element.getAttribute("hidden")) {
+            return;
+        }
+
+        if (element.cells.namedItem('status').innerHTML == "En proceso..." 
+            || 
+            element.cells.namedItem('status').innerHTML == "Cancelado") {
+            return;
+        }
+
+        arrayMoney.push(Number(element.cells.namedItem('cost').innerHTML.replace(/\D/g, '')))
+        arrayMoney.forEach(cost => {
+            result += cost;
+        })
+    })
+
+    putProfits(result);
+}
 
 function putAdversiment(hide) {
     if (hide) {
@@ -61,6 +123,7 @@ function put() {
         }
     })
 
+    calculateProfits();
     if (totalHidden == dataRow.length) {
         putAdversiment(false);
     } else {
