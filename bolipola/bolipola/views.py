@@ -233,6 +233,10 @@ def sale_cancel(request, sale_id):
         if not sale.user_id == request.user.id:
             raise Http404('Restringido')
     
+    if request.user.buy_cooldown > 0:
+        messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Cancelaste una compra hace poco, debes esperar {request.user.buy_cooldown} segundos')
+        return redirect('index')
+
     if sale.type == 'Productos':
         sale_car = get_object_or_404(SaleCar, sale_id=sale.id)
         cars_inventorys = CarInventory.objects.all().filter(car_id=sale_car.car.id)
@@ -265,7 +269,7 @@ def store(request):
     if request.user.is_staff:
         return redirect('inventory')
 
-    #Creando carrito si el usuario no lo tiene
+    #Creando carrito si el cliente no lo tiene
     car = Car.objects.all().filter(user_id=request.user.id, active=True)
     if not car.exists():
         new_car = Car(user_id=request.user.id)
@@ -275,6 +279,10 @@ def store(request):
 
     cars_inventorys = CarInventory.objects.filter(car_id=car.id).all()
     inventorys = Inventory.objects.all().filter(disabled=False)
+
+    # Si el cliente es menor de edad no mostrar productos para mayores
+    if request.user.age < 18:
+        inventorys = Inventory.objects.all().filter(disabled=False, product__category__forOlder=False)
 
     # Comparando para que fechas de vencimiento próximas no se muestren
     today = timezone.now().date()
