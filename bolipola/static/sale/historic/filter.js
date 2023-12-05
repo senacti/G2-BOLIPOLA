@@ -49,6 +49,7 @@ function putProfits(cost) {
 function calculateProfits() {
     let arrayMoney = [];
     let result = 0;
+    
     dataRow.forEach(element => {
         if (element.getAttribute("hidden")) {
             return;
@@ -61,9 +62,10 @@ function calculateProfits() {
         }
 
         arrayMoney.push(Number(element.cells.namedItem('cost').innerHTML.replace(/\D/g, '')))
-        arrayMoney.forEach(cost => {
-            result += cost;
-        })
+    })
+
+    arrayMoney.forEach(cost => {
+        result += cost;
     })
 
     putProfits(result);

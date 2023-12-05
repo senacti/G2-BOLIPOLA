@@ -26,6 +26,28 @@ h2 span {
     margin-left: 0.6rem;
 }
 
+.indicate-winner {
+    display: grid;
+    place-items: center;
+}
+
+.indicate-winner div {
+    border: 0.4rem solid transparent;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    border-radius: 1.5rem;
+}
+
+.indicate-winner span {
+    display: block;
+}
+
+.indicate-winner #winner, #tied {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 .form {
     display: grid;
 }
@@ -70,9 +92,10 @@ td span input:disabled {
 }
 
 img {
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
 }
+
 
 .buttons {
     display: flex;

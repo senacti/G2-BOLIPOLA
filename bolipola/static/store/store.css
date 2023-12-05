@@ -130,9 +130,12 @@
 }
 
 .checkOut .total {
-	color: #FBFCFC;
+	display: grid;
+	place-items: center;
 	background-color: #228B22;
+	color: #FBFCFC;
 	border: 0;
+	text-decoration: none;
 }
 
 .checkOut [group="down"] {

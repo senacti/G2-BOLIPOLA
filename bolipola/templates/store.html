@@ -145,7 +145,9 @@
                     <h1 class="title">Total:</h1>
                     <h1 class="totalPrice">$0</h1>
                     <div class="closeShopping" group="down">Cerrar</div>
-                <a href="{% url 'sale' car.id car.sale_type %}" class="total" group="down">Pagar</a>
+                <a href="{% url 'sale' car.id car.sale_type %}" class="total" group="down">
+                    <span><i class="fa-solid fa-dollar-sign fa-lg"></i> Pagar</span>
+                </a>
             </div>
         </form>
     </div>

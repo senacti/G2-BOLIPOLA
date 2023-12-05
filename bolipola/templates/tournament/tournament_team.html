@@ -16,7 +16,7 @@
     <title>Equipos de fútbol</title>
     <link rel="stylesheet" href="{% static 'tournament/tournament_team/tournament_team.css' %}">
 </head>
-    <h1>Equipos del torneo</h1>
+    <h1>Equipos del torneo {{ tournament.name }}</h1>
     <h2>Estado del torneo: 
         {% if tournament.active %}
         <span style="color: green;">Activo</span>
@@ -39,6 +39,25 @@
             </span>
         </div>
         {% endfor %}
+    {% endif %}
+    
+    {% if not tournament.active %}
+    <div class="indicate-winner">
+        {% if tied %}
+        <div style="border-color: black;">
+            <span id="tied" style="color: #6E2C00;">{{ winner_team }}</span>
+        </div>
+        {% else %}
+            <div style="border-color: {{ winner_team.hexcolor }};">
+                <span style="font-size: 1.2rem;">El ganador es:</span>
+                <span id="winner" style="color: {{ winner_team.hexcolor }};">{{ winner_team.name }}</span>
+
+                {% if winner_team.user_id == user.id %}
+                <span style="font-size: 1.4rem;">🤩TU EQUIPO🤩</span>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
     {% endif %}
 
     <div class="form" method="post">
@@ -69,7 +88,11 @@
                         {% csrf_token %}
                         <input type="hidden" name="intermediate_id" value="{{ team.id }}">
                         <tr class="boardHead__list" id="titles">
-                            <td><span><img src="{{ team.team.avatar.url }}" alt=""></span></td>
+                            <td>
+                                <span>
+                                    <img src="{{ team.team.avatar.url }}" alt="">
+                                </span>
+                            </td>
                             <td><span>
                                 <a href="{% url 'tournament_players' tournament.id team.team.id %}" id="teamName" style="color: {{ team.team.hexcolor }};">{{ team.team.name }}</a>
                             </span></td>
@@ -91,10 +114,19 @@
                     {% elif not user.is_staff or not tournament.active %}
                     
                     <tr class="boardHead__list" id="titles">
-                        <td><span><img src="{{ team.team.avatar.url }}" alt=""></span></td>
+                        <td>
+                            <span>
+                                <img 
+                                src="{{ team.team.avatar.url }}" 
+                                alt="" 
+                                style="border: 0.5rem dotted {{ team.team.hexcolor }};">
+                            </span>
+                        </td>
+
                         <td>
                             <span>{{ team.team.name }}</span>
                         </td>
+
                         <td><span><input type="number" class="inf" disabled></span></td>
                         <td><span><input type="number" class="inf" disabled></span></td>
                         <td><span><input type="number" class="inf" disabled></span></td>
@@ -109,11 +141,12 @@
                 {% endfor %}
             </tbody>
         </table>
-        
+
         <div class="buttons">
             <div class="buttons__container">
                 <a href="{% url 'tournament' %}"><button type="button">Salir</button></a>
             </div>
+
             {% if user.is_staff and tournament.active %}
             <div class="buttons__container">
                 <button type="button" id="finalizar">Finalizar torneo
@@ -141,6 +174,7 @@
         <li class="infToPut">{{ team.games_played }}</li>
         <li class="infToPut">{{ team.score }}</li>
         {% endfor %}
+
         <!--Ayuda a evitar bug de addeventlistener-->
         <span id="finalizar" hidden disabled></span>
         <span class="sure-container" hidden disabled></span>
