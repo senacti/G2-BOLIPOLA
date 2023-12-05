@@ -64,6 +64,7 @@
         <table border="1">
             <thead class="boardHead">
                 <tr class="boardHead__list" id="titles">
+                    <th>Posición</th>
                     <th>Imágen del equipo</th>
                     <th>Nombre del equipo</th>
                     <th>Goles a favor</th>
@@ -87,7 +88,14 @@
                     <form action="" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="intermediate_id" value="{{ team.id }}">
-                        <tr class="boardHead__list" id="titles">
+                        <tr class="boardHead__list" id="titles"> 
+                            <td>
+                            {% for team_position in teams_position %}
+                                {% if team_position.0 == team.team.id %}
+                                    <span>{{ team_position.2 }}</span>        
+                                {% endif %}
+                            {% endfor %}
+                            </td>
                             <td>
                                 <span>
                                     <img src="{{ team.team.avatar.url }}" alt="">
@@ -114,6 +122,13 @@
                     {% elif not user.is_staff or not tournament.active %}
                     
                     <tr class="boardHead__list" id="titles">
+                        <td>
+                            {% for team_position in teams_position %}
+                                {% if team_position.0 == team.team.id %}
+                                    <span>{{ team_position.2 }}</span>        
+                                {% endif %}
+                            {% endfor %}
+                        </td>
                         <td>
                             <span>
                                 <img 
