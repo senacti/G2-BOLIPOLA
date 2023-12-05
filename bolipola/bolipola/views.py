@@ -44,7 +44,17 @@ def sale(request, type_id, type_name):
     if request.user.buy_cooldown > 0:
         messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Cancelaste una compra hace poco, debes esperar {request.user.buy_cooldown} segundos')
         return redirect('index')
-
+    
+    sales_user = Sale.objects.all().filter(userd_id=request.user.id)
+    total_process = 0
+    if sales_user.exists():
+        for sale_user in sales_user:
+            if (sale_user.status == "En proceso..."):
+                total_process += 1
+                if total_process >= 3:
+                    messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Tienes 3 compras en proceso')
+                    return redirect('index')
+    
     cars_inventorys = False
     #Detectando que tipo de venta es
     if type_name == 'Torneo':

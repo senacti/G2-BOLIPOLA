@@ -266,6 +266,10 @@ class TournamentTeam(models.Model):
     def __str__(self):
         return str(f'{self.tournament.name} - {self.team.name}')
 
+    def position(self):
+        teams = TournamentTeam.objects.all().filter(Tournament_id=self.tournament.id)
+        return 0
+        
     class Meta:
         verbose_name = 'Torneo y equipo'
         verbose_name_plural = 'Torneos y equipos'
