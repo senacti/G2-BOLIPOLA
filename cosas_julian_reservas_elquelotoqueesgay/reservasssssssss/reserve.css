@@ -3,12 +3,18 @@ html {
 }
 
 .container {
-    padding: 2rem;
-    width: 100%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    width: 30%;
+    position: relative;
+    right: 50rem;
 }
-
+.container-2{
+    display: grid;
+    justify-content: center;
+    position: relative;
+    top: -47.6rem;
+    right: -46rem;
+}
 .admin {
     position: relative;
     margin: 2rem 0;
@@ -31,30 +37,16 @@ html {
     background-color: #a33529;
 }
 .calendary-availability{
+    height: max -content;
     width: max-content;
 }
-#left-mounth{
-    cursor: pointer;
-    font-size: 3rem;
-    position: relative;
-    right: 8rem;
-    top: 2.5rem;
-}
-#right-mounth{
-    cursor: pointer;
-    font-size: 3rem;
-    position: relative;
-    right: -15rem;
-    top: -2.5rem;
-}
-.calendary-mounth{
-    background-color: #fe1900a8;
+.header-calendary{
+    background-color: #cb4435e7;
     display: grid;
     justify-content: center;
     border: solid;
     border-radius: 3rem 3rem 0 0;
 }
-
 .week{
     display: flex;
     border-left: solid;
@@ -211,14 +203,3 @@ button[type="submit"]:hover, a button:hover {
 }
 
 /* Estilos para pantallas pequeñas */
-@media screen and (max-width: 600px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .reserva {
-        width: 100%;
-        margin: 0;
-    }
-}
