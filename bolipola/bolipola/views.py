@@ -640,10 +640,29 @@ def tournament_cancel(request, tournament_id):
 @login_required
 def tournament_teams(request, tournament_id):
     user = request.user
-    teams = TournamentTeam.objects.all().filter(tournament_id=tournament_id)
+    teams = TournamentTeam.objects.all().filter(tournament_id=tournament_id).order_by('score')
     tournament = get_object_or_404(Tournament, id=tournament_id)
+    tied = False
+
+    # Detectar equipo ganador
+    if not tournament.active:
+        winner_team = teams[0].team
+        for i in range(0, len(teams)):
+            if i + 1 == len(teams):
+                break
+            if teams[i].score > winner_team.score:
+                winner_team = teams[i]
+            if teams[i].score == winner_team.score:
+                tied = True
+                winner_team = "Hay dos o más equipos con los mismos puntos<br>es un empate 🤝"
+                break
+    else:
+        winner_team = False
 
     if request.method == 'POST':
+        if not tournament.active:
+            return redirect('tournament')
+
         intermediate_id = request.POST.get('intermediate_id', '')
         team_form = get_object_or_404(TournamentTeam, id=intermediate_id)
         form = TournamentTeamForm(request.POST, instance=team_form)
@@ -664,7 +683,14 @@ def tournament_teams(request, tournament_id):
     else:
        form = TournamentTeamForm()
 
-    return render(request, 'tournament/tournament_team.html', {'teams':teams, 'user':user, 'tournament':tournament,'form':form})
+    return render(request, 'tournament/tournament_team.html', {
+        'teams': teams, 
+        'user': user, 
+        'tournament': tournament,
+        'form': form,
+        'tied': tied,
+        'winner_team': winner_team,
+    })
 
 #Inscripción a torneo
 @login_required
