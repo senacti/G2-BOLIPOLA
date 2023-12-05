@@ -193,7 +193,32 @@
         </script>
     <script src="{% static 'header/header.js' %}"></script>
     <script src="{% static 'messages/messages.js' %}"></script>
-    <script src="{% static 'reserve/reserve.js' %}"></script>
+    {% if user.is_staff %}
+    <script>
+        const form = document.querySelector(".form-calendar");
+        const buttonDay = document.querySelector(".dispButton");
+        const firstInput = document.querySelector(".input-container input");
+        let active = false;
+
+        buttonDay.addEventListener("click", () => {
+            if (!active) {
+                form.style.display = "block";
+                firstInput.focus();
+                active = true;
+            } else {
+                form.style.display = "none";
+                active = false;
+            }
+        })
+
+        window.addEventListener("click", (e) => {
+            if (e.target.attributes.group == undefined && active) {
+                form.style.display = "none";
+                active = false;
+            }
+        })
+    </script>
+    {% endif %}
     <script src="{% static 'cooldown_buy/cooldown.js' %}"></script>
 </body>
 </html>
