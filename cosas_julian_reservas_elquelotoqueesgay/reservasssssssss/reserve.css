@@ -1,0 +1,224 @@
+html {
+    font-size: 100%;
+}
+
+.container {
+    padding: 2rem;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.admin {
+    position: relative;
+    margin: 2rem 0;
+    display: grid;
+    place-items: center;
+}
+
+.admin button {
+	color: #fff;
+	background-color: #c63424;
+	padding: 1.5rem;
+    border: 0.2rem solid black;
+	border-radius: 1rem;
+	text-decoration: none;
+	font-size: 1.6rem;
+	font-weight: 600;
+}
+
+.admin button:hover {
+    background-color: #a33529;
+}
+.calendary-availability{
+    width: max-content;
+}
+#left-mounth{
+    cursor: pointer;
+    font-size: 3rem;
+    position: relative;
+    right: 8rem;
+    top: 2.5rem;
+}
+#right-mounth{
+    cursor: pointer;
+    font-size: 3rem;
+    position: relative;
+    right: -15rem;
+    top: -2.5rem;
+}
+.calendary-mounth{
+    background-color: #fe1900a8;
+    display: grid;
+    justify-content: center;
+    border: solid;
+    border-radius: 3rem 3rem 0 0;
+}
+
+.week{
+    display: flex;
+    border-left: solid;
+    border-right: solid;
+}
+.name-days{
+    padding: 0.5rem;
+    font-size: 1.7rem;
+}
+.name-days:hover {
+    background-color: #d9d8d8;
+    cursor: pointer;
+}
+.calendary-day{
+    height: 30rem;
+    padding: 1rem;
+    border: solid;
+    border-radius: 0 0 3rem 3rem;
+}
+.days{
+    justify-content: space-between;
+    margin: 1px;
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: white;
+    width: 4rem;
+    height: 5rem;
+}
+.days:hover{
+    background-color: #d9d8d8;
+}
+.info-show{
+    background-color: #fe19008e;;
+    position: relative;
+    top: -27.5rem;
+    right: -33rem;
+    width: 17.9rem;
+    border: dashed;
+    border-radius: 1rem;
+    display: none;
+}
+.info-show p{
+    text-align: center;
+    font-size: 2.9rem;
+}
+.info-show.visible{
+    display: block;
+}
+
+.reserva {
+    background-color: #fff;
+    padding: 1.4rem;
+    margin: 1rem;
+    border: 1px solid; 
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height: 75%;
+    width: 75%;
+    max-width: 400px;
+}
+
+.reserva p{
+    font-size: 2.2rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.reserva h2 {
+    background-color: #CB4335; 
+    color: #fff;
+    padding: 0.625rem;
+    margin: 0 0 0.625rem 0;
+}
+
+.reference-img {
+    width: 25em;
+    height: 25em;
+}
+
+button[type="submit"], a button {
+    background-color: #CB4335; 
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover, a button:hover {
+    background-color: #CB4335; 
+}
+
+.form-calendar {
+	position: absolute;
+	display: none;
+    top: 6rem;
+	width: fit-content;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+	border: 0.2rem solid #CB4335;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+	z-index: 9102;
+}
+  
+.form-calendar form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-calendar .input-container {
+	width: 100%;
+	margin: 2rem 0;
+}
+
+.form-calendar span {
+	display: block;
+	width: max-content;
+	font-size: 2rem;
+    color: #CB4335;
+}
+  
+.form-calendar input {
+    padding: 1rem;
+	width: 100%;
+    border: 0.2rem solid #ccc;
+    border-radius: 0.8rem;
+    outline: none;
+}
+
+.form-calendar input:focus {
+	border-color: #CB4335;
+}
+
+.form-calendar button {
+    position: relative;
+	left: 50%;
+	transform: translate(-50%, 0);
+    background-color: #CB4335;
+    color: white;
+    padding: 1.1rem;
+    border: none;
+    border-radius: 1rem;
+	font-size: 2.3rem;
+    font-weight: bold;
+	transition: 250ms ease;
+}
+  
+.form-calendar button:hover {
+	cursor: pointer;
+    background-color: #a33529;
+}
+
+/* Estilos para pantallas pequeñas */
+@media screen and (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .reserva {
+        width: 100%;
+        margin: 0;
+    }
+}
