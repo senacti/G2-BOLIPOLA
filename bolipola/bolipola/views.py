@@ -45,7 +45,7 @@ def sale(request, type_id, type_name):
         messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Cancelaste una compra hace poco, debes esperar {request.user.buy_cooldown} segundos')
         return redirect('index')
     
-    sales_user = Sale.objects.all().filter(userd_id=request.user.id)
+    sales_user = Sale.objects.all().filter(user_id=request.user.id)
     total_process = 0
     if sales_user.exists():
         for sale_user in sales_user:
@@ -650,10 +650,17 @@ def tournament_cancel(request, tournament_id):
 @login_required
 def tournament_teams(request, tournament_id):
     user = request.user
-    teams = TournamentTeam.objects.all().filter(tournament_id=tournament_id).order_by('score')
+    teams = TournamentTeam.objects.all().filter(tournament_id=tournament_id).order_by('-score')
     tournament = get_object_or_404(Tournament, id=tournament_id)
     tied = False
-
+    
+    teams_position = []
+    for team in teams:
+        teams_position.append([team.team.id, team.score])
+    teams_position = sorted(teams_position, key=lambda x: x[1], reverse=True)
+    for i in range(0, len(teams_position)):
+        teams_position[i].append(i + 1)
+    
     # Detectar equipo ganador
     if not tournament.active:
         winner_team = teams[0].team
@@ -700,6 +707,7 @@ def tournament_teams(request, tournament_id):
         'form': form,
         'tied': tied,
         'winner_team': winner_team,
+        'teams_position': teams_position,
     })
 
 #Inscripción a torneo
