@@ -2,7 +2,6 @@ import os
 import json
 import time
 from . import settings
-from asgiref.sync import sync_to_async
 from django.utils import timezone
 from django.http import Http404, HttpResponse, JsonResponse
 from django.urls import reverse
@@ -647,10 +646,25 @@ def tournament_cancel(request, tournament_id):
     return redirect('tournament')
 
 #Torneo y equipos
+
+def tournament_teams_filter(request):
+    if not request.user.is_authenticated:
+        return redirect('index')
+
+    if request.method == 'POST':
+        data = str(request.body)
+        data = data[2:]
+        data = data[:-1]
+        data_to_dictionary = json.loads(data)
+        filter = data_to_dictionary['filter']     
+        tournament_id = data_to_dictionary['tournament_id']
+        
+    return redirect(f'/tournament/teams/{tournament_id}/{filter}')
+
 @login_required
-def tournament_teams(request, tournament_id):
+def tournament_teams(request, tournament_id, filter):
     user = request.user
-    teams = TournamentTeam.objects.all().filter(tournament_id=tournament_id).order_by('-score')
+    teams = TournamentTeam.objects.all().filter(tournament_id=tournament_id).order_by(f'-{filter}')
     tournament = get_object_or_404(Tournament, id=tournament_id)
     tied = False
     
@@ -663,15 +677,15 @@ def tournament_teams(request, tournament_id):
     
     # Detectar equipo ganador
     if not tournament.active:
+        winner_team_stats = teams[0]
         winner_team = teams[0].team
-        for i in range(0, len(teams)):
-            if i + 1 == len(teams):
-                break
-            if teams[i].score > winner_team.score:
-                winner_team = teams[i]
-            if teams[i].score == winner_team.score:
+        for team in teams:
+            if team.score > winner_team_stats.score:
+                winner_team = team.team
+                winner_team_stats = team
+            if team.score == winner_team_stats.score:
                 tied = True
-                winner_team = "Hay dos o más equipos con los mismos puntos<br>es un empate 🤝"
+                winner_team = "Hay dos o más equipos con los mismos puntos, es un empate 🤝"
                 break
     else:
         winner_team = False
@@ -696,7 +710,7 @@ def tournament_teams(request, tournament_id):
             form.save()
 
         messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Las estadísticas del equipo {team_form.team.name} han sido modificadas')
-        return redirect(f'/tournament/teams/{tournament_id}/')
+        return redirect(f'/tournament/teams/{tournament_id}/{filter}')
     else:
        form = TournamentTeamForm()
 
@@ -708,6 +722,7 @@ def tournament_teams(request, tournament_id):
         'tied': tied,
         'winner_team': winner_team,
         'teams_position': teams_position,
+        'filter': filter,
     })
 
 #Inscripción a torneo
