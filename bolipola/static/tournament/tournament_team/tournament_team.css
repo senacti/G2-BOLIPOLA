@@ -71,6 +71,38 @@ th, td {
 
 th {
     border: 0.15rem solid #CB4335;
+    padding: 0;
+}
+
+th div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 5rem;
+    margin: 1rem;
+}
+
+th div span {
+    text-align: center;
+}
+
+th div button {
+    position: relative;
+    width: 1.6rem;
+    height: 1.6rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: 0;
+    background-color: #CB4335;
+    border-radius: 0.3rem;
+    box-shadow: -0.1rem 0.1rem #696969;
+    color: #FBFCFC;
+    transition: 200ms ease;
+    cursor: pointer;
+}
+
+th div button:hover {
+    background-color: #ff2c14;
 }
 
 td span {
@@ -89,6 +121,7 @@ td span input {
 td span input:disabled {
     border: 0;
     background-color: transparent;
+    color: black;
 }
 
 img {
@@ -96,6 +129,13 @@ img {
     height: 3.5rem;
 }
 
+.score_value input {
+    position: relative;
+    left: 50%;
+    transform: translate(-25%, 0);
+    font-size: 2rem;
+    font-weight: bold;
+}
 
 .buttons {
     display: flex;

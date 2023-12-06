@@ -44,11 +44,11 @@
     {% if not tournament.active %}
     <div class="indicate-winner">
         {% if tied %}
-        <div style="border-color: black;">
+        <div style="border-color: black; box-shadow: 0 0 1.2rem 0.2rem #6E2C00">
             <span id="tied" style="color: #6E2C00;">{{ winner_team }}</span>
         </div>
         {% else %}
-            <div style="border-color: {{ winner_team.hexcolor }};">
+            <div style="border-color: black; box-shadow: 0 0 1.2rem 0.2rem {{ winner_team.hexcolor }};">
                 <span style="font-size: 1.2rem;">El ganador es:</span>
                 <span id="winner" style="color: {{ winner_team.hexcolor }};">{{ winner_team.name }}</span>
 
@@ -64,19 +64,50 @@
         <table border="1">
             <thead class="boardHead">
                 <tr class="boardHead__list" id="titles">
-                    <th>Posición</th>
-                    <th>Imágen del equipo</th>
-                    <th>Nombre del equipo</th>
-                    <th>Goles a favor</th>
-                    <th>Goles en contra</th>
-                    <th>Diferencia de goles</th>
-                    <th>Partidos empatados</th>
-                    <th>Partidos ganados</th>
-                    <th>Partidos perdidos</th>
-                    <th>Partidos jugados</th>
-                    <th>Puntos</th>
+                    <th><div style="display: grid; place-items: center;">
+                        <span>Posición</span>
+                    </div></th>
+                    <th><div style="display: grid; place-items: center;">
+                        <span>Imágen del equipo</span>
+                    </div></th>
+                    <th id="team__id"><div>
+                        <span>Nombre del equipo</span>
+                        <button onclick="sendJsonFilter('team__id')"><i class="fa-solid fa-filter"></i></button>
+                    </div></th>
+                    <th id="goals_for"><div>
+                        <span>Goles a favor</span>
+                        <button onclick="sendJsonFilter('goals_for')"><i class="fa-solid fa-filter"></i></button>
+                    </div></th>
+                    <th id="goals_against"><div>
+                        <span>Goles en contra</span>
+                        <button onclick="sendJsonFilter('goals_against')"><i class="fa-solid fa-filter"></i></button>
+                    </div></th>
+                    <th id="goals_diff"><div>
+                        <span>Diferencia de goles</span>
+                        <button onclick="sendJsonFilter('goals_diff')"><i class="fa-solid fa-filter"></i></button>
+                    </div></th>
+                    <th id="games_tied"><div>
+                        <span>Partidos empatados</span>
+                        <button onclick="sendJsonFilter('games_tied')"><i class="fa-solid fa-filter"></i></button>
+                    </div></th>
+                    <th id="games_won"><div>
+                        <span>Partidos ganados</span>
+                        <button onclick="sendJsonFilter('games_won')"><i class="fa-solid fa-filter"></i></button>
+                    </div></th>
+                    <th id="games_lost"><div>
+                        <span>Partidos perdidos</span>
+                        <button onclick="sendJsonFilter('games_lost')"><i class="fa-solid fa-filter"></i></button>
+                    </div></th>
+                    <th id="games_played"><div>
+                        <span>Partidos jugados</span>
+                        <button onclick="sendJsonFilter('games_played')"><i class="fa-solid fa-filter"></i></button>
+                    </div></th>
+                    <th id="score"><div>
+                        <span>Puntos</span>
+                        <button onclick="sendJsonFilter('score')"><i class="fa-solid fa-filter"></i></button>
+                    </div></th>
                     {% if user.is_staff and tournament.active %}
-                    <th>Guardar información</th>
+                    <th><div style="display: grid; place-items: center;"><span>Guardar información</span></div></th>
                     {% endif %}
                 </tr>
             </thead>
@@ -89,13 +120,23 @@
                         {% csrf_token %}
                         <input type="hidden" name="intermediate_id" value="{{ team.id }}">
                         <tr class="boardHead__list" id="titles"> 
-                            <td>
                             {% for team_position in teams_position %}
                                 {% if team_position.0 == team.team.id %}
-                                    <span>{{ team_position.2 }}</span>        
+                                <td 
+                                    style="
+                                        {% if team_position.2 == 1 %}
+                                            background-color: #F7DC6F;
+                                        {% elif team_position.2 == 2 %}
+                                            background-color: #D5DBDB;
+                                        {% elif team_position.2 == 3 %}
+                                            background-color: #d2a172;
+                                        {% endif %}
+                                    "
+                                >
+                                    <span style="font-weight: bold;">{{ team_position.2 }}</span>   
+                                </td>
                                 {% endif %}
                             {% endfor %}
-                            </td>
                             <td>
                                 <span>
                                     <img src="{{ team.team.avatar.url }}" alt="">
@@ -111,7 +152,7 @@
                             <td><span>{{ form.games_won }}</span></td>
                             <td><span>{{ form.games_lost }}</span></td>
                             <td><span><input type="number" class="inf" disabled></span></td>
-                            <td><span><input type="number" class="inf" disabled></span></td>
+                            <td class="score_value"><span><input type="number" class="inf" disabled></span></td>
                             <td>
                                 <div class="buttons__container" id="save">
                                     <button type="submit" id="submit"><i class="fa-solid fa-floppy-disk"></i></button>
@@ -122,13 +163,23 @@
                     {% elif not user.is_staff or not tournament.active %}
                     
                     <tr class="boardHead__list" id="titles">
-                        <td>
-                            {% for team_position in teams_position %}
+                        {% for team_position in teams_position %}
                                 {% if team_position.0 == team.team.id %}
-                                    <span>{{ team_position.2 }}</span>        
+                                <td 
+                                    style="
+                                        {% if team_position.2 == 1 %}
+                                            background-color: #F7DC6F;
+                                        {% elif team_position.2 == 2 %}
+                                            background-color: #D5DBDB;
+                                        {% elif team_position.2 == 3 %}
+                                            background-color: #d2a172;
+                                        {% endif %}
+                                    "
+                                >
+                                    <span style="font-weight: bold;">{{ team_position.2 }}</span>   
+                                </td>
                                 {% endif %}
-                            {% endfor %}
-                        </td>
+                        {% endfor %}
                         <td>
                             <span>
                                 <img 
@@ -149,7 +200,7 @@
                         <td><span><input type="number" class="inf" disabled></span></td>
                         <td><span><input type="number" class="inf" disabled></span></td>
                         <td><span><input type="number" class="inf" disabled></span></td>
-                        <td><span><input type="number" class="inf" disabled></span></td>
+                        <td class="score_value"><span><input type="number" class="inf" disabled></span></td>
                     </tr>
 
                     {% endif %}
@@ -169,7 +220,7 @@
                         ¿Estás seguro?
                         <div class="sure-container-links">
                             <a href="{% url 'tournament_cancel' tournament.id %}">SI</a>
-                            <a href="{% url 'tournament_teams' tournament.id %}">NO</a>
+                            <a href="{% url 'tournament_teams' tournament.id 'score' %}">NO</a>
                         </div>
                     </div>
                 </button>
@@ -195,12 +246,49 @@
         <span class="sure-container" hidden disabled></span>
     </ul>
 
+    <span class="tournament_id" id="{{ tournament.id }}" hidden disabled></span>
+    <span class="filter_name" id="{{ filter }}" hidden disabled></span>
     <script src="https://kit.fontawesome.com/81581fb069.js"></script>
     <script>
         const inputValue = document.querySelectorAll('.inf')
         const information = document.querySelectorAll('.infToPut')
         const finishButton = document.querySelector('#finalizar')
         const sureContainer = document.querySelector('.sure-container')
+        const ths = document.querySelectorAll('th')
+        let tournamentId = document.querySelector('.tournament_id').id
+        let filterName = document.querySelector('.filter_name').id
+
+        function getCSRFToken() {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith('csrftoken=')) {
+                    return cookie.split('=')[1];
+                }
+            }
+            return null;
+        }
+
+        function sendJsonFilter(filter) {
+            fetch(`/tournament/teams/filter/`, {
+                method: 'POST', 
+                headers: {
+                    'X-CSRFToken': getCSRFToken(),
+                },
+                body: JSON.stringify({
+                    'filter': `${filter}`,
+                    'tournament_id': `${tournamentId}`,
+                }),
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
 
         function setValues() {
             information.forEach((element, i) => {
@@ -208,10 +296,19 @@
             })
         }
 
-        finishButton.addEventListener('click', () => {
+        function setColorFilter() {
+            ths.forEach(element => {
+                if (element.id == filterName) {
+                    element.style.backgroundColor = "#D5D8DC";
+                }
+            })
+        }
+
+        finishButton.addEventListener('click', (e) => {
             sureContainer.style.display = 'block'
         })
 
+        setColorFilter()
         setValues()
     </script>
     <script src="{% static 'messages/messages.js' %}"></script>

@@ -221,7 +221,7 @@
 
                     {% if sale_tournament.tournament.active %}
                         {% if sale_tournament.sale.status == 'Comprado' %}
-                        <a href="{% url 'tournament_teams' sale_tournament.tournament.id %}"><input type="submit" value="Ver estadisticas" class="boton2" style="background-color: #2471A3"></a>
+                        <a href="{% url 'tournament_teams' sale_tournament.tournament.id 'score' %}"><input type="submit" value="Ver estadisticas" class="boton2" style="background-color: #2471A3"></a>
                         {% elif sale_tournament.sale.status == 'En proceso...' %}
                         <a href="#"><input type="submit" value="Pago en proceso" class="boton2" style="background-color: #E67E22"></a>
                         {% else %}
@@ -229,9 +229,9 @@
                         {% endif %}
                     {% else %}
                         {% if sale_tournament.sale.status == 'Cancelado' or sale_tournament.sale.status == 'En proceso...' %}
-                        <a href="{% url 'tournament_teams' sale_tournament.tournament.id %}"><button style="background-color: #B7950B;" class="boton2"><i style="font-size: 1.5rem; text-decoration: underline;">No aceptado</i>, ver resultados</button></a>
+                        <a href="{% url 'tournament_teams' sale_tournament.tournament.id 'score' %}"><button style="background-color: #B7950B;" class="boton2"><i style="font-size: 1.5rem; text-decoration: underline;">No aceptado</i>, ver resultados</button></a>
                         {% else %}
-                        <a href="{% url 'tournament_teams' sale_tournament.tournament.id %}"><input type="submit" value="Consultar resultados" class="boton2" style="background-color: #239B56;"></a>
+                        <a href="{% url 'tournament_teams' sale_tournament.tournament.id 'score' %}"><input type="submit" value="Consultar resultados" class="boton2" style="background-color: #239B56;"></a>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -259,9 +259,9 @@
                     </div>
 
                     {% if user.is_staff %}
-                        <a href="{% url 'tournament_teams' no_tournament.id %}"><input type="submit" value="Consultar" class="boton2"></a>
+                        <a href="{% url 'tournament_teams' no_tournament.id 'score' %}"><input type="submit" value="Consultar" class="boton2"></a>
                     {% elif not no_tournament.active %}
-                        <a href="{% url 'tournament_teams' no_tournament.id %}"><input style="background-color: #B7950B;" type="submit" value="Ver resultados" class="boton2"></a>
+                        <a href="{% url 'tournament_teams' no_tournament.id 'score' %}"><input style="background-color: #B7950B;" type="submit" value="Ver resultados" class="boton2"></a>
                     {% else %}
                         {% if has_tournament %}
                             <a href="#"><input type="submit" value="Estás inscrito en un torneo" class="boton2" style="background-color:#7F8C8D" disabled></a>
