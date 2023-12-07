@@ -1,0 +1,171 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página dividida</title>
+    <link rel="stylesheet" href="{% static '/entries_outputs/entries_outputs.css' %}">
+    <link rel="stylesheet" href="{% static 'header/header2.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container-hero">
+            <div class="container hero">
+                <div class="customer-support">
+                    {% if user.is_staff and user.is_authenticated %}
+                    
+                    <a href="{% url 'sale_historic' %}" class="content-customer-support" style="text-decoration: none;">
+                        <button class="button-db" style="
+                          color: #CB4335;
+                          border-color: #CB4335;
+                          background-color: #FBFCFC;
+                          box-shadow: none;
+                        ">
+                            <i class="fa-solid fa-coins"></i> <span>Ventas</span>
+                        </button>
+                    </a>
+    
+                    {% else %}
+    
+                    <i class="fa-solid fa-clock-rotate-left" id="indexIcon"></i>
+                    <div class="content-customer-support">
+                        <span class="numberTop">HISTORIAL</span>             
+                    </div>
+    
+                    {% endif %}
+                </div>
+    
+                <div class="container-logo">
+                    <a class="logo" href="/"></a>
+                </div>
+    
+                <div class="container-user">
+                    {% if user.is_authenticated %}
+                    <div class="linePerfil">
+                    </div>
+                    <div class="carAndPerfil" id="perfil">
+                        <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
+                        <ul class="perfilDropDown">
+                            <li><a href="{% url 'profile' %}">Ver perfil</a></li>
+                            {% if not user.is_staff %}
+                            <li><a href="{% url 'sale_historic' %}">Historial</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'signout' %}">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+    
+                    {% else %}
+    
+                    <div class="container-linkUser">
+                        <a class="linkUser" id="register" href="{% url 'register' %}">Regístrate</a></span>
+                        <a class="linkUser" id="signin" href="{% url 'signin' %}">Iniciar sesión</a>
+                    </div>
+    
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    
+        <div class="container-navbar">
+            <nav class="navbar container">
+                <i class="fa-solid fa-bars" id="dropdown"></i>
+                <ul class="menu">
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    {% if not user.is_staff %}
+                    <li><a href="{% url 'store' %}">Productos</a></li>
+                    {% endif %}
+                    {% if user.is_staff and user.is_authenticated %}
+                    <li><a href="{% url 'inventory' %}">Inventario</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li><a href="{% url 'tournament' %}">Torneos</a></li>
+                </ul>
+                <ul class="menuDropDown" hidden>
+                    <li hidden><a href="{% url 'index' %}">Inicio</a></li>
+                    {% if not user.is_staff %}
+                    <li><a href="{% url 'store' %}">Productos</a></li>
+                    {% endif %}
+                    {% if user.is_staff and user.is_authenticated %}
+                    <li hidden><a href="{% url 'inventory' %}">Inventario</a></li>
+                    {% endif %}
+                    <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
+                </ul>
+            </nav>
+        </div>
+      </header>
+      <div class="filter-form">
+        <form id="filterForm">
+            <label for="filterInput">Filtrar por:</label>
+            <input type="text" id="filterInput" name="filterInput">
+            <button type="button" onclick="filterBoxes()">Filtrar</button>
+        </form>
+    </div>
+    <h2 class="h2_entradas">Entradas</h2>
+    <h2 class="h2_salidas">Salidas</h2>
+
+    <div class="entrys_outputs">
+        <table class="entries-table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                <tr>
+                    <td>{{ entry.date }}</td>
+                    <td>{{ entry.inventory.product.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <div>
+    </div>
+        <table class="exits-table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Total Productos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for output in outputs %}
+                <tr>
+                    <td>{{ output.date }}</td>
+                    <td>
+                        {% if output.inventory_id == null %}
+                            {% for car_inventory in cars_inventories %}
+                                {% if car_inventory.car.id == output.car_id %}
+                                    {{ car_inventory.inventory.product.name }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {{ output.inventory.product.name }}
+                        {% endif %}
+                    </td>
+                    <td>{{ output.type }}</td>
+                    <td>{{ output.total_products }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        function filterBoxes() {
+            const filterValue = document.getElementById('filterInput').value.toLowerCase();
+            const boxes = document.querySelectorAll('.box');
+
+            boxes.forEach(box => {
+                const boxContent = box.innerText.toLowerCase();
+                box.style.display = boxContent.includes(filterValue) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
