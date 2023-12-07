@@ -10,40 +10,42 @@ const selectMonth = document.querySelector("#month");
 const selectDay = document.querySelector('#day');
 let confirmated = true, process = true, cancel = true, dayActive = "", monthActive = "all", yearActive = "all"; 
 
-function putProfits(cost) {
-    watchProfits.style.color = "black";
-    let moneyResult = "<span style='color: #145A32; margin-right: 0.2rem;'>$</span>" + cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    let dateResult = "";
-
-    watchProfits.innerHTML = moneyResult;
-
-    if (!confirmated) {
-        dateResult = "Confirmados desactivado";
-        watchProfits.style.color = "#b74033";
-        return watchProfits.innerHTML = dateResult;
-    }
-
-    if (dayActive == "" && monthActive == "all" && yearActive == "all") {
-        dateResult += "en todo este tiempo";
-    }
-
-    if (dayActive != "") {
-        if (monthActive == "all" || yearActive == "all") {
-            dateResult += `días ${selectDay.value} `;
-        } else {
-            dateResult += `día ${selectDay.value} `;
+if (watchProfits != null && watchProfitsDate != null) {
+    function putProfits(cost) {
+        watchProfits.style.color = "black";
+        let moneyResult = "<span style='color: #145A32; margin-right: 0.2rem;'>$</span>" + cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        let dateResult = "";
+    
+        watchProfits.innerHTML = moneyResult;
+    
+        if (!confirmated) {
+            dateResult = "Confirmados desactivado";
+            watchProfits.style.color = "#b74033";
+            return watchProfits.innerHTML = dateResult;
         }
+    
+        if (dayActive == "" && monthActive == "all" && yearActive == "all") {
+            dateResult += "en todo este tiempo";
+        }
+    
+        if (dayActive != "") {
+            if (monthActive == "all" || yearActive == "all") {
+                dateResult += `días ${selectDay.value} `;
+            } else {
+                dateResult += `día ${selectDay.value} `;
+            }
+        }
+    
+        if (monthActive != "all") {
+            dateResult += `de ${selectMonth.selectedOptions[0].innerHTML.toLowerCase()} `;
+        }
+    
+        if (yearActive != "all") {
+            dateResult += `de ${selectYear.value}`;
+        }
+    
+        return watchProfitsDate.innerHTML = dateResult;
     }
-
-    if (monthActive != "all") {
-        dateResult += `de ${selectMonth.selectedOptions[0].innerHTML.toLowerCase()} `;
-    }
-
-    if (yearActive != "all") {
-        dateResult += `de ${selectYear.value}`;
-    }
-
-    return watchProfitsDate.innerHTML = dateResult;
 }
 
 function calculateProfits() {
@@ -68,7 +70,9 @@ function calculateProfits() {
         result += cost;
     })
 
-    putProfits(result);
+    if (watchProfits != null && watchProfitsDate != null) {
+        putProfits(result);
+    }
 }
 
 function putAdversiment(hide) {

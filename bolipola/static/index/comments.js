@@ -1,4 +1,8 @@
 const hearths = document.querySelectorAll(".comment-like i");
+const filterForm = document.querySelector("#commentFilterForm");
+const filterSelect = document.querySelector("#commentFilterSelect");
+let commented = document.querySelector("#commented-bool").innerHTML;
+let filterName = document.querySelector("#filter-name").innerHTML;
 
 function obtenerCSRFToken() {
     // Obtiene el token CSRF de las cookies
@@ -75,3 +79,14 @@ hearths.forEach(element => {
         return uptdateHearth(element);
     })
 })
+
+filterSelect.addEventListener("change", () => {
+    filterForm.action = `/comment/filter/${filterSelect.value}/`;
+    filterForm.submit();
+})
+
+filterSelect.value = filterName
+
+if (commented == "true") {
+    filterSelect.focus();
+}

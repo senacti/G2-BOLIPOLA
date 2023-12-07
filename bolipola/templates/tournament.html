@@ -172,6 +172,16 @@
             <div class="main-top">
                 <a href="{% url 'team_edit' team.id %}"><button class="main-top-button">Ver equipo</button></a>
             </div>
+            <form method="post" action="{% url 'tournament_filter_finished' %}" id="formFinishedInput">
+                {% csrf_token %}
+                <span>Torneos finalizados <input 
+                    type="checkbox"
+                    id="watchFinishedInput"
+                    {% if watch_finished_tournament %}
+                    checked
+                    {% endif %}
+                ></span>
+            </form>
             <div class="main-top">
                 <a href="{% url 'player' %}"><button class="main-top-button">Mis jugadores</button></a>
             </div>
@@ -179,6 +189,16 @@
             <div class="main-top">
                 <a href="{% url 'team_edit' team.id %}"><button class="main-top-button">Editar equipo</button></a>
             </div>
+            <form method="post" action="{% url 'tournament_filter_finished' %}" id="formFinishedInput">
+                {% csrf_token %}
+                <span>Torneos finalizados <input 
+                    type="checkbox"
+                    id="watchFinishedInput"
+                    {% if watch_finished_tournament %}
+                    checked
+                    {% endif %}
+                ></span>
+            </form>
             <div class="main-top">
                 <a href="{% url 'player' %}"><button class="main-top-button">Consultar jugadores</button></a>
             </div>
@@ -188,8 +208,21 @@
         {% elif user.is_staff %}
 
         <div class="main-top">
-            <a><button class="main-top-button" id="createTournament">¡Crear torneo!</button>
-            </a>
+            <div class="admin-settings">
+                <form method="post" action="{% url 'tournament_filter_finished' %}" id="formFinishedInput">
+                    {% csrf_token %}
+                    <span>Torneos finalizados <input 
+                        type="checkbox"
+                        id="watchFinishedInput"
+                        {% if watch_finished_tournament %}
+                        checked
+                        {% endif %}
+                    ></span>
+                </form>
+    
+                <a><button class="main-top-button" id="createTournament">¡Crear torneo!</button>
+                </a>
+            </div>
         </div>
 
         {% endif %}

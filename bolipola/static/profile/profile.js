@@ -116,6 +116,3 @@ inputImg.addEventListener("change", (e) => {
 
 setNames()
 setBirthdate()
-setAdversiment()
-setColorStatus()
-setAliasColor()

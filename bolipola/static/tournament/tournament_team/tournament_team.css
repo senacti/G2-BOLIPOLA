@@ -9,6 +9,8 @@ html {
 }
 
 body {
+    display: grid;
+    place-items: center;
     padding: 1rem;
 }
 
@@ -16,14 +18,11 @@ h1 {
     text-align: center;
 }
 
-h2 {
-    display: flex;
-    font-size: 1.9rem;
-    margin: 1.35rem 0;
-}
-
-h2 span {
-    margin-left: 0.6rem;
+.tournament-status {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 2.3rem;
 }
 
 .indicate-winner {
@@ -50,6 +49,22 @@ h2 span {
 
 .form {
     display: grid;
+    width: fit-content;
+    justify-self: center;
+    overflow-x: visible;
+}
+
+.form .img-container {
+    display: grid;
+    place-items: center;
+    margin-top: 4.5rem;
+    width: 100%;
+}
+
+.form .img-container img {
+    position: absolute;
+    width: 10rem;
+    height: 5rem;
 }
 
 table {

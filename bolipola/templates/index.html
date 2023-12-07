@@ -159,6 +159,17 @@
     <div class="comments">
         <div class="title-comments">
             <h1>Comentarios</h1>
+            <div class="filter">
+                <h1>Filtrar por:</h1>
+                <form method="post" action="" id="commentFilterForm">
+                    {% csrf_token %}
+                    <select id="commentFilterSelect">
+                        <option value="-date">Fecha ↓</option>
+                        <option value="date">Fecha ↑<i class="fa-solid fa-arrow-down"></i></option>
+                        <option value="-score">Likes</option>
+                    </select>
+                </form>
+            </div>
         </div>
         <div class="box-comments">
             <div class="chat-comments">
@@ -166,12 +177,17 @@
 
                 <div class="commentContainer">
                     <img src="{{ comment.user.avatar.url }}" class="comment-img">
-                    <div class="comment-inf">
+                    <div class="comment-inf" id="{{ comment.id }}">
                         <span class="dateAndName">
                             <span class="name">{{ comment.user.first_name }} {{ comment.user.last_name }}</span> -
                             <span class="date">{{ comment.date.day }} / {{ comment.date.month }} / {{ comment.date.year }}</span>
                         </span>
-                        <span class="comment">{{ comment.text }}</span>
+                        <span class="comment">
+                            {{ comment.text }}
+                            {% if comment.user_id == user.id %}
+                            <button class="edit-comment"><i class="fa-solid fa-pen"></i></button>
+                            {% endif %}
+                        </span>
                     </div>
                     <div class="comment-like">
                         {% if user.is_authenticated %}
@@ -206,20 +222,21 @@
                     </div>
                 </div>
                 {% endfor %}
-                <!--
-                    <i class="fa-solid fa-heart fa-lg" name="liked"></i>
-                -->
+
             </div>
             
             {% if user.is_authenticated and not user.is_staff %}
             <form class="send-comments" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form_comment.text }}
-                <button id="button-send" type="submit" class="fa-solid fa-paper-plane">
+                <button id="button-send" type="submit" class="fa-solid fa-paper-plane"></button>
             </form>
             {% endif %}
         </div>
     </div>
+
+    <span hidden style="display: none;" id="commented-bool">{% if commented %}true{% else %}false{% endif %}</span>
+    <span hidden style="display: none;" id="filter-name">{{ commented_filter }}</span>
 
     <footer class="footer">
         <div class="container container-footer">

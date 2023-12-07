@@ -5,25 +5,17 @@
     <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'messages/crud/messages.css' %}">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'tournament/tournament_team/tournament_team.css' %}">
+    <title>Tabla torneo</title>
 </head>
 <body>
-    
-</body>
-</html>
-<html>
-<head>
-    <title>Equipos de fútbol</title>
-    <link rel="stylesheet" href="{% static 'tournament/tournament_team/tournament_team.css' %}">
-</head>
-    <h1>Equipos del torneo {{ tournament.name }}</h1>
-    <h2>Estado del torneo: 
+    <h1 class="tournament-status">Equipos del torneo {{ tournament.name }}
         {% if tournament.active %}
-        <span style="color: green;">Activo</span>
+        (<span style="color: green; border-bottom: 0.2rem solid gray;">Activo</span>)
         {% else %}
-        <span style="color: #CB4335;">Finalizado</span>
+        (<span style="color: #CB4335; border-bottom: 0.2rem solid gray;">Finalizado</span>)
         {% endif %}
-    </h2>
+    </h1>
 
     {% if messages %}
         {% for msg in messages %}
@@ -40,27 +32,30 @@
         </div>
         {% endfor %}
     {% endif %}
-    
-    {% if not tournament.active %}
-    <div class="indicate-winner">
-        {% if tied %}
-        <div style="border-color: black; box-shadow: 0 0 1.2rem 0.2rem #6E2C00">
-            <span id="tied" style="color: #6E2C00;">{{ winner_team }}</span>
-        </div>
-        {% else %}
-            <div style="border-color: black; box-shadow: 0 0 1.2rem 0.2rem {{ winner_team.hexcolor }};">
-                <span style="font-size: 1.2rem;">El ganador es:</span>
-                <span id="winner" style="color: {{ winner_team.hexcolor }};">{{ winner_team.name }}</span>
-
-                {% if winner_team.user_id == user.id %}
-                <span style="font-size: 1.4rem;">🤩TU EQUIPO🤩</span>
-                {% endif %}
-            </div>
-        {% endif %}
-    </div>
-    {% endif %}
 
     <div class="form" method="post">
+        {% if not tournament.active %}
+        <div class="indicate-winner">
+            {% if tied %}
+            <div style="border-color: black; box-shadow: 0 0 1.2rem 0.2rem #6E2C00">
+                <span id="tied" style="color: #6E2C00;">{{ winner_team }}</span>
+            </div>
+            {% else %}
+                <div style="border-color: black; box-shadow: 0 0 1.2rem 0.2rem {{ winner_team.hexcolor }};">
+                    <span style="font-size: 1.2rem;">El ganador es:</span>
+                    <span id="winner" style="color: {{ winner_team.hexcolor }};">{{ winner_team.name }}</span>
+    
+                    {% if winner_team.user_id == user.id %}
+                    <span style="font-size: 1.4rem;">🤩TU EQUIPO🤩</span>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="img-container">
+            <img src="{% static 'register/images/logo.png' %}" alt="Bolipola img">
+        </div>
         <table border="1">
             <thead class="boardHead">
                 <tr class="boardHead__list" id="titles">

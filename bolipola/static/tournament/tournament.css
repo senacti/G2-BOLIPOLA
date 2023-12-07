@@ -8,9 +8,15 @@
     margin: 0 auto;
 }
 
-.teamCreatedButtons {
+.teamCreatedButtons, .admin-settings {
 	display: flex;
 	justify-content: space-evenly;
+}
+
+.admin-settings {
+	flex-direction: column;
+	align-items: center;
+	gap: 2.5rem;
 }
 
 .main-top{
@@ -121,6 +127,27 @@
 .tournament_form button:hover, #submitTournament:hover {
 	cursor: pointer;
     background-color: #a33529;
+}
+
+#formFinishedInput {
+	display: flex;
+	align-items: center;
+}
+
+#formFinishedInput span {
+	position: relative;
+	top: 1rem;
+	font-size: 2rem;
+	font-weight: 600;
+}
+
+#formFinishedInput input {
+	position: relative;
+	top: 0.5rem;
+	width: 2.5rem;
+	height: 2.5rem;
+	accent-color: #CB4335;
+	cursor: pointer;
 }
 
 .info-torneo{
@@ -251,6 +278,14 @@ select, option {
 @media (max-width: 870px) {
 	.tarjeta {
 		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 550px) {
+	.teamCreatedButtons {
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
 	}
 }
 
