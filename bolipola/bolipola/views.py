@@ -14,6 +14,10 @@ from core.forms import TeamForm, PlayerForm, SaleForm, InventoryForm, ProductFor
 from user.forms import CustomUserForm, CustomSigninForm, ChangePasswordForm, EditProfileForm
 from user.models import UserBoli
 from core.models import Team, Player, Tournament, TournamentTeam, Product, Reservation, Sale, SaleTournament, SaleReservation, SaleCar, Car, Inventory, Entry, Output, CarInventory, Category, Calendar, Comment, Like
+watch_finished_tournament = False
+commented = False
+watch_commented = 0
+commented_filter = '-date'
 
 #Funcionas extras
 def ajax_for_cooldown(request):
@@ -561,9 +565,13 @@ def tournament(request):
     if not request.user.is_authenticated:
         return redirect('signin')
 
+    global watch_finished_tournament
     user = get_object_or_404(UserBoli, id=request.user.id)
     sales = Sale.objects.all().filter(type='Torneo',user_id=user.id)
-    tournaments = Tournament.objects.all().order_by('-active')
+    if watch_finished_tournament:
+        tournaments = Tournament.objects.all().order_by('-active')
+    else:
+        tournaments = Tournament.objects.all().filter(active=True)
     sales_tournaments_all = SaleTournament.objects.all()
 
     if request.user.is_authenticated:
@@ -621,7 +629,18 @@ def tournament(request):
     else:
         form = TournamentCreateForm()
 
-    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'sales_tournaments':sales_tournaments, 'tournaments':tournaments, 'has_tournament':has_tournament, 'no_tournaments':no_tournaments, 'form':form})
+    return render(request, 'tournament.html', {'has_team':has_team, 'team':team, 'sales_tournaments':sales_tournaments, 'tournaments':tournaments, 'has_tournament':has_tournament, 'no_tournaments':no_tournaments, 'watch_finished_tournament': watch_finished_tournament, 'form':form})
+
+
+def watch_finished_tournament_filter(request):
+    global watch_finished_tournament
+    if request.method == 'POST':
+        if watch_finished_tournament:
+            watch_finished_tournament = False
+            return redirect('tournament')
+        else:
+            watch_finished_tournament = True
+            return redirect('tournament')
 
 @login_required
 def tournament_cancel(request, tournament_id):
@@ -675,15 +694,17 @@ def tournament_teams(request, tournament_id, filter):
     for i in range(0, len(teams_position)):
         teams_position[i].append(i + 1)
     
-    # Detectar equipo ganador
+    # Detectar equipo ganador o empate
     if not tournament.active:
         winner_team_stats = teams[0]
         winner_team = teams[0].team
-        for team in teams:
-            if team.score > winner_team_stats.score:
-                winner_team = team.team
-                winner_team_stats = team
-            if team.score == winner_team_stats.score:
+        for i in range(0, len(teams)):
+            if i + 1 == len(teams):
+                break
+            if teams[i].score > winner_team_stats.score:
+                winner_team_stats = teams[i]
+                winner_team = teams[i].team
+            if teams[i].score == winner_team_stats.score:
                 tied = True
                 winner_team = "Hay dos o más equipos con los mismos puntos, es un empate 🤝"
                 break
@@ -769,6 +790,7 @@ def team(request):
             team.user = request.user
             team.save()
 
+            messages.success(request, f'<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Se ha creado el equipo')
             return redirect('tournament')
     else:
         form = TeamForm()
@@ -915,8 +937,18 @@ def reserve(request):
 
 #--------------------Inicio---------------------------
 #Inicio
-def index(request):    
-    comments = Comment.objects.all().order_by('-date')
+def index(request):
+    global commented
+    global watch_commented
+    global commented_filter
+
+    # Ver sección de comentarios en tal caso que se comente
+    if watch_commented == 0:
+        commented = False
+    if watch_commented == 1:
+        watch_commented = 0
+
+    comments = Comment.objects.all().order_by(f'{commented_filter}')
 
     if request.user.is_authenticated:
         user = get_object_or_404(UserBoli, id=request.user.id)
@@ -953,6 +985,9 @@ def index(request):
             #Creando comentario
             new_comment = Comment(text = form_comment.cleaned_data['text'], user_id=request.user.id)
             new_comment.save()
+            commented = True
+            watch_commented = 1
+            commented_filter = '-date'
             messages.success(request, '<i class="fa-solid fa-circle-check fa-bounce fa-xs"></i> Comentario publicado')
             return redirect('index')
         
@@ -960,7 +995,17 @@ def index(request):
             messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Comentario no válido, mínimo 10 caracteres')
             return redirect('index')
 
-    return render(request, 'index.html', {'user': user, 'inventorys':inventorys, 'form_comment': form_comment, 'comments': comments, 'comments_likes': comments_likes, 'comments_no_likes': comments_no_likes})
+    return render(request, 'index.html', {'user': user, 'inventorys':inventorys, 'form_comment': form_comment, 'comments': comments, 'comments_likes': comments_likes, 'comments_no_likes': comments_no_likes, 'commented': commented, 'commented_filter': commented_filter})
+
+def comment_filter(request, filter):
+    global commented
+    global watch_commented
+    global commented_filter
+    if request.method == 'POST':
+        commented = True
+        watch_commented = 1
+        commented_filter = filter
+    return redirect('index')
 
 # Fetch para los likes
 def add_like(request):

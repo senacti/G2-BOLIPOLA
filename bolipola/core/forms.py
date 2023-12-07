@@ -20,7 +20,7 @@ class CommentForm(forms.ModelForm):
                 'minlength': '10',
                 'maxlength': '150',
                 'placeholder': 'Escribe tu comentario...',
-                'autocomplete': 'off'
+                'autocomplete': 'off',
             }
         )
     )
