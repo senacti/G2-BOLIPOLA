@@ -391,7 +391,19 @@ def store_product_del(request):
     
     else:
         return JsonResponse({'error': 'Solo se aceptan solicitudes asincronas'})
+#--------------Entradas y salidas------------------
+def entries_outputs(request):
+    if not request.user.is_staff:
+        raise Http404('Restringido')
 
+    entries = Entry.objects.all()
+    outputs = Output.objects.all()
+    cars_inventories = []
+    for output in outputs:
+        if output.type == 'compra':
+            cars_inventories.append(CarInventory.objects.all().filter(car_id=output.car.id).first())
+
+    return render(request, 'inventario/entries_outputs/entries_outputs.html', {'entries':entries, 'outputs':outputs, 'cars_inventories':cars_inventories})
 #------------------Inventario-----------------------
 @login_required
 def inventory(request):

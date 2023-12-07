@@ -47,6 +47,7 @@ urlpatterns = [
     path('quantity-product/<int:pk>/<str:add>', views.quantity_product, name='quantity_product'),
     path('create-category/', views.create_category, name='create_category'),
     path('create-product/', views.create_product, name='create_product'),
+    path('entries_outputs/', views.entries_outputs, name='entries_outputs'),
 ]
 
 if settings.DEBUG:
