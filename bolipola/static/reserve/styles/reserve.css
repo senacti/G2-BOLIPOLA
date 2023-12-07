@@ -1,15 +1,22 @@
 html {
     font-size: 100%;
 }
-
-.container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 1.2rem;
-
+body{
+    height: 80rem;
 }
-
+.container {
+    height: max-content;
+    display: flex;
+    width: 100%;
+}
+.container-2{
+    width: max-content;
+    display: grid;
+    justify-content: center;
+    position: relative;
+    top: -46.2rem;
+    right: -125rem;
+}
 .admin {
     position: relative;
     margin: 2rem 0;
@@ -31,26 +38,165 @@ html {
 .admin button:hover {
     background-color: #a33529;
 }
-
-.containerMain {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.2rem;
+.calendary-availability{
+    height: max-content;
+    width: max-content;
 }
-
+.header-calendary{
+    background-color: #cb4435e7;
+    display: grid;
+    justify-content: center;
+    border: solid;
+    border-radius: 3rem 3rem 0 0;
+    height: 10rem;
+}
+#left-mounth{
+    cursor: pointer;
+    position: relative;
+    right: 15rem;
+    top: 3.3rem;
+    font-size: 3rem;
+}
+#right-mounth{
+    cursor: pointer;
+    position: relative;
+    right: -15rem;
+    top: -4.3rem;
+    font-size: 3rem;
+}
+#mounth{
+    position: relative;
+    right: 7.7rem;
+    top: -0.3rem;
+    font-size: 3rem;
+}
+.year{
+    position: relative;
+    right: -25rem;
+    top: -7.8rem;
+    font-size: 3rem;
+}
+.week{
+    display: flex;
+}
+.day-weak{
+    display: grid;
+    place-items: center;
+}
+.days{
+    color: black;
+    border: none;
+    box-shadow: rgba(128, 128, 128, 0.741) 0 0 3px;
+    width: 9rem;
+    cursor: pointer;
+    background-color: white;
+    height: 6rem;
+}
+.days:hover{
+    background-color: #d9d8d8;
+}
+.name-days{
+    border-bottom: solid;
+    height: 4rem;
+    display: grid;
+    place-content: center;
+    width: 9rem;
+    font-size: 1.7rem;
+}
+.name-days:hover {
+    background-color: #d9d8d8;
+    cursor: pointer;
+}
+.calendary-day{
+    height: 40.3rem;
+    border-right: solid;
+    border-left: solid;
+    border-bottom: solid;
+    border-radius: 0 0 3rem 3rem;
+}
+.info-show{
+    background-color: #fe19008e;;
+    position: relative;
+    top: -27.5rem;
+    right: -33rem;
+    width: 17.9rem;
+    border: dashed;
+    border-radius: 1rem;
+    display: none;
+}
+.info-show p{
+    text-align: center;
+    font-size: 2.9rem;
+}
+.info-show.visible{
+    display: block;
+}
+.switch {
+    position: relative;
+    top: 1rem;
+    right: -43rem;
+    display: inline-block;
+    width: 6rem;
+    height: 3.4rem;
+}
+.availability{
+    position: relative;
+    top: -0.3rem;
+    right: 29rem;
+    font-size: 3rem;
+    width: max-content;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    border-radius: 2rem;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.slider:before {
+    border-radius: 2rem;
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: #CB4335;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
 .reserva {
+    position: relative;
+    right: 33rem;
+    top: 5rem;
     background-color: #fff;
     padding: 1.4rem;
-    margin: 0 1rem;
-    border: 1px solid #CB4335; 
-    border-radius: 5px;
+    margin: 1rem;
+    border: solid; 
+    border-radius: 3rem;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    height: 75%;
+    height: 50rem;
     width: 75%;
-    max-width: 900px;
+    max-width: 400px;
 }
 
 .reserva p{
@@ -60,6 +206,7 @@ html {
 }
 
 .reserva h2 {
+    border-radius: 0.8rem;
     background-color: #CB4335; 
     color: #fff;
     padding: 0.625rem;
@@ -71,18 +218,17 @@ html {
     height: 25em;
 }
 
-button[type="submit"], a button {
+.reservar-button{
     background-color: #CB4335; 
     color: #fff;
-    border: none;
-    padding: 8px 15px;
+    border: solid black;
+    border-radius: 2rem;
+    padding: 1rem;
     cursor: pointer;
-    border-radius: 3px;
-    transition: background-color 0.3s ease-in-out;
 }
 
-button[type="submit"]:hover, a button:hover {
-    background-color: #CB4335; 
+button:hover, a button:hover {
+    background-color: #d53624; 
 }
 
 .form-calendar {
@@ -147,6 +293,7 @@ button[type="submit"]:hover, a button:hover {
 }
 
 /* Estilos para pantallas pequeñas */
+
 @media screen and (max-width: 600px) {
     .container {
         flex-direction: column;
