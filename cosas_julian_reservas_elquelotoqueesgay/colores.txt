@@ -1,4 +1,0 @@
-color si ya hay alguna reserva pero todavia queda espacio: background-color: rgba(248, 248, 88, 0.571); 
-(me da pereza definirlo como variable en el css .l.)
-
-color si el dia fue cambiado a no disponible: background-color: rgba(247, 118, 118, 0.673);
