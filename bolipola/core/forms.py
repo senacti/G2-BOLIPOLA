@@ -53,7 +53,11 @@ class SaleForm(forms.ModelForm):
     payment_type = forms.ChoiceField(
         required=True,
         choices=PAYMENT_TYPE_CHOICES,
-        widget=forms.Select(),
+        widget=forms.Select(
+            attrs={
+                'id': 'select-payment'
+            }
+        )
     )
 
     type = forms.CharField(

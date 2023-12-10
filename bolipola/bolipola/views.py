@@ -3,6 +3,7 @@ import json
 import time
 from . import settings
 from django.utils import timezone
+from django.utils.html import escape
 from django.http import Http404, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
@@ -45,10 +46,12 @@ def ajax_for_cooldown(request):
 @login_required
 def sale(request, type_id, type_name):
     if request.user.buy_cooldown > 0:
-        messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Cancelaste una compra hace poco, debes esperar {request.user.buy_cooldown} segundos')
+        messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> debes esperar {request.user.buy_cooldown} segundos')
         return redirect('index')
-    
+
     sales_user = Sale.objects.all().filter(user_id=request.user.id)
+
+    # No puede tener más de 3 compras en proceso
     total_process = 0
     if sales_user.exists():
         for sale_user in sales_user:
@@ -63,6 +66,11 @@ def sale(request, type_id, type_name):
     if type_name == 'Torneo':
         inf = get_object_or_404(Tournament, id=type_id)
         team = get_object_or_404(Team, user_id=request.user.id)
+        tournament_teams_len = len(TournamentTeam.objects.all().filter(tournament_id=inf.id))
+        if tournament_teams_len >= inf.number_teams:
+            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Torneo lleno')
+            return redirect('tournament')
+
         if team.players_num < 11:
             messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Sin jugadores suficientes, mínimo 11 para un torneo')
             return redirect('tournament')
@@ -72,7 +80,11 @@ def sale(request, type_id, type_name):
         if inf.total_products <= 0:
             messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> No hay productos para comprar')
             return redirect('store')
+        if inf.user_id != request.user.id:
+            raise Http404("Restringido")
+
         cars_inventorys = CarInventory.objects.all().filter(car_id=inf.id)
+        
 
     if type_name == 'Reserva':
         inf = get_object_or_404(Reservation, id=type_id)
@@ -391,7 +403,9 @@ def store_product_del(request):
     
     else:
         return JsonResponse({'error': 'Solo se aceptan solicitudes asincronas'})
+    
 #--------------Entradas y salidas------------------
+@login_required
 def entries_outputs(request):
     if not request.user.is_staff:
         raise Http404('Restringido')
@@ -961,10 +975,10 @@ def index(request):
         watch_commented = 0
 
     comments = Comment.objects.all().order_by(f'{commented_filter}')
+    likes = Like.objects.all()
 
     if request.user.is_authenticated:
         user = get_object_or_404(UserBoli, id=request.user.id)
-        likes = Like.objects.all()
         comments_likes = []
         comments_no_likes = []
 
@@ -995,6 +1009,13 @@ def index(request):
 
         if form_comment.is_valid():
             #Creando comentario
+            inf = form_comment.cleaned_data['text']
+            if escape(inf) != inf:
+                messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Intento de inyección 😡, baneo de 5 horas')
+                request.user.buy_cooldown = 18000
+                request.user.save()
+                return redirect('index')
+
             new_comment = Comment(text = form_comment.cleaned_data['text'], user_id=request.user.id)
             new_comment.save()
             commented = True
@@ -1007,7 +1028,7 @@ def index(request):
             messages.error(request, f'<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Comentario no válido, mínimo 10 caracteres')
             return redirect('index')
 
-    return render(request, 'index.html', {'user': user, 'inventorys':inventorys, 'form_comment': form_comment, 'comments': comments, 'comments_likes': comments_likes, 'comments_no_likes': comments_no_likes, 'commented': commented, 'commented_filter': commented_filter})
+    return render(request, 'index.html', {'user': user, 'inventorys':inventorys, 'likes': likes, 'form_comment': form_comment, 'comments': comments, 'comments_likes': comments_likes, 'comments_no_likes': comments_no_likes, 'commented': commented, 'commented_filter': commented_filter})
 
 def comment_filter(request, filter):
     global commented
