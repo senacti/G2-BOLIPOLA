@@ -25,10 +25,13 @@
                             {{ form.payment_type }}
                         </div>
 
+                        <div class="main__inf" id="nequiInf">
+                        </div>
+
                         <div style="display: none;">
                             {{ form.type }}
                         </div>
-
+                        
                         <!--Caso de venta torneo-->
                         {% if type_name == 'Torneo'%}
 
@@ -157,5 +160,28 @@
     </ul>
     <script src="{% static 'sale/sale.js' %}"></script>
     <script src="{% static 'cooldown_buy/cooldown.js' %}"></script>
+    <script>
+        const selectPayment = document.querySelector("#select-payment");
+        const nequiInf = document.querySelector("#nequiInf");
+        function activeNequi() {
+            if (selectPayment.value == "Nequi") {
+                nequiInf.innerHTML = `
+                <div class="main__inf-item">
+                    <span>Número donde saldrá el dinero:</span>
+                    <input type="text" pattern="\d{1,10}" maxlength="10" minlength="10" required style="width: 5rem;">
+                </div>
+                <div class="main__inf-item">
+                    <span>Número donde enviará el dinero:</span>
+                    <input type="text" pattern="\d{1,10}" maxlength="10" minlength="10" required style="width: 5rem;">
+                </div>
+                `;
+                return;
+            }
+            nequiInf.innerHTML = "";
+            return;
+        }
+
+        selectPayment.addEventListener("change", activeNequi)
+    </script>
 </body>
 </html>

@@ -185,7 +185,7 @@
                         <span class="comment">
                             {{ comment.text }}
                             {% if comment.user_id == user.id %}
-                            <button class="edit-comment"><i class="fa-solid fa-pen"></i></button>
+                            <span class="edit-comment"><i class="fa-regular fa-id-badge"></i></span>
                             {% endif %}
                         </span>
                     </div>
@@ -194,6 +194,12 @@
 
                             {% for comment_like in comments_likes %}
 
+                                {% for like in likes %}
+                                    {% if comment_like == comment.id and like.comment_id == comment_like and like.user.is_staff %}
+                                        <span id="prominent">Destacado <i class="fa-solid fa-user-tie"></i></span>
+                                    {% endif %}
+                                {% endfor %}
+
                                 {% if comment_like == comment.id %}
                                 <i class="fa-regular fa-heart fa-lg" name="no-liked" id="{{ comment.id }}" style="display: none;"></i>
                                 <i class="fa-solid fa-heart fa-lg" name="liked" id="{{ comment.id }}"></i>
@@ -201,6 +207,12 @@
 
                             {% endfor %}
                             {% for comment_no_like in comments_no_likes %}
+
+                                {% for like in likes %}
+                                    {% if comment_like == comment.id and like.comment_id == comment_like and like.user.is_staff %}
+                                        <span id="prominent">Destacado <i class="fa-solid fa-user-tie"></i></span>
+                                    {% endif %}
+                                {% endfor %}
 
                                 {% if comment_no_like == comment.id %}
                                 <i class="fa-regular fa-heart fa-lg" name="no-liked" id="{{ comment.id }}"></i>

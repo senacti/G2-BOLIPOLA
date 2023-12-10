@@ -1,4 +1,4 @@
-const hearths = document.querySelectorAll(".comment-like i");
+const hearths = document.querySelectorAll(".comment-like [name='no-liked'], .comment-like [name='liked']");
 const filterForm = document.querySelector("#commentFilterForm");
 const filterSelect = document.querySelector("#commentFilterSelect");
 let commented = document.querySelector("#commented-bool").innerHTML;
@@ -69,6 +69,7 @@ function uptdateHearth(hearth) {
         hearth.style.display = "none";
         score--;
         delHearth(id);
+        console.log(hearth.parentNode)
     }
 
     hearth.parentNode.children[2].innerHTML = score;

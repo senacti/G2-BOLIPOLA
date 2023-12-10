@@ -8,6 +8,8 @@
   <link rel="stylesheet" type="text/css" href="{% static 'sale/historic/sale_historic.css' %}">
   <link rel="stylesheet" href="{% static 'header/header2.css' %}">
   <link rel="stylesheet" href="{% static 'sale/status/status.css' %}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.15/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 
@@ -99,6 +101,13 @@
   </header>
 
   <div class="main">
+
+    {% if user.is_staff %}
+    <div class="export">
+      <button id="buttonExport">Exportar <i class="fa-solid fa-file-pdf"></i></button>
+    </div>
+    {% endif %}
+
     <div class="filters">
 
       <div class="status-filter-container">
@@ -171,28 +180,30 @@
       <span class="box__right-list-none-span">No hay nada que mostrar</span>
     </div>
 
-    <table>
-      <tr>
-        {% if user.is_staff %}
-          <th>ID venta</th>
-          <th class="userInf">Correo del cliente</th>
-          <th class="userInf">Nombre del cliente</th>
-          <th>Tipo de venta</th>
-          <th class="status">Estado de compra</th>
-          <th class="paymentType">Tipo de pago</th>
-          <th class="date">Fecha de compra</th>
-          <th>Pago total</th>
-        {% else %}
-          <th>ID compra</th>
-          <th>Tipo de compra</th>
-          <th class="status">Estado de compra</th>
-          <th class="paymentType">Tipo de pago</th>
-          <th class="date">Fecha de compra</th>
-          <th>Total a pagar</th>
-        {% endif %}
-      </tr>
-
-      {% for sale in sales %}
+    <table id="theTable">
+      <thead>
+        <tr>
+          {% if user.is_staff %}
+            <th>ID venta</th>
+            <th class="userInf">Correo del cliente</th>
+            <th class="userInf">Nombre del cliente</th>
+            <th>Tipo de venta</th>
+            <th class="status">Estado de compra</th>
+            <th class="paymentType">Tipo de pago</th>
+            <th class="date">Fecha de compra</th>
+            <th>Pago total</th>
+          {% else %}
+            <th>ID compra</th>
+            <th>Tipo de compra</th>
+            <th class="status">Estado de compra</th>
+            <th class="paymentType">Tipo de pago</th>
+            <th class="date">Fecha de compra</th>
+            <th>Total a pagar</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for sale in sales %}
         <tr class="data-row" id="{{ sale.status_number }}" onclick="go(`{% url 'sale_information' sale.id %}`)">
           <td>{{ sale.id }}</td>
           {% if user.is_staff %}
@@ -206,6 +217,7 @@
           <td id="cost">{{ sale.cost_to_money }}</td>
         </tr>
       {% endfor %}
+      </tbody>
     </table>
   </div>
 
@@ -213,7 +225,31 @@
   <script src="{% static 'header/header.js' %}"></script>
   <script src="{% static 'sale/historic/filter.js' %}"></script>
   <script src="{% static 'cooldown_buy/cooldown.js' %}"></script>
-  
+  <!--Script de exportación de tabla-->
+  <script>
+    window.jsPDF = window.jspdf.jsPDF
+    const buttonExport = document.querySelector('#buttonExport');
+    const buttonCalcContainer = document.querySelector('.button-calc-container');
+
+    const headStylesForm = {
+        fillColor: [203, 67, 52],
+        textColor: [255, 255, 255],
+        fontStyle: 'bold',
+    };
+
+    function exportPDF() {
+        const table = document.querySelector('#theTable');
+        let doc = new jsPDF();
+        
+        doc.autoTable({ html: table, headStyles: headStylesForm});
+        doc.text(10, 285, buttonCalcContainer.innerText);
+
+        doc.save('historico_ventas.pdf');
+    }
+
+    buttonExport.addEventListener('click', exportPDF);
+  </script>
+
   <script>
     function go(url) {
       window.location.href = url;

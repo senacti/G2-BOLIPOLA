@@ -16,12 +16,7 @@
                     {% if user.is_staff and user.is_authenticated %}
                     
                     <a href="{% url 'sale_historic' %}" class="content-customer-support" style="text-decoration: none;">
-                        <button class="button-db" style="
-                          color: #CB4335;
-                          border-color: #CB4335;
-                          background-color: #FBFCFC;
-                          box-shadow: none;
-                        ">
+                        <button class="button-db">
                             <i class="fa-solid fa-coins"></i> <span>Ventas</span>
                         </button>
                     </a>
@@ -76,7 +71,7 @@
                     <li><a href="{% url 'store' %}">Productos</a></li>
                     {% endif %}
                     {% if user.is_staff and user.is_authenticated %}
-                    <li><a href="{% url 'inventory' %}">Inventario</a></li>
+                    <li><a href="{% url 'inventory' %}">Inventario<span></span></a></li>
                     {% endif %}
                     <li><a href="{% url 'reserve' %}">Reservas</a></li>
                     <li><a href="{% url 'tournament' %}">Torneos</a></li>
@@ -87,7 +82,7 @@
                     <li><a href="{% url 'store' %}">Productos</a></li>
                     {% endif %}
                     {% if user.is_staff and user.is_authenticated %}
-                    <li hidden><a href="{% url 'inventory' %}">Inventario</a></li>
+                    <li hidden><a href="{% url 'inventory' %}">Inventario<span></span></a></li>
                     {% endif %}
                     <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
                     <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
@@ -99,7 +94,6 @@
         <form id="filterForm">
             <label for="filterInput">Filtrar por:</label>
             <input type="text" id="filterInput" name="filterInput">
-            <button type="button" onclick="filterBoxes()">Filtrar</button>
         </form>
     </div>
     <h2 class="h2_entradas">Entradas</h2>
@@ -115,7 +109,7 @@
             </thead>
             <tbody>
                 {% for entry in entries %}
-                <tr>
+                <tr class="box">
                     <td>{{ entry.date }}</td>
                     <td>{{ entry.inventory.product.name }}</td>
                 </tr>
@@ -135,7 +129,7 @@
             </thead>
             <tbody>
                 {% for output in outputs %}
-                <tr>
+                <tr class="box">
                     <td>{{ output.date }}</td>
                     <td>
                         {% if output.inventory_id == null %}
@@ -158,14 +152,24 @@
     
     <script>
         function filterBoxes() {
-            const filterValue = document.getElementById('filterInput').value.toLowerCase();
+            const filterInput = document.querySelector('#filterInput');
             const boxes = document.querySelectorAll('.box');
+            let filterValue = filterInput.value.toLowerCase();
 
             boxes.forEach(box => {
                 const boxContent = box.innerText.toLowerCase();
-                box.style.display = boxContent.includes(filterValue) ? 'block' : 'none';
+                box.style.display = boxContent.includes(filterValue) ? 'table-row' : 'none';
             });
         }
+
+        filterInput.addEventListener('input', () => {
+            filterBoxes();
+        })
     </script>
+    <script
+    src="https://kit.fontawesome.com/81581fb069.js"
+    crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'header/header.js' %}"></script>
 </body>
 </html>
