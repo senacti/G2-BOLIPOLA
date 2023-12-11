@@ -210,7 +210,7 @@
             </div>
             {% endif %}
 
-            {% if not user.is_staff and sale.status == 'En proceso...'%}
+            {% if not user.is_staff and sale.status == 'En proceso...' and not user.buy_cooldown > 0 %}
             <div class="buttons">
                 <div class="buttons_container">
                     <a href="{% url 'sale_cancel' sale.id %}">

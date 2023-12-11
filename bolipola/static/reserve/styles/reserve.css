@@ -138,27 +138,38 @@ button:hover, a button:hover {
 .container-2{
     display: flex;
     justify-content: space-evenly;
-    margin-top: 8rem;
+    margin-top: 4rem;
 }
 
 .reserve-table, .calendar-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+
 }
 
 .reserve-table th, .calendar-table th {
     padding: 10px;
     text-align: left;
-    background-color: #f2f2f2;
-    border: 1px solid #ddd;
+    color: #FBFCFC;
+    font-size: 1.5rem;
+    background-color: #CB4335;
+    border: 1px solid #CB4335;
+    
 }
 
 .reserve-table td, .calendar-table td{
     padding: 10px;
     text-align: left;
-    border: 1px solid #ddd;
+    font-size: 1.3rem;
+    border: 1px solid black;
 }
+
+.reserve-dates h1, .calendar-dates h1	{
+    text-align: center;
+    margin: 1rem;
+    font-size: 2.5rem;
+} 
 
 .reserve-table tr:nth-child(even), .calendar-table tr:nth-child(even) {
     background-color: #f9f9f9;
