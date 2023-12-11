@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'messages/crud/messages.css' %}">
+</head>
+<body>
+    
+</body>
+</html>
+<html>
+<head>
+    <title>Equipo {{ team.name }}</title>
+    <link rel="stylesheet" href="{% static 'tournament/tournament_team/tournament_team.css' %}">
+</head>
+    <h1>Equipo: <span style="color: {{ team.hexcolor }}">{{ team.name }}</span></h1>
+
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="message-container" style="margin: 0;">
+            <span group="messages"
+            class="
+                {% if msg.tags == 'success' %}message-success{% endif %}
+                {% if msg.tags == 'error' %}message-error{% endif %}
+                {% if msg.tags == 'info' %}message-info{% endif %}
+            "
+            >
+                {{ msg.message|safe }}
+            </span>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="form">
+        <table border="1">
+            <thead class="boardHead">
+                <tr class="boardHead__list" id="titles">
+                    <th>Nombre/s y apellido/s</th>
+                    <th>Dorsal</th>
+                    <th>Edad</th>
+                    <th>Género</th>
+                    <th>Posición</th>
+                    <th>Tarjetas amarillas</th>
+                    <th>Tarjetas azules</th>
+                    <th>Tarjetas rojas</th>
+                    <th>Guardar tarjetas</th>
+                </tr>
+            </thead>
+        
+            <tbody class="boardBody" id="equipoTableBody">
+                {% for player in players %}
+                <form action="" method="post">
+                    <input type="hidden" name="player_id" value="{{ player.id }}">
+                    {% csrf_token %}
+                    <tr class="boardHead__list" id="titles">
+                        <td><span>{{ player.name }} {{ player.last_name }}</span></td>
+                        <td><span>{{ player.dorsal }}</span></td>
+                        <td><span>{{ player.age }}</span></td>
+                        <td><span>{{ player.gender }}</span></td>
+                        <td><span>{{ player.position }}</span></td>
+                        <td><span>{{ form.yellow_card }}</span></td>
+                        <td><span>{{ form.blue_card }}</span></td>
+                        <td><span>{{ form.red_card }}</span></td>
+                        <td>
+                            <div class="buttons__container" id="save"><button type="submit" id="submit"><i class="fa-solid fa-floppy-disk"></i></button></div>
+                        </td>
+                    </tr>
+                </form>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="buttons">
+            <div class="buttons__container">
+                <a href="{% url 'tournament_teams' tournament.id 'score' %}"><button type="button">Volver</button></a>
+            </div>
+        </div>
+    </div>
+
+    <ul style="display: none;">
+        {% for player in players %}
+        <li class="infToPut">{{ player.yellow_card }}</li>
+        <li class="infToPut">{{ player.blue_card }}</li>
+        <li class="infToPut">{{ player.red_card }}</li>
+        {% endfor %}
+    </ul>
+    <script src="https://kit.fontawesome.com/81581fb069.js"></script>
+    <script>
+        const inputValue = document.querySelectorAll('.inf')
+        const information = document.querySelectorAll('.infToPut')
+
+        function setValues() {
+            information.forEach((element, i) => {
+                inputValue[i].value = element.innerHTML
+            })
+        }
+
+        setValues()
+    </script>
+    <script src="{% static 'messages/messages.js' %}"></script>
+</body>
+</html>

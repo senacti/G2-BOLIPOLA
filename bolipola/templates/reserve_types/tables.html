@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <link rel="stylesheet" href="{% static 'reserve/styles/types.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
+</head>
+<body>
+<div class="container">
+
+    <div class="reserva">
+         <h2 class="reservas">Mesas</h2>
+         <img src="{% static 'reserve/images/tables.jpg' %}" width="400"/>
+
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message-container" style="margin-top: 2rem;">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <input type="hidden" name="type_reserve" value="Cancha">
+            <div class="letra">
+                <label>Dia reserva:</label>
+                {{ form.the_date }}
+            </div>
+
+            <div class="letra">
+                <label>Hora inicio:</label>
+                <input type="time" id="hora-inicio" name="hora-inicio" required>
+            </div>
+
+            <div class="letra">
+                <label>Hora fin:</label>
+                <input type="time" id="hora-fin" name="hora-fin" required>
+            </div>
+
+            <input type="hidden" id="site" name="site" value="2">
+
+            <input type="number" name="cost" id="costoInput" value="1" hidden>
+            <div class="letra">
+                <span>Costo:</span>
+                <span>$</span><span id="costo"></span>
+            </div>
+
+            <button type="submit"> 
+                <span>Hacer reserva</span>
+            </button>
+        </form>
+    </div>
+</div>
+<script>
+    const horaInicio = document.getElementById('hora-inicio');
+    const horaFinal = document.getElementById('hora-fin');
+    const inputCost = document.querySelector('#costoInput')
+    const form = document.querySelector('form')
+    const fechaInput = document.querySelector('#fecha')
+    const fechaActual = new Date()
+
+    function calcularCosto() {
+      const horaInicioObj = new Date(`2000-01-01T${horaInicio.value}`);
+      const horaFinalObj = new Date(`2000-01-01T${horaFinal.value}`);
+
+      // Calcula la diferencia en minutos
+      const diferenciaMinutos = Math.round((horaFinalObj - horaInicioObj) / (1000 * 60));
+
+      // Precio por minuto (ajusta según tus necesidades)
+      const precioPorMinuto = 250;
+
+      // Calcula el costo
+      const costo = diferenciaMinutos * precioPorMinuto;
+
+      if (isNaN(costo) || costo <= 0) {
+        return document.querySelector('#costo').innerHTML = "";
+      }
+
+      inputCost.value = costo
+      return document.querySelector('#costo').innerHTML = costo;
+    }
+
+    form.addEventListener('submit', (e) => {
+        calcularCosto()
+        if (inputCost.value == '1') {
+            alert('La fecha no es correcta')
+            return e.preventDefault()
+        }
+    })
+
+    horaInicio.addEventListener('change', calcularCosto)
+    horaFinal.addEventListener('change', calcularCosto)
+  </script>
+
+    <script
+    src="https://kit.fontawesome.com/81581fb069.js"
+    crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'messages/messages.js' %}"></script>
+    <script src="{% static 'reserve/reserve.js' %}"></script>
+    <script src="{% static 'cooldown_buy/cooldown.js' %}"></script>
+</body>
+</html>

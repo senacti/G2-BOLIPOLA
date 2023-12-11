@@ -1,0 +1,137 @@
+/* inventory.css */
+.containerProducts {
+    background-color: #fff;
+    padding: 1.4rem;
+    margin: 2.4rem;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2rem rgba(0, 0, 0, 0.1);
+}
+
+.containerProducts * {
+    font-size: 2.2rem;
+}
+
+h1 {
+    color: #dc3545;
+}
+
+/* Estilo para las tarjetas de producto */
+.card {
+    display: flex;
+    justify-content: center;
+    border: 1px solid #dc3545;
+    border-radius: 10px;
+    max-width: 70rem;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+#cardxd{
+    border: 1px solid #dc3545;
+    border-radius: 0.625rem;
+    box-shadow: 0rem 0rem 0.313rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.25rem;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    margin-top: 1.25rem;
+    padding: 0.4rem 1.5rem;
+    background-color: #fff;
+}
+
+.card-title {
+    font-size: 2.4rem;
+    color: #dc3545;
+}
+
+.card-text {
+    color: #333;
+    z-index: 9000;
+}
+
+#quantity {
+    padding-right: 0.5rem;
+    margin-right: 1.2rem;
+}
+
+#due_date i {
+    margin-left: 1rem;  
+}
+
+.card-body {
+    position: relative;
+    right: 1.4rem;
+}
+
+.card-body button{
+    border-radius: 0.9rem;
+    margin: 0.2rem;
+    padding: 0.4rem 1rem;
+    border: none;
+}
+
+.card-body button a{
+    text-decoration: none;
+    color: #FBFCFC;
+}
+
+#button-1{
+    background-color: #a67a0a;
+}
+
+#button-1:hover{
+    background-color: #936d0c;
+}
+
+#button-2{
+    background-color: #CB4335;
+}
+
+#button-2:hover{
+    background-color: #b13c2f;
+}
+
+#button-3{
+    background-color: #228B22;
+}
+
+#button-3:hover{
+    background-color: #1f751f;
+}
+
+#button-4{
+    background-color: #839192;
+}
+
+#button-4:hover{
+    background-color: #717D7E;
+}
+
+/* Alineación de la imagen a la derecha */
+.row img {
+    position: absolute;
+    right: 0;
+    margin-right: 1rem;
+    width: 38%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Estilo para los botones */
+.btn {
+    margin-right: 5px;
+}
+
+@media (max-width: 1330px) and (min-width: 765px) {
+    .row img {
+        position: relative;
+        width: 18rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .row img {
+        position: relative;
+        width: 18rem;
+    }
+}

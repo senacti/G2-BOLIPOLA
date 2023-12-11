@@ -1,0 +1,210 @@
+html {
+    font-size: 100%;
+}
+
+.container-reserve {
+    display: flex;
+    justify-content: center;
+}
+
+.admin {
+    position: relative;
+    margin: 2rem 0;
+    display: grid;
+    place-items: center;
+}
+
+.admin button {
+	color: #fff;
+	background-color: #c63424;
+	padding: 1.5rem;
+    border: 0.2rem solid black;
+	border-radius: 1rem;
+	text-decoration: none;
+	font-size: 1.6rem;
+	font-weight: 600;
+    cursor: pointer;
+    transition: 250ms ease;
+}
+
+.admin button:hover {
+    background-color: #a33529;
+}
+
+.reserva {
+    background-color: #fff;
+    padding: 1.4rem;
+    margin: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    border: 0.2rem solid black; 
+    width: 75%;
+    max-width: 40rem;
+}
+
+.reserva p{
+    font-size: 2.2rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.reserva h2 {
+    border-radius: 0.8rem;
+    background-color: #CB4335; 
+    color: #fff;
+    padding: 0.625rem;
+    margin: 0 0 0.625rem 0;
+}
+
+.reference-img {
+    width: 25em;
+    height: 25em;
+}
+
+.reservar-button{
+    background-color: #CB4335;
+    font-size: 1.8rem;
+    color: #fff;
+    border: 0.25rem solid black;
+    border-radius: 1.3rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+button:hover, a button:hover {
+    background-color: #d53624; 
+}
+
+.form-calendar {
+	position: absolute;
+	display: none;
+    top: 6rem;
+	width: fit-content;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+	border: 0.2rem solid #CB4335;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+	z-index: 9102;
+}
+  
+.form-calendar form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-calendar .input-container {
+	width: 100%;
+	margin: 2rem 0;
+}
+
+.form-calendar span {
+	display: block;
+	width: max-content;
+	font-size: 2rem;
+    color: #CB4335;
+}
+  
+.form-calendar input {
+    padding: 1rem;
+	width: 100%;
+    border: 0.2rem solid #ccc;
+    border-radius: 0.8rem;
+    outline: none;
+}
+
+.form-calendar input:focus {
+	border-color: #CB4335;
+}
+
+.form-calendar button {
+    position: relative;
+	left: 50%;
+	transform: translate(-50%, 0);
+    background-color: #CB4335;
+    color: white;
+    padding: 1.1rem;
+    border: none;
+    border-radius: 1rem;
+	font-size: 2.3rem;
+    font-weight: bold;
+	transition: 250ms ease;
+}
+  
+.form-calendar button:hover {
+	cursor: pointer;
+    background-color: #a33529;
+}
+
+.container-2{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 4rem;
+}
+
+.reserve-table, .calendar-table {
+    width: 100%;
+    max-height: 10rem;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.scroller {
+    padding: 0 0.5rem;
+    max-height: 25rem;
+    overflow-y: auto;
+}
+
+.scroller::-webkit-scrollbar {
+	width: 0.6rem;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+	background-color: rgba(84, 84, 84, 0.754);
+	border-radius: 1rem;
+}
+
+.scroller::-webkit-scrollbar-thumb:hover {
+	background-color: black;
+}
+
+.reserve-table th, .calendar-table th {
+    padding: 10px;
+    text-align: left;
+    color: #FBFCFC;
+    font-size: 1.5rem;
+    background-color: #CB4335;
+    border: 1px solid #CB4335;
+    
+}
+
+.reserve-table td, .calendar-table td{
+    padding: 10px;
+    text-align: left;
+    font-size: 1.3rem;
+    border: 1px solid black;
+}
+
+.reserve-dates h1, .calendar-dates h1	{
+    text-align: center;
+    margin: 1rem;
+    font-size: 2.5rem;
+} 
+
+.reserve-table tr:nth-child(even), .calendar-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Estilos para pantallas pequeñas */
+
+@media screen and (max-width: 900px) {
+    .container-reserve {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .reserva {
+        width: 100%;
+        margin: 0;
+    }
+}

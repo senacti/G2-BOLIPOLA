@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'inventory/inventory.css' %}">
+    <link rel="stylesheet" href="{% static 'header/header.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
+</head>
+<body>
+    {% if not user.is_authenticated  %}
+
+        <script>
+            window.location.href = "{% url 'signin' %}";
+        </script>
+
+        
+    {% elif not user.is_staff %}
+
+        <script>
+             window.location.href = "{% url 'index' %}";
+       </script>
+
+    {% endif %}
+    
+    <header>
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="message-container" style="margin: 0;">
+                <span group="messages"
+                class="
+                    {% if msg.tags == 'success' %}message-success{% endif %}
+                    {% if msg.tags == 'error' %}message-error{% endif %}
+                    {% if msg.tags == 'info' %}message-info{% endif %}
+                "
+                >
+                    {{ msg.message|safe }}
+                </span>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="container-hero">
+
+            <div class="container hero">
+                <div class="customer-support">
+                    {% if user.is_staff and user.is_authenticated %}
+                    
+                    <a href="{% url 'sale_historic' %}" class="content-customer-support" style="text-decoration: none;">
+                        <button class="button-db">
+                            <i class="fa-solid fa-coins"></i> <span>Ventas</span>
+                        </button>             
+                    </a>
+
+                    {% else %}
+
+                    <i class="fa-brands fa-whatsapp" id="whatsappIcon"></i>
+                    <div class="content-customer-support">
+                        <span class="numberTop">+57 3202127187</span>             
+                    </div>
+
+                    {% endif %}
+                </div>
+
+                <div class="container-logo">
+                    <a class="logo" href="/"></a>
+                </div>
+
+                <div class="container-user">
+                    {% if user.is_authenticated %}
+                    <div class="linePerfil">
+                    </div>
+                    <div class="carAndPerfil" id="perfil">
+                        <a href="{% url 'profile' %}"><img src="{{ user.avatar.url }}"></a>
+                        <ul class="perfilDropDown">
+                            <li><a href="{% url 'profile' %}">Ver perfil</a></li>
+                            <li><a href="{% url 'signout' %}">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+
+                    {% else %}
+
+                    <div>
+                        <a class="linkUser" id="register" href="{% url 'register' %}">Regístrate</a></span>
+                        <a class="linkUser" id="signin" href="{% url 'signin' %}">Inicia sesión</a>
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container-navbar">
+            <nav class="navbar container">
+                <i class="fa-solid fa-bars" id="dropdown"></i>
+                <ul class="menu">
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    {% if not user.is_staff %}
+                    <li><a href="{% url 'store' %}">Productos</a></li>
+                    {% endif %}
+                    {% if user.is_staff and user.is_authenticated %}
+                    <li><a href="{% url 'inventory' %}">Inventario<span></span></a></li>
+                    {% endif %}
+                    <li><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li><a href="{% url 'tournament' %}">Torneos</a></li>
+                </ul>
+                <ul class="menuDropDown" hidden>
+                    <li hidden><a href="{% url 'index' %}">Inicio</a></li>
+                    {% if not user.is_staff %}
+                    <li><a href="{% url 'store' %}">Productos</a></li>
+                    {% endif %}
+                    {% if user.is_staff and user.is_authenticated %}
+                    <li hidden><a href="{% url 'inventory' %}">Inventario<span></span></a></li>
+                    {% endif %}
+                    <li hidden><a href="{% url 'reserve' %}">Reservas</a></li>
+                    <li hidden><a href="{% url 'tournament' %}">Torneos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="containerProducts">
+        <div class="text-center">
+            <a href="{% url 'entries_outputs' %}" class="btn btn-secondary" style="border-radius: 0.5rem; box-shadow: 0.2rem 0.2rem 0.5rem 0.2rem gray;">Entradas y salidas</a>
+        </div>
+        <h1 class="mt-5 mb-4">Lista de Productos</h1>
+        <ul class="list-unstyled">
+            <div class="row">
+                {% for inventory in inventorys %}
+                <div class="col-md-4 mb-3" >
+                    <div class="card border-danger mb-3"id="cardxd" >
+
+                        <h5 class="card-title">{{ inventory.product.name }}</h5>
+                        <p class="card-text">Costo: {{ inventory.product.cost_to_money }}</p>
+                        <p class="card-text">Categoria: {{ inventory.product.category }}</p>
+                        <p class="card-text"><span
+                            id="quantity"
+                            style="background-color: 
+                            {% if inventory.product_quantity <= 20 and inventory.product_quantity > 10 %}
+                            #F1C40F;
+                            {% elif inventory.product_quantity <= 10 and inventory.product_quantity > 5 %}
+                            orange;
+                            {% elif inventory.product_quantity <= 5 and inventory.product_quantity > 0 %}
+                            #E74C3C;
+                            color: white;
+                            {% elif inventory.product_quantity == 0 %}
+                            #839192;
+                            color: white;
+                            {% endif %}
+                            "
+                            >Disponibles: <span style="font-weight: bold;">{{ inventory.product_quantity }}</span>
+                        </span>
+                        {% if inventory.product_quantity <= 5 and inventory.product_quantity > 0 %}
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #E74C3C"></i>
+                        {% endif %}
+                        </p>
+                        <p class="card-text"><span>Reservados: {{ inventory.quantity_reserved }}</span></p>
+
+                        <p class="card-text"
+                        id="due_date" 
+                        style="
+                        {% for due_date in due_dates %}
+                            {% if due_date == inventory.id %}
+                            color: #E74C3C;
+                            font-weight: bold;
+                            text-decoration: underline;
+                            {% endif %}
+                        {% endfor %}
+                        ">FV: {{ inventory.product.due_date }} 
+                        {% for due_date in due_dates %}
+                            {% if due_date == inventory.id %}
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #E74C3C"></i>
+                            {% endif %}
+                        {% endfor %}
+                        </p>
+
+                        <img src="{{ inventory.product.image.url }}" class="card-img-top" alt="Foto de Producto">
+                        <div class="card-body">
+                            <button class="boton" id="button-1"><a href="{% url 'edit_product' inventory.product.pk %}"><i class="fa-solid fa-pen-to-square"></i></a></button>
+                            <button class="boton" id="button-3"><a href="{% url 'quantity_product' inventory.product.pk True %}"><i class="fa-solid fa-plus"></i></a></button>
+                            <button class="boton" id="button-2"><a href="{% url 'quantity_product' inventory.product.pk False %}"><i class="fa-solid fa-minus"></i></a></button>
+                            {% if inventory.product_quantity <= 0 and inventory.quantity_reserved <= 0 %}
+                                <button class="boton" id="button-4"><a href="{% url 'delete_product' inventory.product.pk %}"><i class="fa-solid fa-trash"></i></a></button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </ul>
+        <div class="text-center">
+            <a href="{% url 'create_product' %}" class="btn btn-primary">Crear Producto</a>
+            <a href="{% url 'create_category' %}" class="btn btn-primary">Crear Categoria</a>
+        </div>
+    </div>
+    
+    <script src="{% static 'header/header.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <script
+        src="https://kit.fontawesome.com/81581fb069.js"
+        crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'messages/messages.js' %}"></script>
+</body>
+</html>

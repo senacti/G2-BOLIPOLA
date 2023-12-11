@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="{% static 'favicon/logo.png' %}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'tournament/team/team.css' %}">
+    <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
+    <title>Crear equipo</title>
+</head>
+<body>
+    <div class="mainBox">
+        <form class="form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="box">
+                <legend class="box__legend">
+                    {% if team_inf %}
+                    <img src="{{ team_inf.avatar.url }}" class="box__legend-img">
+                    {% else %}
+                    <img src="{% static 'tournament/team/images/group.png' %}" class="box__legend-img">
+                    {% endif %}
+                    {{ form.avatar }}
+                </legend>
+
+                <div class="box__pass">
+                    <div class="box__pass-container" id="newpass1">
+                        {{ form.name }}
+                    </div>
+                    <div class="box__pass-container" id="newpass2">
+                        {{ form.color }}
+                    </div>
+                </div>
+
+                {% if not has_tournament %}  
+                <div class="box__containerSubmit">
+                    <button class="box__containerSubmit-button" type="submit">
+                        {% if team_inf %}
+                            Guardar cambios
+                        {% else %}
+                            Crear
+                        {% endif %}
+                    </button>
+                </div>
+                {% endif %}
+                <div class="box__containerLogo">
+                    <a href="{% url 'index' %}"><img class="box__containerLogo-img" src="{% static 'register/images/logo.png' %} " alt="Logo"></a>
+                </div>
+            </fieldset>
+        </form>
+        <div class="cancel">
+            <a class="cancel__link" href="{% url 'tournament' %}">Salir</a>
+        </div>
+    </div>
+
+    <ul hidden id="teamInf">
+        {% if team_inf %}
+            <li>{{ team_inf.name }}</li>
+            <li>{{ team_inf.color }}</li>
+        {% endif %}
+    </ul>
+
+    <script
+        src="https://kit.fontawesome.com/81581fb069.js"
+        crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'tournament/team/team.js' %}"></script>
+    <script src="{% static 'cooldown_buy/cooldown.js' %}"></script>
+    {% if has_tournament %}
+    <script>
+        const infPlayers = document.querySelectorAll("input, select")
+
+        function setDisabled() {
+            infPlayers.forEach((element) => {
+                element.setAttribute("disabled", "true")
+            })
+        }
+
+        setDisabled()
+    </script>
+    {% endif %}
+</body>
+</html>
