@@ -193,14 +193,15 @@
                         {% if user.is_authenticated %}
 
                             {% for comment_like in comments_likes %}
-
-                                {% for like in likes %}
-                                    {% if comment_like == comment.id and like.comment_id == comment_like and like.user.is_staff %}
-                                        <span id="prominent">Destacado <i class="fa-solid fa-user-tie"></i></span>
-                                    {% endif %}
-                                {% endfor %}
-
+                            
                                 {% if comment_like == comment.id %}
+
+                                    {% if comment.score_admin %}
+                                    <span id="prominent">Destacado <i class="fa-solid fa-user-tie"></i></span>
+                                    {% else %}
+                                    <span id="prominent" style="display: none;">Destacado <i class="fa-solid fa-user-tie"></i></span>
+                                    {% endif %}
+
                                 <i class="fa-regular fa-heart fa-lg" name="no-liked" id="{{ comment.id }}" style="display: none;"></i>
                                 <i class="fa-solid fa-heart fa-lg" name="liked" id="{{ comment.id }}"></i>
                                 {% endif %}
@@ -208,13 +209,14 @@
                             {% endfor %}
                             {% for comment_no_like in comments_no_likes %}
 
-                                {% for like in likes %}
-                                    {% if comment_like == comment.id and like.comment_id == comment_like and like.user.is_staff %}
-                                        <span id="prominent">Destacado <i class="fa-solid fa-user-tie"></i></span>
-                                    {% endif %}
-                                {% endfor %}
-
                                 {% if comment_no_like == comment.id %}
+
+                                    {% if comment.score_admin %}
+                                    <span id="prominent">Destacado <i class="fa-solid fa-user-tie"></i></span>
+                                    {% else %}
+                                    <span id="prominent" style="display: none;">Destacado <i class="fa-solid fa-user-tie"></i></span>
+                                    {% endif %}
+
                                 <i class="fa-regular fa-heart fa-lg" name="no-liked" id="{{ comment.id }}"></i>
                                 <i class="fa-solid fa-heart fa-lg" name="liked" id="{{ comment.id }}"  style="display: none;"></i>
                                 {% endif %}
@@ -225,6 +227,9 @@
 
                         {% else %}
                             <!-- Redireccionar en caso de dar like sin registro -->
+                            {% if comment.score_admin %}
+                                <span id="prominent">Destacado <i class="fa-solid fa-user-tie"></i></span>
+                            {% endif %}
                             <i class="fa-regular fa-heart fa-lg" name="no-liked" id="{{ comment.id }}"
                                 onclick=" window.location.href = '/signin/' "
                             ></i>
@@ -249,6 +254,7 @@
 
     <span hidden style="display: none;" id="commented-bool">{% if commented %}true{% else %}false{% endif %}</span>
     <span hidden style="display: none;" id="filter-name">{{ commented_filter }}</span>
+    <span hidden style="display: none;" id="scoreAdmin-bool">{% if user.is_staff %}true{% else %}false{% endif %}</span>
 
     <footer class="footer">
         <div class="container container-footer">

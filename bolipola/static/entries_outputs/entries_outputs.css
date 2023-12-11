@@ -5,35 +5,8 @@
 }
 
 .filter-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1.5rem 0;
+    margin-top: 20px;
     text-align: center;
-}
-
-.filter-form input {
-    margin-left: 0.5rem;
-    outline: none;
-    border: 0.1rem solid gray;
-}
-
-.filter-form input:focus {
-    box-shadow: 0 0 0.5rem 0.05rem #CB4335;
-}
-
-.filter-form button {
-    background-color: #14767f;
-    padding: 0.2rem 1rem;
-    color: #FBFCFC;
-    border-radius: 0.4rem;
-    border: none;
-    cursor: pointer;
-    transition: 200ms ease;
-}
-
-.filter-form button:hover {
-    background-color: #105c63;
 }
 
 .entrys_outputs {
@@ -45,15 +18,15 @@
 .exits-table {
     width: 45%;
     border-collapse: collapse;
-    margin-top: 1rem;
+    margin-top: 20px;
 }
 
 .entries-table th,
 .exits-table th,
 .entries-table td,
 .exits-table td {
-    border: 0.1rem solid black;
-    padding: 0.5rem;
+    border: 1px solid black;
+    padding: 8px;
     text-align: left;
 }
 
@@ -70,13 +43,12 @@
 .exits-table td {
     background-color: #F5B7B1;
 }
-
 .entries-table td {
     background-color: #D5F5E3;
 }
-
 .h2_entradas{
     background-color: #28a745;
+    border: 1px solid black;
     margin: auto;
     padding: auto;
     text-align: center;
@@ -84,9 +56,9 @@
     margin-left: calc(50% - 30%);
     width: 10%;
 }
-
 .h2_salidas{
     background-color: #dc3545;
+    border: 1px solid black;
     margin-top: -1.9rem;
     padding: auto;
     text-align: center;

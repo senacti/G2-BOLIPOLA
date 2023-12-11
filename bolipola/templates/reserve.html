@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservas</title>
     <link rel="stylesheet" href="{% static 'messages/messages.css' %}">
-    <link rel="stylesheet" href="{% static 'event/event.css' %}">
     <link rel="stylesheet" href="{% static 'reserve/styles/reserve.css' %}">
     <link rel="stylesheet" href="{% static 'header/header.css' %}">
 </head>
@@ -140,7 +139,7 @@
         </div>
     {% endif %}
 
-    <div class="container">
+    <div class="container-reserve">
         <div class="reserva">
              <h2 class="reservas">Boliranas</h2>
              <img src="{% static 'reserve/images/bolirana.jpg' %}" class="reference-img"/>
@@ -174,80 +173,46 @@
           {% endif %}
         </div>
     </div>
+
     <div class="container-2">
-        <div class="calendary-availability" >
-            <div class="header-calendary">
-                    <i id="left-mounth" class="fa-solid fa-chevron-left"></i> <h2 id="mounth">SEPTIEMBRE</h2><i id="right-mounth" class="fa-solid fa-chevron-right"></i>
-                    <h1 class="year">2023</h1>
-            </div>
-            <div class="calendary-day">
-                <div class="week">
-                    <div class="day-weak">
-                        <h4 class="name-days">lunes</h4>
-                        <button class="days">1</button>
-                        <button class="days">8</button>
-                        <button class="days">15</button>
-                        <button class="days">22</button>
-                        <button class="days">29</button>
-                    </div>
-                    <div class="day-weak">
-                        <h4 class="name-days">martes</h4>
-                        <button class="days">2</button>
-                        <button class="days">9</button>
-                        <button class="days">16</button>
-                        <button class="days">23</button>
-                        <button class="days">30</button>
-                    </div>
-                    <div class="day-weak">
-                        <h4 class="name-days">miercoles</h4>
-                        <button class="days">3</button>
-                        <button class="days">10</button>
-                        <button class="days">17</button>
-                        <button class="days">24</button>
-                        <button class="days">31</button>
-                    </div>
-                    <div class="day-weak">
-                        <h4 class="name-days">jueves</h4>
-                        <button class="days">4</button>
-                        <button class="days">11</button>
-                        <button class="days">18</button>
-                        <button class="days">25</button>
-                        <button class="days">1</button>
-                    </div>
-                    <div class="day-weak">
-                        <h4 class="name-days">viernes</h4>
-                        <button class="days">5</button>
-                        <button class="days">12</button>
-                        <button class="days">19</button>
-                        <button class="days">26</button>
-                        <button class="days">2</button>
-                    </div>
-                    <div class="day-weak">
-                        <h4 class="name-days">sabado</h4>
-                        <button class="days">6</button>
-                        <button class="days">13</button>
-                        <button class="days">20</button>
-                        <button class="days">27</button>
-                        <button class="days">3</button>
-                    </div>
-                    <div class="day-weak">
-                        <h4 class="name-days">domingo</h4>
-                        <button class="days">7</button>
-                        <button class="days">14</button>
-                        <button class="days">21</button>
-                        <button class="days">28</button>
-                        <button class="days">4</button>
-                    </div>
-                </div>
-                <label class="switch">
-                    <h2 class="availability">Deshabilitar dia</h2>
-                    <input type="checkbox">
-                    <span class="slider"></span>
-                  </label>
-                <div class="info-show">
-                    <p>para este dia hay una reserva de 1:00 pm a 3:00 pm</p>
-                </div>
-            </div>
+        <div class="reserve-dates">
+            <h1>Fechas y horas reservadas</h1>
+            <table class="reserve-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora inicio</th>
+                        <th>Hora fin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reserve in reserves %}
+                    <tr class="box">
+                        <td>{{ reserve.date }}</td>
+                        <td>{{ reserve.start_time }}</td>
+                        <td>{{ reserve.end_time }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="calendar-dates">
+            <h1>Días no disponibles</h1>
+            <table class="calendar-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for calendar in calendars %}
+                    <tr class="box">
+                        <td>{{ calendar.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -255,20 +220,6 @@
         src="https://kit.fontawesome.com/81581fb069.js"
         crossorigin="anonymous"
     ></script>
-    <script>
-        function mostrarOtra() {
-            var selectElement = document.getElementById("tipo");
-            var otraInput = document.getElementById("otraInput");
-        
-            if (selectElement.value === "Otra") {
-                otraInput.style.display = "block";
-            } else {
-                otraInput.style.display = "none";
-            }
-        }
-        </script>
-    <script src="{% static 'reserve/days.js' %}"></script>
-    <script src="{% static 'reserve/reserve.js' %}"></script>
     <script src="{% static 'header/header.js' %}"></script>
     <script src="{% static 'messages/messages.js' %}"></script>
     {% if user.is_staff %}

@@ -3,6 +3,7 @@ const filterForm = document.querySelector("#commentFilterForm");
 const filterSelect = document.querySelector("#commentFilterSelect");
 let commented = document.querySelector("#commented-bool").innerHTML;
 let filterName = document.querySelector("#filter-name").innerHTML;
+let scoreAdmin = document.querySelector("#scoreAdmin-bool").innerHTML;
 
 function obtenerCSRFToken() {
     // Obtiene el token CSRF de las cookies
@@ -55,24 +56,29 @@ function addHearth(comment_id) {
 }
 
 function uptdateHearth(hearth) {
-    score = Number(hearth.parentNode.children[2].innerHTML);
+    score = Number(hearth.parentNode.children[3].innerHTML);
     id = Number(hearth.getAttribute("id"))
 
     if (hearth.getAttribute("name") == "no-liked") {
-        hearth.parentNode.children[1].style.display = "block";
+        if (scoreAdmin == "true") {
+            hearth.parentNode.children[0].style.display = "block";
+        }
+        hearth.parentNode.children[2].style.display = "block";
         hearth.style.display = "none";
         score++;
         addHearth(id);
 
     } else {
-        hearth.parentNode.children[0].style.display = "block";
+        if (scoreAdmin == "true") {
+            hearth.parentNode.children[0].style.display = "none";
+        }
+        hearth.parentNode.children[1].style.display = "block";
         hearth.style.display = "none";
         score--;
         delHearth(id);
-        console.log(hearth.parentNode)
     }
 
-    hearth.parentNode.children[2].innerHTML = score;
+    hearth.parentNode.children[3].innerHTML = score;
 }
 
 hearths.forEach(element => {

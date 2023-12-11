@@ -217,13 +217,13 @@ body {
 }
 
 .comment-like #prominent {
+	font-size: 1.4rem;
 	font-weight: 600;
 	color: var(--primary-color);
 }
 
 .comment-like #prominent i {
 	position: relative;
-	margin-left: 0.2rem;
 	top: 0.1rem;
 	color: black;
 }
@@ -1030,6 +1030,13 @@ body {
 /* ********************************** */
 /*       MEDIA QUERIES -- 468px       */
 /* ********************************** */
+
+@media (max-width: 960px) {
+	.comment-like #prominent {
+		display: none;
+	}
+}
+
 @media (max-width: 468px) {
 	html {
 		font-size: 42.5%;
