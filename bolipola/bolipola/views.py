@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import calendar as cal_module
 from . import settings
 from django.utils import timezone
 from django.utils.html import escape
@@ -71,8 +72,8 @@ def sale(request, type_id, type_name):
             messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Torneo lleno')
             return redirect('tournament')
 
-        if team.players_num < 11:
-            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Sin jugadores suficientes, mínimo 11 para un torneo')
+        if team.players_num < 5:
+            messages.error(request, '<i class="fa-solid fa-triangle-exclamation fa-bounce fa-xs"></i> Sin jugadores suficientes, mínimo 5 para un torneo')
             return redirect('tournament')
         
     if type_name == 'Productos':
@@ -942,7 +943,10 @@ def reserve(request):
     if not request.user.is_authenticated:
         return redirect('signin')
     
+    date_time_now = timezone.now()
     user = get_object_or_404(UserBoli, id=request.user.id) 
+    reserves = Reservation.objects.all().filter(date__gt=date_time_now, confirmed=True)
+    calendars = Calendar.objects.all().filter(availability=False, date__gt=date_time_now)
     if request.method == 'POST':
         form = ReserveCalendarForm(request.POST)
         if form.is_valid():
@@ -959,7 +963,7 @@ def reserve(request):
     else:
         form = ReserveCalendarForm()
     
-    return render(request, 'reserve.html', {'user':user, 'form':form})
+    return render(request, 'reserve.html', {'user':user, 'form':form, 'reserves':reserves, 'calendars':calendars})
 
 #--------------------Inicio---------------------------
 #Inicio
@@ -976,6 +980,7 @@ def index(request):
 
     comments = Comment.objects.all().order_by(f'{commented_filter}')
     likes = Like.objects.all()
+    likes_admin = []
 
     if request.user.is_authenticated:
         user = get_object_or_404(UserBoli, id=request.user.id)
@@ -1054,11 +1059,13 @@ def add_like(request):
         #Obteniendo informaición para determinar si puso o no un like en ese comentario
         like = Like.objects.all().filter(comment_id=comment_id_data, user_id=request.user.id)
 
-        if (not like.exists()):
+        if not like.exists():
             new_like = Like(comment_id=comment_id_data, user_id=request.user.id)
             new_like.save()
             comment = get_object_or_404(Comment, id=comment_id_data)
             comment.score += 1
+            if request.user.is_staff:
+                comment.score_admin = True
             comment.save()
         
         return JsonResponse({'res': f'{comment_id_data}'})
@@ -1076,14 +1083,20 @@ def del_like(request):
         comment_id_data = int(comment_id_data)
 
         #Obteniendo informaición para determinar si puso o no un like en ese comentario
+        likes = Like.objects.all().filter(comment_id=comment_id_data)
         like = Like.objects.all().filter(comment_id=comment_id_data, user_id=request.user.id)
 
-        if (like.exists()):
+        if like.exists():
             like = like.first()
             comment = get_object_or_404(Comment, id=comment_id_data)
             comment.score -= 1
-            comment.save()
             like.delete()
+            comment.score_admin = False
+            for like in likes:
+                if like.user.is_staff:
+                    comment.score_admin = True
+                    break
+            comment.save()
 
         return JsonResponse({'res': f'{comment_id_data}'})
     else:

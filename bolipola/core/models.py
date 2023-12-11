@@ -29,6 +29,7 @@ def validate_min_comment(value):
 
 class Comment(models.Model):
     score = models.PositiveIntegerField(verbose_name='Puntuación', default=0)
+    score_admin = models.BooleanField(verbose_name='Like de admin', default=False)
     text = models.TextField(max_length=150, verbose_name='Texto', validators=[validate_min_comment])
     date = models.DateTimeField(auto_now_add=True, verbose_name='Fecha publicado')
     user = models.ForeignKey(UserBoli, on_delete=models.CASCADE)
