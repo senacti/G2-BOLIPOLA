@@ -945,8 +945,8 @@ def reserve(request):
     
     date_time_now = timezone.now()
     user = get_object_or_404(UserBoli, id=request.user.id) 
-    reserves = Reservation.objects.all().filter(date__gt=date_time_now, confirmed=True)
-    calendars = Calendar.objects.all().filter(availability=False, date__gt=date_time_now)
+    reserves = Reservation.objects.all().filter(date__gt=date_time_now, confirmed=True).order_by('date')
+    calendars = Calendar.objects.all().filter(availability=False, date__gt=date_time_now).order_by('date')
     if request.method == 'POST':
         form = ReserveCalendarForm(request.POST)
         if form.is_valid():
