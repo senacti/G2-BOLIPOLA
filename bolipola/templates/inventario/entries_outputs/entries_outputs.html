@@ -105,6 +105,7 @@
                 <tr>
                     <th>Fecha</th>
                     <th>Nombre</th>
+                    <th>Total productos</th>
                 </tr>
             </thead>
             <tbody>
@@ -112,6 +113,7 @@
                 <tr class="box">
                     <td>{{ entry.date }}</td>
                     <td>{{ entry.inventory.product.name }}</td>
+                    <td>{{ entry.total_products }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
