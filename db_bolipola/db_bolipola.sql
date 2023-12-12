@@ -190,7 +190,7 @@ CREATE TABLE `calendario` (
   `date` date NOT NULL,
   `availability` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +199,7 @@ CREATE TABLE `calendario` (
 
 LOCK TABLES `calendario` WRITE;
 /*!40000 ALTER TABLE `calendario` DISABLE KEYS */;
-INSERT INTO `calendario` VALUES (1,'2023-09-24',0),(2,'2024-01-13',0),(3,'2023-12-24',0),(4,'2023-12-25',0),(5,'2023-12-26',0),(6,'2023-12-27',0),(7,'2024-01-15',0);
+INSERT INTO `calendario` VALUES (1,'2023-09-24',0),(2,'2024-01-13',0),(3,'2023-12-24',0),(4,'2023-12-25',0),(5,'2023-12-26',0),(6,'2023-12-27',0),(7,'2024-01-15',0),(8,'2023-12-14',0);
 /*!40000 ALTER TABLE `calendario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +220,7 @@ CREATE TABLE `carrito` (
   KEY `carrito_user_id_f2eb18ff_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `carrito_user_id_f2eb18ff_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`),
   CONSTRAINT `carrito_chk_1` CHECK (`total_products` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +229,7 @@ CREATE TABLE `carrito` (
 
 LOCK TABLES `carrito` WRITE;
 /*!40000 ALTER TABLE `carrito` DISABLE KEYS */;
-INSERT INTO `carrito` VALUES (1,1,0,6000,2),(2,4,0,60000,4),(3,5,0,75000,4),(4,2,0,30000,4),(5,1,0,15000,4),(6,2,0,24000,4),(7,1,0,6000,4),(8,1,0,6000,4),(9,1,0,6000,4),(10,1,0,6000,4),(11,4,1,30000,4),(12,0,1,0,2),(13,0,1,0,6),(14,1,0,6000,5),(15,3,1,18000,5);
+INSERT INTO `carrito` VALUES (1,1,0,6000,2),(2,4,0,60000,4),(3,5,0,75000,4),(4,2,0,30000,4),(5,1,0,15000,4),(6,2,0,24000,4),(7,1,0,6000,4),(8,1,0,6000,4),(9,1,0,6000,4),(10,1,0,6000,4),(11,4,1,30000,4),(12,0,1,0,2),(13,3,0,12000,6),(14,1,0,6000,5),(15,9,1,31800,5),(16,0,1,0,6),(17,0,1,0,3),(18,0,1,0,13);
 /*!40000 ALTER TABLE `carrito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +251,7 @@ CREATE TABLE `carrito_inventario` (
   CONSTRAINT `carrito_inventario_car_id_11d06df3_fk_carrito_id` FOREIGN KEY (`car_id`) REFERENCES `carrito` (`id`),
   CONSTRAINT `carrito_inventario_inventory_id_6f91f89b_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`),
   CONSTRAINT `carrito_inventario_chk_1` CHECK (`quantity` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,7 +260,7 @@ CREATE TABLE `carrito_inventario` (
 
 LOCK TABLES `carrito_inventario` WRITE;
 /*!40000 ALTER TABLE `carrito_inventario` DISABLE KEYS */;
-INSERT INTO `carrito_inventario` VALUES (3,2,2,5),(4,3,2,5),(5,4,2,2),(6,5,2,1),(10,6,4,2),(11,7,5,1),(21,8,5,1),(22,9,5,1),(23,10,5,1),(26,1,5,1),(27,14,5,1),(28,15,5,3),(32,11,5,3),(33,11,4,1);
+INSERT INTO `carrito_inventario` VALUES (3,2,2,5),(4,3,2,5),(5,4,2,2),(6,5,2,1),(10,6,4,2),(11,7,5,1),(21,8,5,1),(22,9,5,1),(23,10,5,1),(26,1,5,1),(27,14,5,1),(28,15,5,3),(32,11,5,3),(33,11,4,1),(34,13,7,3),(35,15,11,4),(36,15,10,2);
 /*!40000 ALTER TABLE `carrito_inventario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,7 +276,7 @@ CREATE TABLE `categoria` (
   `name` varchar(100) NOT NULL,
   `forOlder` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,7 +285,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'A',0),(2,'Alcohol',1),(3,'Paquetes',0),(4,'Cigarros',1),(5,'Bebidas',0);
+INSERT INTO `categoria` VALUES (2,'Alcohol',1),(3,'Paquetes',0),(4,'Cigarros',1),(5,'Bebidas',0),(7,'Dulces',0);
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,7 +307,7 @@ CREATE TABLE `comentario` (
   KEY `comentario_user_id_a50ac53c_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `comentario_user_id_a50ac53c_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`),
   CONSTRAINT `comentario_chk_1` CHECK (`score` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -316,7 +316,7 @@ CREATE TABLE `comentario` (
 
 LOCK TABLES `comentario` WRITE;
 /*!40000 ALTER TABLE `comentario` DISABLE KEYS */;
-INSERT INTO `comentario` VALUES (3,2,'Buen servicio','2023-11-26 19:31:11.209873',4,1),(5,1,'Genial esto','2023-11-26 20:29:25.291432',2,1),(6,3,'Me encanta','2023-11-26 20:31:23.854930',2,0),(7,0,'Sisis que bien','2023-12-06 16:32:47.962109',5,0);
+INSERT INTO `comentario` VALUES (3,2,'Buen servicio','2023-11-26 19:31:11.209873',4,0),(5,1,'Genial esto','2023-11-26 20:29:25.291432',2,1),(6,5,'Me encanta','2023-11-26 20:31:23.854930',2,1),(7,1,'Sisis que bien','2023-12-06 16:32:47.962109',5,0),(23,1,'Me gustan los torneos','2023-12-12 00:15:15.965797',13,0);
 /*!40000 ALTER TABLE `comentario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,7 +448,7 @@ CREATE TABLE `entrada` (
   PRIMARY KEY (`id`),
   KEY `entrada_inventory_id_e0e9ba00_fk_inventario_id` (`inventory_id`),
   CONSTRAINT `entrada_inventory_id_e0e9ba00_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -457,7 +457,7 @@ CREATE TABLE `entrada` (
 
 LOCK TABLES `entrada` WRITE;
 /*!40000 ALTER TABLE `entrada` DISABLE KEYS */;
-INSERT INTO `entrada` VALUES (2,'2023-11-01 20:37:30.951874',1,5),(3,'2023-11-28 22:34:24.585440',1,4);
+INSERT INTO `entrada` VALUES (2,'2023-11-01 20:37:30.951874',1,5),(3,'2023-11-28 22:34:24.585440',1,4),(4,'2023-12-11 23:20:03.924472',21,7),(5,'2023-12-11 23:29:14.047253',12,10),(6,'2023-12-11 23:42:05.007036',15,11),(7,'2023-12-11 23:55:10.665217',5,10);
 /*!40000 ALTER TABLE `entrada` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -479,7 +479,7 @@ CREATE TABLE `equipo` (
   KEY `equipo_user_id_6697ca39_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `equipo_user_id_6697ca39_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`),
   CONSTRAINT `equipo_chk_1` CHECK (`players_num` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -488,7 +488,7 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES (1,'Los diomedez','Rojo',12,'team_avatar/eliminar.png',2),(2,'Mario y los luigis','Verde',15,'team_avatar/marioteam.jpeg',6),(3,'julian','Azul',0,'group.png',10),(4,'Gallinas ciegas','Azul',2,'team_avatar/fondo.jpg',4),(6,'Equipo de sarita','Azul',0,'group.png',5);
+INSERT INTO `equipo` VALUES (1,'Los diomedez','Rojo',12,'team_avatar/eliminar.png',2),(2,'Mario y los luigis','Verde',15,'team_avatar/marioteam.jpeg',6),(3,'julian','Azul',0,'group.png',10),(4,'Gallinas ciegas','Azul',5,'team_avatar/fondo.jpg',4),(6,'Equipo de sarita','Rosa',5,'team_avatar/jejejeje.jpg',5),(7,'Pinochitos','Negro',5,'group.png',13);
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -511,7 +511,7 @@ CREATE TABLE `inventario` (
   CONSTRAINT `inventario_product_id_a1edc06a_fk_producto_id` FOREIGN KEY (`product_id`) REFERENCES `producto` (`id`),
   CONSTRAINT `inventario_chk_1` CHECK (`product_quantity` >= 0),
   CONSTRAINT `inventario_chk_2` CHECK (`quantity_reserved` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -520,7 +520,7 @@ CREATE TABLE `inventario` (
 
 LOCK TABLES `inventario` WRITE;
 /*!40000 ALTER TABLE `inventario` DISABLE KEYS */;
-INSERT INTO `inventario` VALUES (1,'2023-09-21 21:51:55.087442',22,1,0,0),(2,'2023-09-21 21:53:24.062129',3,2,0,0),(4,'2023-09-22 01:31:40.004380',11,4,0,0),(5,'2023-09-22 01:33:53.717422',38,5,4,0),(6,'2023-09-22 01:35:35.698512',18,6,0,0),(7,'2023-09-22 01:37:38.221147',5,7,0,0),(9,'2023-11-03 00:12:56.519169',0,9,0,1);
+INSERT INTO `inventario` VALUES (1,'2023-09-21 21:51:55.087442',22,1,0,0),(2,'2023-09-21 21:53:24.062129',3,2,0,0),(4,'2023-09-22 01:31:40.004380',11,4,0,0),(5,'2023-09-22 01:33:53.717422',39,5,1,0),(6,'2023-09-22 01:35:35.698512',18,6,0,0),(7,'2023-09-22 01:37:38.221147',23,7,0,0),(9,'2023-11-03 00:12:56.519169',0,9,0,1),(10,'2023-12-11 23:28:45.214761',17,10,0,0),(11,'2023-12-11 23:32:03.622240',15,11,0,0),(12,'2023-12-11 23:41:43.950455',0,12,0,0);
 /*!40000 ALTER TABLE `inventario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -548,7 +548,7 @@ CREATE TABLE `jugador` (
   CONSTRAINT `jugador_team_id_ade94278_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`),
   CONSTRAINT `jugador_chk_1` CHECK (`dorsal` >= 0),
   CONSTRAINT `jugador_chk_2` CHECK (`age` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -557,7 +557,7 @@ CREATE TABLE `jugador` (
 
 LOCK TABLES `jugador` WRITE;
 /*!40000 ALTER TABLE `jugador` DISABLE KEYS */;
-INSERT INTO `jugador` VALUES (1,'Juan','Ochoa',14,17,'Masculino','Centrocampista',0,0,0,2),(2,'Marisol','Gomex',12,19,'Otro','Defensa',0,0,0,2),(3,'Cachaco','Peñazco',19,15,'Masculino','Portero',0,0,0,2),(4,'Miguel','Kika',13,25,'Masculino','Delantero',0,0,0,2),(5,'Luis','Ibañez',24,19,'Masculino','Defensa',0,0,0,2),(6,'Carolina','Ñuñez',99,32,'Femenino','Delantero',0,0,0,2),(7,'Julián','Bernardo',7,17,'Masculino','Defensa',0,0,0,2),(8,'Dragui','Sao',32,24,'Otro','Delantero',0,0,0,2),(9,'Felipe','Mendoza',1,54,'Masculino','Delantero',0,0,0,2),(10,'Maria','Basquez',76,18,'Femenino','Centrocampista',0,0,0,2),(11,'Mario','Volador',8,13,'Otro','Centrocampista',0,0,0,2),(12,'Miguel','Pulido',65,19,'Masculino','Defensa',0,0,0,2),(13,'Diego','Perez',4,16,'Masculino','Portero',0,0,0,2),(14,'Camilo','Hernesto',45,45,'Masculino','Centrocampista',0,0,0,2),(15,'Vichado','Ñunez',98,27,'Masculino','Defensa',0,0,0,2),(17,'Juan','Ochoa',14,17,'Masculino','Centrocampista',0,0,0,1),(18,'Marisol','Gomex',12,19,'Otro','Defensa',0,0,0,1),(19,'Cachaco','Peñazco',19,15,'Masculino','Portero',0,0,0,1),(20,'Miguel','Kika',13,25,'Masculino','Delantero',0,0,0,1),(21,'Luis','Ibañez',24,19,'Masculino','Defensa',0,0,0,1),(22,'Carolina','Ñuñez',99,32,'Femenino','Delantero',0,0,0,1),(23,'Julián','Bernardo',7,17,'Masculino','Defensa',0,0,0,1),(24,'Dragui','Sao',32,24,'Otro','Delantero',0,0,0,1),(25,'Felipe','Mendoza',1,54,'Masculino','Delantero',0,0,0,1),(26,'Maria','Basquez',76,18,'Femenino','Centrocampista',0,0,0,1),(27,'Mario','Volador',8,13,'Otro','Centrocampista',0,0,0,1),(28,'Miguel','Pulido',65,19,'Masculino','Defensa',0,0,0,1),(29,'julian','castro',13,15,'Masculino','Delantero',0,0,0,4),(30,'Juan','Ochux',11,18,'Masculino','Portero',0,0,0,4);
+INSERT INTO `jugador` VALUES (1,'Juan','Ochoa',14,17,'Masculino','Centrocampista',1,0,0,2),(2,'Marisol','Gomex',12,19,'Otro','Defensa',0,0,0,2),(3,'Cachaco','Peñazco',19,15,'Masculino','Portero',1,0,0,2),(4,'Miguel','Kika',13,25,'Masculino','Delantero',0,0,0,2),(5,'Luis','Ibañez',24,19,'Masculino','Defensa',0,0,0,2),(6,'Carolina','Ñuñez',99,32,'Femenino','Delantero',0,0,0,2),(7,'Julián','Bernardo',7,17,'Masculino','Defensa',0,0,0,2),(8,'Dragui','Sao',32,24,'Otro','Delantero',0,0,0,2),(9,'Felipe','Mendoza',1,54,'Masculino','Delantero',0,0,0,2),(10,'Maria','Basquez',76,18,'Femenino','Centrocampista',0,0,0,2),(11,'Mario','Volador',8,13,'Otro','Centrocampista',0,0,0,2),(12,'Miguel','Pulido',65,19,'Masculino','Defensa',0,0,0,2),(13,'Diego','Perez',4,16,'Masculino','Portero',0,0,0,2),(14,'Camilo','Hernesto',45,45,'Masculino','Centrocampista',0,0,0,2),(15,'Vichado','Ñunez',98,27,'Masculino','Defensa',0,0,0,2),(17,'Juan','Ochoa',14,17,'Masculino','Centrocampista',0,0,0,1),(18,'Marisol','Gomex',12,19,'Otro','Defensa',0,0,0,1),(19,'Cachaco','Peñazco',19,15,'Masculino','Portero',0,0,0,1),(20,'Miguel','Kika',13,25,'Masculino','Delantero',0,0,0,1),(21,'Luis','Ibañez',24,19,'Masculino','Defensa',0,0,0,1),(22,'Carolina','Ñuñez',99,32,'Femenino','Delantero',0,0,0,1),(23,'Julián','Bernardo',7,17,'Masculino','Defensa',0,0,0,1),(24,'Dragui','Sao',32,24,'Otro','Delantero',0,0,0,1),(25,'Felipe','Mendoza',1,54,'Masculino','Delantero',0,0,0,1),(26,'Maria','Basquez',76,18,'Femenino','Centrocampista',0,0,0,1),(27,'Mario','Volador',8,13,'Otro','Centrocampista',0,0,0,1),(28,'Miguel','Pulido',65,19,'Masculino','Defensa',0,0,0,1),(29,'julian','castro',15,15,'Masculino','Delantero',0,0,0,4),(30,'Juan','Ochux',18,18,'Masculino','Portero',0,0,0,4),(31,'Pedro','Gomez',23,17,'Masculino','Defensa',0,0,0,4),(32,'Pipe','Torres',25,45,'Masculino','Delantero',0,0,0,4),(33,'Maria','Fernanda',2,25,'Femenino','Centrocampista',0,0,0,4),(34,'Fernanda','Gomez',12,23,'Femenino','Delantero',0,0,0,6),(35,'Juan','Ochoa',1,18,'Masculino','Centrocampista',0,0,0,6),(36,'Julián','Castro',5,16,'Masculino','Portero',0,0,0,6),(37,'Sergio','Hernán',7,25,'Masculino','Defensa',0,0,0,6),(38,'Kiko','Perez',14,26,'Masculino','Centrocampista',0,0,0,6),(39,'Luis','Espitia',10,19,'Masculino','Delantero',0,0,0,7),(40,'Pacho','Pecho',14,16,'Masculino','Centrocampista',0,0,0,7),(41,'Pancha','Gutierrez',9,25,'Femenino','Defensa',0,0,0,7),(42,'Chicharito','Castro',20,24,'Masculino','Portero',0,0,0,7),(43,'Carlos','Romero',17,20,'Masculino','Centrocampista',0,0,0,7);
 /*!40000 ALTER TABLE `jugador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -577,7 +577,7 @@ CREATE TABLE `like` (
   KEY `like_user_id_318aef4d_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `like_comment_id_ffffeb92_fk_comentario_id` FOREIGN KEY (`comment_id`) REFERENCES `comentario` (`id`),
   CONSTRAINT `like_user_id_318aef4d_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -586,7 +586,7 @@ CREATE TABLE `like` (
 
 LOCK TABLES `like` WRITE;
 /*!40000 ALTER TABLE `like` DISABLE KEYS */;
-INSERT INTO `like` VALUES (4,6,2),(6,3,2),(10,6,4),(19,6,5),(44,5,1),(50,3,1);
+INSERT INTO `like` VALUES (4,6,2),(6,3,2),(10,6,4),(19,6,5),(44,5,1),(52,6,1),(53,6,13),(54,3,13),(55,7,13),(56,23,2);
 /*!40000 ALTER TABLE `like` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -608,7 +608,7 @@ CREATE TABLE `producto` (
   PRIMARY KEY (`id`),
   KEY `producto_category_id_d39dad7c_fk_categoria_id` (`category_id`),
   CONSTRAINT `producto_category_id_d39dad7c_fk_categoria_id` FOREIGN KEY (`category_id`) REFERENCES `categoria` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -617,7 +617,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'Tequila',150000,'Tequila patrón reposado','product/960022-TEQUILA_PATRON_REPOSADO_BOTELLA_700ML_cOaB8qq.png','2024-12-12',2),(2,'Aguardiente',15000,'Medio litro de aguardiente azul','product/example.jpg','2023-11-15',2),(4,'Marlboro',12000,'Media caja Marlboro, 20 unidades','product/477dc5_7a85a1376b274ae5be033608141920eemv2.webp','2024-09-12',4),(5,'Lucky Strike',6000,'Lucky Strike Azul x10','product/10007_202102242259134412668-600x600.jpeg','2025-08-12',4),(6,'Aguardiente',20000,'Aguardiente antioqueño verde 375ml','product/asfadsf_9mAP6cI.webp','2023-12-30',2),(7,'Gatorade',4000,'Gatorade naranja 500ml','product/supermercados_la_vaquita_supervaquita_gatorade_500ml_frutas_tropicales_bebidas__Q9DfUSU.webp','2025-08-09',5),(9,'Example',17000,'Jejejej','default_product.png','2025-12-12',3);
+INSERT INTO `producto` VALUES (1,'Tequila',150000,'Tequila patrón reposado','product/960022-TEQUILA_PATRON_REPOSADO_BOTELLA_700ML_cOaB8qq.png','2024-12-12',2),(2,'Aguardiente',15000,'Medio litro de aguardiente azul','product/example.jpg','2023-11-15',2),(4,'Marlboro',12000,'Media caja Marlboro, 20 unidades','product/477dc5_7a85a1376b274ae5be033608141920eemv2.webp','2024-09-12',4),(5,'Lucky Strike',6000,'Lucky Strike Azul x10','product/10007_202102242259134412668-600x600.jpeg','2025-08-12',4),(6,'Aguardiente',20000,'Aguardiente antioqueño verde 375ml','product/asfadsf_9mAP6cI.webp','2023-12-30',2),(7,'Gatorade',4000,'Gatorade naranja 500ml','product/supermercados_la_vaquita_supervaquita_gatorade_500ml_frutas_tropicales_bebidas__Q9DfUSU.webp','2025-08-09',5),(9,'Example',17000,'Jejejej','default_product.png','2025-12-12',3),(10,'Postobón uva',2500,'Postobón uva 500ml','product/xdadffa.png','2025-05-12',5),(11,'Papas margarita BBQ',2200,'Papas margarita BBQ 30g','product/papasjeje.png','2024-07-09',3),(12,'Halls negro barra',2400,'Halls negro barra 9unds 25g','product/halls_strong_bugsconfiteria.jpeg','2025-01-23',7);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -638,7 +638,7 @@ CREATE TABLE `reserva` (
   `cost` double NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -647,7 +647,7 @@ CREATE TABLE `reserva` (
 
 LOCK TABLES `reserva` WRITE;
 /*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
-INSERT INTO `reserva` VALUES (1,'2','Bolirana','2023-09-24','12:12:00.000000','14:56:00.000000',98400,0),(2,'2','Bolirana','2023-09-24','13:45:00.000000','15:34:00.000000',65400,1),(3,'2','Bolirana','2004-09-12','02:30:00.000000','16:30:00.000000',504000,0),(4,'2','Bolirana','2023-12-12','11:00:00.000000','15:30:00.000000',171000,0),(5,'2','Bolirana','2023-12-12','12:00:00.000000','13:00:00.000000',36000,0),(6,'2','Bolirana','2023-12-12','12:00:00.000000','13:00:00.000000',36000,0),(7,'2','Bolirana','2023-12-12','12:00:00.000000','13:00:00.000000',36000,0),(8,'2','Bolirana','2023-12-12','12:00:00.000000','14:00:00.000000',72000,0),(9,'2','Bolirana','2023-12-12','14:00:00.000000','16:00:00.000000',72000,0),(10,'2','Bolirana','2023-12-12','14:30:00.000000','16:00:00.000000',54000,0),(11,'2','Cancha','2023-12-12','12:00:00.000000','14:00:00.000000',72000,0),(12,'2','Cancha','2023-12-25','12:30:00.000000','13:00:00.000000',18000,0),(13,'2','Bolirana','2023-12-25','12:30:00.000000','13:30:00.000000',15000,1);
+INSERT INTO `reserva` VALUES (1,'2','Bolirana','2023-09-24','12:12:00.000000','14:56:00.000000',98400,0),(2,'2','Bolirana','2023-09-24','13:45:00.000000','15:34:00.000000',65400,1),(3,'2','Bolirana','2004-09-12','02:30:00.000000','16:30:00.000000',504000,0),(4,'2','Bolirana','2023-12-12','11:00:00.000000','15:30:00.000000',171000,0),(5,'2','Bolirana','2023-12-12','12:00:00.000000','13:00:00.000000',36000,0),(6,'2','Bolirana','2023-12-12','12:00:00.000000','13:00:00.000000',36000,0),(7,'2','Bolirana','2023-12-12','12:00:00.000000','13:00:00.000000',36000,0),(8,'2','Bolirana','2023-12-12','12:00:00.000000','14:00:00.000000',72000,0),(9,'2','Bolirana','2023-12-12','14:00:00.000000','16:00:00.000000',72000,0),(10,'2','Bolirana','2023-12-12','14:30:00.000000','16:00:00.000000',54000,0),(11,'2','Cancha','2023-12-12','12:00:00.000000','14:00:00.000000',72000,0),(12,'2','Cancha','2023-12-25','12:30:00.000000','13:00:00.000000',18000,0),(13,'2','Bolirana','2023-12-25','12:30:00.000000','13:30:00.000000',15000,1),(14,'2','Mesa','2023-12-16','20:00:00.000000','22:00:00.000000',30000,0),(15,'2','Bolirana','2023-12-30','12:30:00.000000','14:30:00.000000',30000,1),(16,'2','Cancha','2023-12-30','07:00:00.000000','12:30:00.000000',82500,1),(17,'2','Mesa','2023-12-15','17:00:00.000000','20:00:00.000000',45000,1);
 /*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -670,7 +670,7 @@ CREATE TABLE `salida` (
   KEY `salida_car_id_29f01413_fk_carrito_id` (`car_id`),
   CONSTRAINT `salida_car_id_29f01413_fk_carrito_id` FOREIGN KEY (`car_id`) REFERENCES `carrito` (`id`),
   CONSTRAINT `salida_inventory_id_3d569ade_fk_inventario_id` FOREIGN KEY (`inventory_id`) REFERENCES `inventario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -679,7 +679,7 @@ CREATE TABLE `salida` (
 
 LOCK TABLES `salida` WRITE;
 /*!40000 ALTER TABLE `salida` DISABLE KEYS */;
-INSERT INTO `salida` VALUES (1,'2023-11-01 20:44:28.518647',NULL,5,'compra',3),(2,'2023-11-02 10:07:13.850085',7,10,'inventario',NULL),(3,'2023-11-02 10:15:21.154304',2,1,'inventario',NULL),(4,'2023-11-02 10:21:41.418582',2,1,'inventario',NULL),(5,'2023-11-02 23:57:54.178784',4,9,'inventario',NULL),(6,'2023-11-28 22:31:31.743774',1,3,'inventario',NULL);
+INSERT INTO `salida` VALUES (1,'2023-11-01 20:44:28.518647',NULL,5,'compra',3),(2,'2023-11-02 10:07:13.850085',7,10,'inventario',NULL),(3,'2023-11-02 10:15:21.154304',2,1,'inventario',NULL),(4,'2023-11-02 10:21:41.418582',2,1,'inventario',NULL),(5,'2023-11-02 23:57:54.178784',4,9,'inventario',NULL),(6,'2023-11-28 22:31:31.743774',1,3,'inventario',NULL),(7,'2023-12-11 23:04:53.061786',NULL,1,'compra',10),(8,'2023-12-11 23:05:04.702089',NULL,1,'compra',8),(9,'2023-12-11 23:23:44.578913',NULL,3,'compra',13);
 /*!40000 ALTER TABLE `salida` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -700,7 +700,7 @@ CREATE TABLE `torneo` (
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `torneo_chk_1` CHECK (`number_teams` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -709,7 +709,7 @@ CREATE TABLE `torneo` (
 
 LOCK TABLES `torneo` WRITE;
 /*!40000 ALTER TABLE `torneo` DISABLE KEYS */;
-INSERT INTO `torneo` VALUES (1,'Pelea de pollos',16,'2024-12-12 12:30:00.000000',10000000,20000,0),(2,'Duendes navideños',10,'2023-10-10 14:15:00.000000',2400000,120000,0),(3,'Sena',16,'2023-09-22 15:14:14.000000',5000000,200000,1),(5,'Prueba',32,'2023-12-14 12:00:00.000000',2300000,8000,1);
+INSERT INTO `torneo` VALUES (1,'Pelea de pollos',16,'2024-12-12 12:30:00.000000',10000000,20000,0),(2,'Duendes navideños',10,'2023-10-10 14:15:00.000000',2400000,120000,0),(3,'Sena',16,'2023-09-22 15:14:14.000000',5000000,200000,1),(5,'Prueba',32,'2023-12-14 12:00:00.000000',2300000,8000,1),(6,'Ochux',16,'2023-12-15 12:00:00.000000',100000,50000,1);
 /*!40000 ALTER TABLE `torneo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -737,7 +737,7 @@ CREATE TABLE `torneo_equipo` (
   KEY `torneo_equipo_tournament_id_2a153cdb_fk_torneo_id` (`tournament_id`),
   CONSTRAINT `torneo_equipo_team_id_aff5ce69_fk_equipo_id` FOREIGN KEY (`team_id`) REFERENCES `equipo` (`id`),
   CONSTRAINT `torneo_equipo_tournament_id_2a153cdb_fk_torneo_id` FOREIGN KEY (`tournament_id`) REFERENCES `torneo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -746,7 +746,7 @@ CREATE TABLE `torneo_equipo` (
 
 LOCK TABLES `torneo_equipo` WRITE;
 /*!40000 ALTER TABLE `torneo_equipo` DISABLE KEYS */;
-INSERT INTO `torneo_equipo` VALUES (1,0,0,0,0,0,0,0,0,2,1),(2,2,1,1,3,5,1,9,18,1,2),(3,5,1,4,0,1,1,2,3,1,3),(4,0,0,0,0,1,0,1,3,2,3);
+INSERT INTO `torneo_equipo` VALUES (1,0,0,0,0,0,0,0,0,2,1),(2,2,1,1,3,5,1,9,18,1,2),(3,5,1,4,0,1,2,3,3,1,3),(4,0,0,0,2,1,0,3,5,2,3),(5,1,0,1,1,1,1,3,4,4,3),(6,2,0,2,0,0,0,0,0,6,3);
 /*!40000 ALTER TABLE `torneo_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -779,7 +779,7 @@ CREATE TABLE `user_userboli` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   CONSTRAINT `user_userboli_chk_1` CHECK (`range` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -788,7 +788,7 @@ CREATE TABLE `user_userboli` (
 
 LOCK TABLES `user_userboli` WRITE;
 /*!40000 ALTER TABLE `user_userboli` DISABLE KEYS */;
-INSERT INTO `user_userboli` VALUES (1,'pbkdf2_sha256$600000$8IDOdeuJRmtqRYS3dgo1Mj$8uVyG2jEv1orAReTNgwQ2XYWSIq462H0OE44O9wU1lI=','2023-12-11 04:44:31.820864',1,'admin@admin.com','Juan','Ochoa',1,1,'2023-09-21 21:46:34.184997','admin@admin.com','avatar/miFotoDeGit_ZfFF493.jpg','2005-12-14','3225452102','Masculino',0,0),(2,'pbkdf2_sha256$600000$OikFUkoMpadJ1OfKTWHIch$R+P9zL2LRbu2aJRg+J5KDzuXmz7zgbTQa/e+sV8id4g=','2023-12-06 15:41:57.124832',0,'sopa@gmail.com','Sopita','Ibañez',0,1,'2023-09-21 21:56:23.931162','sopa@gmail.com','avatar/9yr7_ifq5_221215.jpg','2003-09-10','3115698784','Femenino',600,0),(3,'pbkdf2_sha256$600000$IYBSemf7A00wGN0aPcKnba$cr6Dy6GachFlawetcLCKi13QkbqYRgQolfvux4/AFEk=','2023-09-21 22:56:08.726909',0,'carro@hotmail.com','Felipe','Mendoza',0,1,'2023-09-21 22:56:08.431641','carro@hotmail.com','avatar/internet.png','1997-10-13','3254169874','Masculino',0,0),(4,'pbkdf2_sha256$600000$byo3ba6PKrPNcgw2gWz6ho$HhwP8hOrLGMlCr7d+oF4/+qX7g5bFOMEVMv3Vn0tWQw=','2023-12-11 04:27:48.241737',0,'calisto@hotmail.com','Miguel','Fernandez',0,1,'2023-09-21 23:03:12.339924','calisto@hotmail.com','avatar/nerd.png','2003-01-10','3547896215','Otro',175,0),(5,'pbkdf2_sha256$600000$t2nP0FrdmLtU7CduFf7Hnb$phf9sZO5jDw3SEwyIC7mS6AkFL0dO6LWhPrxA6FK1B0=','2023-12-11 03:38:43.315207',0,'maribel@gmail.com','Sara','Mendoza',0,1,'2023-09-21 23:07:34.711361','maribel@gmail.com','avatar/como.png','2005-07-05','3225414756','Femenino',0,17858),(6,'pbkdf2_sha256$600000$bEUBAYu3U3VowHcCoAx24N$m6Zx9BWkKBf+DcHMjMz6EHbbDwhaNGmOwpF36wIsU2s=','2023-12-05 20:28:26.355467',0,'mario@gmail.com','Mario','Boloñez',0,1,'2023-09-21 23:10:46.617006','mario@gmail.com','avatar/mario.png','2010-10-12','3524178555','Masculino',450,0),(10,'pbkdf2_sha256$600000$tGEyBC9yBYc1VPjiRf4ro9$P6QMWFA6HEkjmpTAaXjl1RpeQUGOlvFMMbzZ5G+kiCU=','2023-09-22 14:44:32.958246',0,'julian@hotmail.com','julian','castro',0,1,'2023-09-22 14:41:37.222338','julian@hotmail.com','exampleUser.png','2006-11-09','3015415613','Masculino',0,0),(11,'pbkdf2_sha256$600000$cm4AP2uSJjd8JznIwqRh2X$kyia7KIW9YxCUXng25g0lXsRCjbh2hb1E/VntA41x6Y=','2023-09-22 14:58:28.908990',0,'miguel@gmail.com','Miguel','Pulido',0,1,'2023-09-22 14:58:28.141627','miguel@gmail.com','avatar/editar.png','2003-09-12','3225478695','Masculino',0,0);
+INSERT INTO `user_userboli` VALUES (1,'pbkdf2_sha256$600000$8IDOdeuJRmtqRYS3dgo1Mj$8uVyG2jEv1orAReTNgwQ2XYWSIq462H0OE44O9wU1lI=','2023-12-12 00:20:57.460986',1,'admin@admin.com','Raúl','Hernesto',1,1,'2023-09-21 21:46:34.184997','admin@admin.com','avatar/21004056.jpg','1995-12-14','3225452102','Masculino',0,0),(2,'pbkdf2_sha256$600000$OikFUkoMpadJ1OfKTWHIch$R+P9zL2LRbu2aJRg+J5KDzuXmz7zgbTQa/e+sV8id4g=','2023-12-12 00:16:39.041704',0,'sopa@gmail.com','Sopita','Ibañez',0,1,'2023-09-21 21:56:23.931162','sopa@gmail.com','avatar/4500_1_01.jpg','2003-09-10','3115698784','Femenino',600,0),(3,'pbkdf2_sha256$600000$IYBSemf7A00wGN0aPcKnba$cr6Dy6GachFlawetcLCKi13QkbqYRgQolfvux4/AFEk=','2023-12-12 00:01:21.146281',0,'carro@hotmail.com','Felipe','Mendoza',0,1,'2023-09-21 22:56:08.431641','carro@hotmail.com','avatar/internet.png','1997-10-13','3254169874','Masculino',0,0),(4,'pbkdf2_sha256$600000$byo3ba6PKrPNcgw2gWz6ho$HhwP8hOrLGMlCr7d+oF4/+qX7g5bFOMEVMv3Vn0tWQw=','2023-12-12 00:35:59.064812',0,'calisto@hotmail.com','Miguel','Fernandez',0,1,'2023-09-21 23:03:12.339924','calisto@hotmail.com','avatar/nerd.png','2003-01-10','3547896215','Otro',545,0),(5,'pbkdf2_sha256$600000$t2nP0FrdmLtU7CduFf7Hnb$phf9sZO5jDw3SEwyIC7mS6AkFL0dO6LWhPrxA6FK1B0=','2023-12-11 23:43:20.017011',0,'maribel@gmail.com','Sara','Mendoza',0,1,'2023-09-21 23:07:34.711361','maribel@gmail.com','avatar/como.png','2005-07-05','3225414756','Femenino',300,0),(6,'pbkdf2_sha256$600000$bEUBAYu3U3VowHcCoAx24N$m6Zx9BWkKBf+DcHMjMz6EHbbDwhaNGmOwpF36wIsU2s=','2023-12-11 23:16:34.961545',0,'mario@gmail.com','Mario','Boloñez',0,1,'2023-09-21 23:10:46.617006','mario@gmail.com','avatar/mario.png','2010-10-12','3524178555','Masculino',795,0),(10,'pbkdf2_sha256$600000$tGEyBC9yBYc1VPjiRf4ro9$P6QMWFA6HEkjmpTAaXjl1RpeQUGOlvFMMbzZ5G+kiCU=','2023-09-22 14:44:32.958246',0,'julian@hotmail.com','julian','castro',0,1,'2023-09-22 14:41:37.222338','julian@hotmail.com','exampleUser.png','2006-11-09','3015415613','Masculino',0,0),(11,'pbkdf2_sha256$600000$cm4AP2uSJjd8JznIwqRh2X$kyia7KIW9YxCUXng25g0lXsRCjbh2hb1E/VntA41x6Y=','2023-09-22 14:58:28.908990',0,'miguel@gmail.com','Miguel','Pulido',0,1,'2023-09-22 14:58:28.141627','miguel@gmail.com','avatar/editar.png','2003-09-12','3225478695','Masculino',0,0),(13,'pbkdf2_sha256$600000$d7OlB66o6q53S3ALE9BbNO$SQipHs2UCmitLBnu34dthIl2lbPCSyPtQEL5Uji8fzw=','2023-12-12 00:10:16.021099',0,'pinocho@gmail.com','Timoteo','Guadalajara',0,1,'2023-12-12 00:09:56.447562','pinocho@gmail.com','avatar/pexels-dziana-hasanbekava-7063763.jpg','2007-05-12','3524845464','Otro',0,0);
 /*!40000 ALTER TABLE `user_userboli` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -868,7 +868,7 @@ CREATE TABLE `venta` (
   KEY `venta_user_id_9f98c281_fk_user_userboli_id` (`user_id`),
   CONSTRAINT `venta_user_id_9f98c281_fk_user_userboli_id` FOREIGN KEY (`user_id`) REFERENCES `user_userboli` (`id`),
   CONSTRAINT `venta_chk_1` CHECK (`product_quantity` >= 0)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -877,7 +877,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (1,98400,'Efectivo','Cancelado','2023-09-21 22:09:46.701553','Reserva',1,2),(2,20000,'Efectivo','Comprado','2023-09-21 23:56:07.371521','Torneo',1,6),(3,65400,'Efectivo','En proceso...','2023-09-22 00:24:41.749095','Reserva',1,6),(4,20000,'Efectivo','En proceso...','2023-09-22 01:45:40.180694','Torneo',1,2),(5,120000,'Efectivo','Comprado','2023-09-22 13:21:16.319903','Torneo',1,2),(6,60000,'Efectivo','Cancelado','2023-11-01 20:39:12.401909','Productos',4,4),(7,75000,'Efectivo','Comprado','2023-11-01 20:41:05.236448','Productos',5,4),(8,30000,'Efectivo','Cancelado','2023-11-01 20:45:36.388036','Productos',2,4),(9,15000,'Efectivo','Cancelado','2023-11-01 20:53:02.313811','Productos',1,4),(10,24000,'Efectivo','Cancelado','2023-11-28 08:40:24.105068','Productos',2,4),(11,6000,'Efectivo','Cancelado','2023-11-28 22:03:31.878116','Productos',1,4),(12,200000,'Efectivo','Comprado','2023-11-28 22:11:37.781812','Torneo',1,2),(13,72000,'Efectivo','Cancelado','2023-12-01 21:05:25.891670','Reserva',1,4),(14,72000,'Efectivo','Cancelado','2023-12-01 21:33:20.356836','Reserva',1,4),(15,6000,'Efectivo','En proceso...','2023-12-05 20:22:21.908525','Productos',1,4),(16,6000,'Efectivo','Cancelado','2023-12-05 20:22:30.252104','Productos',1,4),(17,6000,'Efectivo','En proceso...','2023-12-05 20:22:37.872897','Productos',1,4),(18,6000,'Efectivo','En proceso...','2023-12-05 20:24:13.230216','Productos',1,2),(19,200000,'Efectivo','Comprado','2023-12-05 20:28:43.939436','Torneo',1,6),(20,6000,'Efectivo','En proceso...','2023-12-06 16:37:57.713785','Productos',1,5),(21,15000,'Nequi','En proceso...','2023-12-11 03:57:05.103460','Reserva',1,4);
+INSERT INTO `venta` VALUES (1,98400,'Efectivo','Cancelado','2023-09-21 22:09:46.701553','Reserva',1,2),(2,20000,'Efectivo','Comprado','2023-09-21 23:56:07.371521','Torneo',1,6),(3,65400,'Efectivo','Comprado','2023-09-22 00:24:41.749095','Reserva',1,6),(4,20000,'Efectivo','En proceso...','2023-09-22 01:45:40.180694','Torneo',1,2),(5,120000,'Efectivo','Comprado','2023-09-22 13:21:16.319903','Torneo',1,2),(6,60000,'Efectivo','Cancelado','2023-11-01 20:39:12.401909','Productos',4,4),(7,75000,'Efectivo','Comprado','2023-11-01 20:41:05.236448','Productos',5,4),(8,30000,'Efectivo','Cancelado','2023-11-01 20:45:36.388036','Productos',2,4),(9,15000,'Efectivo','Cancelado','2023-11-01 20:53:02.313811','Productos',1,4),(10,24000,'Efectivo','Cancelado','2023-11-28 08:40:24.105068','Productos',2,4),(11,6000,'Efectivo','Cancelado','2023-11-28 22:03:31.878116','Productos',1,4),(12,200000,'Efectivo','Comprado','2023-11-28 22:11:37.781812','Torneo',1,2),(13,72000,'Efectivo','Cancelado','2023-12-01 21:05:25.891670','Reserva',1,4),(14,72000,'Efectivo','Cancelado','2023-12-01 21:33:20.356836','Reserva',1,4),(15,6000,'Efectivo','Comprado','2023-12-05 20:22:21.908525','Productos',1,4),(16,6000,'Efectivo','Cancelado','2023-12-05 20:22:30.252104','Productos',1,4),(17,6000,'Efectivo','Comprado','2023-12-05 20:22:37.872897','Productos',1,4),(18,6000,'Efectivo','En proceso...','2023-12-05 20:24:13.230216','Productos',1,2),(19,200000,'Efectivo','Comprado','2023-12-05 20:28:43.939436','Torneo',1,6),(20,6000,'Efectivo','Cancelado','2023-12-06 16:37:57.713785','Productos',1,5),(21,15000,'Nequi','En proceso...','2023-12-11 03:57:05.103460','Reserva',1,4),(22,200000,'Nequi','Comprado','2023-12-11 23:07:04.772773','Torneo',1,4),(23,30000,'Efectivo','Cancelado','2023-12-11 23:07:54.672951','Reserva',1,4),(24,30000,'Nequi','En proceso...','2023-12-11 23:18:01.513044','Reserva',1,6),(25,12000,'Efectivo','Comprado','2023-12-11 23:18:28.470055','Productos',3,6),(26,82500,'Efectivo','Comprado','2023-12-11 23:19:18.385104','Reserva',1,6),(27,45000,'Efectivo','En proceso...','2023-12-11 23:44:11.933404','Reserva',1,5),(28,200000,'Nequi','Comprado','2023-12-11 23:49:19.240423','Torneo',1,5),(29,200000,'Efectivo','En proceso...','2023-12-12 00:14:39.262834','Torneo',1,13);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -897,7 +897,7 @@ CREATE TABLE `venta_carrito` (
   KEY `venta_carrito_sale_id_0f55ffc7_fk_venta_id` (`sale_id`),
   CONSTRAINT `venta_carrito_car_id_903fc97f_fk_carrito_id` FOREIGN KEY (`car_id`) REFERENCES `carrito` (`id`),
   CONSTRAINT `venta_carrito_sale_id_0f55ffc7_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -906,7 +906,7 @@ CREATE TABLE `venta_carrito` (
 
 LOCK TABLES `venta_carrito` WRITE;
 /*!40000 ALTER TABLE `venta_carrito` DISABLE KEYS */;
-INSERT INTO `venta_carrito` VALUES (1,2,6),(2,3,7),(3,4,8),(4,5,9),(5,6,10),(6,7,11),(7,8,15),(8,9,16),(9,10,17),(10,1,18),(11,14,20);
+INSERT INTO `venta_carrito` VALUES (1,2,6),(2,3,7),(3,4,8),(4,5,9),(5,6,10),(6,7,11),(7,8,15),(8,9,16),(9,10,17),(10,1,18),(11,14,20),(12,13,25);
 /*!40000 ALTER TABLE `venta_carrito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -926,7 +926,7 @@ CREATE TABLE `venta_reserva` (
   KEY `venta_reserva_sale_id_3d4f7ed0_fk_venta_id` (`sale_id`),
   CONSTRAINT `venta_reserva_reservation_id_0075a4d9_fk_reserva_id` FOREIGN KEY (`reservation_id`) REFERENCES `reserva` (`id`),
   CONSTRAINT `venta_reserva_sale_id_3d4f7ed0_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -935,7 +935,7 @@ CREATE TABLE `venta_reserva` (
 
 LOCK TABLES `venta_reserva` WRITE;
 /*!40000 ALTER TABLE `venta_reserva` DISABLE KEYS */;
-INSERT INTO `venta_reserva` VALUES (1,1,1),(2,2,3),(3,8,13),(4,11,14),(5,13,21);
+INSERT INTO `venta_reserva` VALUES (1,1,1),(2,2,3),(3,8,13),(4,11,14),(5,13,21),(6,14,23),(7,15,24),(8,16,26),(9,17,27);
 /*!40000 ALTER TABLE `venta_reserva` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -955,7 +955,7 @@ CREATE TABLE `venta_torneo` (
   KEY `venta_torneo_tournament_id_0114354e_fk_torneo_id` (`tournament_id`),
   CONSTRAINT `venta_torneo_sale_id_ffa6bfa1_fk_venta_id` FOREIGN KEY (`sale_id`) REFERENCES `venta` (`id`),
   CONSTRAINT `venta_torneo_tournament_id_0114354e_fk_torneo_id` FOREIGN KEY (`tournament_id`) REFERENCES `torneo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -964,7 +964,7 @@ CREATE TABLE `venta_torneo` (
 
 LOCK TABLES `venta_torneo` WRITE;
 /*!40000 ALTER TABLE `venta_torneo` DISABLE KEYS */;
-INSERT INTO `venta_torneo` VALUES (1,2,1),(2,4,1),(3,5,2),(4,12,3),(5,19,3);
+INSERT INTO `venta_torneo` VALUES (1,2,1),(2,4,1),(3,5,2),(4,12,3),(5,19,3),(6,22,3),(7,28,3),(8,29,3);
 /*!40000 ALTER TABLE `venta_torneo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -977,4 +977,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-11  4:57:56
+-- Dump completed on 2023-12-12  0:45:42
