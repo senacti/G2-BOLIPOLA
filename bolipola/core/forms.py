@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 
 fecha_hoy = datetime.now()
 fecha_hoy_str = fecha_hoy.strftime('%Y-%m-%d')
-mas_2_dias = fecha_hoy + timedelta(days=2)
-mas_2_dias_str = mas_2_dias.strftime('%Y-%m-%d')
+mas_4_dias = fecha_hoy + timedelta(days=4)
+mas_4_dias_str = mas_4_dias.strftime('%Y-%m-%d')
 mas_1_semana = fecha_hoy + timedelta(days=7)
 mas_1_semana_str = mas_1_semana.strftime('%Y-%m-%d')
 mas_6_meses = fecha_hoy + timedelta(days=30*6)
@@ -154,8 +154,8 @@ class TournamentCreateForm(forms.ModelForm):
         widget=forms.DateTimeInput(
             attrs={
                 'type':'datetime-local',
-                'min':mas_2_dias_str + 'T12:00',
-                'value':mas_2_dias_str + 'T12:00',
+                'min':mas_4_dias_str + 'T12:00',
+                'value':mas_4_dias_str + 'T12:00',
             }
         )
     )
