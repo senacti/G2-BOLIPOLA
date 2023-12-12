@@ -118,10 +118,14 @@
     <section class="banner">
         <div class="content-banner">
             <p>Hola</p>
-            <h2>Bienvenido a BoliPola<br/>¡Tómate una pola!</h2>
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and user.is_staff %}
+                <h2>Bienvenido<br/>admin ⭐</h2>
+                <a href="{% url 'inventory' %}">Ir a inventario</a>
+            {% elif user.is_authenticated %}
+                <h2>Bienvenido a BoliPola<br/>¿Qué tal {{ user.first_name }}?</h2>
                 <a href="{% url 'tournament' %}">Ir a torneos</a>
             {% else %}
+                <h2>Bienvenido a BoliPola<br/>¡Tómate una pola!</h2>
                 <a href="{% url 'register' %}">Regístrate</a>
             {% endif %}
         </div>
@@ -139,7 +143,7 @@
                 {% for inventory in inventorys %}
                 <div class="card-product">
                     <div class="container-img">
-                        <img src="{{ inventory.product.image.url }}" alt="aguardiente" />
+                        <img src="{{ inventory.product.image.url }}" alt="producto"/>
                         <div class="button-group">
                         </div>
                     </div>
