@@ -1211,9 +1211,7 @@ def register(request):
                 user = form.save()
                 user.set_password(form.cleaned_data["password"])
                 user.save()
-
-                login(request, user)
-                messages.success(request, f'<i class="fa-solid fa-circle-check"></i> Cuenta creada con éxito, bienvenid{request.user.pronoun()} {request.user.first_name}')
+                messages.success(request, f'<i class="fa-solid fa-circle-check"></i> Cuenta creada con éxito, inicie sesión')
                 return redirect('index')
         else:
             #Si el formulario no es válido es porque el email ya existe
